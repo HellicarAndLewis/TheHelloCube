@@ -27,7 +27,9 @@ https://github.com/openframeworks/openFrameworks.git develop
    cd projects
     
    git clone git@github.com:HellicarAndLewis/TheHelloCube.git
-       
+   
+   cd TheHelloCube
+    
    git submodule init
    
    git submodule update
