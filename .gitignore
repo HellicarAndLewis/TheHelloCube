@@ -7,10 +7,6 @@ openFrameworksDebug.a
 openFrameworksUniversal.a
 *.app/
 
-#rule to avoid non-official addons going into git
-#see addons/.gitignore
-addons/**
-
 #xcode files
 *.pbxuser
 *.perspectivev3
@@ -53,8 +49,6 @@ libs/openFrameworksCompiled/project/*/*.layout
 
 #eclipse build folders
 #Mac OS X
-addons/Debug Mac OS X
-addons/Release Mac OS X
 libs/openFrameworks/Debug Mac OS X
 libs/openFrameworks/Release Mac OS X
 examples/*/*/Debug Mac OS X
@@ -82,8 +76,6 @@ examples/*/*/.project
 examples/*/*/.settings
 
 #Android
-addons/Debug Android
-addons/Release Android
 libs/openFrameworks/Debug Android
 libs/openFrameworks/Release Android
 libs/openFrameworks/Release
