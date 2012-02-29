@@ -1,35 +1,34 @@
 
 
-Getting Started:
+# Getting Started:
 the project is working off the latest OpenFrameworks develop branch
 https://github.com/openframeworks/openFrameworks.git develop
 
-    -----------------------------------------------------------
-    (if you do not have OF installed) 
-    -----------------------------------------------------------
+# -----------------------------------------------------------
+# (if you do not have OF installed) 
+# -----------------------------------------------------------
 	
-    fork https://github.com/openframeworks/openFrameworks to your github
+* fork https://github.com/openframeworks/openFrameworks to your github
 
-    git clone https://github.com/openframeworks/openFrameworks.git
+* git clone https://github.com/openframeworks/openFrameworks.git
 
-    git remote add upstream https://github.com/openframeworks/openFrameworks.git
+* git remote add upstream https://github.com/openframeworks/openFrameworks.git
 
-    git fetch upstream
+* git fetch upstream
 
-    ----------------------------------------------------------- 
-    OF is installed...
-    -----------------------------------------------------------
+# ----------------------------------------------------------- 
+# OF is installed…
+# -----------------------------------------------------------
 
-    cd to apps/
+* cd to apps/
 
-    mkdir projects
+* mkdir projects
+* cd projects
     
-    cd projects
-    
-    git clone git@github.com:HellicarAndLewis/TheHelloCube.git
+* git clone git@github.com:HellicarAndLewis/TheHelloCube.git
        
-    git submodule init
-    git submodule update
+* git submodule init
+* git submodule update
 
 
 
