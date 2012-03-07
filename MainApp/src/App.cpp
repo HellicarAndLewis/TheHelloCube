@@ -22,11 +22,14 @@ void App::setup() {
     // start with the frist scene
     sceneIndex   = SCENE_TEXTURE;
     currentScene = scenes[sceneIndex];
+	
+	twitter.init();
 }
 
 //--------------------------------------------------------------
 void App::update() {
-    
+    twitter.update();
+	
     // later maybe just update the scene that needs to be rendered
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
         (*it)->update();
@@ -55,6 +58,19 @@ void App::draw() {
         ofEndSaveScreenAsPDF();
     }
     
+	if(twitter.getSimulator().take_screenshot) {	
+		ofImage img;
+		img.grabScreen(0,0,ofGetWidth(), ofGetHeight());
+		rtt::Tweet tweet;
+		tweet.setScreenName("roxlutest");
+		twitter.getUploader().uploadScreenshot(
+			 (unsigned char*)img.getPixels()
+			,img.getWidth()
+			,img.getHeight()
+			,tweet
+		);
+		twitter.getSimulator().take_screenshot = false;
+	}
 }
 
 //--------------------------------------------------------------

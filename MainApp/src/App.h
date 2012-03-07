@@ -5,6 +5,7 @@
 #include "DrawnScene.h"
 #include "TextureScene.h"
 #include "SpotsScene.h"
+#include "TwitterManager.h"
 
 class App : public ofBaseApp{
     
@@ -39,5 +40,6 @@ public:
     DrawnScene          drawnSC;
     TextureScene        textureSC;
     SpotScene           spotsSC;
+	TwitterManager		twitter;
     
 };

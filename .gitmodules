@@ -4,3 +4,6 @@
 [submodule "addons/Tools"]
 	path = addons/Tools
 	url = git@github.com:vanderlin/Tools.git
+[submodule "addons/roxlu"]
+	path = addons/roxlu
+	url = git@github.com:roxlu/roxlu.git
