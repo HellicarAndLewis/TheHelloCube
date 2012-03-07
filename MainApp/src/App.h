@@ -9,12 +9,19 @@
 class App : public ofBaseApp{
     
 public:
+        
+    enum {
+        SCENE_CELL    = 0,
+        SCENE_DRAWN   = 1,
+        SCENE_TEXTURE = 2,
+        SCENE_SPOTS   = 3,
+    };
     
     void setup();
     void update();
     void draw();
     
-    void keyPressed  (int key);
+    void keyPressed(int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y );
     void mouseDragged(int x, int y, int button);
@@ -24,6 +31,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    bool                bExportPDF;
     int                 sceneIndex;
     vector <BaseScene*> scenes;
     BaseScene *         currentScene;

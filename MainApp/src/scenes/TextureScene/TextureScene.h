@@ -8,7 +8,9 @@
 
 #pragma once
 #include "BaseScene.h"
-
+#include "ofxBox2d.h"
+#include "TexturedShape.h"
+#include "ofxBox2dPolygonUtils.h"
 
 class TextureScene : public BaseScene {
     
@@ -17,6 +19,16 @@ protected:
 public:
     
     void setup();
+    void update();
+    void draw();
+    void keyPressed(int key);
+    void addPoints();
     
+    vector <ofTexture> textures;
     
+    ofxBox2d box2d;
+    vector <TexturedShape> shapes;
+    vector <ofVec2f>       pts;
+    vector <TriangleShape> tris;
+    int index;
 };

@@ -14,5 +14,5 @@ BaseScene::~BaseScene() {
 // ----------------------------------------------------
 void BaseScene::draw() {
     ofSetColor(255);
-    AppAssets::inst()->appFont.drawString(name, (ofGetWidth()-AppAssets::inst()->appFont.stringWidth(name))/2, ofGetHeight()/2);
+    AppAssets::inst()->appFont.drawString(name, 10, 15);
 };
