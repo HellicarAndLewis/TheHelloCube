@@ -34,5 +34,13 @@ https://github.com/openframeworks/openFrameworks.git develop
    
    git submodule update
 
+# ----------------------------------------------------------- 
+# Updating
+# -----------------------------------------------------------
+   git pull
+   
+   git submodule init
+   
+   git submodule update
 
 
