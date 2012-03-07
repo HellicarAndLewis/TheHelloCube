@@ -1,3 +1,6 @@
 [submodule "addons/ofxBox2d"]
 	path = addons/ofxBox2d
 	url = git@github.com:vanderlin/ofxBox2d.git
+[submodule "addons/Tools"]
+	path = addons/Tools
+	url = git@github.com:vanderlin/Tools.git
