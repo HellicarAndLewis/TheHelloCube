@@ -1,5 +1,4 @@
 
-
 Getting Started:
 the project is working off the latest OpenFrameworks develop branch
 https://github.com/openframeworks/openFrameworks.git develop
@@ -7,32 +6,40 @@ https://github.com/openframeworks/openFrameworks.git develop
 # -----------------------------------------------------------
 # (if you do not have OF installed) 
 # -----------------------------------------------------------
+
+ 	open up terminal
+  	cd to the place where you want to install openFrameworks
 	
-   fork https://github.com/openframeworks/openFrameworks to your github
+	git clone https://github.com/openframeworks/openFrameworks.git
 
-   git clone https://github.com/openframeworks/openFrameworks.git
+	cd openFrameworks/
 
-   git remote add upstream https://github.com/openframeworks/openFrameworks.git
+	git fetch origin develop
+	
+	git checkout origin/develop
+	
+	git checkout develop
 
-   git fetch upstream
 
 # ----------------------------------------------------------- 
-# OF is installed…
+# OF is installed... clone the project
 # -----------------------------------------------------------
+ 	
+	from openFrameworks/
+   	
+	cd to apps/
 
-   cd to apps/
-
-   mkdir projects
+   	mkdir projects
    
-   cd projects
+   	cd projects
     
-   git clone git@github.com:HellicarAndLewis/TheHelloCube.git
+   	git clone git@github.com:HellicarAndLewis/TheHelloCube.git
    
-   cd TheHelloCube
+   	cd TheHelloCube
     
-   git submodule init
+   	git submodule init
    
-   git submodule update
+   	git submodule update
 
 # ----------------------------------------------------------- 
 # Updating
