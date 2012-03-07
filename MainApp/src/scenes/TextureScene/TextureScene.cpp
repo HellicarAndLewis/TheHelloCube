@@ -53,7 +53,7 @@ void TextureScene::keyPressed(int key) {
         
         for (vector<TriangleShape>::iterator it=tris.begin(); it!=tris.end(); ++it) {
             
-            float radius = getTriangleRadius(it->c, it->b, it->a);
+            float radius = GeometryUtils::getTriangleRadius(it->c, it->b, it->a);
             ofVec2f center = getTriangleCenter(it->a, it->b, it->c);
             
             radius = ofRandom(10, 25);
@@ -119,10 +119,10 @@ void TextureScene::draw() {
         ofTriangle(it->a, it->b, it->c);
         
         // the triangle area
-        float radius = getTriangleRadius(it->c, it->b, it->a);
+        float radius = GeometryUtils::getTriangleRadius(it->c, it->b, it->a);
         
         // center of the triangle
-        ofVec2f center = getTriangleCenter(it->a, it->b, it->c);
+        ofVec2f center = GeometryUtils::getTriangleCenter(it->a, it->b, it->c);
         ofCircle(center, radius);
         
         /*ofSetColor(255);
@@ -137,4 +137,5 @@ void TextureScene::draw() {
     ofSetColor(255);
     ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
     ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
+    ofDrawBitmapString("space to make new points\npress b to add shpaes", 20, 100);
 }

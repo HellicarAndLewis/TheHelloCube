@@ -20,7 +20,7 @@ void App::setup() {
     }
     
     // start with the frist scene
-    sceneIndex   = SCENE_CELL;
+    sceneIndex   = SCENE_TEXTURE;
     currentScene = scenes[sceneIndex];
 }
 

@@ -11,7 +11,7 @@
 #include "ofxBox2d.h"
 #include "TexturedShape.h"
 #include "ofxBox2dPolygonUtils.h"
-
+#include "GeometryUtils.h"
 class TextureScene : public BaseScene {
     
 private:
