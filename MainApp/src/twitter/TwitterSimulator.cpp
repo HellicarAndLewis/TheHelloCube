@@ -7,23 +7,31 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,gui(4000)
 	,take_screenshot(false)
 {
+	
 	gui.addString("fake_tweet", fake_tweet);
 	gui.addCallback("simulate_tweet", 1, this);
 	gui.addCallback("reload_commands", 2, this);
 	gui.addCallback("take_screenshot", 3, this);
 	gui.addCallback("reload_badwords", 4, this);
-	gui.addColor("color", col);
-//	gui.addColor("martin", col);
+	gui.addCallback("save_settings", 5, this);
 }
 
 TwitterSimulator::~TwitterSimulator() {
 }
 
-void TwitterSimulator::guiCallback(int v) {
-	string settings_file = ofToDataPath("twitter/simulator.ini",true);
-	//gui.save(settings_file);
+void TwitterSimulator::saveSettings() {
+	gui.save(settings_file);
+}
+
+void TwitterSimulator::loadSettings() {
 	gui.load(settings_file);
-	return;	
+}
+
+void TwitterSimulator::setup(const string& settingsFile) {
+	settings_file = settingsFile;
+}
+
+void TwitterSimulator::guiCallback(int v) {
 	if(v == 1 && fake_tweet.length())  {
 		printf("> fake tweet\n");
 		rtt::Tweet tweet;
@@ -40,6 +48,10 @@ void TwitterSimulator::guiCallback(int v) {
 	else if(v == 4) {
 		printf("> reload bad words\n");
 		manager.reloadBadWords();
+	}
+	else if(v == 5) {
+		printf("> save settings.\n");
+		saveSettings();
 	}
 }
 
