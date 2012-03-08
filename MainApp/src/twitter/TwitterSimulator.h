@@ -14,9 +14,11 @@ public:
 	void guiCallback(int t);
 	string fake_tweet;	
 	bool take_screenshot;
+	float col[4];
 private:
 
 	TwitterManager& manager;
 	OSCGui gui;
+	
 };
 #endif

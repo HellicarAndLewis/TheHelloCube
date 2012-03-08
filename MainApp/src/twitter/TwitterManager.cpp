@@ -13,11 +13,11 @@ void TwitterManager::init() {
 	reloadBadWords();
 	
 	// alllowed commands.
-	allowed_commands.setup(ofToDataPath("allowed_commands.txt", true));
+	allowed_commands.setup(ofToDataPath("twitter/allowed_commands.txt", true));
 	allowed_commands.load();
 	
 	// twitter mentions
-	string tokens_file = ofToDataPath("twitter.txt",true);
+	string tokens_file = ofToDataPath("twitter/twitter.txt",true);
 	twitter_thread.setup(tokens_file);
 	twitter_thread.startThread(false, false);
 	
@@ -87,5 +87,5 @@ bool TwitterManager::getNextCommand(TwitterCommand& result)  {
 }
 
 void TwitterManager::reloadBadWords() {
-	bad_words.reloadWordsFile(ofToDataPath("bad_words.txt", true));
+	bad_words.reloadWordsFile(ofToDataPath("twitter/bad_words.txt", true));
 }

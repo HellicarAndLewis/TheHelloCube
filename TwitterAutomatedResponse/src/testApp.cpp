@@ -24,7 +24,8 @@ void testApp::setup() {
 	// thehellocube account
 	twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
 	twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
-	tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
+	//tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
+	tokens_file = ofToDataPath("twitter_roxlutest.txt", true);
 	if(!twitter.loadTokens(tokens_file)) {
 		string auth_url;
 		twitter.requestToken(auth_url);

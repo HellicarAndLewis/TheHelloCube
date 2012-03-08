@@ -1,5 +1,6 @@
 #include "TwitterSimulator.h"
 #include "TWitterManager.h"
+#include "ofMain.h"
 
 TwitterSimulator::TwitterSimulator(TwitterManager& manager) 
 	:manager(manager)
@@ -11,12 +12,18 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	gui.addCallback("reload_commands", 2, this);
 	gui.addCallback("take_screenshot", 3, this);
 	gui.addCallback("reload_badwords", 4, this);
+	gui.addColor("color", col);
+//	gui.addColor("martin", col);
 }
 
 TwitterSimulator::~TwitterSimulator() {
 }
 
 void TwitterSimulator::guiCallback(int v) {
+	string settings_file = ofToDataPath("twitter/simulator.ini",true);
+	//gui.save(settings_file);
+	gui.load(settings_file);
+	return;	
 	if(v == 1 && fake_tweet.length())  {
 		printf("> fake tweet\n");
 		rtt::Tweet tweet;
@@ -38,4 +45,5 @@ void TwitterSimulator::guiCallback(int v) {
 
 void TwitterSimulator::update() {
 	gui.update();
+	//printf("r:%f, g:%f\n", col[0], col[1]);
 }
