@@ -7,6 +7,7 @@
 //
 
 #pragma once
+#include "ofMain.h"
 #include "BaseScene.h"
 #include "ofxBox2d.h"
 #include "TexturedShape.h"

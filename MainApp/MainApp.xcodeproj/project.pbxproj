@@ -116,6 +116,7 @@
 		E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
 		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
 		E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		E995A3571508CBE20078FBEA /* TwitterBadWords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E995A3561508CBE20078FBEA /* TwitterBadWords.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -469,6 +470,8 @@
 		E4C2424610CC5A17004149E2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
+		E995A3551508CB9F0078FBEA /* TwitterBadWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterBadWords.h; path = twitter/TwitterBadWords.h; sourceTree = "<group>"; };
+		E995A3561508CBE20078FBEA /* TwitterBadWords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterBadWords.cpp; path = twitter/TwitterBadWords.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -838,6 +841,8 @@
 				548EB36F150807B9002179B7 /* TwitterThread.cpp */,
 				548EB370150807B9002179B7 /* TwitterThread.h */,
 				548EB371150807B9002179B7 /* TwitterTypes.h */,
+				E995A3551508CB9F0078FBEA /* TwitterBadWords.h */,
+				E995A3561508CBE20078FBEA /* TwitterBadWords.cpp */,
 			);
 			name = twitter;
 			sourceTree = "<group>";
@@ -1386,6 +1391,7 @@
 				48675C9A15081265007AB310 /* Twitter.cpp in Sources */,
 				48675C9B15081265007AB310 /* Tweet.cpp in Sources */,
 				48675C9C15081265007AB310 /* URL.cpp in Sources */,
+				E995A3571508CBE20078FBEA /* TwitterBadWords.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -97,10 +97,13 @@ void TextureScene::draw() {
         glEnd();
         it->tex->unbind();  
         
+		/*
+		// roxlu 03/08,  isPointInScreen is found, but I get a compiler error 
         if(!isPointInScreen(p, r)) {
             it->destroy();
             it->dead = true;
         }
+		*/
         // ofCircle(p, r);
     }
     

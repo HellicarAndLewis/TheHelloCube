@@ -15,7 +15,7 @@ using std::queue;
 using std::string;
 
 //const string URL_TWITTER_UPLOADER = "http://hellocube.localhost";
-const string URL_TWITTER_UPLOADER = "http://www.thehellocube.com";
+const string URL_TWITTER_UPLOADER = "http://www.thehellocube.com/";
 enum TwitterPhotoUploaderTaskType {
 	TASK_UPLOAD_PHOTO
 };
@@ -38,6 +38,11 @@ public:
 		,h(h)
 		,tweet(tweet)
 	{
+	}
+	
+	~TwitterPhotoUploaderTask_Upload() {
+		printf("~TwitterPhotoUploaderTask_Upload");
+		delete[] pixels;
 	}
 	
 	int w;

@@ -6,6 +6,7 @@
 #include "TwitterSimulator.h"
 #include "TwitterCommands.h"
 #include "TwitterPhotoUploaderThread.h"
+#include "TwitterBadWords.h"
 #include "pcrecpp.h"
 #include <vector>
 #include <queue>
@@ -24,18 +25,23 @@ public:
 	~TwitterManager();
 	void init();
 	void update();
+	void parseTweet(rtt::Tweet& tweet);
+	bool hasNewCommands();
+	bool getNextCommand(TwitterCommand& result);
+	void reloadBadWords();
 	TwitterThread& getThread();
 	TwitterCommands& getCommands();
 	TwitterPhotoUploaderThread& getUploader();
 	TwitterSimulator& getSimulator();
-	void parseTweet(rtt::Tweet& tweet);
-	bool hasNewCommands();
-	bool getNextCommand(TwitterCommand& result);
+	TwitterBadWords& getBadWords();
+
 private:
+
 	TwitterCommands allowed_commands;
 	TwitterSimulator simulator;
 	TwitterThread twitter_thread;
 	TwitterPhotoUploaderThread uploader_thread;
+	TwitterBadWords bad_words;
 	queue<TwitterCommand> commands;
 };
 
@@ -53,6 +59,10 @@ inline TwitterPhotoUploaderThread& TwitterManager::getUploader() {
 
 inline TwitterSimulator& TwitterManager::getSimulator() {
 	return simulator;
+}
+
+inline TwitterBadWords& TwitterManager::getBadWords() {
+	return bad_words;
 }
 
 /*
