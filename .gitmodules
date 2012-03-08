@@ -4,3 +4,6 @@
 [submodule "addons/Tools"]
 	path = addons/Tools
 	url = git@github.com:vanderlin/Tools.git
+[submodule "addons/ofxQTKitVideoGrabber"]
+	path = addons/ofxQTKitVideoGrabber
+	url = https://github.com/Flightphase/ofxQTKitVideoGrabber
