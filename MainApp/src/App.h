@@ -6,6 +6,10 @@
 #include "TextureScene.h"
 #include "SpotsScene.h"
 
+#include "ofxQTKitVideoGrabber.h"
+#define CAM_WIDTH 960
+#define CAM_HEIGHT 720
+
 class App : public ofBaseApp{
     
 public:
@@ -40,4 +44,8 @@ public:
     TextureScene        textureSC;
     SpotScene           spotsSC;
     
+    //JGL video parts
+	ofxQTKitVideoGrabber	vidGrabber;	
+	int 				camWidth;
+	int 				camHeight;    
 };

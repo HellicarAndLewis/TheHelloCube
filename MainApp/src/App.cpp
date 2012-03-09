@@ -4,8 +4,18 @@
 void App::setup() {
     
     ofBackground(255);
+    ofSetFrameRate(30);
     ofSetVerticalSync(true);
     
+    //initialise camera
+	camWidth 		= CAM_WIDTH;	// try to grab at this size. 
+	camHeight 		= CAM_HEIGHT;
+	
+	//vidGrabber.listVideoDevices();											
+    vidGrabber.setVideoDeviceID(0); //0 is first, iSight is always last, so this is safe...
+	vidGrabber.initGrabber(camWidth, camHeight);    
+    
+    //now fonts
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
     // add all the scenes
@@ -19,13 +29,18 @@ void App::setup() {
         (*it)->setup();
     }
     
-    // start with the frist scene
+    // start with the first scene
     sceneIndex   = SCENE_TEXTURE;
     currentScene = scenes[sceneIndex];
 }
 
 //--------------------------------------------------------------
 void App::update() {
+	vidGrabber.update();
+	
+	if (vidGrabber.isFrameNew()){
+        //new frame fun here....
+	}    
     
     // later maybe just update the scene that needs to be rendered
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
@@ -49,6 +64,8 @@ void App::draw() {
         ofSetColor(255);
         currentScene->draw();
     }
+    
+    vidGrabber.draw(0,0); //stick the camera up on screen....
     
     if(bExportPDF) {
         bExportPDF = false;
