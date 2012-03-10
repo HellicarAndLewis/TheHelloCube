@@ -6,6 +6,9 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	:manager(manager)
 	,gui(4000)
 	,take_screenshot(false)
+	,fx_mirror(false)
+	,fx_flip(false)
+	,fx_pixelate(false)
 {
 	
 	gui.addString("fake_tweet", fake_tweet);
@@ -14,6 +17,7 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	gui.addCallback("take_screenshot", 3, this);
 	gui.addCallback("reload_badwords", 4, this);
 	gui.addCallback("save_settings", 5, this);
+	gui.addCallback("update_fx",6 , this);
 }
 
 TwitterSimulator::~TwitterSimulator() {
@@ -53,9 +57,30 @@ void TwitterSimulator::guiCallback(int v) {
 		printf("> save settings.\n");
 		saveSettings();
 	}
+	else if(v == 6) {
+	
+		fx->mirror(fx_mirror);
+		fx->flip(fx_flip);
+		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
+	}
 }
 
 void TwitterSimulator::update() {
 	gui.update();
-	//printf("r:%f, g:%f\n", col[0], col[1]);
+	
+	if(gui.didValueChange()) {
+		fx->mirror(fx_mirror);
+		fx->flip(fx_flip);
+		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
+	}
+	
+}
+
+void TwitterSimulator::setEffects(Effects& f) {
+	fx = &f;
+	gui.addBool("fx_mirror", fx_mirror);
+	gui.addBool("fx_flip", fx_flip);
+	gui.addBool("fx_pixelate", fx_pixelate);
+	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
+	gui.addFloat("fx_pixelate_y", fx_pixelate_y);
 }

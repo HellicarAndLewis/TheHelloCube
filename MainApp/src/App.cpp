@@ -25,6 +25,7 @@ void App::setup() {
 	
 	twitter.init();
 	fx.setup(ofGetWidth(), ofGetHeight());
+	twitter.getSimulator().setEffects(fx);
 }
 
 //--------------------------------------------------------------
@@ -76,6 +77,8 @@ void App::draw() {
 		);
 		twitter.getSimulator().take_screenshot = false;
 	}
+	
+	
 	fx.draw();
 }
 

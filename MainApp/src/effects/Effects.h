@@ -22,6 +22,10 @@ public:
 	void endGrabPixels();	
 	void bind();
 	void unbind();
+	
+	void mirror(bool apply);
+	void flip(bool apply);
+	void pixelate(bool apply, float x, float y);
 private:
 	ofShader shader;
 	//ofFbo fbo;

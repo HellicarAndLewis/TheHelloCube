@@ -90,12 +90,15 @@ void Effects::setup(int w, int h) {
 	);
 	
 	unbind();
+	
+	flip(false);
+	mirror(false);
 }
 
 void Effects::beginGrabPixels() {
 	ofEnableNormalizedTexCoords();
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo_handle);
-	glClearColor(1,0,0,1);
+	glClearColor(0,0,0,1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(0,0,width, height);
 }
@@ -125,4 +128,24 @@ void Effects::bind() {
 void Effects::unbind() {
 	shader.end();
 	glBindVertexArrayAPPLE(0);
+}
+
+void Effects::mirror(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_mirror", apply ? 1: 2);
+	shader.end();
+}
+
+void Effects::flip(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_flip", apply ? 1: 2);
+	shader.end();
+}
+
+void Effects::pixelate(bool apply, float x, float y) {
+	shader.begin();
+		shader.setUniform1i("fx_pixelate", apply ? 1: 2);
+		shader.setUniform1f("fx_pixelate_x", x);
+		shader.setUniform1f("fx_pixelate_y", y);
+	shader.end();
 }
