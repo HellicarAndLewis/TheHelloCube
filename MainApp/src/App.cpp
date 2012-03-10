@@ -20,7 +20,7 @@ void App::setup() {
     }
     
     // start with the frist scene
-    sceneIndex   = SCENE_TEXTURE;
+    sceneIndex   = SCENE_CELL;
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();

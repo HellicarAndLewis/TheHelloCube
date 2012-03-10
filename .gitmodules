@@ -7,3 +7,6 @@
 [submodule "addons/roxlu"]
 	path = addons/roxlu
 	url = git@github.com:roxlu/roxlu.git
+[submodule "addons/ofxQTKitVideoGrabber"]
+	path = addons/ofxQTKitVideoGrabber
+	url = https://github.com/Flightphase/ofxQTKitVideoGrabber
