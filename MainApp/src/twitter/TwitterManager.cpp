@@ -21,7 +21,7 @@ void TwitterManager::init() {
 	allowed_commands.load();
 	
 	// twitter mentions
-	string tokens_file = ofToDataPath("twitter/twitter.txt",true);
+	string tokens_file = ofToDataPath("twitter/twitter_roxlutest.txt",true);
 	twitter_thread.setup(tokens_file);
 	twitter_thread.startThread(false, false);
 	

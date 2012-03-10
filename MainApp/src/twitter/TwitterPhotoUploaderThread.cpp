@@ -26,7 +26,6 @@ void TwitterPhotoUploaderThread::setup(
 	twitter.setConsumerSecret(consumerSecret);
 	if(!twitter.loadTokens(tokensPath)) {
 		printf("Error: cannot load tokens file for photo uploader: '%s'...\n", tokensPath.c_str());
-		exit(0);
 	}
 }
 
