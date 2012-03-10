@@ -11,6 +11,7 @@
 #include "ofxQTKitVideoGrabber.h"
 #define CAM_WIDTH 960
 #define CAM_HEIGHT 720
+//#define USE_FX
 
 class App : public ofBaseApp{
     
@@ -51,7 +52,9 @@ public:
 	
     // twitter
     TwitterManager		 twitter;
+#ifdef USE_FX
     Effects				 fx;
+#endif
     
     // Video
 	ofxQTKitVideoGrabber vidGrabber;	
