@@ -8,7 +8,7 @@ void CellScene::setup() {
     ofStringReplace(safeName, " ", "_");
     gui.setup(safeName);
     gui.add(separationDistance.setup("separation", 10, 1, 500));
-    gui.add(speed.setup("speed", 0.004, 0.0003, 2.0));
+    gui.add(speed.setup("speed", 0.4, 0.0003, 2.0));
     
 }
 
