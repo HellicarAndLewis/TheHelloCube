@@ -47,5 +47,21 @@ public:
     //JGL video parts
 	ofxQTKitVideoGrabber	vidGrabber;	
 	int 				camWidth;
-	int 				camHeight;    
+	int 				camHeight;  
+    
+    //LUT bits from openFrameworks/examples/graphics/InstagramLikeImageFilters example 
+    
+    void loadLUT(string path);
+	void applyLUT(ofPixelsRef pix);
+	
+	bool doLUT;
+	int dirLoadIndex;
+	ofDirectory dir;
+	ofPoint lutPos;
+	ofPoint thumbPos;
+	
+	bool LUTloaded;
+	ofVec3f lut[32][32][32];
+	
+	ofImage lutImg;
 };
