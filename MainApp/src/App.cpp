@@ -5,7 +5,6 @@ void App::setup() {
  
     ofBackground(255);
     ofSetVerticalSync(true);
-//    ofSetFrameRate(10);   
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
     // add all the scenes
@@ -29,6 +28,7 @@ void App::setup() {
 
 //--------------------------------------------------------------
 void App::update() {
+    
     twitter.update();
 	
     // later maybe just update the scene that needs to be rendered
@@ -39,6 +39,7 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw() {
+    
 	fx.beginGrabPixels();
     ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     

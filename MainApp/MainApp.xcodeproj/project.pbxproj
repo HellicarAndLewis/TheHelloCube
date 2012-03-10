@@ -450,7 +450,7 @@
 		5F624CEF150179140081827B /* TexturedShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturedShape.h; sourceTree = "<group>"; };
 		5F624CF01501791B0081827B /* TexturedShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TexturedShape.cpp; sourceTree = "<group>"; };
 		5F7BE6CB15058D2500F8495B /* GeometryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryUtils.h; sourceTree = "<group>"; };
-		5FE6CE1C150A838B00C31FF2 /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
+		5F8ED670150BCB5F0082F12D /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
 		5FE6CE1D150A841F00C31FF2 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		5FE8943B14FDD56B002C15D0 /* ofxTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimer.cpp; sourceTree = "<group>"; };
 		5FE8943C14FDD56B002C15D0 /* ofxTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimer.h; sourceTree = "<group>"; };
@@ -1137,7 +1137,7 @@
 			children = (
 				5FE8945114FDD586002C15D0 /* CellScene.cpp */,
 				5FE8945214FDD586002C15D0 /* CellScene.h */,
-				5FE6CE1C150A838B00C31FF2 /* CellNode.h */,
+				5F8ED670150BCB5F0082F12D /* CellNode.h */,
 			);
 			path = CellScene;
 			sourceTree = "<group>";

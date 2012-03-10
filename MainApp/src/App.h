@@ -37,35 +37,37 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    bool                bExportPDF;
-    int                 sceneIndex;
-    vector <BaseScene*> scenes;
-    BaseScene *         currentScene;
-    CellScene           cellSC;
-    DrawnScene          drawnSC;
-    TextureScene        textureSC;
-    SpotScene           spotsSC;
-	TwitterManager		twitter;
-    Effects				fx;
     
-    //JGL video parts
-	ofxQTKitVideoGrabber	vidGrabber;	
-	int 				camWidth;
-	int 				camHeight;  
+    bool                 bExportPDF;
+    int                  sceneIndex;
     
+    // scenes
+    vector <BaseScene*>  scenes;
+    BaseScene *          currentScene;
+    CellScene            cellSC;
+    DrawnScene           drawnSC;
+    TextureScene         textureSC;
+    SpotScene            spotsSC;
+	
+    // twitter
+    TwitterManager		 twitter;
+    Effects				 fx;
+    
+    // Video
+	ofxQTKitVideoGrabber vidGrabber;	
+	int 				 camWidth;
+	int 				 camHeight;  
+    
+    // Video FX
     //LUT bits from openFrameworks/examples/graphics/InstagramLikeImageFilters example 
-    
-    void loadLUT(string path);
-	void applyLUT(ofPixelsRef pix);
-	
-	bool doLUT;
-	int dirLoadIndex;
-	ofDirectory dir;
-	ofPoint lutPos;
-	ofPoint thumbPos;
-	
-	bool LUTloaded;
-	ofVec3f lut[32][32][32];
-	
-	ofImage lutImg;
+    void                 loadLUT(string path);
+	void                 applyLUT(ofPixelsRef pix);
+	bool                 doLUT;
+	int                  dirLoadIndex;
+	ofDirectory          dir;
+	ofPoint              lutPos;
+	ofPoint              thumbPos;
+	bool                 LUTloaded;
+	ofVec3f              lut[32][32][32];
+	ofImage              lutImg;
 };
