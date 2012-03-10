@@ -4,7 +4,8 @@
 void App::setup() {
  
     ofBackground(255);
-    ofSetVerticalSync(true);
+    ofSetFrameRate(60);
+    //ofSetVerticalSync(true);
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
     // add all the scenes
@@ -23,7 +24,9 @@ void App::setup() {
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();
-	fx.setup(ofGetWidth(), ofGetHeight());
+#ifdef USE_FX
+    fx.setup(ofGetWidth(), ofGetHeight());
+#endif
 }
 
 //--------------------------------------------------------------
@@ -39,8 +42,9 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw() {
-    
+#ifdef USE_FX
 	fx.beginGrabPixels();
+#endif
     ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     
     if(bExportPDF) {
@@ -62,7 +66,9 @@ void App::draw() {
         ofEndSaveScreenAsPDF();
     }
 	
+#ifdef USE_FX
 	fx.endGrabPixels();
+#endif
     
 	if(twitter.getSimulator().take_screenshot) {	
 		ofImage img;
@@ -77,7 +83,23 @@ void App::draw() {
 		);
 		twitter.getSimulator().take_screenshot = false;
 	}
-	fx.draw();
+#ifdef USE_FX
+	ofSetColor(255);
+    fx.draw();
+#endif
+    
+    
+    // draw some stats about the app...
+    ofEnableAlphaBlending();
+    ofFill();
+    ofSetColor(255, 130);
+    ofRect(0, ofGetHeight()-60, 255, 60);
+    ofSetColor(0);
+    string info;
+    info += ofToString(ofGetFrameRate(), 0)+" fps\n";
+    if(currentScene) info += "scene "+currentScene->name+"\n";
+    
+    ofDrawBitmapString(info, 10, ofGetHeight()-40);
 }
 
 //--------------------------------------------------------------

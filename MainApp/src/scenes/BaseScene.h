@@ -10,6 +10,7 @@
 #include "ofMain.h"
 #include "Utils.h"
 #include "AppAssets.h"
+#include "ofxGui.h"
 
 class BaseScene {
     
@@ -21,7 +22,8 @@ public:
     ~BaseScene();
     
     // ----------------------------------------------------
-    string name;
+    string   name;
+    ofxPanel gui;
     
     // ----------------------------------------------------
     virtual void setup() = 0;
