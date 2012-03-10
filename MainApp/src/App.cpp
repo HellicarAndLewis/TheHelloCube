@@ -2,10 +2,10 @@
 
 //--------------------------------------------------------------
 void App::setup() {
-    
+ 
     ofBackground(255);
     ofSetVerticalSync(true);
-    
+//    ofSetFrameRate(10);   
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
     // add all the scenes
@@ -24,6 +24,7 @@ void App::setup() {
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();
+	fx.setup(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -38,13 +39,15 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw() {
-
+	fx.beginGrabPixels();
     ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     
     if(bExportPDF) {
         ofBeginSaveScreenAsPDF("exports/"+ofToString(ofGetUnixTime())+".pdf");
     }
     
+	
+	
     // we only want to draw the current screen
     // later we will have a transition from 
     // one scene to the next
@@ -57,6 +60,8 @@ void App::draw() {
         bExportPDF = false;
         ofEndSaveScreenAsPDF();
     }
+	
+	fx.endGrabPixels();
     
 	if(twitter.getSimulator().take_screenshot) {	
 		ofImage img;
@@ -71,6 +76,7 @@ void App::draw() {
 		);
 		twitter.getSimulator().take_screenshot = false;
 	}
+	fx.draw();
 }
 
 //--------------------------------------------------------------

@@ -6,6 +6,7 @@
 #include "TextureScene.h"
 #include "SpotsScene.h"
 #include "TwitterManager.h"
+#include "Effects.h"
 
 class App : public ofBaseApp{
     
@@ -41,5 +42,5 @@ public:
     TextureScene        textureSC;
     SpotScene           spotsSC;
 	TwitterManager		twitter;
-    
+    Effects				fx;
 };

@@ -48,6 +48,9 @@
 		548EB374150807B9002179B7 /* TwitterPhotoUploaderThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 548EB36B150807B9002179B7 /* TwitterPhotoUploaderThread.cpp */; };
 		548EB375150807B9002179B7 /* TwitterSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 548EB36D150807B9002179B7 /* TwitterSimulator.cpp */; };
 		548EB376150807B9002179B7 /* TwitterThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 548EB36F150807B9002179B7 /* TwitterThread.cpp */; };
+		54C4C73F150B8E950062EA42 /* Effects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C4C73E150B8E950062EA42 /* Effects.cpp */; };
+		54C4C743150B9EB20062EA42 /* effects.frag in Sources */ = {isa = PBXBuildFile; fileRef = 54C4C741150B9EB10062EA42 /* effects.frag */; };
+		54C4C744150B9EB20062EA42 /* effects.vert in Sources */ = {isa = PBXBuildFile; fileRef = 54C4C742150B9EB20062EA42 /* effects.vert */; };
 		5F01477614FF3241000EB0FF /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01471314FF3241000EB0FF /* b2BroadPhase.cpp */; };
 		5F01477714FF3241000EB0FF /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01471514FF3241000EB0FF /* b2CollideCircle.cpp */; };
 		5F01477814FF3241000EB0FF /* b2CollidePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01471614FF3241000EB0FF /* b2CollidePolygon.cpp */; };
@@ -335,6 +338,11 @@
 		548EB36F150807B9002179B7 /* TwitterThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterThread.cpp; path = twitter/TwitterThread.cpp; sourceTree = "<group>"; };
 		548EB370150807B9002179B7 /* TwitterThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterThread.h; path = twitter/TwitterThread.h; sourceTree = "<group>"; };
 		548EB371150807B9002179B7 /* TwitterTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterTypes.h; path = twitter/TwitterTypes.h; sourceTree = "<group>"; };
+		54C4C73D150B8D4A0062EA42 /* Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Effects.h; path = effects/Effects.h; sourceTree = "<group>"; };
+		54C4C73E150B8E950062EA42 /* Effects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Effects.cpp; path = effects/Effects.cpp; sourceTree = "<group>"; };
+		54C4C740150B92E90062EA42 /* Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Error.h; path = effects/Error.h; sourceTree = "<group>"; };
+		54C4C741150B9EB10062EA42 /* effects.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.frag; path = bin/data/effects/effects.frag; sourceTree = SOURCE_ROOT; };
+		54C4C742150B9EB20062EA42 /* effects.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.vert; path = bin/data/effects/effects.vert; sourceTree = SOURCE_ROOT; };
 		5F01470E14FF3241000EB0FF /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		5F01471114FF3241000EB0FF /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		5F01471314FF3241000EB0FF /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
@@ -847,6 +855,18 @@
 			name = twitter;
 			sourceTree = "<group>";
 		};
+		54C4C73C150B8D2E0062EA42 /* effects */ = {
+			isa = PBXGroup;
+			children = (
+				54C4C741150B9EB10062EA42 /* effects.frag */,
+				54C4C742150B9EB20062EA42 /* effects.vert */,
+				54C4C740150B92E90062EA42 /* Error.h */,
+				54C4C73D150B8D4A0062EA42 /* Effects.h */,
+				54C4C73E150B8E950062EA42 /* Effects.cpp */,
+			);
+			name = effects;
+			sourceTree = "<group>";
+		};
 		5F01470D14FF3241000EB0FF /* ofxBox2d */ = {
 			isa = PBXGroup;
 			children = (
@@ -1197,6 +1217,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				54C4C73C150B8D2E0062EA42 /* effects */,
 				548EB3661508079C002179B7 /* twitter */,
 				5FE8946514FDD645002C15D0 /* app utils */,
 				5FE8944D14FDD586002C15D0 /* scenes */,
@@ -1392,6 +1413,9 @@
 				48675C9B15081265007AB310 /* Tweet.cpp in Sources */,
 				48675C9C15081265007AB310 /* URL.cpp in Sources */,
 				E995A3571508CBE20078FBEA /* TwitterBadWords.cpp in Sources */,
+				54C4C73F150B8E950062EA42 /* Effects.cpp in Sources */,
+				54C4C743150B9EB20062EA42 /* effects.frag in Sources */,
+				54C4C744150B9EB20062EA42 /* effects.vert in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

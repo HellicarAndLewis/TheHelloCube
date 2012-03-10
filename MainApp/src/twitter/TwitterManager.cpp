@@ -23,7 +23,7 @@ void TwitterManager::init() {
 	// twitter mentions
 	string tokens_file = ofToDataPath("twitter/twitter_roxlutest.txt",true);
 	twitter_thread.setup(tokens_file);
-	twitter_thread.startThread(false, false);
+	//twitter_thread.startThread(false, false);
 	
 	// photo uploader + reply
 	uploader_thread.setup(
@@ -31,7 +31,8 @@ void TwitterManager::init() {
 		,twitter_thread.getTwitter().getConsumerSecret()
 		,tokens_file
 	);
-	uploader_thread.startThread(false, false);	
+	
+	//uploader_thread.startThread(false, false);	
 }
 
 void TwitterManager::update() {
