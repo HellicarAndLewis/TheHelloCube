@@ -9,6 +9,7 @@
 #pragma once
 #include "BaseScene.h"
 #include "CellNode.h"
+#include "ofxVoronoi.h"
 
 class CellScene : public BaseScene {
     
@@ -21,6 +22,10 @@ public:
     void draw();
     void keyPressed(int key);
 
+    ofxVoronoi        voronoi;
     vector <CellNode> cells;
+    
+    ofxFloatSlider separationDistance;
+    ofxFloatSlider speed;
     
 };

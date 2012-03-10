@@ -10,3 +10,6 @@
 [submodule "addons/ofxQTKitVideoGrabber"]
 	path = addons/ofxQTKitVideoGrabber
 	url = https://github.com/Flightphase/ofxQTKitVideoGrabber
+[submodule "addons/ofxVoronoi"]
+	path = addons/ofxVoronoi
+	url = git@github.com:vanderlin/ofxVoronoi.git
