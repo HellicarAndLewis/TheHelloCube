@@ -6,6 +6,10 @@
 #include "TextureScene.h"
 #include "SpotsScene.h"
 
+#include "ofxQTKitVideoGrabber.h"
+#define CAM_WIDTH 960
+#define CAM_HEIGHT 720
+
 class App : public ofBaseApp{
     
 public:
@@ -40,4 +44,24 @@ public:
     TextureScene        textureSC;
     SpotScene           spotsSC;
     
+    //JGL video parts
+	ofxQTKitVideoGrabber	vidGrabber;	
+	int 				camWidth;
+	int 				camHeight;  
+    
+    //LUT bits from openFrameworks/examples/graphics/InstagramLikeImageFilters example 
+    
+    void loadLUT(string path);
+	void applyLUT(ofPixelsRef pix);
+	
+	bool doLUT;
+	int dirLoadIndex;
+	ofDirectory dir;
+	ofPoint lutPos;
+	ofPoint thumbPos;
+	
+	bool LUTloaded;
+	ofVec3f lut[32][32][32];
+	
+	ofImage lutImg;
 };

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80CB0B150B864800F8C65F /* CoreVideo.framework */; };
+		5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA11969150A5D300011C6A8 /* QTKit.framework */; };
+		5DA11A3B150A5D530011C6A8 /* ofxQTKitVideoGrabber.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5DA11A2C150A5D530011C6A8 /* ofxQTKitVideoGrabber.mm */; };
 		5F01477614FF3241000EB0FF /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01471314FF3241000EB0FF /* b2BroadPhase.cpp */; };
 		5F01477714FF3241000EB0FF /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01471514FF3241000EB0FF /* b2CollideCircle.cpp */; };
 		5F01477814FF3241000EB0FF /* b2CollidePolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01471614FF3241000EB0FF /* b2CollidePolygon.cpp */; };
@@ -108,6 +111,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5D80CB0B150B864800F8C65F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = ../../../../../../../../../../../System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
+		5DA11969150A5D300011C6A8 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = ../../../../../../../../../../../System/Library/Frameworks/QTKit.framework; sourceTree = "<group>"; };
+		5DA11A29150A5D530011C6A8 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		5DA11A2B150A5D530011C6A8 /* ofxQTKitVideoGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQTKitVideoGrabber.h; sourceTree = "<group>"; };
+		5DA11A2C150A5D530011C6A8 /* ofxQTKitVideoGrabber.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxQTKitVideoGrabber.mm; sourceTree = "<group>"; };
 		5F01470E14FF3241000EB0FF /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		5F01471114FF3241000EB0FF /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		5F01471314FF3241000EB0FF /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
@@ -266,12 +274,33 @@
 				E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */,
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
+				5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */,
+				5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DA1196C150A5D520011C6A8 /* ofxQTKitVideoGrabber */ = {
+			isa = PBXGroup;
+			children = (
+				5DA11A29150A5D530011C6A8 /* README */,
+				5DA11A2A150A5D530011C6A8 /* src */,
+			);
+			name = ofxQTKitVideoGrabber;
+			path = ../addons/ofxQTKitVideoGrabber;
+			sourceTree = "<group>";
+		};
+		5DA11A2A150A5D530011C6A8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5DA11A2B150A5D530011C6A8 /* ofxQTKitVideoGrabber.h */,
+				5DA11A2C150A5D530011C6A8 /* ofxQTKitVideoGrabber.mm */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		5F01470D14FF3241000EB0FF /* ofxBox2d */ = {
 			isa = PBXGroup;
 			children = (
@@ -557,6 +586,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5DA1196C150A5D520011C6A8 /* ofxQTKitVideoGrabber */,
 				5F01470D14FF3241000EB0FF /* ofxBox2d */,
 				5FE8941814FDD56B002C15D0 /* Tools */,
 			);
@@ -566,6 +596,8 @@
 		BBAB23C913894ECA00AA2426 /* system frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5D80CB0B150B864800F8C65F /* CoreVideo.framework */,
+				5DA11969150A5D300011C6A8 /* QTKit.framework */,
 				E4C2424410CC5A17004149E2 /* AppKit.framework */,
 				E4C2424510CC5A17004149E2 /* Cocoa.framework */,
 				E4C2424610CC5A17004149E2 /* IOKit.framework */,
@@ -781,6 +813,7 @@
 				5F01479E14FF3241000EB0FF /* ofxBox2dPolygon.cpp in Sources */,
 				5F01479F14FF3241000EB0FF /* ofxBox2dRect.cpp in Sources */,
 				5F624CF11501791B0081827B /* TexturedShape.cpp in Sources */,
+				5DA11A3B150A5D530011C6A8 /* ofxQTKitVideoGrabber.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -932,6 +965,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
 				PRODUCT_NAME = MainAppDebug;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1016,6 +1050,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
 				PRODUCT_NAME = MainApp;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
