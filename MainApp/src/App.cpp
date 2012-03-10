@@ -4,7 +4,8 @@
 void App::setup() {
  
     ofBackground(255);
-    ofSetVerticalSync(true);
+    ofSetFrameRate(60);
+    //ofSetVerticalSync(true);
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
     // add all the scenes
@@ -87,6 +88,18 @@ void App::draw() {
     fx.draw();
 #endif
     
+    
+    // draw some stats about the app...
+    ofEnableAlphaBlending();
+    ofFill();
+    ofSetColor(255, 130);
+    ofRect(0, ofGetHeight()-60, 255, 60);
+    ofSetColor(0);
+    string info;
+    info += ofToString(ofGetFrameRate(), 0)+" fps\n";
+    if(currentScene) info += "scene "+currentScene->name+"\n";
+    
+    ofDrawBitmapString(info, 10, ofGetHeight()-40);
 }
 
 //--------------------------------------------------------------
