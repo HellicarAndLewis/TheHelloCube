@@ -32,6 +32,7 @@ void Effects::setup(int w, int h) {
 	glBindRenderbuffer(GL_RENDERBUFFER, fbo_depth); eglGetError();	
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, w, h);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, fbo_depth); eglGetError();
+
 	GLenum drawbufs[] = {GL_COLOR_ATTACHMENT0};
 	glDrawBuffers(1, drawbufs);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -62,6 +63,7 @@ void Effects::setup(int w, int h) {
 
 	glGenBuffers(1, &vbo); eglGetError();
 	glBindBuffer(GL_ARRAY_BUFFER, vbo); eglGetError();
+	
 	glBufferData(
 		GL_ARRAY_BUFFER	
 		,sizeof(Vertex) * 4
