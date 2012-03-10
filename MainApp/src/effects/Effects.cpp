@@ -127,6 +127,7 @@ void Effects::bind() {
 
 void Effects::unbind() {
 	shader.end();
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArrayAPPLE(0);
 }
 

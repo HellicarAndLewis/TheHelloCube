@@ -36,7 +36,6 @@
 		544C7B27150BB9D8003E8B76 /* OSCGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AF9150BB9D8003E8B76 /* OSCGui.cpp */; };
 		544C7B2A150BB9D8003E8B76 /* JSON.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7B05150BB9D8003E8B76 /* JSON.cpp */; };
 		544C7B2B150BB9D8003E8B76 /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7B07150BB9D8003E8B76 /* Stream.cpp */; };
-		544C7B2C150BB9D8003E8B76 /* TwitPic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7B0A150BB9D8003E8B76 /* TwitPic.cpp */; };
 		544C7B2D150BB9D8003E8B76 /* Twitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7B0C150BB9D8003E8B76 /* Twitter.cpp */; };
 		544C7B2E150BB9D8003E8B76 /* Tweet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7B10150BB9D8003E8B76 /* Tweet.cpp */; };
 		544C7B2F150BB9D8003E8B76 /* URL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7B12150BB9D8003E8B76 /* URL.cpp */; };
@@ -234,8 +233,6 @@
 		544C7B07150BB9D8003E8B76 /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stream.cpp; sourceTree = "<group>"; };
 		544C7B08150BB9D8003E8B76 /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
 		544C7B09150BB9D8003E8B76 /* TweetConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetConstants.h; sourceTree = "<group>"; };
-		544C7B0A150BB9D8003E8B76 /* TwitPic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TwitPic.cpp; sourceTree = "<group>"; };
-		544C7B0B150BB9D8003E8B76 /* TwitPic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitPic.h; sourceTree = "<group>"; };
 		544C7B0C150BB9D8003E8B76 /* Twitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Twitter.cpp; sourceTree = "<group>"; };
 		544C7B0D150BB9D8003E8B76 /* Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twitter.h; sourceTree = "<group>"; };
 		544C7B0F150BB9D8003E8B76 /* General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = General.h; sourceTree = "<group>"; };
@@ -697,8 +694,6 @@
 				544C7B07150BB9D8003E8B76 /* Stream.cpp */,
 				544C7B08150BB9D8003E8B76 /* Stream.h */,
 				544C7B09150BB9D8003E8B76 /* TweetConstants.h */,
-				544C7B0A150BB9D8003E8B76 /* TwitPic.cpp */,
-				544C7B0B150BB9D8003E8B76 /* TwitPic.h */,
 				544C7B0C150BB9D8003E8B76 /* Twitter.cpp */,
 				544C7B0D150BB9D8003E8B76 /* Twitter.h */,
 				544C7B0E150BB9D8003E8B76 /* types */,
@@ -1443,7 +1438,6 @@
 				544C7B27150BB9D8003E8B76 /* OSCGui.cpp in Sources */,
 				544C7B2A150BB9D8003E8B76 /* JSON.cpp in Sources */,
 				544C7B2B150BB9D8003E8B76 /* Stream.cpp in Sources */,
-				544C7B2C150BB9D8003E8B76 /* TwitPic.cpp in Sources */,
 				544C7B2D150BB9D8003E8B76 /* Twitter.cpp in Sources */,
 				544C7B2E150BB9D8003E8B76 /* Tweet.cpp in Sources */,
 				544C7B2F150BB9D8003E8B76 /* URL.cpp in Sources */,
