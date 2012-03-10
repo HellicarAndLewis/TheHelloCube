@@ -28,7 +28,7 @@ public:
 	void pixelate(bool apply, float x, float y);
 private:
 	ofShader shader;
-	//ofFbo fbo;
+	ofFbo fbo;
 	GLuint vbo;
 	GLuint vao;
 	GLuint fbo_tex;

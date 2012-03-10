@@ -26,6 +26,7 @@ void App::setup() {
 	twitter.init();
 	fx.setup(ofGetWidth(), ofGetHeight());
 	twitter.getSimulator().setEffects(fx);
+	 printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
 }
 
 //--------------------------------------------------------------
