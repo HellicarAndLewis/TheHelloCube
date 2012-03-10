@@ -8,7 +8,7 @@
 
 #pragma once
 #include "BaseScene.h"
-
+#include "CellNode.h"
 
 class CellScene : public BaseScene {
     
@@ -17,5 +17,10 @@ protected:
 public:
   
     void setup();
+    void update();
+    void draw();
+    void keyPressed(int key);
+
+    vector <CellNode> cells;
     
 };
