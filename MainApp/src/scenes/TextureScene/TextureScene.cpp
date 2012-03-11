@@ -29,13 +29,13 @@ void TextureScene::addPoints() {
     pts.clear();
     
     pts.push_back(ofVec2f(0, 0));
-    pts.push_back(ofVec2f(ofGetWidth(), 0));
-    pts.push_back(ofVec2f(ofGetWidth(), ofGetHeight()));
-    pts.push_back(ofVec2f(0, ofGetHeight()));
+    pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, 0));
+    pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT));
+    pts.push_back(ofVec2f(0, CUBE_SCREEN_HEIGHT));
     
     for(int i=0; i<60; i++) {
-        float x = ofRandom(10, ofGetWidth()-10);
-        float y = ofRandom(10, ofGetHeight()-10);
+        float x = ofRandom(10, CUBE_SCREEN_WIDTH-10);
+        float y = ofRandom(10, CUBE_SCREEN_HEIGHT-10);
         pts.push_back(ofVec2f(x, y));
     }   
     

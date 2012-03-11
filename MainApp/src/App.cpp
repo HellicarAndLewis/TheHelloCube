@@ -30,9 +30,6 @@ void App::setup() {
 	doLUT = false; // roxlu (drops fps to 11)
 	
 	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
-	
-	thumbPos.set(lutImg.getWidth()*0.5f-80, -lutImg.getHeight()*0.5f - 60, 0);
-	lutPos.set(-lutImg.getWidth()*0.5f, -lutImg.getHeight()*0.5f, 0);
     
     //now fonts
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
@@ -55,10 +52,10 @@ void App::setup() {
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();
-	
 
 #ifdef USE_FX
-    fx.setup(ofGetWidth(), ofGetHeight());
+//    fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
 	printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
 #endif
@@ -93,7 +90,7 @@ void App::draw() {
 	fx.beginGrabPixels();
 #endif
 
-    ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
+    //ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     
     if(bExportPDF) {
         ofBeginSaveScreenAsPDF("exports/"+ofToString(ofGetUnixTime())+".pdf");
@@ -108,12 +105,10 @@ void App::draw() {
         ofSetColor(255);
         currentScene->draw();
     }
-    
-    vidGrabber.draw(0,0); //stick the camera up on screen....
 
     
     if(doLUT){
-        lutImg.draw(0,0);
+        lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
 //		lutImg.draw(lutPos.x, lutPos.y);
 //		ofRect(thumbPos.x-3, thumbPos.y-3, 166, 126);
 //		vidGrabber.draw(thumbPos.x, thumbPos.y, 160, 120);
@@ -123,7 +118,7 @@ void App::draw() {
 //		ofDrawBitmapString("Use the up and down arrows of your keyboard \nto go through the different filters", lutPos.x, -lutPos.y+100);
 		
 	}else {
-        vidGrabber.draw(0,0); //stick the camera up on screen....
+        vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
 	}
     
     if(bExportPDF) {
@@ -203,7 +198,7 @@ void App::keyPressed(int key) {
     if(key == 'f') ofToggleFullscreen();
     
     switch (key) { //JGL should clean this up
-		case ' ':
+		case 'L':
 			doLUT^=true;
 			break;
 		case OF_KEY_UP:

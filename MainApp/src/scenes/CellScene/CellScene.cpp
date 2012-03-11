@@ -61,18 +61,16 @@ void CellScene::update() {
         itA->pos += itA->vel;
         
         // wrap the screen
-        itA->wrapScreen(-200, -200, ofGetWidth()+400, ofGetHeight()+400);
+        itA->wrapScreen(-200, -200, CUBE_SCREEN_WIDTH+400, CUBE_SCREEN_HEIGHT+400);
     }
-    
-    
     
     // voronoi up this scene
     if(cells.size() > 0) {
         voronoi.clear();
         voronoi.addPoint(0, 0);
-        voronoi.addPoint(ofGetWidth(), 0);
-        voronoi.addPoint(ofGetWidth(), ofGetHeight());
-        voronoi.addPoint(0, ofGetHeight());
+        voronoi.addPoint(CUBE_SCREEN_WIDTH, 0);
+        voronoi.addPoint(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+        voronoi.addPoint(0, CUBE_SCREEN_HEIGHT);
         
         for (vector<CellNode>::iterator itA=cells.begin(); itA!=cells.end(); ++itA) {
             voronoi.addPoint(itA->pos);
@@ -102,7 +100,7 @@ void CellScene::keyPressed(int key) {
     if(key == ' ') {
         
         CellNode c;
-        c.setPosition(-100, ofRandom(-400, 400)+ofGetHeight()/2);
+        c.setPosition(-100, ofRandom(-400, 400)+CUBE_SCREEN_HEIGHT/2);
         cells.push_back(c);
         
     }

@@ -7,11 +7,7 @@
 #include "SpotsScene.h"
 #include "TwitterManager.h"
 #include "Effects.h"
-
 #include "ofxQTKitVideoGrabber.h"
-#define CAM_WIDTH 960
-#define CAM_HEIGHT 720
-#define USE_FX
 
 class App : public ofBaseApp{
     
@@ -68,8 +64,6 @@ public:
 	bool                 doLUT;
 	int                  dirLoadIndex;
 	ofDirectory          dir;
-	ofPoint              lutPos;
-	ofPoint              thumbPos;
 	bool                 LUTloaded;
 	ofVec3f              lut[32][32][32];
 	ofImage              lutImg;
