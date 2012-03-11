@@ -13,9 +13,18 @@ class CellNode : public Particle {
   
 public:
     
+    bool bRemove;
+    
     CellNode() {
-        radius = 3;  
-        drag   = 0.98;//ofRandom(0.97, 0.99);
+        bRemove = false;
+        radius  = 3;  
+        drag    = ofRandom(0.97, 0.99);
+    }
+    void draw() {
+        ofCircle(pos, 1);
     }
     
+    static bool shouldRemove(const CellNode &c) {
+        return c.bRemove;
+    }
 };

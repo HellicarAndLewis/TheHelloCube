@@ -47,8 +47,6 @@ void App::setup() {
     
     // start with the frist scene
     sceneIndex   = SCENE_CELL;
-    // start with the first scene
-    sceneIndex   = SCENE_TEXTURE;
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();
@@ -168,7 +166,6 @@ void App::draw() {
     string info;
     info += ofToString(ofGetFrameRate(), 0)+" fps\n";
     if(currentScene) info += "scene "+currentScene->name+"\n";
-    
     ofDrawBitmapString(info, 10, ofGetHeight()-40);
 
 }
