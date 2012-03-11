@@ -5,7 +5,6 @@ void App::setup() {
     
     ofBackground(255);
     ofSetFrameRate(60);
-    ofSetFrameRate(30);
     ofSetVerticalSync(true);
     
     //initialise camera
@@ -28,6 +27,7 @@ void App::setup() {
 	}else{
 		doLUT = false;
 	}
+	doLUT = false; // roxlu (drops fps to 11)
 	
 	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
 	
@@ -77,7 +77,7 @@ void App::update() {
         //new frame fun here....
         
         if (doLUT) {
-            applyLUT(vidGrabber.getPixelsRef());
+           // applyLUT(vidGrabber.getPixelsRef());
         }
 	}    
     
@@ -138,16 +138,28 @@ void App::draw() {
 
    
 	if(twitter.getSimulator().take_screenshot) {	
-		ofImage img;
-		img.grabScreen(0,0,ofGetWidth(), ofGetHeight());
 		rtt::Tweet tweet;
 		tweet.setScreenName("roxlutest");
-		twitter.getUploader().uploadScreenshot(
-			 (unsigned char*)img.getPixels()
-			,img.getWidth()
-			,img.getHeight()
-			,tweet
-		);
+		bool grab = 1; // 0 = screen, 1 = webcam	
+
+		if(grab == 0) {
+			ofImage img;
+			img.grabScreen(0,0,ofGetWidth(), ofGetHeight());
+			twitter.getUploader().uploadScreenshot(
+				 (unsigned char*)img.getPixels()
+				,img.getWidth()
+				,img.getHeight()
+				,tweet
+			);
+		}
+		else if(grab == 1) {
+			twitter.getUploader().uploadScreenshot(
+				 (unsigned char*)vidGrabber.getPixels()
+				,vidGrabber.getWidth()
+				,vidGrabber.getHeight()
+				,tweet
+			);
+		}
 		twitter.getSimulator().take_screenshot = false;
 	}
 
