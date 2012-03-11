@@ -10,7 +10,7 @@
 #include "BaseScene.h"
 #include "CellNode.h"
 #include "ofxVoronoi.h"
-
+#include "Utils.h"
 class CellScene : public BaseScene {
     
 private:
@@ -21,11 +21,17 @@ public:
     void update();
     void draw();
     void keyPressed(int key);
-
+    void addCells();
+    
     ofxVoronoi        voronoi;
     vector <CellNode> cells;
     
     ofxFloatSlider separationDistance;
-    ofxFloatSlider speed;
+    ofxFloatSlider damping;
+    ofxFloatSlider maxParticleSpeed;
     
+    ofxFloatSlider releaseRate;
+    ofxIntSlider   maxCellsOnScreen;
+    
+
 };

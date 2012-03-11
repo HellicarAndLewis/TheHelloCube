@@ -43,14 +43,14 @@ void App::setup() {
     // setup the scenes
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
         (*it)->setup();
+        (*it)->exitScene();
+        
     }
     
     // start with the frist scene
-    sceneIndex   = SCENE_CELL;
-    // start with the first scene
     sceneIndex   = SCENE_TEXTURE;
-    currentScene = scenes[sceneIndex];
-	
+    changeScene(sceneIndex);
+    
 	twitter.init();
 
 #ifdef USE_FX
@@ -171,9 +171,20 @@ void App::draw() {
     string info;
     info += ofToString(ofGetFrameRate(), 0)+" fps\n";
     if(currentScene) info += "scene "+currentScene->name+"\n";
-    
     ofDrawBitmapString(info, 10, ofGetHeight()-40);
 
+}
+
+//--------------------------------------------------------------
+void App::changeScene(int scene) {
+    
+    BaseScene * lastScene = scenes[sceneIndex];
+    lastScene->exitScene();
+    
+    sceneIndex = scene;
+    currentScene = scenes[scene];
+    currentScene->enterScene();
+    
 }
 
 //--------------------------------------------------------------
@@ -185,9 +196,10 @@ void App::keyPressed(int key) {
     if(key == OF_KEY_LEFT)  sceneIndex--;
     sceneIndex %= (int)scenes.size();
     if(sceneIndex < 0) sceneIndex = scenes.size()-1;
-    currentScene = scenes[sceneIndex];
-    if(currentScene!=NULL)currentScene->keyPressed(key);
     
+    changeScene(sceneIndex);
+    
+    if(currentScene!=NULL)currentScene->keyPressed(key);
     
     // for exporting a screen grab
     if(key == 'E') {
@@ -237,28 +249,17 @@ void App::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void App::mouseDragged(int x, int y, int button){
     if(currentScene!=NULL)currentScene->mouseDragged(x, y, button);
-    
-    if(textureSC.index!=-1) {
-        textureSC.pts[textureSC.index].set(x, y);
-    }
+
 }
 
 //--------------------------------------------------------------
 void App::mousePressed(int x, int y, int button){
     if(currentScene!=NULL)currentScene->mousePressed(x, y, button);
-    
-    
-    for (int i=0; i<textureSC.pts.size(); i++) {
-        if(ofVec2f(x,y).distance(textureSC.pts[i]) < 10) {
-            textureSC.index = i;
-        }
-    }
 }
 
 //--------------------------------------------------------------
 void App::mouseReleased(int x, int y, int button){
     if(currentScene!=NULL)currentScene->mouseReleased(x, y, button);
-    textureSC.index = -1;
 }
 
 //--------------------------------------------------------------

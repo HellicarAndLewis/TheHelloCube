@@ -8,9 +8,9 @@
 
 #pragma once
 #include "ofMain.h"
-#include "Utils.h"
 #include "AppAssets.h"
 #include "ofxGui.h"
+#include "../../../addons/Tools/Utils/Utils.h"
 
 class BaseScene {
     
@@ -24,6 +24,21 @@ public:
     // ----------------------------------------------------
     string   name;
     ofxPanel gui;
+    
+    ofColor  bgColor;
+    ofColor  bgColorTarget;
+
+    // ----------------------------------------------------
+    virtual void exitScene() {
+        ofUnregisterMouseEvents(&gui);
+    }
+    
+    virtual void enterScene() {
+        ofRegisterMouseEvents(&gui);
+    }
+    
+    // ----------------------------------------------------
+    virtual void drawBackground();
     
     // ----------------------------------------------------
     virtual void setup() = 0;
