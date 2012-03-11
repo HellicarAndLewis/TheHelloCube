@@ -164,3 +164,10 @@ void Effects::pixelate(bool apply, float x, float y) {
 		shader.setUniform1f("fx_pixelate_y", y);
 	shader.end();
 }
+
+void Effects::invert(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_invert", apply ? 1: 2);
+	shader.end();
+
+}

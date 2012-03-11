@@ -10,6 +10,7 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_flip(false)
 	,fx_pixelate(false)
 	,fx_shake(false)
+	,fx_invert(false)
     ,fx_pixelate_x(5.0f)
     ,fx_pixelate_y(5.0f)
 	,fx_shake_displace(0.01f)
@@ -79,6 +80,7 @@ void TwitterSimulator::update() {
 		fx->flip(fx_flip);
 		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
 		fx->shake(fx_shake, fx_shake_speed, fx_shake_displace, fx_shake_waves);
+		fx->invert(fx_invert);
 	}
 	
 }
@@ -89,10 +91,12 @@ void TwitterSimulator::setEffects(Effects& f) {
 	gui.addBool("fx_flip", fx_flip);
 	gui.addBool("fx_shake", fx_shake);
 	gui.addBool("fx_pixelate", fx_pixelate);
+	gui.addBool("fx_invert", fx_invert);
 	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
 	gui.addFloat("fx_pixelate_y", fx_pixelate_y);
 	gui.addFloat("fx_shake_displace", fx_shake_displace);
 	gui.addFloat("fx_shake_speed", fx_shake_speed);
 	gui.addFloat("fx_shake_waves", fx_shake_waves);
+	
 	
 }

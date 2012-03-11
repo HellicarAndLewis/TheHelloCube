@@ -23,9 +23,11 @@ public:
 	bool fx_mirror;
 	bool fx_flip;
 	bool fx_pixelate;
+	bool fx_shake;
+	bool fx_invert;
 	float fx_pixelate_x;
 	float fx_pixelate_y;
-	bool fx_shake;
+
 	float fx_shake_displace;
 	float fx_shake_speed;
 	float fx_shake_waves;
