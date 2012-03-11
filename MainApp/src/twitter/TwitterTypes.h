@@ -30,12 +30,22 @@ struct TwitterCommand {
 	TwitterCommand() {
 	}
 	
-	TwitterCommand(rtt::Tweet tweet, set<string> tokens, map<string, ofColor> colours)	
+	TwitterCommand(rtt::Tweet tweet, set<string> tokens, map<string, ofColor> colours, set<string> scenes)	
 		:tweet(tweet)
 		,tokens(tokens)
 		,colours(colours)
+		,scenes(scenes)
 	{
 	}
+	
+	bool mustSwitchScene(string& scene) {
+		if(scenes.size() > 0) {
+			scene = *(scenes.begin());
+			return true;
+		}
+		return false;
+	}	
+	
 	
 	void print() {
 		set<string>::iterator it = tokens.begin();
@@ -49,10 +59,17 @@ struct TwitterCommand {
 			printf("colour: %s\n", mit->first.c_str());
 			++mit;
 		}
+		
+		set<string>::iterator sit = scenes.begin();
+		while(sit != scenes.end()) {
+			printf("scene: %s\n", (*sit).c_str());
+			++sit;
+		}
 	}
 	
 	rtt::Tweet tweet;
 	set<string> tokens;
+	set<string> scenes;
 	map<string, ofColor> colours;
 };
 

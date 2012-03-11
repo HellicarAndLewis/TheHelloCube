@@ -8,7 +8,9 @@ more
 less
 smaller,small
 bigger,big
-faster
-slower
-texture
+faster,fast
+slower,slow
+cell,cells
+drawn
 spots
+texture

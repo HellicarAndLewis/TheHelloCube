@@ -65,6 +65,21 @@ void App::update() {
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
+			string switch_scene;
+			if(command.mustSwitchScene(switch_scene)) {
+				if(switch_scene == "cell") {
+					currentScene = &cellSC;
+				}
+				else if(switch_scene == "drawn") {
+					currentScene = &drawnSC;
+				}
+				else if(switch_scene == "texture") {
+					currentScene = &textureSC;
+				}
+				else if(switch_scene == "spots") {
+					currentScene = &spotsSC;
+				}	
+			}
 			currentScene->handleCommands(command, fx);
 		}
 		else {

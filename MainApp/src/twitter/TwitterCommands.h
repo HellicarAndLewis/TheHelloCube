@@ -37,6 +37,7 @@ public:
 		 set<string>& unfiltered
 		,set<string>& commandsResult
 		,map<string, ofColor>& coloursResult
+		,set<string>& scenesResult
 	);
 	
 private:
@@ -49,5 +50,6 @@ private:
 	map<string, ofColor> colours;
 	map<string, string> aliases;
 	set<string> aliased_words;
+	set<string> scenes;
 };
 #endif
