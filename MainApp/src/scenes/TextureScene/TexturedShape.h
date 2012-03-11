@@ -16,5 +16,9 @@ public:
     
     TexturedShape();
     ~TexturedShape();
+    void update();
+    
+    float       growSpeed;
+    float       radiusTarget;
     ofTexture * tex;
 };

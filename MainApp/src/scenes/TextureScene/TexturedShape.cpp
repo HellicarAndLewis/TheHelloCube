@@ -10,8 +10,16 @@
 
 TexturedShape::TexturedShape() {
     tex = NULL;
+    growSpeed = ofRandom(0.03, 0.1);    
 }
 
 TexturedShape::~TexturedShape() {
-    
+    tex = NULL;
+}
+
+void TexturedShape::update() {
+    ofxBox2dBaseShape::update();
+    float r = getRadius();
+    r += (radiusTarget - r)*growSpeed;
+    setRadius(r);
 }

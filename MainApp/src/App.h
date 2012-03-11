@@ -23,6 +23,7 @@ public:
     void setup();
     void update();
     void draw();
+    void changeScene(int scene);
     
     void keyPressed(int key);
     void keyReleased(int key);

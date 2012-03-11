@@ -3,7 +3,14 @@
 
 // ----------------------------------------------------
 void TextureScene::setup() {
-    name = "texture scene";
+    name = "texture scene";    
+    string safeName = name;
+    ofStringReplace(safeName, " ", "_");
+    gui.setup(name, safeName+".xml", 20, 20);
+    gui.add(maxShapesOnScreen.setup("max shapes", 250, 1, 1000));
+    gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0));
+    
+    
     index = 0;
     
     ofDisableArbTex();
@@ -13,14 +20,30 @@ void TextureScene::setup() {
     }
     // setup box2d
     box2d.init();
-    box2d.setGravity(0, 0.2);
+    box2d.setGravity(0, 0);
     box2d.setFPS(60);
     
-    addPoints();
+    bgColorTarget = ofRandomColor();    
+
 }
 
 // ----------------------------------------------------
 void TextureScene::update() {
+    
+    int nShapesToAdd = MAX(1, 10 * releaseRate);
+    for(int i=0; i<nShapesToAdd; i++) {
+        addShape();
+    }
+    
+    for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
+        it->update();
+        
+        if(it->getPosition().distance(ofGetCenterScreen()) > 100) {
+            it->addRepulsionForce(ofGetCenterScreen(), 0.0002);
+        }
+    }
+    
+    
     box2d.update();
 }
 
@@ -28,12 +51,13 @@ void TextureScene::update() {
 void TextureScene::addPoints() {
     pts.clear();
     
-    pts.push_back(ofVec2f(0, 0));
-    pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, 0));
-    pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT));
-    pts.push_back(ofVec2f(0, CUBE_SCREEN_HEIGHT));
+    /*
+     pts.push_back(ofVec2f(0, 0));
+     pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, 0));
+     pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT));
+     pts.push_back(ofVec2f(0, CUBE_SCREEN_HEIGHT));*/
     
-    for(int i=0; i<60; i++) {
+    for(int i=0; i<6; i++) {
         float x = ofRandom(10, CUBE_SCREEN_WIDTH-10);
         float y = ofRandom(10, CUBE_SCREEN_HEIGHT-10);
         pts.push_back(ofVec2f(x, y));
@@ -43,28 +67,64 @@ void TextureScene::addPoints() {
     tris = triangulatePolygon(pts);
 }
 
+
+// ----------------------------------------------------
+void TextureScene::addShape() {
+    if(shapes.size() < maxShapesOnScreen) {
+        ofVec2f pt = ofGetCenterScreen();
+        float r = ofRandom(10, 30);
+        pt.x += cos(ofRandomuf()*TWO_PI) * r;
+        pt.y += sin(ofRandomuf()*TWO_PI) * r;
+        
+        TexturedShape shape;
+        shape.setPhysics(1, 0.1, 1);
+        shape.setup(box2d.getWorld(), pt, 1);
+        shape.radiusTarget = ofRandom(10, 30);
+        shape.tex = &textures[(int)ofRandom(0, textures.size()-1)];
+        shapes.push_back(shape);
+    }
+}
+
+
+// ----------------------------------------------------
+void TextureScene::makeObstacles() {
+    obsticals.clear();
+    for (vector<TriangleShape>::iterator it=tris.begin(); it!=tris.end(); ++it) {
+        
+        float   radius = GeometryUtils::getTriangleRadius(it->c, it->b, it->a);
+        ofVec2f center = GeometryUtils::getTriangleCenter(it->a, it->b, it->c);
+        
+        ofxBox2dCircle ob;
+        ob.setPhysics(0, 0.1, 1);
+        ob.setup(box2d.getWorld(), center, radius);
+        obsticals.push_back(ob);
+    }  
+}
+
+
 // ----------------------------------------------------
 void TextureScene::keyPressed(int key) {
     if(key == ' ') {
-        addPoints();
+        //addPoints();
+        //makeObstacles();
+    }
+    
+    if(key == 'r') {
+        for(int i=0; i<MIN(30, shapes.size()-1); i++) {
+            int ranId = (int)ofRandom(0, shapes.size()-1);
+            shapes[ranId].radiusTarget = ofRandom(30, 100);
+        }
+    }
+    if(key == 's') {
+        for(int i=0; i<MIN(30, shapes.size()-1); i++) {
+            int ranId = (int)ofRandom(0, shapes.size()-1);
+            shapes[ranId].radiusTarget = ofRandom(2, 10);
+            
+        }
     }
     
     if(key == 'b') {
-        
-        for (vector<TriangleShape>::iterator it=tris.begin(); it!=tris.end(); ++it) {
-            
-            float radius = GeometryUtils::getTriangleRadius(it->c, it->b, it->a);
-            ofVec2f center = GeometryUtils::getTriangleCenter(it->a, it->b, it->c);
-            
-            radius = ofRandom(10, 25);
-            
-            TexturedShape shape;
-            shape.setPhysics(1, 0.1, 1);
-            shape.setup(box2d.getWorld(), center, radius);
-            shape.tex = &textures[(int)ofRandom(0, textures.size()-1)];
-            shapes.push_back(shape);
-        }        
-        
+        bgColorTarget = ofRandomColor();    
     }
 }
 
@@ -72,14 +132,10 @@ void TextureScene::keyPressed(int key) {
 // ----------------------------------------------------
 void TextureScene::draw() {
     
-    BaseScene::draw();
+    drawBackground();
     ofEnableAlphaBlending();
     
-    /*
-    for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
-        it->draw();
-    }*/
- 
+    ofSetColor(255);
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         
         ofVec2f p = it->getPosition();
@@ -97,14 +153,10 @@ void TextureScene::draw() {
         glEnd();
         it->tex->unbind();  
         
-		/*
-		// roxlu 03/08,  isPointInScreen is found, but I get a compiler error 
         if(!isPointInScreen(p, r)) {
             it->destroy();
             it->dead = true;
         }
-		*/
-        // ofCircle(p, r);
     }
     
     ofRemove(shapes, ofxBox2dBaseShape::shouldRemove);
@@ -129,16 +181,16 @@ void TextureScene::draw() {
         ofCircle(center, radius);
         
         /*ofSetColor(255);
-        ofDrawBitmapString("a", it->a+10);
-        ofDrawBitmapString("b", it->b+10);
-        ofDrawBitmapString("c", it->c+10);*/
+         ofDrawBitmapString("a", it->a+10);
+         ofDrawBitmapString("b", it->b+10);
+         ofDrawBitmapString("c", it->c+10);*/
         ofCircle(center, 3);
         
-
     }
     
     ofSetColor(255);
     ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
     ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
-    ofDrawBitmapString("space to make new points\npress b to add shpaes", 20, 100);
+    ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
+    gui.draw();
 }
