@@ -6,8 +6,8 @@ wave
 shake
 more
 less
-smaller
-bigger
+smaller,small
+bigger,big
 faster
 slower
 texture

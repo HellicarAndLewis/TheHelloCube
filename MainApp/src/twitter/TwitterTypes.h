@@ -19,6 +19,8 @@ struct TwitterMentionSorter {
 };
 
 struct TwitterCommand {
+	TwitterCommand() {
+	}
 	
 	TwitterCommand(rtt::Tweet tweet, set<string> tokens, map<string, ofColor> colours)	
 		:tweet(tweet)

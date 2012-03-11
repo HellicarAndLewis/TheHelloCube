@@ -59,16 +59,25 @@ void App::setup() {
 	twitter.getSimulator().setEffects(fx);
 	printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
 #endif
-
+	command_timeout = ofGetElapsedTimef() + 1.5;
 	//ofSetFullscreen(true);
 
 }
 
 //--------------------------------------------------------------
 void App::update() {
+	float now = ofGetElapsedTimef();
+	if(now >= command_timeout) {
+		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
+			currentScene->handleCommands(command);
+		}
+		command_timeout = now + 1.5;
+	}
+	
 #ifdef USE_FX
 	fx.update();
 #endif
+
     twitter.update();
 	vidGrabber.update();
 	

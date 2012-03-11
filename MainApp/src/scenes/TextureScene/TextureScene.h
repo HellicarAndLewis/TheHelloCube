@@ -26,7 +26,8 @@ public:
     void addPoints();
     void makeObstacles();
     void addShape();
-    
+	void handleCommands(TwitterCommand& cmd);
+	
     vector <ofTexture> textures;
     
     ofxBox2d box2d;

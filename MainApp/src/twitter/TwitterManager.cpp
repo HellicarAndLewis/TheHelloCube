@@ -79,7 +79,6 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 			map<string, ofColor> found_colours;
 			allowed_commands.filterCommands(tokens_copy, found_commands, found_colours);
 			TwitterCommand cmd(tweet, found_commands, found_colours);
-			cmd.print();
 			commands.push(cmd);
 		}
 	}

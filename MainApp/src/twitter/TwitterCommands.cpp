@@ -36,9 +36,29 @@ void TwitterCommands::loadCommands(const string& filePath) {
 	}
 	commands.clear();
 	string word;
+	string tok;
+	string cmd;
 	while(std::getline(ifs, word)) {
-		commands.insert(word);
-		//printf("Command: %s\n", word.c_str());
+	
+		// keep track of aliases
+		stringstream ss(word);
+		if(word.find(",") != std::string::npos) {
+			int i = 0;
+			while(std::getline(ss, tok, ',')) {
+				aliased_words.insert(tok);
+				if(i == 0) {
+					word = tok;
+					++i;
+					commands.insert(tok);
+				}
+				else {
+					aliases[tok] = word;
+				}
+			}
+		}
+		else {
+			commands.insert(word);
+		}
 	}
 	
 	ifs.close();
@@ -85,18 +105,34 @@ void TwitterCommands::filterCommands(
 			,map<string, ofColor>& coloursResult
 ) 
 {
+	// first, replace aliases with the aliased word.
+	set<string> aliased;
+	std::set_intersection(
+		unfiltered.begin(), unfiltered.end()
+		,aliased_words.begin(), aliased_words.end()
+		,std::inserter(aliased, aliased.end())
+	);
+	set<string>::iterator sit = aliased.begin();
+	while(sit != aliased.end()) {
+		commandsResult.insert(aliases[(*sit)]);
+		++sit;
+	}
+
+	// now find which commands are valid.	
 	std::set_intersection(
 		 unfiltered.begin(), unfiltered.end()
 		,commands.begin(), commands.end()
 		,std::inserter(commandsResult, commandsResult.end())
 	);
 	
+	// and find the colours.
 	set<string> found_colours;
 	std::set_intersection(
 		unfiltered.begin(), unfiltered.end()
 		,colour_names.begin(), colour_names.end()
 		,std::inserter(found_colours, found_colours.end())
 	);
+	
 	set<string>::iterator it = found_colours.begin();
 	while(it != found_colours.end()) {
 		string name = (*it);

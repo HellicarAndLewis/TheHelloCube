@@ -27,6 +27,7 @@ void TextureScene::setup() {
 
 }
 
+
 // ----------------------------------------------------
 void TextureScene::update() {
     
@@ -193,4 +194,25 @@ void TextureScene::draw() {
     ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
     ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
     gui.draw();
+}
+
+// ----------------------------------------------------
+void TextureScene::handleCommands(TwitterCommand& cmd) {
+	set<string>::const_iterator it = cmd.tokens.begin();
+	while(it != cmd.tokens.end()) {
+		const string& c = (*it);
+		if(c == "bigger") {
+			 for(int i=0; i<MIN(30, shapes.size()-1); i++) {
+            	int ranId = (int)ofRandom(0, shapes.size()-1);
+            	shapes[ranId].radiusTarget = ofRandom(30, 100);
+        	}
+		}
+		else if(c == "smaller") {
+			for(int i=0; i<MIN(30, shapes.size()-1); i++) {
+				int ranId = (int)ofRandom(0, shapes.size()-1);
+				shapes[ranId].radiusTarget = ofRandom(2, 10);
+			}
+		}
+		++it;
+	}
 }

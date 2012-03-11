@@ -39,5 +39,7 @@ private:
 	set<string> commands;
 	set<string> colour_names;
 	map<string, ofColor> colours;
+	map<string, string> aliases;
+	set<string> aliased_words;
 };
 #endif

@@ -17,7 +17,6 @@ void TwitterThread::threadedFunction() {
 	initializeTwitter();
 	
 	while(true) {
-		printf("Fetch tweets..\n");
 		fetchMentions();
 		sleep(25);
 	}
@@ -96,12 +95,10 @@ void TwitterThread::initializeTwitter() {
 	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
 	if(!twitter.loadTokens(tokens_file)) {
-		printf("LOAD ...\n");
 		string auth_url;
 		twitter.requestToken(auth_url);
 		twitter.handlePin(auth_url);
 		twitter.accessToken();
-		printf("oaded..\n");
 		twitter.saveTokens(tokens_file);
 	}
 }
