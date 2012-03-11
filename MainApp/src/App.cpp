@@ -60,6 +60,8 @@ void App::setup() {
 	printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
 #endif
 
+	//ofSetFullscreen(true);
+
 }
 
 //--------------------------------------------------------------
@@ -106,6 +108,11 @@ void App::draw() {
         currentScene->draw();
     }
 
+	
+#ifdef USE_FX
+	fx.endGrabPixels();
+    fx.draw();
+#endif
     
     if(doLUT){
         lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
@@ -125,11 +132,7 @@ void App::draw() {
         bExportPDF = false;
         ofEndSaveScreenAsPDF();
     }
-	
-#ifdef USE_FX
-	fx.endGrabPixels();
-    fx.draw();
-#endif
+
 
    
 	if(twitter.getSimulator().take_screenshot) {	
