@@ -2,10 +2,21 @@
 
 //--------------------------------------------------------------
 void App::setup() {
- 
+    
     ofBackground(255);
     ofSetFrameRate(60);
-    //ofSetVerticalSync(true);
+    ofSetFrameRate(30);
+    ofSetVerticalSync(true);
+    
+    //initialise camera
+	camWidth 		= CAM_WIDTH;	// try to grab at this size. 
+	camHeight 		= CAM_HEIGHT;
+	
+	//vidGrabber.listVideoDevices();											
+    vidGrabber.setVideoDeviceID(0); //0 is first, iSight is always last, so this is safe...
+	vidGrabber.initGrabber(camWidth, camHeight);    
+    
+    //now fonts
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
     // add all the scenes
@@ -21,6 +32,8 @@ void App::setup() {
     
     // start with the frist scene
     sceneIndex   = SCENE_CELL;
+    // start with the first scene
+    sceneIndex   = SCENE_TEXTURE;
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();
@@ -40,7 +53,12 @@ void App::update() {
 	fx.update();
 #endif
     twitter.update();
+	vidGrabber.update();
 	
+	if (vidGrabber.isFrameNew()){
+        //new frame fun here....
+	}    
+    
     // later maybe just update the scene that needs to be rendered
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
         (*it)->update();
@@ -52,6 +70,7 @@ void App::draw() {
 #ifdef USE_FX
 	fx.beginGrabPixels();
 #endif
+
     ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     
     if(bExportPDF) {
@@ -67,6 +86,8 @@ void App::draw() {
         ofSetColor(255);
         currentScene->draw();
     }
+    
+    vidGrabber.draw(0,0); //stick the camera up on screen....
     
     if(bExportPDF) {
         bExportPDF = false;
