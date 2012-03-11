@@ -191,5 +191,6 @@ void TextureScene::draw() {
     ofSetColor(255);
     ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
     ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
+    ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
     gui.draw();
 }
