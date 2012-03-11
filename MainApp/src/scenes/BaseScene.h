@@ -29,6 +29,15 @@ public:
     ofColor  bgColorTarget;
 
     // ----------------------------------------------------
+    virtual void exitScene() {
+        ofUnregisterMouseEvents(&gui);
+    }
+    
+    virtual void enterScene() {
+        ofRegisterMouseEvents(&gui);
+    }
+    
+    // ----------------------------------------------------
     virtual void drawBackground();
     
     // ----------------------------------------------------

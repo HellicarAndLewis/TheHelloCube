@@ -13,15 +13,15 @@ void CellScene::setup() {
     
     gui.add(maxCellsOnScreen.setup("max cells", 500, 1, 1000));
     gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0));
-
+    
     // we need some nice colors...
     bgColorTarget = ofRandomColor();
-
+    
 }
 
 // ----------------------------------------------------
 void CellScene::update() {
-        
+    
     // reset the forces & remove deads
     for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
         it->frc = 0;
@@ -33,7 +33,7 @@ void CellScene::update() {
     float t = ofGetElapsedTimef()*0.02;
     
     for (vector<CellNode>::iterator itA=cells.begin(); itA!=cells.end(); ++itA) {
-    
+        
         ofVec2f pos = itA->pos;
         float frwX  = ofNoise(pos.x * 0.003, pos.y * 0.006, ofGetElapsedTimef() * 0.6);
         
@@ -41,7 +41,7 @@ void CellScene::update() {
      	noiseFrc.x = frwX + ofSignedNoise(t, pos.y * 0.04) * 0.6;
 		noiseFrc.y = ofSignedNoise(itA->uniquef, pos.x * 0.006, t);
         noiseFrc *= damping;
-       
+        
         
         
         ofVec2f sepFrc = 0;
@@ -49,7 +49,8 @@ void CellScene::update() {
             if (itA==itB) continue;
             ofVec2f v = itA->pos - itB->pos;
             float   d = v.length();
-            if(d < separationDistance) {
+            float minRad = separationDistance + (itA->radius+itB->radius);
+            if(d < minRad) {
                 v.normalize();
                 sepFrc += v;
             }
@@ -132,6 +133,12 @@ void CellScene::keyPressed(int key) {
         
         addCells();
         
+    }
+    
+    if(key == 'r') {
+        for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
+            it->radius = ofRandom(10, separationDistance);
+        }    
     }
     
     if(key == 'b') {
