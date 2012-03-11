@@ -4,6 +4,10 @@ TwitterCommands::TwitterCommands()
 	:commands_filepath("")
 	,colours_filepath("")
 {
+	scenes.insert("cell");
+	scenes.insert("drawn");
+	scenes.insert("texture");
+	scenes.insert("spots");
 }
 
 TwitterCommands::~TwitterCommands() {
@@ -103,6 +107,7 @@ void TwitterCommands::filterCommands(
 			 set<string>& unfiltered
 			,set<string>& commandsResult
 			,map<string, ofColor>& coloursResult
+			,set<string>& scenesResult
 ) 
 {
 	
@@ -140,6 +145,13 @@ void TwitterCommands::filterCommands(
 		coloursResult.insert(std::pair<string,ofColor>(name, colours[name]));
 		++it;
 	}
+	
+	// find scene
+	std::set_intersection(
+		commandsResult.begin(), commandsResult.end()
+		,scenes.begin(), scenes.end()
+		,std::inserter(scenesResult, scenesResult.end())
+	);
 }
 
 
