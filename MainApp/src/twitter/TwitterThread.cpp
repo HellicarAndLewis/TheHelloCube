@@ -17,8 +17,9 @@ void TwitterThread::threadedFunction() {
 	initializeTwitter();
 	
 	while(true) {
+		printf("Fetch tweets..\n");
 		fetchMentions();
-		sleep(145);
+		sleep(25);
 	}
 }
 

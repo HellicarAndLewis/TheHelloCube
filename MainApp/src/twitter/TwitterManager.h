@@ -36,13 +36,13 @@ public:
 	TwitterBadWords& getBadWords();
 
 private:
-
 	TwitterCommands allowed_commands;
 	TwitterSimulator simulator;
 	TwitterThread twitter_thread;
 	TwitterPhotoUploaderThread uploader_thread;
 	TwitterBadWords bad_words;
 	queue<TwitterCommand> commands;
+	string twitter_user;
 };
 
 inline TwitterThread& TwitterManager::getThread() {

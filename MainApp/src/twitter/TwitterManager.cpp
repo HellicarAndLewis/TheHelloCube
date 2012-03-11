@@ -21,9 +21,10 @@ void TwitterManager::init() {
 	allowed_commands.load();
 	
 	// twitter mentions
-	string tokens_file = ofToDataPath("twitter/twitter_roxlutest.txt",true);
+	twitter_user = "roxlutest";
+	string tokens_file = ofToDataPath("twitter/twitter_" +twitter_user +".txt",true);
 	twitter_thread.setup(tokens_file);
-	//twitter_thread.startThread(false, false);
+	twitter_thread.startThread(false, false);
 	
 	// photo uploader + reply
 	uploader_thread.setup(
@@ -32,7 +33,7 @@ void TwitterManager::init() {
 		,tokens_file
 	);
 	
-	//uploader_thread.startThread(false, false);	
+	uploader_thread.startThread(false, false);	
 }
 
 void TwitterManager::update() {
@@ -64,7 +65,8 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 	printf("Mention: %s\n", lower.c_str());
 		
 	// Check if it's a correct search term:
-	pcrecpp::RE re("^@thehellocube (.*)$");
+	string match = "^@" +twitter_user +" (.*)$";
+	pcrecpp::RE re(match.c_str());
 	re.FullMatch(lower, &command);
 	if(command.length()) {
 		StringTokenizer tokens(command, " ",Poco::StringTokenizer::TOK_IGNORE_EMPTY);
