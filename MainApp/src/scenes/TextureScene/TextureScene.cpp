@@ -197,7 +197,8 @@ void TextureScene::draw() {
 }
 
 // ----------------------------------------------------
-void TextureScene::handleCommands(TwitterCommand& cmd) {
+void TextureScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
+	// handle commands.
 	set<string>::const_iterator it = cmd.tokens.begin();
 	while(it != cmd.tokens.end()) {
 		const string& c = (*it);
@@ -213,6 +214,14 @@ void TextureScene::handleCommands(TwitterCommand& cmd) {
 				shapes[ranId].radiusTarget = ofRandom(2, 10);
 			}
 		}
+		fx.applyEffect(c);
 		++it;
+	}
+	
+	// handle colour
+	map<string, ofColor>::const_iterator cit = cmd.colours.begin();
+	while(cit != cmd.colours.end()) {	
+		bgColorTarget = cit->second;
+		break;
 	}
 }

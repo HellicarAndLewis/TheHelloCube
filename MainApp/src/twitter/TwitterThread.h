@@ -1,3 +1,11 @@
+/**
+ * Checks for new mentions with commands we need to parse.
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_THREADH
 #define TWITTER_THREADH
 

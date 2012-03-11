@@ -1,3 +1,11 @@
+/**
+ * Shared twitter types.
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_TYPESH
 #define TWITTER_TYPESH
 

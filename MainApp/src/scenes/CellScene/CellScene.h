@@ -22,7 +22,8 @@ public:
     void draw();
     void keyPressed(int key);
     void addCells();
-    
+	void handleCommands(TwitterCommand& cmd, Effects& fx);
+	
     ofxVoronoi        voronoi;
     vector <CellNode> cells;
     

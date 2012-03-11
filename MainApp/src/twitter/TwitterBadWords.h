@@ -1,4 +1,3 @@
-
 /**
  * 
  * Used to filter bad words from a tweet.
@@ -6,9 +5,7 @@
  * 
  * @date	2012.03.08
  * @author	Diederick Huijbers <diederick@apollomedia.nl>
- *
  */
- 
 #ifndef TWITTER_BAD_WORDSH
 #define TWITTER_BAD_WORDSH
 

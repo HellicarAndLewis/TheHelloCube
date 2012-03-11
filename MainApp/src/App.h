@@ -51,9 +51,8 @@ public:
 	float				 command_timeout;	
 	TwitterCommand		 command;
     TwitterManager		 twitter;
-#ifdef USE_FX
     Effects				 fx;
-#endif
+	float				 fx_duration;
     
     // Video
 	ofxQTKitVideoGrabber vidGrabber;	

@@ -12,6 +12,7 @@
 #include "ofxGui.h"
 #include "../../../addons/Tools/Utils/Utils.h"
 #include "TwitterTypes.h"
+#include "Effects.h"
 
 class BaseScene {
     
@@ -39,7 +40,7 @@ public:
     }
 
     // ----------------------------------------------------
-	virtual void handleCommands(TwitterCommand& cmd){
+	virtual void handleCommands(TwitterCommand& cmd, Effects& fx){
 	}
 	
     // ----------------------------------------------------

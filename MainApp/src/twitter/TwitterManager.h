@@ -1,3 +1,11 @@
+/**
+ * "Manager" for all twitter related actions.
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_MANAGERH
 #define TWITTER_MANAGERH
 

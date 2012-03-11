@@ -51,17 +51,13 @@ void App::setup() {
     sceneIndex   = SCENE_TEXTURE;
     changeScene(sceneIndex);
     
+
 	twitter.init();
-
-#ifdef USE_FX
-//    fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
-    fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
+	// fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    fx_duration = 5.5; // sec
+	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
-	printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
-#endif
-	command_timeout = ofGetElapsedTimef() + 1.5;
-	//ofSetFullscreen(true);
-
+	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
 //--------------------------------------------------------------
@@ -69,14 +65,17 @@ void App::update() {
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
-			currentScene->handleCommands(command);
+			currentScene->handleCommands(command, fx);
 		}
-		command_timeout = now + 1.5;
+		else {
+			fx.reset();
+		}
+		command_timeout = now + fx_duration;
 	}
 	
-#ifdef USE_FX
+
 	fx.update();
-#endif
+
 
     twitter.update();
 	vidGrabber.update();
@@ -97,9 +96,7 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw() {
-#ifdef USE_FX
 	fx.beginGrabPixels();
-#endif
 
     //ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     
@@ -117,11 +114,8 @@ void App::draw() {
         currentScene->draw();
     }
 
-	
-#ifdef USE_FX
 	fx.endGrabPixels();
     fx.draw();
-#endif
     
     if(doLUT){
         lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);

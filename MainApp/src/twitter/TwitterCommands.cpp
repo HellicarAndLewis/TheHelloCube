@@ -105,6 +105,7 @@ void TwitterCommands::filterCommands(
 			,map<string, ofColor>& coloursResult
 ) 
 {
+	
 	// first, replace aliases with the aliased word.
 	set<string> aliased;
 	std::set_intersection(

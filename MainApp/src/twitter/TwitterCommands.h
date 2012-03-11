@@ -1,3 +1,11 @@
+/**
+ * Parsing commands from twitter
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_COMMANDSH
 #define TWITTER_COMMANDSH
 

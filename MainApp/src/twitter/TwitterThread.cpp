@@ -81,11 +81,13 @@ void TwitterThread::fetchMentions() {
 
 	// STORE NEW MENTIONS
 	// ------------------
-	last_mention = newer_mentions.at(0);			
-	mentions_params["since_id"] = last_mention.getTweetID();
-	lock();
-		std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
-	unlock();
+	if(!is_first_request) {
+		last_mention = newer_mentions.at(0);			
+		mentions_params["since_id"] = last_mention.getTweetID();
+		lock();
+			std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
+		unlock();
+	}
 
 	is_first_request = false;
 }

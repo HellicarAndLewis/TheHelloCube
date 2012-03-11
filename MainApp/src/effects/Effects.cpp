@@ -169,5 +169,32 @@ void Effects::invert(bool apply) {
 	shader.begin();
 		shader.setUniform1i("fx_invert", apply ? 1: 2);
 	shader.end();
+}
 
+void Effects::applyEffect(const string& fx) {
+	if(fx == "pixelate") {
+		pixelate(true, 10.0f, 10.0f);
+	}
+	else if(fx == "mirror") {
+		mirror(true);
+	}
+	else if(fx == "flip") {
+		flip(true);
+	}
+	else if(fx == "invert") {
+		invert(true);
+	}
+	else if(fx == "shake") {
+		shake(true, 1.4, 0.01, 14.0);
+	}
+}
+
+void Effects::reset() {
+	shader.begin();
+		shader.setUniform1i("fx_pixelate", 2);
+		shader.setUniform1i("fx_mirror", 2);
+		shader.setUniform1i("fx_flip", 2);
+		shader.setUniform1i("fx_invert", 2);
+		shader.setUniform1i("fx_shake", 2);
+	shader.end();
 }
