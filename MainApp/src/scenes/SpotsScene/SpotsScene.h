@@ -17,6 +17,6 @@ protected:
 public:
     
     void setup();
-    
+    void handleCommands(TwitterCommand& cmd, Effects& fx);
     
 };

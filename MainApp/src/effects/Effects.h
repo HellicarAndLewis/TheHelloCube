@@ -1,3 +1,11 @@
+/**
+ * Post FX
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef ROXLU_EFFECTSH
 #define ROXLU_EFFECTSH
 
@@ -24,6 +32,8 @@ public:
 	void bind();
 	void unbind();
 	
+	void reset(); 
+	void applyEffect(const string& fx);
 	void invert(bool apply);
 	void mirror(bool apply);
 	void flip(bool apply);

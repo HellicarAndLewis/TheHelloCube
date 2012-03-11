@@ -1,6 +1,5 @@
 #include "TwitterBadWords.h"
 
-
 // You can also simply pass a vector of bad words.
 void TwitterBadWords::setBadWords(const set<string>& words) {
 	bad_words.clear();

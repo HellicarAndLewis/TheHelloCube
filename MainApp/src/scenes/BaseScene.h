@@ -11,6 +11,8 @@
 #include "AppAssets.h"
 #include "ofxGui.h"
 #include "../../../addons/Tools/Utils/Utils.h"
+#include "TwitterTypes.h"
+#include "Effects.h"
 
 class BaseScene {
     
@@ -36,7 +38,11 @@ public:
     virtual void enterScene() {
         ofRegisterMouseEvents(&gui);
     }
-    
+
+    // ----------------------------------------------------
+	virtual void handleCommands(TwitterCommand& cmd, Effects& fx){
+	}
+	
     // ----------------------------------------------------
     virtual void drawBackground();
     
