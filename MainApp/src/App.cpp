@@ -75,8 +75,10 @@ void App::draw() {
 	
 #ifdef USE_FX
 	fx.endGrabPixels();
+    fx.draw();
 #endif
-    
+
+   
 	if(twitter.getSimulator().take_screenshot) {	
 		ofImage img;
 		img.grabScreen(0,0,ofGetWidth(), ofGetHeight());
@@ -91,10 +93,6 @@ void App::draw() {
 		twitter.getSimulator().take_screenshot = false;
 	}
 
-#ifdef USE_FX
-    fx.draw();
-#endif
-    
     
     // draw some stats about the app...
     ofEnableAlphaBlending();

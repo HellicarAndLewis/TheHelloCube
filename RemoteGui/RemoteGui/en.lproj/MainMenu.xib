@@ -1298,7 +1298,7 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{119, 138}, {656, 306}}</string>
+				<string key="NSWindowRect">{{0, 0}, {656, 306}}</string>
 				<int key="NSWTFlags">1954021376</int>
 				<string key="NSWindowTitle">RemoteGui</string>
 				<string key="NSWindowClass">NSWindow</string>
