@@ -8,7 +8,8 @@
 
 #pragma once
 #include "BaseScene.h"
-
+#include "ofxBox2d.h"
+#include "Viner.h"
 
 class DrawnScene : public BaseScene {
     
@@ -16,6 +17,12 @@ private:
 protected:
 public:
     
-    void setup();
+    ofxBox2d        box2d;
+    vector <Viner>  vines;
     
+    void setup();
+    void update();
+    void draw(); 
+    void keyPressed(int key);
+
 };

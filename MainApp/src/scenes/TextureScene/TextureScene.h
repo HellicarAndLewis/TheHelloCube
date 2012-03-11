@@ -26,6 +26,7 @@ public:
     void addPoints();
     void makeObstacles();
     void addShape();
+    void exitScene();
     
     vector <ofTexture> textures;
     
