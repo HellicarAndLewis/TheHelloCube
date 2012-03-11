@@ -9,6 +9,8 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_mirror(false)
 	,fx_flip(false)
 	,fx_pixelate(false)
+    ,fx_pixelate_x(5)
+    ,fx_pixelate_y(5)
 {
 	
 	gui.addString("fake_tweet", fake_tweet);
