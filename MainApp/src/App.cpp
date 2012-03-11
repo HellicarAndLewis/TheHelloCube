@@ -5,7 +5,7 @@ void App::setup() {
     
     ofBackground(255);
     ofSetFrameRate(60);
-    ofSetVerticalSync(true);
+    //ofSetVerticalSync(true);
     
     //initialise camera
 	camWidth 		= CAM_WIDTH;	// try to grab at this size. 
