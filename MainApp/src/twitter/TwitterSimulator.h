@@ -3,7 +3,7 @@
 
 #include "Twitter.h"
 #include "OSCGui.h"
-
+#include "Effects.h"
 class TwitterManager;
 
 class TwitterSimulator : public roxlu::GuiCallback{
@@ -15,13 +15,26 @@ public:
 	void setup(const string& settingsFile);
 	void update();
 	void guiCallback(int t);
+	void setEffects(Effects& f);
+	
 	string fake_tweet;	
 	bool take_screenshot;
 	float col[4];
+	bool fx_mirror;
+	bool fx_flip;
+	bool fx_pixelate;
+	float fx_pixelate_x;
+	float fx_pixelate_y;
+	bool fx_shake;
+	float fx_shake_displace;
+	float fx_shake_speed;
+	float fx_shake_waves;
+
 private:
 	string settings_file;
 	TwitterManager& manager;
 	OSCGui gui;
+	Effects* fx;
 	
 };
 #endif

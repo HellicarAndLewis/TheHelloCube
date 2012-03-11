@@ -24,14 +24,21 @@ void App::setup() {
     currentScene = scenes[sceneIndex];
 	
 	twitter.init();
+	
+
 #ifdef USE_FX
     fx.setup(ofGetWidth(), ofGetHeight());
+	twitter.getSimulator().setEffects(fx);
+	printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
 #endif
+
 }
 
 //--------------------------------------------------------------
 void App::update() {
-    
+#ifdef USE_FX
+	fx.update();
+#endif
     twitter.update();
 	
     // later maybe just update the scene that needs to be rendered
@@ -83,8 +90,8 @@ void App::draw() {
 		);
 		twitter.getSimulator().take_screenshot = false;
 	}
+
 #ifdef USE_FX
-	ofSetColor(255);
     fx.draw();
 #endif
     
@@ -100,6 +107,7 @@ void App::draw() {
     if(currentScene) info += "scene "+currentScene->name+"\n";
     
     ofDrawBitmapString(info, 10, ofGetHeight()-40);
+
 }
 
 //--------------------------------------------------------------
