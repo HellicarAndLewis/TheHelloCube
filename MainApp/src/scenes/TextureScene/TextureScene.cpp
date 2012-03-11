@@ -54,7 +54,7 @@ void TextureScene::keyPressed(int key) {
         for (vector<TriangleShape>::iterator it=tris.begin(); it!=tris.end(); ++it) {
             
             float radius = GeometryUtils::getTriangleRadius(it->c, it->b, it->a);
-            ofVec2f center = getTriangleCenter(it->a, it->b, it->c);
+            ofVec2f center = GeometryUtils::getTriangleCenter(it->a, it->b, it->c);
             
             radius = ofRandom(10, 25);
             

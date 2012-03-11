@@ -1243,7 +1243,7 @@
 				5FE8944E14FDD586002C15D0 /* BaseScene.cpp */,
 				5FE8944F14FDD586002C15D0 /* BaseScene.h */,
 				5FE8945014FDD586002C15D0 /* CellScene */,
-				5FE8945314FDD586002C15D0 /* DrawScene */,
+				5FE8945314FDD586002C15D0 /* DrawnScene */,
 				5FE8945914FDD586002C15D0 /* TextureScene */,
 				5FE8945614FDD586002C15D0 /* SpotsScene */,
 			);
@@ -1260,12 +1260,13 @@
 			path = CellScene;
 			sourceTree = "<group>";
 		};
-		5FE8945314FDD586002C15D0 /* DrawScene */ = {
+		5FE8945314FDD586002C15D0 /* DrawnScene */ = {
 			isa = PBXGroup;
 			children = (
 				5FE8945414FDD586002C15D0 /* DrawnScene.cpp */,
 				5FE8945514FDD586002C15D0 /* DrawnScene.h */,
 			);
+			name = DrawnScene;
 			path = DrawScene;
 			sourceTree = "<group>";
 		};
