@@ -9,8 +9,12 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_mirror(false)
 	,fx_flip(false)
 	,fx_pixelate(false)
-    ,fx_pixelate_x(5)
-    ,fx_pixelate_y(5)
+	,fx_shake(false)
+    ,fx_pixelate_x(5.0f)
+    ,fx_pixelate_y(5.0f)
+	,fx_shake_displace(0.01f)
+	,fx_shake_speed(1.001f)
+	,fx_shake_waves(5.0f)
 {
 	
 	gui.addString("fake_tweet", fake_tweet);
@@ -74,6 +78,7 @@ void TwitterSimulator::update() {
 		fx->mirror(fx_mirror);
 		fx->flip(fx_flip);
 		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
+		fx->shake(fx_shake, fx_shake_speed, fx_shake_displace, fx_shake_waves);
 	}
 	
 }
@@ -82,7 +87,12 @@ void TwitterSimulator::setEffects(Effects& f) {
 	fx = &f;
 	gui.addBool("fx_mirror", fx_mirror);
 	gui.addBool("fx_flip", fx_flip);
+	gui.addBool("fx_shake", fx_shake);
 	gui.addBool("fx_pixelate", fx_pixelate);
 	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
 	gui.addFloat("fx_pixelate_y", fx_pixelate_y);
+	gui.addFloat("fx_shake_displace", fx_shake_displace);
+	gui.addFloat("fx_shake_speed", fx_shake_speed);
+	gui.addFloat("fx_shake_waves", fx_shake_waves);
+	
 }

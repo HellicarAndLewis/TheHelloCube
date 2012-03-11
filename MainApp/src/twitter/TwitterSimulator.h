@@ -25,6 +25,10 @@ public:
 	bool fx_pixelate;
 	float fx_pixelate_x;
 	float fx_pixelate_y;
+	bool fx_shake;
+	float fx_shake_displace;
+	float fx_shake_speed;
+	float fx_shake_waves;
 
 private:
 	string settings_file;

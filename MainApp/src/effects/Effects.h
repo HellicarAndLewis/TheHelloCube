@@ -17,6 +17,7 @@ public:
 	Effects();
 	~Effects();
 	void setup(int w, int h);
+	void update();
 	void draw();
 	void beginGrabPixels();
 	void endGrabPixels();	
@@ -26,6 +27,7 @@ public:
 	void mirror(bool apply);
 	void flip(bool apply);
 	void pixelate(bool apply, float x, float y);
+	void shake(bool apply, float speed, float displace, float numWaves);
 private:
 	ofShader shader;
 	ofFbo fbo;

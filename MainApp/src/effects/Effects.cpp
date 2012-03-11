@@ -108,6 +108,11 @@ void Effects::endGrabPixels() {
 	glViewport(0,0,width, height);
 }
 
+void Effects::update() {
+	shader.begin();
+		shader.setUniform1f("fx_time", ofGetElapsedTimef());
+	shader.end();
+}
 
 void Effects::draw() {
 	ofEnableNormalizedTexCoords();
@@ -140,6 +145,15 @@ void Effects::mirror(bool apply) {
 void Effects::flip(bool apply) {
 	shader.begin();
 		shader.setUniform1i("fx_flip", apply ? 1: 2);
+	shader.end();
+}
+
+void Effects::shake(bool apply, float speed, float displace, float numWaves) {
+	shader.begin();
+		shader.setUniform1i("fx_shake", apply ? 1: 2);
+		shader.setUniform1f("fx_shake_displace", displace);
+		shader.setUniform1f("fx_shake_speed", speed);
+		shader.setUniform1f("fx_shake_waves", numWaves);
 	shader.end();
 }
 

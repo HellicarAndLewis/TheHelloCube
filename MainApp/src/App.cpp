@@ -36,7 +36,9 @@ void App::setup() {
 
 //--------------------------------------------------------------
 void App::update() {
-    
+#ifdef USE_FX
+	fx.update();
+#endif
     twitter.update();
 	
     // later maybe just update the scene that needs to be rendered
