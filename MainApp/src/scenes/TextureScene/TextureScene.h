@@ -28,6 +28,8 @@ public:
     void addShape();
     void exitScene();
     
+	void handleCommands(TwitterCommand& cmd, Effects& fx);
+	
     vector <ofTexture> textures;
     
     ofxBox2d box2d;

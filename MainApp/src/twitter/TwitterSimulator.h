@@ -1,3 +1,11 @@
+/**
+ * Simulator, used to debug and test effects, tweet parsing etc..
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_SIMULATORH
 #define TWITTER_SIMULATORH
 

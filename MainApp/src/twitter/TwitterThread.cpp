@@ -17,7 +17,6 @@ void TwitterThread::threadedFunction() {
 	initializeTwitter();
 	
 	while(true) {
-		printf("Fetch tweets..\n");
 		fetchMentions();
 		sleep(25);
 	}
@@ -82,11 +81,13 @@ void TwitterThread::fetchMentions() {
 
 	// STORE NEW MENTIONS
 	// ------------------
-	last_mention = newer_mentions.at(0);			
-	mentions_params["since_id"] = last_mention.getTweetID();
-	lock();
-		std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
-	unlock();
+	if(!is_first_request) {
+		last_mention = newer_mentions.at(0);			
+		mentions_params["since_id"] = last_mention.getTweetID();
+		lock();
+			std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
+		unlock();
+	}
 
 	is_first_request = false;
 }
@@ -96,12 +97,10 @@ void TwitterThread::initializeTwitter() {
 	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
 	if(!twitter.loadTokens(tokens_file)) {
-		printf("LOAD ...\n");
 		string auth_url;
 		twitter.requestToken(auth_url);
 		twitter.handlePin(auth_url);
 		twitter.accessToken();
-		printf("oaded..\n");
 		twitter.saveTokens(tokens_file);
 	}
 }

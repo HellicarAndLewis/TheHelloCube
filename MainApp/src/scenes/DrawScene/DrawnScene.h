@@ -24,5 +24,5 @@ public:
     void update();
     void draw(); 
     void keyPressed(int key);
-
+	void handleCommands(TwitterCommand& cmd, Effects& fx);    
 };

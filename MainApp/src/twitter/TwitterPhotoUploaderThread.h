@@ -1,3 +1,11 @@
+/**
+ * Uploads images to a remote webserver
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_PHOTOUPLOADER_THREADH
 #define TWITTER_PHOTOUPLOADER_THREADH
 

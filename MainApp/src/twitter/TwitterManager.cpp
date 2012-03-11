@@ -17,7 +17,10 @@ void TwitterManager::init() {
 	reloadBadWords();
 	
 	// alllowed commands.
-	allowed_commands.setup(ofToDataPath("twitter/allowed_commands.txt", true));
+	allowed_commands.setup(
+		ofToDataPath("twitter/allowed_commands.txt", true)
+		,ofToDataPath("twitter/allowed_colours.xml", true)
+	);
 	allowed_commands.load();
 	
 	// twitter mentions
@@ -72,9 +75,24 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 		StringTokenizer tokens(command, " ",Poco::StringTokenizer::TOK_IGNORE_EMPTY);
 		if(tokens.count() > 0) {
 			set<string> tokens_copy(tokens.begin(), tokens.end());
-			set<string> filtered;
-			allowed_commands.filterCommands(tokens_copy, filtered);
-			TwitterCommand cmd(tweet, filtered);
+			set<string> found_commands;
+			set<string> found_scenes;
+			map<string, ofColor> found_colours;
+			
+			allowed_commands.filterCommands(
+				 tokens_copy
+				,found_commands
+				,found_colours
+				,found_scenes
+			);
+			
+			TwitterCommand cmd(
+				 tweet
+				,found_commands
+				,found_colours
+				,found_scenes
+			);
+			
 			commands.push(cmd);
 		}
 	}

@@ -51,22 +51,47 @@ void App::setup() {
     sceneIndex = SCENE_DRAWN;
     changeScene(sceneIndex);
     
+
 	twitter.init();
-
-#ifdef USE_FX
-//    fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
-    fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
+	// fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    fx_duration = 5.5; // sec
+	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
-	printf( "%s, %s, %s\n", glGetString( GL_VENDOR), glGetString( GL_RENDERER ), glGetString( GL_VERSION ) );
-#endif
-
+	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
 //--------------------------------------------------------------
 void App::update() {
-#ifdef USE_FX
+	float now = ofGetElapsedTimef();
+	if(now >= command_timeout) {
+		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
+			string switch_scene;
+			if(command.mustSwitchScene(switch_scene)) {
+				if(switch_scene == "cell") {
+					currentScene = &cellSC;
+				}
+				else if(switch_scene == "drawn") {
+					currentScene = &drawnSC;
+				}
+				else if(switch_scene == "texture") {
+					currentScene = &textureSC;
+				}
+				else if(switch_scene == "spots") {
+					currentScene = &spotsSC;
+				}	
+			}
+			currentScene->handleCommands(command, fx);
+		}
+		else {
+			fx.reset();
+		}
+		command_timeout = now + fx_duration;
+	}
+	
+
 	fx.update();
-#endif
+
+
     twitter.update();
 	vidGrabber.update();
 	
@@ -86,9 +111,7 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw() {
-#ifdef USE_FX
 	fx.beginGrabPixels();
-#endif
 
     //ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
     
@@ -106,6 +129,8 @@ void App::draw() {
         currentScene->draw();
     }
 
+	fx.endGrabPixels();
+    fx.draw();
     
     if(doLUT){
         lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
@@ -125,11 +150,7 @@ void App::draw() {
         bExportPDF = false;
         ofEndSaveScreenAsPDF();
     }
-	
-#ifdef USE_FX
-	fx.endGrabPixels();
-    fx.draw();
-#endif
+
 
    
 	if(twitter.getSimulator().take_screenshot) {	
