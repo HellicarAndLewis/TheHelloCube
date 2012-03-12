@@ -40,6 +40,9 @@ public:
 	void pixelate(bool apply, float x, float y);
 	void shake(bool apply, float speed, float displace, float numWaves);
 	void bounce(bool apply, float seconds, float number, float amplitude);
+	void swirl(bool apply, float radius, float angle);
+	void shockwave(bool apply, float seconds);
+	void posterize(bool apply);
 	
 private:
 	ofShader shader;
@@ -56,6 +59,8 @@ private:
 	float bounce_untill;
 	float bounce_duration;
 	bool bounce_enabled;
-	
+	bool shockwave_enabled;
+	float shockwave_duration;
+	float shockwave_untill;
 };
 #endif

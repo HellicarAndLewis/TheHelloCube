@@ -22,4 +22,5 @@
 @property (assign) IBOutlet NSSlider *bounce_amplitude;
 @property (assign) IBOutlet NSSlider *bounce_number;
 @property (assign) IBOutlet NSButton *bounce_button;
+@property (assign) IBOutlet NSSlider *bounce_duration;
 @end

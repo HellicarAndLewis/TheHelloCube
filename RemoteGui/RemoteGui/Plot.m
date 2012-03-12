@@ -6,9 +6,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
-    	NSLog(@"plot created");
-	 	//[self setBackgroundColor:[NSColor whiteColor]];
 	}
     
     return self;
@@ -33,7 +30,7 @@
 	float amp = (amplitude * hy) * 0.9;
 	NSPoint p = NSMakePoint(0, hy);
 	NSBezierPath* path = [NSBezierPath bezierPath];
-	[path setLineWidth:1.0]; // Has no effect.
+	[path setLineWidth:1.0]; 
 	[path moveToPoint:p];
 	for(float i = 0; i <= steps; ++i) {
 		float perc = (i/steps);
