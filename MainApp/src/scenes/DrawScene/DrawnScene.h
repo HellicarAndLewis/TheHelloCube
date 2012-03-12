@@ -20,6 +20,9 @@ public:
     ofxBox2d        box2d;
     vector <Viner>  vines;
     
+    ofxFloatSlider  damping;
+    ofxFloatSlider  frequency;
+    
     void setup();
     void update();
     void draw(); 
