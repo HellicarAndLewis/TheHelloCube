@@ -52,4 +52,6 @@ class testApp : public ofBaseApp{
 		rtt::Tweet last_mention;
 		DateTime online_date;
 		string last_tweet;
+
+
 };
