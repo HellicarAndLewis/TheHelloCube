@@ -97,8 +97,6 @@ void main() {
 		color.g = max(0.0, 1.0 - color.g);
 		color.b = max(0.0, 1.0 - color.b);
 	}
-	
-	
-	
+			
 	gl_FragColor = color;
 }

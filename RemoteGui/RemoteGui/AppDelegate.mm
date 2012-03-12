@@ -22,6 +22,7 @@
 	oscu = [[Osculator alloc] init];
 	[oscu generateFromWindow:[self window] port:4000];
 	[fake_tweet setStringValue:@"@thehellocube"];
+	[self updateBounce];
 }
 
 - (IBAction)onSendFakeTweet:(id)sender {
@@ -47,7 +48,7 @@
 }
 
 - (IBAction)onBounceButton:(id)sender {
-	[oscu sendSliderChanged:"fx_bounde_duration" sender:bounce_duration];
+	[oscu sendSliderChanged:"fx_bounce_duration" sender:bounce_duration];
 	[oscu sendSliderChanged:"fx_bounce_number" sender:bounce_number];
 	[oscu sendSliderChanged:"fx_bounce_amplitude" sender:bounce_amplitude];
 	[oscu sendButtonChanged:"bounce_fx" sender:bounce_button];
