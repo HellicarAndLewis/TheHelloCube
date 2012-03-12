@@ -6,6 +6,8 @@
 #include "TextureScene.h"
 #include "SpotsScene.h"
 #include "TwitterManager.h"
+#include "Effects.h"
+#include "ofxQTKitVideoGrabber.h"
 
 class App : public ofBaseApp{
     
@@ -21,6 +23,7 @@ public:
     void setup();
     void update();
     void draw();
+    void changeScene(int scene);
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -32,14 +35,38 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    bool                bExportPDF;
-    int                 sceneIndex;
-    vector <BaseScene*> scenes;
-    BaseScene *         currentScene;
-    CellScene           cellSC;
-    DrawnScene          drawnSC;
-    TextureScene        textureSC;
-    SpotScene           spotsSC;
-	TwitterManager		twitter;
     
+    bool                 bExportPDF;
+    int                  sceneIndex;
+    
+    // scenes
+    vector <BaseScene*>  scenes;
+    BaseScene *          currentScene;
+    CellScene            cellSC;
+    DrawnScene           drawnSC;
+    TextureScene         textureSC;
+    SpotScene            spotsSC;
+	
+    // twitter
+	float				 command_timeout;	
+	TwitterCommand		 command;
+    TwitterManager		 twitter;
+    Effects				 fx;
+	float				 fx_duration;
+    
+    // Video
+	ofxQTKitVideoGrabber vidGrabber;	
+	int 				 camWidth;
+	int 				 camHeight;  
+    
+    // Video FX
+    //LUT bits from openFrameworks/examples/graphics/InstagramLikeImageFilters example 
+    void                 loadLUT(string path);
+	void                 applyLUT(ofPixelsRef pix);
+	bool                 doLUT;
+	int                  dirLoadIndex;
+	ofDirectory          dir;
+	bool                 LUTloaded;
+	ofVec3f              lut[32][32][32];
+	ofImage              lutImg;
 };

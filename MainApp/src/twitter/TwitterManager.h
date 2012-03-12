@@ -1,3 +1,11 @@
+/**
+ * "Manager" for all twitter related actions.
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_MANAGERH
 #define TWITTER_MANAGERH
 
@@ -36,13 +44,13 @@ public:
 	TwitterBadWords& getBadWords();
 
 private:
-
 	TwitterCommands allowed_commands;
 	TwitterSimulator simulator;
 	TwitterThread twitter_thread;
 	TwitterPhotoUploaderThread uploader_thread;
 	TwitterBadWords bad_words;
 	queue<TwitterCommand> commands;
+	string twitter_user;
 };
 
 inline TwitterThread& TwitterManager::getThread() {

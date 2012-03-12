@@ -8,8 +8,9 @@
 
 #pragma once
 #include "BaseScene.h"
-
-
+#include "CellNode.h"
+#include "ofxVoronoi.h"
+#include "Utils.h"
 class CellScene : public BaseScene {
     
 private:
@@ -17,5 +18,21 @@ protected:
 public:
   
     void setup();
+    void update();
+    void draw();
+    void keyPressed(int key);
+    void addCells();
+	void handleCommands(TwitterCommand& cmd, Effects& fx);
+	
+    ofxVoronoi        voronoi;
+    vector <CellNode> cells;
     
+    ofxFloatSlider separationDistance;
+    ofxFloatSlider damping;
+    ofxFloatSlider maxParticleSpeed;
+    
+    ofxFloatSlider releaseRate;
+    ofxIntSlider   maxCellsOnScreen;
+    
+
 };

@@ -8,8 +8,11 @@
 
 #pragma once
 #include "ofMain.h"
-#include "Utils.h"
 #include "AppAssets.h"
+#include "ofxGui.h"
+#include "../../../addons/Tools/Utils/Utils.h"
+#include "TwitterTypes.h"
+#include "Effects.h"
 
 class BaseScene {
     
@@ -21,7 +24,27 @@ public:
     ~BaseScene();
     
     // ----------------------------------------------------
-    string name;
+    string   name;
+    ofxPanel gui;
+    
+    ofColor  bgColor;
+    ofColor  bgColorTarget;
+
+    // ----------------------------------------------------
+    virtual void exitScene() {
+        ofUnregisterMouseEvents(&gui);
+    }
+    
+    virtual void enterScene() {
+        ofRegisterMouseEvents(&gui);
+    }
+
+    // ----------------------------------------------------
+	virtual void handleCommands(TwitterCommand& cmd, Effects& fx){
+	}
+	
+    // ----------------------------------------------------
+    virtual void drawBackground();
     
     // ----------------------------------------------------
     virtual void setup() = 0;

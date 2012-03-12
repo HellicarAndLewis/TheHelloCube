@@ -1,3 +1,11 @@
+/**
+ * Uploads images to a remote webserver
+ * 
+ * 
+ * 
+ * @date	2012.03.xx
+ * @author	Diederick Huijbers <diederick@apollomedia.nl>
+ */
 #ifndef TWITTER_PHOTOUPLOADER_THREADH
 #define TWITTER_PHOTOUPLOADER_THREADH
 
@@ -14,8 +22,8 @@
 using std::queue;
 using std::string;
 
-//const string URL_TWITTER_UPLOADER = "http://hellocube.localhost";
-const string URL_TWITTER_UPLOADER = "http://www.thehellocube.com/";
+//const string URL_TWITTER_UPLOADER = "http://hellocube.localhost/images/";
+const string URL_TWITTER_UPLOADER = "http://www.thehellocube.com/images/";
 enum TwitterPhotoUploaderTaskType {
 	TASK_UPLOAD_PHOTO
 };

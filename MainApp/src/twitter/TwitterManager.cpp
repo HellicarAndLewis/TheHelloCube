@@ -17,11 +17,15 @@ void TwitterManager::init() {
 	reloadBadWords();
 	
 	// alllowed commands.
-	allowed_commands.setup(ofToDataPath("twitter/allowed_commands.txt", true));
+	allowed_commands.setup(
+		ofToDataPath("twitter/allowed_commands.txt", true)
+		,ofToDataPath("twitter/allowed_colours.xml", true)
+	);
 	allowed_commands.load();
 	
 	// twitter mentions
-	string tokens_file = ofToDataPath("twitter/twitter.txt",true);
+	twitter_user = "roxlutest";
+	string tokens_file = ofToDataPath("twitter/twitter_" +twitter_user +".txt",true);
 	twitter_thread.setup(tokens_file);
 	twitter_thread.startThread(false, false);
 	
@@ -31,6 +35,7 @@ void TwitterManager::init() {
 		,twitter_thread.getTwitter().getConsumerSecret()
 		,tokens_file
 	);
+	
 	uploader_thread.startThread(false, false);	
 }
 
@@ -63,15 +68,31 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 	printf("Mention: %s\n", lower.c_str());
 		
 	// Check if it's a correct search term:
-	pcrecpp::RE re("^@thehellocube (.*)$");
+	string match = "^@" +twitter_user +" (.*)$";
+	pcrecpp::RE re(match.c_str());
 	re.FullMatch(lower, &command);
 	if(command.length()) {
 		StringTokenizer tokens(command, " ",Poco::StringTokenizer::TOK_IGNORE_EMPTY);
 		if(tokens.count() > 0) {
 			set<string> tokens_copy(tokens.begin(), tokens.end());
-			set<string> filtered;
-			allowed_commands.filterCommands(tokens_copy, filtered);
-			TwitterCommand cmd(tweet, filtered);
+			set<string> found_commands;
+			set<string> found_scenes;
+			map<string, ofColor> found_colours;
+			
+			allowed_commands.filterCommands(
+				 tokens_copy
+				,found_commands
+				,found_colours
+				,found_scenes
+			);
+			
+			TwitterCommand cmd(
+				 tweet
+				,found_commands
+				,found_colours
+				,found_scenes
+			);
+			
 			commands.push(cmd);
 		}
 	}

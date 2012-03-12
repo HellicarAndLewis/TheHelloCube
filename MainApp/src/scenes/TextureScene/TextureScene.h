@@ -24,12 +24,20 @@ public:
     void draw();
     void keyPressed(int key);
     void addPoints();
-    
+    void makeObstacles();
+    void addShape();
+	void handleCommands(TwitterCommand& cmd, Effects& fx);
+	
     vector <ofTexture> textures;
     
     ofxBox2d box2d;
-    vector <TexturedShape> shapes;
-    vector <ofVec2f>       pts;
-    vector <TriangleShape> tris;
+    vector <ofxBox2dCircle> obsticals;
+    vector <TexturedShape>   shapes;
+    vector <ofVec2f>         pts;
+    vector <TriangleShape>   tris;
     int index;
+    
+    ofxFloatSlider releaseRate;
+    ofxIntSlider   maxShapesOnScreen;
+    
 };
