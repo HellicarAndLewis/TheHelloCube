@@ -16,6 +16,9 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_shake_displace(0.01f)
 	,fx_shake_speed(1.001f)
 	,fx_shake_waves(5.0f)
+	,fx_bounce_number(6.0f)
+	,fx_bounce_amplitude(0.4f)
+	,fx_bounce_duration(3.5f)
 {
 	
 	gui.addString("fake_tweet", fake_tweet);
@@ -24,7 +27,7 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	gui.addCallback("take_screenshot", 3, this);
 	gui.addCallback("reload_badwords", 4, this);
 	gui.addCallback("save_settings", 5, this);
-	gui.addCallback("update_fx",6 , this);
+	gui.addCallback("bounce_fx", 6, this); 
 }
 
 TwitterSimulator::~TwitterSimulator() {
@@ -65,10 +68,8 @@ void TwitterSimulator::guiCallback(int v) {
 		saveSettings();
 	}
 	else if(v == 6) {
-	
-		fx->mirror(fx_mirror);
-		fx->flip(fx_flip);
-		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
+		printf("> bounce: duration: %f seconds, %f bounces, %f amplitude.\n", fx_bounce_duration, fx_bounce_number, fx_bounce_amplitude);
+		fx->bounce(true, fx_bounce_duration, fx_bounce_number, fx_bounce_amplitude);
 	}
 }
 
@@ -97,6 +98,8 @@ void TwitterSimulator::setEffects(Effects& f) {
 	gui.addFloat("fx_shake_displace", fx_shake_displace);
 	gui.addFloat("fx_shake_speed", fx_shake_speed);
 	gui.addFloat("fx_shake_waves", fx_shake_waves);
-	
+	gui.addFloat("fx_bounce_duration", fx_bounce_duration);
+	gui.addFloat("fx_bounce_number", fx_bounce_number);
+	gui.addFloat("fx_bounce_amplitude", fx_bounce_amplitude);
 	
 }

@@ -5,6 +5,9 @@
 Effects::Effects()
 	:vertices(4, Vertex())
 	,cleared(false)
+	,bounce_enabled(false)
+	,bounce_untill(0)
+	,bounce_duration(0)
 {
 }
 
@@ -110,7 +113,16 @@ void Effects::endGrabPixels() {
 
 void Effects::update() {
 	shader.begin();
-		shader.setUniform1f("fx_time", ofGetElapsedTimef());
+		float now = ofGetElapsedTimef();
+		shader.setUniform1f("fx_time", now);
+		if(bounce_enabled) {
+			float p = 1.0 -  MIN(1.0, (bounce_untill-now)/bounce_duration);
+			if(p >= 1.0) {
+				bounce_enabled = false;
+				printf("READY!\n");
+			}
+			shader.setUniform1f("fx_bounce_p", p);
+		}
 	shader.end();
 }
 
@@ -169,6 +181,18 @@ void Effects::invert(bool apply) {
 	shader.begin();
 		shader.setUniform1i("fx_invert", apply ? 1: 2);
 	shader.end();
+}
+
+void Effects::bounce(bool apply, float seconds, float number, float amplitude) {
+	bounce_untill = ofGetElapsedTimef() + seconds;
+	bounce_enabled = apply;
+	bounce_duration = seconds;
+	shader.begin();
+		shader.setUniform1i("fx_bounce", apply ? 1: 2);
+		shader.setUniform1f("fx_bounce_number", number);
+		shader.setUniform1f("fx_bounce_amplitude", amplitude);
+	shader.end();
+
 }
 
 void Effects::applyEffect(const string& fx) {

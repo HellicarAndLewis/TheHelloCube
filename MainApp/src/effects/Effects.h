@@ -39,6 +39,7 @@ public:
 	void flip(bool apply);
 	void pixelate(bool apply, float x, float y);
 	void shake(bool apply, float speed, float displace, float numWaves);
+	void bounce(bool apply, float seconds, float number, float amplitude);
 	
 private:
 	ofShader shader;
@@ -52,5 +53,9 @@ private:
 	bool cleared;
 	int width;
 	int height;
+	float bounce_untill;
+	float bounce_duration;
+	bool bounce_enabled;
+	
 };
 #endif

@@ -1,7 +1,12 @@
 #define TWO_PI 6.2831853
+#define PI 3.14159265
 uniform int fx_pixelate;
 uniform int fx_shake;
 uniform int fx_invert;
+uniform int fx_bounce;
+uniform float fx_bounce_p;
+uniform float fx_bounce_number;
+uniform float fx_bounce_amplitude;
 uniform float fx_pixelate_x;
 uniform float fx_pixelate_y;
 uniform float fx_time;
@@ -25,6 +30,11 @@ void main() {
 	if(fx_shake == 1) {
 		tc.x += sin(tc.y * TWO_PI * fx_shake_waves + fx_time * fx_shake_speed) * fx_shake_displace;
 	}
+	
+	if(fx_bounce == 1) {
+		tc.x += cos(fx_bounce_number*fx_bounce_p*PI) * fx_bounce_amplitude * sin(fx_bounce_p*PI);
+	}
+	
 	
 	color = texture2D(img, tc);	
 	

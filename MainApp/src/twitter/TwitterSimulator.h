@@ -39,6 +39,9 @@ public:
 	float fx_shake_displace;
 	float fx_shake_speed;
 	float fx_shake_waves;
+	float fx_bounce_number;
+	float fx_bounce_amplitude;
+	float fx_bounce_duration;
 
 private:
 	string settings_file;
