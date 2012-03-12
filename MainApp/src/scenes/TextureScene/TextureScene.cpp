@@ -29,6 +29,12 @@ void TextureScene::setup() {
 
 
 // ----------------------------------------------------
+void TextureScene::exitScene() {
+    BaseScene::exitScene();
+    //shapes.clear();
+}
+
+// ----------------------------------------------------
 void TextureScene::update() {
     
     int nShapesToAdd = MAX(1, 10 * releaseRate);
@@ -117,10 +123,9 @@ void TextureScene::keyPressed(int key) {
         }
     }
     if(key == 's') {
-        for(int i=0; i<MIN(30, shapes.size()-1); i++) {
+        for(int i=0; i<MIN(230, shapes.size()-1); i++) {
             int ranId = (int)ofRandom(0, shapes.size()-1);
             shapes[ranId].radiusTarget = ofRandom(2, 10);
-            
         }
     }
     

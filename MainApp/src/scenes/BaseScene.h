@@ -40,8 +40,7 @@ public:
     }
 
     // ----------------------------------------------------
-	virtual void handleCommands(TwitterCommand& cmd, Effects& fx){
-	}
+	virtual void handleCommands(TwitterCommand& cmd, Effects& fx) { }
 	
     // ----------------------------------------------------
     virtual void drawBackground();

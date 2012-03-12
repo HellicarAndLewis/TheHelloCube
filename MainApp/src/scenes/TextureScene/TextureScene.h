@@ -26,6 +26,8 @@ public:
     void addPoints();
     void makeObstacles();
     void addShape();
+    void exitScene();
+    
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
 	
     vector <ofTexture> textures;
