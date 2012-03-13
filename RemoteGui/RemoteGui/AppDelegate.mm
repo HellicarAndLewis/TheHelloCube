@@ -9,10 +9,10 @@
 @synthesize send_tweet_button;
 @synthesize reload_commands_button;
 @synthesize reload_badwords_button;
-@synthesize bounce_amplitude;
-@synthesize bounce_number;
-@synthesize bounce_button;
-@synthesize bounce_duration;
+@synthesize shake_amplitude;
+@synthesize shake_number;
+@synthesize shake_button;
+@synthesize shake_duration;
 
 - (void)dealloc {
     [super dealloc];
@@ -22,7 +22,7 @@
 	oscu = [[Osculator alloc] init];
 	[oscu generateFromWindow:[self window] port:4000];
 	[fake_tweet setStringValue:@"@thehellocube"];
-	[self updateBounce];
+	[self updateShake];
 }
 
 - (IBAction)onSendFakeTweet:(id)sender {
@@ -39,24 +39,24 @@
 	[oscu sendButtonChanged:"reload_badwords" sender:reload_badwords_button];
 }
 
-- (IBAction)onBounceAmplitude:(id)sender {
-	[self updateBounce];	
+- (IBAction)onShakeAmplitude:(id)sender {
+	[self updateShake];	
 }
 
-- (IBAction)onBounceNumber:(id)sender {
-	[self updateBounce];
+- (IBAction)onShakeNumber:(id)sender {
+	[self updateShake];
 }
 
-- (IBAction)onBounceButton:(id)sender {
-	[oscu sendSliderChanged:"fx_bounce_duration" sender:bounce_duration];
-	[oscu sendSliderChanged:"fx_bounce_number" sender:bounce_number];
-	[oscu sendSliderChanged:"fx_bounce_amplitude" sender:bounce_amplitude];
-	[oscu sendButtonChanged:"bounce_fx" sender:bounce_button];
+- (IBAction)onShakeButton:(id)sender {
+	[oscu sendSliderChanged:"fx_shake_duration" sender:shake_duration];
+	[oscu sendSliderChanged:"fx_shake_number" sender:shake_number];
+	[oscu sendSliderChanged:"fx_shake_amplitude" sender:shake_amplitude];
+	[oscu sendButtonChanged:"shake_fx" sender:shake_button];
 }
 
--(void) updateBounce {
-	float amp = [bounce_amplitude floatValue]/[bounce_amplitude maxValue];
-	[plot set:amp number:[bounce_number floatValue]];
+-(void) updateShake {
+	float amp = [shake_amplitude floatValue]/[shake_amplitude maxValue];
+	[plot set:amp number:[shake_number floatValue]];
 	[plot setNeedsDisplay:YES];
 
 }

@@ -33,7 +33,7 @@ void testApp::setup() {
 		twitter.accessToken();
 		twitter.saveTokens(tokens_file);
 	}
-	fetch_again_on = ofGetElapsedTimeMillis() +15000;
+	fetch_again_on = ofGetElapsedTimeMillis() +10000;
 	font.loadFont("font.otf", 30);
 	last_tweet = "...";
 }
@@ -122,14 +122,14 @@ void testApp::fetchMentions() {
 			
 			// ok.. not optimized .... 
 			vector<string> messages;
-			messages.push_back("1. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
-			messages.push_back("2. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
-			messages.push_back("3. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
-			messages.push_back("4. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 1 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 2 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 3 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 4 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
 			string message = messages.at((int)ofRandom(0,messages.size()-1));
 			printf("< %s\n", tweet.getText().c_str());
 			printf("> %s\n", message.c_str());
-			//twitter.statusesUpdate(message);
+			twitter.statusesUpdate(message);
 			last_tweet = tweet.getText();
 			++it;
 		}

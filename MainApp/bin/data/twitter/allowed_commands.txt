@@ -1,9 +1,12 @@
-pixelate
-invert
-mirror
 flip
-wave 
+mirror
+invert
+ripple
+posterize
+wave
+pixelate
 shake
+swirl
 more
 less
 smaller,small

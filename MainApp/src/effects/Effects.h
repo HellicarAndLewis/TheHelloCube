@@ -38,10 +38,10 @@ public:
 	void mirror(bool apply);
 	void flip(bool apply);
 	void pixelate(bool apply, float x, float y);
-	void shake(bool apply, float speed, float displace, float numWaves);
-	void bounce(bool apply, float seconds, float number, float amplitude);
+	void wave(bool apply, float speed, float displace, float num);
+	void shake(bool apply, float seconds, float number, float amplitude);
 	void swirl(bool apply, float radius, float angle);
-	void shockwave(bool apply, float seconds);
+	void ripple(bool apply, float seconds);
 	void posterize(bool apply);
 	
 private:
@@ -56,11 +56,11 @@ private:
 	bool cleared;
 	int width;
 	int height;
-	float bounce_untill;
-	float bounce_duration;
-	bool bounce_enabled;
-	bool shockwave_enabled;
-	float shockwave_duration;
-	float shockwave_untill;
+	float shake_untill;
+	float shake_duration;
+	bool shake_enabled;
+	bool ripple_enabled;
+	float ripple_duration;
+	float ripple_untill;
 };
 #endif

@@ -5,12 +5,12 @@
 Effects::Effects()
 	:vertices(4, Vertex())
 	,cleared(false)
-	,bounce_enabled(false)
-	,bounce_untill(0)
-	,bounce_duration(0)
-	,shockwave_enabled(false)
-	,shockwave_duration(0)
-	,shockwave_untill(0)
+	,shake_enabled(false)
+	,shake_untill(0)
+	,shake_duration(0)
+	,ripple_enabled(false)
+	,ripple_duration(0)
+	,ripple_untill(0)
 {
 }
 
@@ -118,22 +118,22 @@ void Effects::update() {
 	shader.begin();
 		float now = ofGetElapsedTimef();
 		shader.setUniform1f("fx_time", now);
-		if(bounce_enabled) {
-			float p = 1.0 -  MIN(1.0, (bounce_untill-now)/bounce_duration);
+		if(shake_enabled) {
+			float p = 1.0 -  MIN(1.0, (shake_untill-now)/shake_duration);
 			if(p >= 1.0) {
-				bounce_enabled = false;
-				shader.setUniform1i("fx_bounce", 2);
+				shake_enabled = false;
+				shader.setUniform1i("fx_shake", 2);
 			}
-			shader.setUniform1f("fx_bounce_p", p);
+			shader.setUniform1f("fx_shake_p", p);
 		}
 		
-		if(shockwave_enabled) {
-			float p = 1.0 - MIN(1.0, (shockwave_untill-now)/shockwave_duration);
+		if(ripple_enabled) {
+			float p = 1.0 - MIN(1.0, (ripple_untill-now)/ripple_duration);
 			if(p >= 1.0) {
-				shockwave_enabled = false;
-				shader.setUniform1i("fx_shockwave", 2);
+				ripple_enabled = false;
+				shader.setUniform1i("fx_ripple", 2);
 			} 
-			shader.setUniform1f("fx_shockwave_p",p);
+			shader.setUniform1f("fx_ripple_p",p);
 		}
 		
 	shader.end();
@@ -173,12 +173,12 @@ void Effects::flip(bool apply) {
 	shader.end();
 }
 
-void Effects::shake(bool apply, float speed, float displace, float numWaves) {
+void Effects::wave(bool apply, float speed, float displace, float num) {
 	shader.begin();
-		shader.setUniform1i("fx_shake", apply ? 1: 2);
-		shader.setUniform1f("fx_shake_displace", displace);
-		shader.setUniform1f("fx_shake_speed", speed);
-		shader.setUniform1f("fx_shake_waves", numWaves);
+		shader.setUniform1i("fx_wave", apply ? 1: 2);
+		shader.setUniform1f("fx_wave_displace", displace);
+		shader.setUniform1f("fx_wave_speed", speed);
+		shader.setUniform1f("fx_wave_num", num);
 	shader.end();
 }
 
@@ -207,13 +207,13 @@ void Effects::swirl(bool apply, float radius, float angle) {
 	shader.end();
 }
 
-void Effects::shockwave(bool apply, float seconds) {
-	shockwave_enabled = apply;
-	shockwave_duration = seconds;
-	shockwave_untill = ofGetElapsedTimef() + seconds;
+void Effects::ripple(bool apply, float seconds) {
+	ripple_enabled = apply;
+	ripple_duration = seconds;
+	ripple_untill = ofGetElapsedTimef() + seconds;
 	shader.begin();
-		shader.setUniform1i("fx_shockwave", apply ? 1 : 2);
-		shader.setUniform3f("fx_shockwave_params", 10.0, 0.9, 0.1);
+		shader.setUniform1i("fx_ripple", apply ? 1 : 2);
+		shader.setUniform3f("fx_ripple_params", 10.0, 0.9, 0.1);
 	shader.end();
 }
 
@@ -223,42 +223,54 @@ void Effects::invert(bool apply) {
 	shader.end();
 }
 
-void Effects::bounce(bool apply, float seconds, float number, float amplitude) {
-	bounce_untill = ofGetElapsedTimef() + seconds;
-	bounce_enabled = apply;
-	bounce_duration = seconds;
+void Effects::shake(bool apply, float seconds, float number, float amplitude) {
+	shake_untill = ofGetElapsedTimef() + seconds;
+	shake_enabled = apply;
+	shake_duration = seconds;
 	shader.begin();
-		shader.setUniform1i("fx_bounce", apply ? 1: 2);
-		shader.setUniform1f("fx_bounce_number", number);
-		shader.setUniform1f("fx_bounce_amplitude", amplitude);
+		shader.setUniform1i("fx_shake", apply ? 1: 2);
+		shader.setUniform1f("fx_shake_number", number);
+		shader.setUniform1f("fx_shake_amplitude", amplitude);
 	shader.end();
 
 }
 
 void Effects::applyEffect(const string& fx) {
-	if(fx == "pixelate") {
-		pixelate(true, 10.0f, 10.0f);
+	if(fx == "flip") {
+		flip(true);
 	}
 	else if(fx == "mirror") {
 		mirror(true);
 	}
-	else if(fx == "flip") {
-		flip(true);
-	}
 	else if(fx == "invert") {
 		invert(true);
 	}
-	else if(fx == "shake") {
-		shake(true, 1.4, 0.01, 14.0);
+	else if(fx == "ripple") {
+		ripple(true, 3.5);
+	}
+	else if(fx == "posterize") {
+		posterize(true);
+	}
+	else if(fx == "pixelate") {
+		pixelate(true, 10.0f, 10.0f);
+	}
+	else if(fx == "wave") {
+		wave(true, 1.4, 0.01, 14.0);
+	}	
+	else if(fx == "swirl") {
+		swirl(true, 0.5, PI);
 	}
 }
 
 void Effects::reset() {
 	shader.begin();
-		shader.setUniform1i("fx_pixelate", 2);
-		shader.setUniform1i("fx_mirror", 2);
 		shader.setUniform1i("fx_flip", 2);
+		shader.setUniform1i("fx_mirror", 2);
 		shader.setUniform1i("fx_invert", 2);
-		shader.setUniform1i("fx_shake", 2);
+		shader.setUniform1i("fx_ripple", 2);
+		shader.setUniform1i("fx_posterize", 2);
+		shader.setUniform1i("fx_pixelate", 2);
+		shader.setUniform1i("fx_wave", 2);
+		shader.setUniform1i("fx_swurk", 2);
 	shader.end();
 }

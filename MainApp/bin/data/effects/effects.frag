@@ -1,26 +1,26 @@
 #define TWO_PI 6.2831853
 #define PI 3.14159265
 uniform int fx_pixelate;
-uniform int fx_shake;
+uniform int fx_wave;
 uniform int fx_invert;
-uniform int fx_bounce;
+uniform int fx_shake;
 uniform int fx_swirl;
-uniform int fx_shockwave;
+uniform int fx_ripple;
 uniform int fx_posterize;
 
 uniform float fx_time;
-uniform float fx_bounce_p;
-uniform float fx_bounce_number;
-uniform float fx_bounce_amplitude;
+uniform float fx_shake_p;
+uniform float fx_shake_number;
+uniform float fx_shake_amplitude;
 uniform float fx_pixelate_x;
 uniform float fx_pixelate_y;
-uniform float fx_shake_waves;
-uniform float fx_shake_speed;
-uniform float fx_shake_displace;
+uniform float fx_wave_num;
+uniform float fx_wave_speed;
+uniform float fx_wave_displace;
 uniform float fx_swirl_radius;
 uniform float fx_swirl_angle;
-uniform vec3 fx_shockwave_params;
-uniform float fx_shockwave_p;
+uniform vec3 fx_ripple_params;
+uniform float fx_ripple_p;
 
 uniform sampler2D img;
 varying vec2 texcoord;
@@ -36,12 +36,12 @@ void main() {
 		tc = vec2(dx*floor(tc.x/dx), dy*floor(tc.y/dy));
 	}
 	
-	if(fx_shake == 1) {
-		tc.x += sin(tc.y * TWO_PI * fx_shake_waves + fx_time * fx_shake_speed) * fx_shake_displace;
+	if(fx_wave == 1) {
+		tc.x += sin(tc.y * TWO_PI * fx_wave_num + fx_time * fx_wave_speed) * fx_wave_displace;
 	}
 	
-	if(fx_bounce == 1) {
-		tc.x += cos(fx_bounce_number*fx_bounce_p*PI) * fx_bounce_amplitude * sin(fx_bounce_p*PI);
+	if(fx_shake == 1) {
+		tc.x += cos(fx_shake_number*fx_shake_p*PI) * fx_shake_amplitude * sin(fx_shake_p*PI);
 	}
 	
 	if(fx_swirl == 1) {
@@ -62,18 +62,17 @@ void main() {
 		tc += center;
 	}
 
-	if(fx_shockwave == 1) {
+	if(fx_ripple == 1) {
 		vec2 center = vec2(0.5, 0.5);
 		float d = distance(tc, center);
-		if( (d <= (fx_shockwave_p + fx_shockwave_params.z)) &&
-			(d >= (fx_shockwave_p - fx_shockwave_params.z)) )
+		if( (d <= (fx_ripple_p + fx_ripple_params.z)) &&
+			(d >= (fx_ripple_p - fx_ripple_params.z)) )
 		{
-			float diff = d - fx_shockwave_p;
-			float pow_diff = 1.0 - pow(abs(diff * fx_shockwave_params.x), fx_shockwave_params.y);
+			float diff = d - fx_ripple_p;
+			float pow_diff = 1.0 - pow(abs(diff * fx_ripple_params.x), fx_ripple_params.y);
 			float time_diff = diff * pow_diff;
 			tc += normalize(tc - center) * time_diff;
 		}
-		
 	}
 	
 	

@@ -31,7 +31,7 @@ public:
 	bool fx_mirror;
 	bool fx_flip;
 	bool fx_pixelate;
-	bool fx_shake;
+	bool fx_wave;
 	bool fx_invert;
 	bool fx_swirl;
 	bool fx_posterize;
@@ -39,15 +39,15 @@ public:
 	float fx_pixelate_x;
 	float fx_pixelate_y;
 
-	float fx_shake_displace;
-	float fx_shake_speed;
-	float fx_shake_waves;
-	float fx_bounce_number;
-	float fx_bounce_amplitude;
-	float fx_bounce_duration;
+	float fx_wave_displace;
+	float fx_wave_speed;
+	float fx_wave_num;
+	float fx_shake_number;
+	float fx_shake_amplitude;
+	float fx_shake_duration;
 	float fx_swirl_radius;
 	float fx_swirl_angle;
-	float fx_shockwave_duration;
+
 
 private:
 	string settings_file;

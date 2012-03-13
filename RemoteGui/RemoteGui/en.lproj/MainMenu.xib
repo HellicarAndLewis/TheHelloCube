@@ -1521,7 +1521,7 @@
 							<string key="NSFrame">{{13, 26}, {564, 196}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="17567102"/>
+							<reference key="NSNextKeyView" ref="548104172"/>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="241496851">
 									<object class="NSView" key="NSView" id="587430667">
@@ -1628,14 +1628,14 @@
 											<object class="NSButton" id="146552916">
 												<reference key="NSNextResponder" ref="587430667"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{17, 22}, {52, 25}}</string>
+												<string key="NSFrame">{{16, 22}, {54, 25}}</string>
 												<reference key="NSSuperview" ref="587430667"/>
 												<reference key="NSNextKeyView"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="278911908">
 													<int key="NSCellFlags">-2080244224</int>
 													<int key="NSCellFlags2">134217728</int>
-													<string key="NSContents">Shock</string>
+													<string key="NSContents">Ripple</string>
 													<reference key="NSSupport" ref="788051649"/>
 													<reference key="NSControlView" ref="146552916"/>
 													<int key="NSButtonFlags">-2038152961</int>
@@ -1650,7 +1650,7 @@
 										<string key="NSFrame">{{10, 33}, {544, 150}}</string>
 										<reference key="NSNextKeyView" ref="559441890"/>
 									</object>
-									<string key="NSLabel">Flip, Mirror, Invert, Shock, Posterize</string>
+									<string key="NSLabel">Flip, Mirror, Invert, Ripple, Posterize</string>
 									<reference key="NSColor" ref="558970548"/>
 									<reference key="NSTabView" ref="58478230"/>
 								</object>
@@ -1804,7 +1804,7 @@
 										<string key="NSFrame">{{10, 33}, {544, 150}}</string>
 										<reference key="NSNextKeyView" ref="200763602"/>
 									</object>
-									<string key="NSLabel">Shake</string>
+									<string key="NSLabel">Wave</string>
 									<reference key="NSColor" ref="558970548"/>
 									<reference key="NSTabView" ref="58478230"/>
 								</object>
@@ -1864,7 +1864,6 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{46, 72}, {481, 15}}</string>
 												<reference key="NSSuperview" ref="112804702"/>
-												<reference key="NSNextKeyView"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="857462208">
 													<int key="NSCellFlags">-2079981824</int>
@@ -1925,21 +1924,20 @@
 								</object>
 								<object class="NSTabViewItem" id="740763730">
 									<object class="NSView" key="NSView" id="17567102">
-										<reference key="NSNextResponder" ref="58478230"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSButton" id="895884563">
 												<reference key="NSNextResponder" ref="17567102"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{17, 123}, {64, 25}}</string>
+												<string key="NSFrame">{{17, 123}, {51, 25}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="869827637"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="44049794">
 													<int key="NSCellFlags">-2080244224</int>
 													<int key="NSCellFlags2">134217728</int>
-													<string key="NSContents">Bounce </string>
+													<string key="NSContents">Shake</string>
 													<reference key="NSSupport" ref="788051649"/>
 													<reference key="NSControlView" ref="895884563"/>
 													<int key="NSButtonFlags">-2038152961</int>
@@ -1955,7 +1953,6 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{118, 98}, {409, 18}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="882254209"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="566384916">
@@ -1978,7 +1975,6 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{119, 81}, {408, 15}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="128476014"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="704927136">
@@ -2001,7 +1997,6 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{118, 61}, {409, 15}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="557351289"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="948367750">
@@ -2024,7 +2019,6 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 102}, {59, 17}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="797525838"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="752550568">
@@ -2042,7 +2036,6 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 61}, {91, 17}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="575347554"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="367696272">
@@ -2060,7 +2053,6 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{14, 81}, {70, 17}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="543253163"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="746516027">
@@ -2078,23 +2070,20 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{118, 7}, {409, 48}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
-												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView"/>
 												<string key="NSClassName">Plot</string>
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {544, 150}}</string>
-										<reference key="NSSuperview" ref="58478230"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="895884563"/>
 									</object>
-									<string key="NSLabel">Bounce</string>
+									<string key="NSLabel">Shake</string>
 									<reference key="NSColor" ref="558970548"/>
 									<reference key="NSTabView" ref="58478230"/>
 								</object>
 								<object class="NSTabViewItem" id="474146567">
 									<object class="NSView" key="NSView" id="548104172">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="58478230"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSButton" id="361170680">
@@ -2102,10 +2091,11 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{21, 115}, {64, 18}}</string>
 												<reference key="NSSuperview" ref="548104172"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="570610587"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="18304588">
-													<int key="NSCellFlags">-2080244224</int>
+													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">0</int>
 													<string key="NSContents">Enable</string>
 													<reference key="NSSupport" ref="788051649"/>
@@ -2125,6 +2115,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{103, 86}, {413, 15}}</string>
 												<reference key="NSSuperview" ref="548104172"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="254194727"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="221685143">
@@ -2147,6 +2138,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{103, 66}, {413, 15}}</string>
 												<reference key="NSSuperview" ref="548104172"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="236900299">
@@ -2169,6 +2161,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{34, 86}, {47, 17}}</string>
 												<reference key="NSSuperview" ref="548104172"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="406530584"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="1032326270">
@@ -2186,6 +2179,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{34, 66}, {41, 17}}</string>
 												<reference key="NSSuperview" ref="548104172"/>
+												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="790708925"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="668119455">
@@ -2200,6 +2194,8 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {544, 150}}</string>
+										<reference key="NSSuperview" ref="58478230"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="361170680"/>
 									</object>
 									<string key="NSLabel">Swirl</string>
@@ -2207,13 +2203,13 @@
 									<reference key="NSTabView" ref="58478230"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="740763730"/>
+							<reference key="NSSelectedTabViewItem" ref="474146567"/>
 							<reference key="NSFont" ref="788051649"/>
 							<int key="NSTvFlags">0</int>
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="17567102"/>
+								<reference ref="548104172"/>
 							</array>
 						</object>
 					</array>
@@ -2232,10 +2228,9 @@
 				<string key="NSClassName">NSFontManager</string>
 			</object>
 			<object class="NSButton" id="804214297">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<string key="NSFrameSize">{52, 25}</string>
-				<reference key="NSSuperview"/>
 				<bool key="NSEnabled">YES</bool>
 				<object class="NSButtonCell" key="NSCell" id="604074292">
 					<int key="NSCellFlags">-2080244224</int>
@@ -2991,14 +2986,6 @@
 					<int key="connectionID">575</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">onBounceAmplitude:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="543253163"/>
-					</object>
-					<int key="connectionID">652</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">plot</string>
 						<reference key="source" ref="976324537"/>
@@ -3008,43 +2995,51 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">bounce_number</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="575347554"/>
-					</object>
-					<int key="connectionID">654</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">bounce_amplitude</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="543253163"/>
-					</object>
-					<int key="connectionID">655</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">onBounceNumber:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="948367750"/>
-					</object>
-					<int key="connectionID">656</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">onBounceButton:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="895884563"/>
-					</object>
-					<int key="connectionID">659</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">bounce_duration</string>
+						<string key="label">shake_duration</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="797525838"/>
 					</object>
-					<int key="connectionID">682</int>
+					<int key="connectionID">683</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">shake_amplitude</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="543253163"/>
+					</object>
+					<int key="connectionID">684</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">shake_number</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="575347554"/>
+					</object>
+					<int key="connectionID">685</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">onShakeButton:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="895884563"/>
+					</object>
+					<int key="connectionID">686</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">onShakeAmplitude:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="543253163"/>
+					</object>
+					<int key="connectionID">687</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">onShakeNumber:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="575347554"/>
+					</object>
+					<int key="connectionID">688</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4438,9 +4433,9 @@
 							<reference ref="128476014"/>
 							<reference ref="575347554"/>
 							<reference ref="543253163"/>
-							<reference ref="895884563"/>
 							<reference ref="797525838"/>
 							<reference ref="557351289"/>
+							<reference ref="895884563"/>
 						</array>
 						<reference key="parent" ref="740763730"/>
 					</object>
@@ -4898,7 +4893,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="200763602"/>
-						<string key="toolTip">fx_shake</string>
+						<string key="toolTip">fx_wave</string>
 					</object>
 				</object>
 				<string key="604.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4908,7 +4903,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="652960563"/>
-						<string key="toolTip">fx_shake_waves</string>
+						<string key="toolTip">fx_wave_speed</string>
 					</object>
 				</object>
 				<string key="606.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4918,7 +4913,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="661204109"/>
-						<string key="toolTip">fx_shake_displace</string>
+						<string key="toolTip">fx_wave_displace</string>
 					</object>
 				</object>
 				<string key="608.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4938,7 +4933,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="388643643"/>
-						<string key="toolTip">fx_shake_waves</string>
+						<string key="toolTip">fx_wave_num</string>
 					</object>
 				</object>
 				<string key="620.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4970,7 +4965,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="797525838"/>
-						<string key="toolTip">fx_bounce_duration</string>
+						<string key="toolTip">fx_shake_duration</string>
 					</object>
 				</object>
 				<string key="635.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5039,7 +5034,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="146552916"/>
-						<string key="toolTip">shock_fx</string>
+						<string key="toolTip">ripple_fx</string>
 					</object>
 				</object>
 				<string key="678.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5071,7 +5066,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">682</int>
+			<int key="maxID">688</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5080,28 +5075,17 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="onBounceAmplitude:">id</string>
-						<string key="onBounceButton:">id</string>
-						<string key="onBounceNumber:">id</string>
-						<string key="onBounceUpdate:">id</string>
 						<string key="onReloadBadWords:">id</string>
 						<string key="onReloadCommands:">id</string>
 						<string key="onSendFakeTweet:">id</string>
+						<string key="onShakeAmplitude:">id</string>
+						<string key="onShakeButton:">id</string>
+						<string key="onShakeNumber:">id</string>
+						<string key="onShakeUpdate:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="onBounceAmplitude:">
 							<string key="name">onBounceAmplitude:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="onBounceButton:">
-							<string key="name">onBounceButton:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="onBounceNumber:">
-							<string key="name">onBounceNumber:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="onBounceUpdate:">
-							<string key="name">onBounceUpdate:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="onReloadBadWords:">
@@ -5116,34 +5100,44 @@
 							<string key="name">onSendFakeTweet:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="onShakeAmplitude:">
+							<string key="name">onShakeAmplitude:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="onShakeButton:">
+							<string key="name">onShakeButton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="onShakeNumber:">
+							<string key="name">onShakeNumber:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="onShakeUpdate:">
+							<string key="name">onShakeUpdate:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="bounce_amplitude">NSSlider</string>
 						<string key="bounce_button">NSButton</string>
 						<string key="bounce_duration">NSSlider</string>
-						<string key="bounce_number">NSSlider</string>
 						<string key="fake_tweet">NSTextField</string>
 						<string key="plot">Plot</string>
 						<string key="reload_badwords_button">NSButton</string>
 						<string key="reload_commands_button">NSButton</string>
 						<string key="send_tweet_button">NSButton</string>
+						<string key="shake_amplitude">NSSlider</string>
+						<string key="shake_button">NSButton</string>
+						<string key="shake_duration">NSSlider</string>
+						<string key="shake_number">NSSlider</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="bounce_amplitude">
-							<string key="name">bounce_amplitude</string>
-							<string key="candidateClassName">NSSlider</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="bounce_button">
 							<string key="name">bounce_button</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="bounce_duration">
 							<string key="name">bounce_duration</string>
-							<string key="candidateClassName">NSSlider</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="bounce_number">
-							<string key="name">bounce_number</string>
 							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="fake_tweet">
@@ -5165,6 +5159,22 @@
 						<object class="IBToOneOutletInfo" key="send_tweet_button">
 							<string key="name">send_tweet_button</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shake_amplitude">
+							<string key="name">shake_amplitude</string>
+							<string key="candidateClassName">NSSlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shake_button">
+							<string key="name">shake_button</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shake_duration">
+							<string key="name">shake_duration</string>
+							<string key="candidateClassName">NSSlider</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shake_number">
+							<string key="name">shake_number</string>
+							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="window">
 							<string key="name">window</string>
