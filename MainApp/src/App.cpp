@@ -62,6 +62,7 @@ void App::setup() {
 
 //--------------------------------------------------------------
 void App::update() {
+    
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
@@ -109,14 +110,6 @@ void App::update() {
 //--------------------------------------------------------------
 void App::draw() {
 	fx.beginGrabPixels();
-
-    //ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
-    
-    if(bExportPDF) {
-        ofBeginSaveScreenAsPDF("exports/"+ofToString(ofGetUnixTime())+".pdf");
-    }
-    
-	
 	
     // we only want to draw the current screen
     // later we will have a transition from 
@@ -142,13 +135,6 @@ void App::draw() {
 	}else {
         vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
 	}
-    
-    if(bExportPDF) {
-        bExportPDF = false;
-        ofEndSaveScreenAsPDF();
-    }
-
-
    
 	if(twitter.getSimulator().take_screenshot) {	
 		rtt::Tweet tweet;
@@ -219,9 +205,6 @@ void App::keyPressed(int key) {
     // for exporting a screen grab
     if(key == 'E') {
         ofSaveScreen("exports/"+ofToString(ofGetUnixTime())+".png");
-    }
-    if(key == 'P') {
-        bExportPDF = true;
     }
     
     // fullscreen or not
