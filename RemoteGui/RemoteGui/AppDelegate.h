@@ -23,4 +23,6 @@
 @property (assign) IBOutlet NSSlider *shake_number;
 @property (assign) IBOutlet NSButton *shake_button;
 @property (assign) IBOutlet NSSlider *shake_duration;
+@property (assign) IBOutlet NSSlider *swirl_radius;
+@property (assign) IBOutlet NSSlider *swirl_angle;
 @end

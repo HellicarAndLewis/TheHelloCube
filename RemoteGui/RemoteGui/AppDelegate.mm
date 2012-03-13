@@ -13,6 +13,8 @@
 @synthesize shake_number;
 @synthesize shake_button;
 @synthesize shake_duration;
+@synthesize swirl_radius;
+@synthesize swirl_angle;
 
 - (void)dealloc {
     [super dealloc];
@@ -22,6 +24,8 @@
 	oscu = [[Osculator alloc] init];
 	[oscu generateFromWindow:[self window] port:4000];
 	[fake_tweet setStringValue:@"@thehellocube"];
+	[oscu sendSliderChanged:"fx_swirl_radius" sender:swirl_radius];
+	[oscu sendSliderChanged:"fx_swirl_angle" sender:swirl_angle];
 	[self updateShake];
 }
 
