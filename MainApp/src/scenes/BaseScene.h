@@ -13,6 +13,7 @@
 #include "../../../addons/Tools/Utils/Utils.h"
 #include "TwitterTypes.h"
 #include "Effects.h"
+#include "AudioManager.h"
 
 class BaseScene {
     
@@ -27,9 +28,10 @@ public:
     string   name;
     ofxPanel gui;
     
-    ofColor  bgColor;
-    ofColor  bgColorTarget;
-
+    ofColor         bgColor;
+    ofColor         bgColorTarget;
+    AudioManager *  audioPtr;
+    
     // ----------------------------------------------------
     virtual void exitScene() {
         ofUnregisterMouseEvents(&gui);

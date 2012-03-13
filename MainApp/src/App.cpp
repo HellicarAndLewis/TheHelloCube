@@ -42,6 +42,9 @@ void App::setup() {
     
     // setup the scenes
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
+        
+        // set the audio pointer
+        (*it)->audioPtr = &audioManager;
         (*it)->setup();
         (*it)->exitScene();
         

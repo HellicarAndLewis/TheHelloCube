@@ -8,6 +8,8 @@
 #include "TwitterManager.h"
 #include "Effects.h"
 #include "ofxQTKitVideoGrabber.h"
+#include "AudioManager.h"
+
 
 class App : public ofBaseApp{
     
@@ -53,6 +55,8 @@ public:
     Effects				 fx;
 	float				 fx_duration;
 	
+    // Audio
+    AudioManager         audioManager;
     
     // Video
 	ofxQTKitVideoGrabber vidGrabber;	
