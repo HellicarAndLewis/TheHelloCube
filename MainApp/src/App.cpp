@@ -42,13 +42,16 @@ void App::setup() {
     
     // setup the scenes
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
+        
+        // set the audio pointer
+        (*it)->audioPtr = &audioManager;
         (*it)->setup();
         (*it)->exitScene();
         
     }
     
     // start with the frist scene
-    sceneIndex = SCENE_DRAWN;
+    sceneIndex = SCENE_CELL;
     changeScene(sceneIndex);
     
 
@@ -68,18 +71,19 @@ void App::update() {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
 			string switch_scene;
 			if(command.mustSwitchScene(switch_scene)) {
+                cout << "changeScene:  "<< switch_scene << endl; 
 				if(switch_scene == "cell") {
-					currentScene = &cellSC;
+                    changeScene(SCENE_CELL);
 				}
 				else if(switch_scene == "drawn") {
-					currentScene = &drawnSC;
-				}
+				    changeScene(SCENE_DRAWN);
+                }
 				else if(switch_scene == "texture") {
-					currentScene = &textureSC;
+					changeScene(SCENE_TEXTURE);
 				}
 				else if(switch_scene == "spots") {
-					currentScene = &spotsSC;
-				}	
+                    changeScene(SCENE_SPOTS);
+                }	
 			}
 			currentScene->handleCommands(command, fx);
 			twitter.getSimulator().take_screenshot = true;
