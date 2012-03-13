@@ -52,6 +52,7 @@ public:
     TwitterManager		 twitter;
     Effects				 fx;
 	float				 fx_duration;
+	
     
     // Video
 	ofxQTKitVideoGrabber vidGrabber;	

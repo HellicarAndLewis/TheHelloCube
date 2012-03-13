@@ -65,7 +65,7 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 		return;
 	}
 	
-	printf("Mention: %s\n", lower.c_str());
+	printf("Mention: %s - screenname: %s\n", lower.c_str(), tweet.getScreenName().c_str());
 		
 	// Check if it's a correct search term:
 	string match = "^@" +twitter_user +" (.*)$";
