@@ -79,21 +79,22 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 			set<string> found_scenes;
 			map<string, ofColor> found_colours;
 			
-			allowed_commands.filterCommands(
+			bool must_handle = allowed_commands.filterCommands(
 				 tokens_copy
 				,found_commands
 				,found_colours
 				,found_scenes
 			);
 			
-			TwitterCommand cmd(
-				 tweet
-				,found_commands
-				,found_colours
-				,found_scenes
-			);
-			
-			commands.push(cmd);
+			if(must_handle) {
+				TwitterCommand cmd(
+					 tweet
+					,found_commands
+					,found_colours
+					,found_scenes
+				);
+				commands.push(cmd);
+			}
 		}
 	}
 }

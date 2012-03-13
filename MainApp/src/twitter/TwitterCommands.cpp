@@ -103,7 +103,8 @@ void TwitterCommands::loadColours(const string& filePath) {
 
 
 
-void TwitterCommands::filterCommands(
+// returns true when we found something we need handle
+bool TwitterCommands::filterCommands(
 			 set<string>& unfiltered
 			,set<string>& commandsResult
 			,map<string, ofColor>& coloursResult
@@ -152,6 +153,8 @@ void TwitterCommands::filterCommands(
 		,scenes.begin(), scenes.end()
 		,std::inserter(scenesResult, scenesResult.end())
 	);
+	
+	return commandsResult.size();
 }
 
 
