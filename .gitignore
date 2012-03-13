@@ -93,3 +93,5 @@ paths.make
 !examples/android/*/.cproject
 !examples/android/*/.project
 !examples/android/*/.settings
+
+MainApp/bin/data/thumbs/
