@@ -13,6 +13,7 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_invert(false)
 	,fx_swirl(false)
 	,fx_posterize(false)
+	,fx_reflect(false)
     ,fx_pixelate_x(5.0f)
     ,fx_pixelate_y(5.0f)
 	,fx_wave_displace(0.01f)
@@ -91,6 +92,7 @@ void TwitterSimulator::update() {
 		fx->invert(fx_invert);
 		fx->swirl(fx_swirl, fx_swirl_radius, fx_swirl_angle);
 		fx->posterize(fx_posterize);
+		fx->reflect(fx_reflect);
 	}
 	
 }
@@ -103,6 +105,7 @@ void TwitterSimulator::setEffects(Effects& f) {
 	gui.addBool("fx_pixelate", fx_pixelate);
 	gui.addBool("fx_invert", fx_invert);
 	gui.addBool("fx_swirl", fx_swirl);
+	gui.addBool("fx_reflect", fx_reflect);
 	gui.addBool("fx_posterize", fx_posterize);
 	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
 	gui.addFloat("fx_pixelate_y", fx_pixelate_y);

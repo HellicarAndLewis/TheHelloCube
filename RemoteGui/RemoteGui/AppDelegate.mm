@@ -25,7 +25,7 @@
 	[oscu generateFromWindow:[self window] port:4000];
 	[fake_tweet setStringValue:@"@thehellocube"];
 	[oscu sendSliderChanged:"fx_swirl_radius" sender:swirl_radius];
-	[oscu sendSliderChanged:"fx_swirl_angle" sender:swirl_angle];
+	[oscu sendSliderChanged	:"fx_swirl_angle" sender:swirl_angle];
 	[self updateShake];
 }
 

@@ -42,6 +42,7 @@ public:
 	void shake(bool apply, float seconds, float number, float amplitude);
 	void swirl(bool apply, float radius, float angle);
 	void ripple(bool apply, float seconds);
+	void reflect(bool apply);
 	void posterize(bool apply);
 	
 private:

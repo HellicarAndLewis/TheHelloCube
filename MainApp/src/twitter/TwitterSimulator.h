@@ -35,6 +35,7 @@ public:
 	bool fx_invert;
 	bool fx_swirl;
 	bool fx_posterize;
+	bool fx_reflect;
 	
 	float fx_pixelate_x;
 	float fx_pixelate_y;

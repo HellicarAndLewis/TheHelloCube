@@ -7,6 +7,8 @@ uniform int fx_shake;
 uniform int fx_swirl;
 uniform int fx_ripple;
 uniform int fx_posterize;
+uniform int fx_reflect;
+
 
 uniform float fx_time;
 uniform float fx_shake_p;
@@ -74,11 +76,29 @@ void main() {
 			tc += normalize(tc - center) * time_diff;
 		}
 	}
+	if(fx_reflect == 1) {
+		if(tc.s > 0.5) {
+			tc.s = 1.0 - tc.s;
+		}
+	}
 	
+	color = texture2D(img,tc);
+
+	// kaleidoscope test (too much)
+	/*
+	int kal = 1;
+	if(kal == 1) {
+		vec2 p = -1.0 + (tc * 2.0)	;
+		float a = atan(p.y,p.x);
+		float r = sqrt(dot(p,p));
+		tc.x =  3.0*a/3.1416;
+		tc.y = -fx_time+ sin(3.0*r+fx_time) + .3*cos(fx_time+3.0*a);
+		float w = .8+.3*(sin(fx_time+3.0*r)+ .3*cos(fx_time+3.0*a));
+		vec3 col = texture2D(img, tc* 0.9).xyz;
+		color = vec4(col * w, 1.0);
+	}
+	*/
 	
-	color = texture2D(img, tc);	
-	
-		
 	if(fx_posterize == 1) {
 		vec3 c = vec3(color);
 		float gamma = 0.6;
@@ -96,6 +116,6 @@ void main() {
 		color.g = max(0.0, 1.0 - color.g);
 		color.b = max(0.0, 1.0 - color.b);
 	}
-			
+	
 	gl_FragColor = color;
 }

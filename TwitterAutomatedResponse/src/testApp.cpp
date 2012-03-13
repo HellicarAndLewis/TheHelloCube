@@ -36,6 +36,7 @@ void testApp::setup() {
 	fetch_again_on = ofGetElapsedTimeMillis() +1000;
 	font.loadFont("font.otf", 30);
 	last_tweet = "...";
+	
 }
 
 //--------------------------------------------------------------

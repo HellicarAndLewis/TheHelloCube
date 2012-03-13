@@ -223,6 +223,13 @@ void Effects::invert(bool apply) {
 	shader.end();
 }
 
+void Effects::reflect(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_reflect", apply ? 1: 2);
+	shader.end();
+}
+
+
 void Effects::shake(bool apply, float seconds, float number, float amplitude) {
 	shake_untill = ofGetElapsedTimef() + seconds;
 	shake_enabled = apply;
@@ -263,6 +270,9 @@ void Effects::applyEffect(const string& fx) {
 	else if(fx == "shake") {
 		shake(true, 1.5, 15, 0.05);
 	}
+	else if(fx == "reflect") {
+		reflect(true);
+	}
 }
 
 void Effects::reset() {
@@ -275,5 +285,7 @@ void Effects::reset() {
 		shader.setUniform1i("fx_pixelate", 2);
 		shader.setUniform1i("fx_wave", 2);
 		shader.setUniform1i("fx_swirl", 2);
+		shader.setUniform1i("fx_reflect", 2);
+		shader.setUniform1i("fx_shake", 2);
 	shader.end();
 }
