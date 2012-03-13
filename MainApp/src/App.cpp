@@ -54,7 +54,7 @@ void App::setup() {
 
 	twitter.init();
 	// fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
-    fx_duration = 5.5; // sec
+    fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
@@ -62,6 +62,7 @@ void App::setup() {
 
 //--------------------------------------------------------------
 void App::update() {
+    
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
@@ -81,17 +82,15 @@ void App::update() {
 				}	
 			}
 			currentScene->handleCommands(command, fx);
+			twitter.getSimulator().take_screenshot = true;
 		}
 		else {
 			fx.reset();
 		}
 		command_timeout = now + fx_duration;
 	}
-	
 
 	fx.update();
-
-
     twitter.update();
 	vidGrabber.update();
 	
@@ -112,14 +111,6 @@ void App::update() {
 //--------------------------------------------------------------
 void App::draw() {
 	fx.beginGrabPixels();
-
-    //ofBackgroundGradient(ofColor(40, 60, 70), ofColor(10,10,10));
-    
-    if(bExportPDF) {
-        ofBeginSaveScreenAsPDF("exports/"+ofToString(ofGetUnixTime())+".pdf");
-    }
-    
-	
 	
     // we only want to draw the current screen
     // later we will have a transition from 
@@ -145,17 +136,12 @@ void App::draw() {
 	}else {
         vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
 	}
-    
-    if(bExportPDF) {
-        bExportPDF = false;
-        ofEndSaveScreenAsPDF();
-    }
-
-
    
 	if(twitter.getSimulator().take_screenshot) {	
 		rtt::Tweet tweet;
-		tweet.setScreenName("roxlutest");
+		//tweet.setScreenName("roxlutest");
+		tweet = command.tweet;
+		printf("screenname from tweet: %s\n", tweet.getScreenName().c_str());
 		bool grab = 1; // 0 = screen, 1 = webcam	
 
 		if(grab == 0) {
@@ -222,9 +208,6 @@ void App::keyPressed(int key) {
     // for exporting a screen grab
     if(key == 'E') {
         ofSaveScreen("exports/"+ofToString(ofGetUnixTime())+".png");
-    }
-    if(key == 'P') {
-        bExportPDF = true;
     }
     
     // fullscreen or not

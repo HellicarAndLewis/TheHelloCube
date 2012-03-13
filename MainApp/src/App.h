@@ -36,7 +36,6 @@ public:
     void gotMessage(ofMessage msg);
     
     
-    bool                 bExportPDF;
     int                  sceneIndex;
     
     // scenes
@@ -53,6 +52,7 @@ public:
     TwitterManager		 twitter;
     Effects				 fx;
 	float				 fx_duration;
+	
     
     // Video
 	ofxQTKitVideoGrabber vidGrabber;	

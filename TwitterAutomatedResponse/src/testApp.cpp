@@ -18,12 +18,12 @@ void testApp::setup() {
 	mentions_params["count"] = 10;
 	
 	// test account.
-	//twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
-	//twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
+	twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
+	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
 	// thehellocube account
-	twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
-	twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
+	//twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
+	//twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
 	//tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
 	tokens_file = ofToDataPath("twitter_roxlutest.txt", true);
 	if(!twitter.loadTokens(tokens_file)) {
@@ -33,9 +33,10 @@ void testApp::setup() {
 		twitter.accessToken();
 		twitter.saveTokens(tokens_file);
 	}
-	fetch_again_on = ofGetElapsedTimeMillis() +15000;
+	fetch_again_on = ofGetElapsedTimeMillis() +1000;
 	font.loadFont("font.otf", 30);
 	last_tweet = "...";
+	
 }
 
 //--------------------------------------------------------------
@@ -115,10 +116,18 @@ void testApp::fetchMentions() {
 	std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
 	
 	if(!is_first_request) {
+		
 		vector<rtt::Tweet>::iterator it = mentions.begin();
 		while(it != mentions.end()) {
 			rtt::Tweet& tweet = *it;
-			string message = "@" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!";
+			
+			// ok.. not optimized .... 
+			vector<string> messages;
+			messages.push_back("@" +tweet.getScreenName() +" Your message 1 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 2 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 3 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" Your message 4 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			string message = messages.at((int)ofRandom(0,messages.size()-1));
 			printf("< %s\n", tweet.getText().c_str());
 			printf("> %s\n", message.c_str());
 			twitter.statusesUpdate(message);

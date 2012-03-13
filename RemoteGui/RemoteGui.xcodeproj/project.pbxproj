@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5473CC34150E1A68004B104F /* Plot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5473CC33150E1A68004B104F /* Plot.m */; };
 		54B767EE1507A22E0094381A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B767ED1507A22E0094381A /* Cocoa.framework */; };
 		54B767F81507A22E0094381A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54B767F61507A22E0094381A /* InfoPlist.strings */; };
 		54B767FA1507A22E0094381A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B767F91507A22E0094381A /* main.m */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5473CC32150E1A68004B104F /* Plot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plot.h; sourceTree = "<group>"; };
+		5473CC33150E1A68004B104F /* Plot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plot.m; sourceTree = "<group>"; };
 		54B767E91507A22E0094381A /* RemoteGui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteGui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54B767ED1507A22E0094381A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		54B767F01507A22E0094381A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -131,6 +134,8 @@
 				54B768001507A22E0094381A /* AppDelegate.mm */,
 				54B768021507A22E0094381A /* MainMenu.xib */,
 				54B767F41507A22E0094381A /* Supporting Files */,
+				5473CC32150E1A68004B104F /* Plot.h */,
+				5473CC33150E1A68004B104F /* Plot.m */,
 			);
 			path = RemoteGui;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				54B7683F1507A2D60094381A /* OSCMessage.cpp in Sources */,
 				54B768401507A2D60094381A /* OSCReceiver.cpp in Sources */,
 				54B768411507A2D60094381A /* OSCSender.cpp in Sources */,
+				5473CC34150E1A68004B104F /* Plot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +429,7 @@
 				54B768091507A22E0094381A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,6 +10,16 @@
 #include "BaseScene.h"
 #include "ofxBox2d.h"
 #include "Viner.h"
+#include "Particle.h"
+
+class Chaser : public Particle {
+public:
+    Chaser() {
+        nConnections = 0;
+    }
+    int nConnections;
+    
+};
 
 class DrawnScene : public BaseScene {
     
@@ -20,9 +30,16 @@ public:
     ofxBox2d        box2d;
     vector <Viner>  vines;
     
+    ofxFloatSlider  damping;
+    ofxFloatSlider  frequency;
+    
     void setup();
     void update();
     void draw(); 
     void keyPressed(int key);
 	void handleCommands(TwitterCommand& cmd, Effects& fx);    
+    
+    void addChasers();
+    vector <Chaser> chasers;
+    
 };

@@ -34,5 +34,6 @@ public:
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxCellsOnScreen;
     
+    
 
 };

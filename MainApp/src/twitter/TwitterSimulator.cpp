@@ -9,13 +9,19 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_mirror(false)
 	,fx_flip(false)
 	,fx_pixelate(false)
-	,fx_shake(false)
+	,fx_wave(false)
 	,fx_invert(false)
+	,fx_swirl(false)
+	,fx_posterize(false)
+	,fx_reflect(false)
     ,fx_pixelate_x(5.0f)
     ,fx_pixelate_y(5.0f)
-	,fx_shake_displace(0.01f)
-	,fx_shake_speed(1.001f)
-	,fx_shake_waves(5.0f)
+	,fx_wave_displace(0.01f)
+	,fx_wave_speed(1.001f)
+	,fx_wave_num(5.0f)
+	,fx_shake_number(6.0f)
+	,fx_shake_amplitude(0.4f)
+	,fx_shake_duration(3.5f)
 {
 	
 	gui.addString("fake_tweet", fake_tweet);
@@ -24,7 +30,8 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	gui.addCallback("take_screenshot", 3, this);
 	gui.addCallback("reload_badwords", 4, this);
 	gui.addCallback("save_settings", 5, this);
-	gui.addCallback("update_fx",6 , this);
+	gui.addCallback("shake_fx", 6, this); 
+	gui.addCallback("ripple_fx", 7, this);
 }
 
 TwitterSimulator::~TwitterSimulator() {
@@ -65,10 +72,12 @@ void TwitterSimulator::guiCallback(int v) {
 		saveSettings();
 	}
 	else if(v == 6) {
-	
-		fx->mirror(fx_mirror);
-		fx->flip(fx_flip);
-		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
+		printf("> bounce: duration: %f seconds, %f bounces, %f amplitude.\n", fx_shake_duration, fx_shake_number, fx_shake_amplitude);
+		fx->shake(true, fx_shake_duration, fx_shake_number, fx_shake_amplitude);
+	}
+	else if(v == 7) {
+		printf("> ripple!\n");
+		fx->ripple(true, 3.5);
 	}
 }
 
@@ -79,8 +88,11 @@ void TwitterSimulator::update() {
 		fx->mirror(fx_mirror);
 		fx->flip(fx_flip);
 		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
-		fx->shake(fx_shake, fx_shake_speed, fx_shake_displace, fx_shake_waves);
+		fx->wave(fx_wave, fx_wave_speed, fx_wave_displace, fx_wave_num);
 		fx->invert(fx_invert);
+		fx->swirl(fx_swirl, fx_swirl_radius, fx_swirl_angle);
+		fx->posterize(fx_posterize);
+		fx->reflect(fx_reflect);
 	}
 	
 }
@@ -89,14 +101,21 @@ void TwitterSimulator::setEffects(Effects& f) {
 	fx = &f;
 	gui.addBool("fx_mirror", fx_mirror);
 	gui.addBool("fx_flip", fx_flip);
-	gui.addBool("fx_shake", fx_shake);
+	gui.addBool("fx_wave", fx_wave);
 	gui.addBool("fx_pixelate", fx_pixelate);
 	gui.addBool("fx_invert", fx_invert);
+	gui.addBool("fx_swirl", fx_swirl);
+	gui.addBool("fx_reflect", fx_reflect);
+	gui.addBool("fx_posterize", fx_posterize);
 	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
 	gui.addFloat("fx_pixelate_y", fx_pixelate_y);
-	gui.addFloat("fx_shake_displace", fx_shake_displace);
-	gui.addFloat("fx_shake_speed", fx_shake_speed);
-	gui.addFloat("fx_shake_waves", fx_shake_waves);
-	
+	gui.addFloat("fx_wave_displace", fx_wave_displace);
+	gui.addFloat("fx_wave_speed", fx_wave_speed);
+	gui.addFloat("fx_wave_num", fx_wave_num);
+	gui.addFloat("fx_shake_duration", fx_shake_duration);
+	gui.addFloat("fx_shake_number", fx_shake_number);
+	gui.addFloat("fx_shake_amplitude", fx_shake_amplitude);
+	gui.addFloat("fx_swirl_angle", fx_swirl_angle);
+	gui.addFloat("fx_swirl_radius", fx_swirl_radius);
 	
 }

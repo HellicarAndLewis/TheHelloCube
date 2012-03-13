@@ -33,7 +33,7 @@ public:
 	~TwitterCommands();
 	void setup(const string& commandsFilePath, const string& coloursFilePath);
 	void load();
-	void filterCommands(
+	bool filterCommands(
 		 set<string>& unfiltered
 		,set<string>& commandsResult
 		,map<string, ofColor>& coloursResult

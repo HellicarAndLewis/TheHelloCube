@@ -10,9 +10,7 @@ void TextureScene::setup() {
     gui.add(maxShapesOnScreen.setup("max shapes", 250, 1, 1000));
     gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0));
     
-    
-    index = 0;
-    
+        
     ofDisableArbTex();
     for(int i=0; i<3; i++) {
         textures.push_back(ofTexture());
@@ -23,6 +21,7 @@ void TextureScene::setup() {
     box2d.setGravity(0, 0);
     box2d.setFPS(60);
     
+    circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
 
 }
@@ -45,9 +44,15 @@ void TextureScene::update() {
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         it->update();
         
-        if(it->getPosition().distance(ofGetCenterScreen()) > 100) {
-            it->addRepulsionForce(ofGetCenterScreen(), 0.0002);
+
+        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
+
+        if(it->getPosition().distance(ofGetCenterScreen()) < 300) {
+            it->addRepulsionForce(ofGetCenterScreen(), 0.002);
         }
+        
+        
+        
     }
     
     
@@ -57,12 +62,6 @@ void TextureScene::update() {
 // ----------------------------------------------------
 void TextureScene::addPoints() {
     pts.clear();
-    
-    /*
-     pts.push_back(ofVec2f(0, 0));
-     pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, 0));
-     pts.push_back(ofVec2f(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT));
-     pts.push_back(ofVec2f(0, CUBE_SCREEN_HEIGHT));*/
     
     for(int i=0; i<6; i++) {
         float x = ofRandom(10, CUBE_SCREEN_WIDTH-10);
@@ -140,6 +139,17 @@ void TextureScene::draw() {
     
     drawBackground();
     ofEnableAlphaBlending();
+    if((int)ofRandom(0, 300) == 30) {
+        circleFrcFlip = !circleFrcFlip;
+    }
+    float n = ofGetElapsedTimef() * 0.2;
+    if(circleFrcFlip) n *= -1;
+    float r = 5 + ofNoise(n, circleFrc.x/3000.0) * 300;
+    circleFrc.x = cos(n*TWO_PI) * r;
+    circleFrc.y = sin(n*TWO_PI) * r;
+    ofSetColor(255, 0, 0);
+    ofCircle(circleFrc+ofGetCenterScreen(), 13);
+    
     
     ofSetColor(255);
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
@@ -193,6 +203,7 @@ void TextureScene::draw() {
         ofCircle(center, 3);
         
     }
+    
     
     ofSetColor(255);
     ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);

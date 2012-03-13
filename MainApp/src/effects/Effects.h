@@ -38,7 +38,12 @@ public:
 	void mirror(bool apply);
 	void flip(bool apply);
 	void pixelate(bool apply, float x, float y);
-	void shake(bool apply, float speed, float displace, float numWaves);
+	void wave(bool apply, float speed, float displace, float num);
+	void shake(bool apply, float seconds, float number, float amplitude);
+	void swirl(bool apply, float radius, float angle);
+	void ripple(bool apply, float seconds);
+	void reflect(bool apply);
+	void posterize(bool apply);
 	
 private:
 	ofShader shader;
@@ -52,5 +57,11 @@ private:
 	bool cleared;
 	int width;
 	int height;
+	float shake_untill;
+	float shake_duration;
+	bool shake_enabled;
+	bool ripple_enabled;
+	float ripple_duration;
+	float ripple_untill;
 };
 #endif
