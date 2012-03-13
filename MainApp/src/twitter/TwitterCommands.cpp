@@ -154,7 +154,7 @@ bool TwitterCommands::filterCommands(
 		,std::inserter(scenesResult, scenesResult.end())
 	);
 	
-	return commandsResult.size();
+	return commandsResult.size() || coloursResult.size() || scenesResult.size();
 }
 
 
