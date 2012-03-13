@@ -54,7 +54,7 @@ void App::setup() {
 
 	twitter.init();
 	// fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
-    fx_duration = 5.5; // sec
+    fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
