@@ -5,6 +5,12 @@
 Effects::Effects()
 	:vertices(4, Vertex())
 	,cleared(false)
+	,bounce_enabled(false)
+	,bounce_untill(0)
+	,bounce_duration(0)
+	,shockwave_enabled(false)
+	,shockwave_duration(0)
+	,shockwave_untill(0)
 {
 }
 
@@ -110,7 +116,26 @@ void Effects::endGrabPixels() {
 
 void Effects::update() {
 	shader.begin();
-		shader.setUniform1f("fx_time", ofGetElapsedTimef());
+		float now = ofGetElapsedTimef();
+		shader.setUniform1f("fx_time", now);
+		if(bounce_enabled) {
+			float p = 1.0 -  MIN(1.0, (bounce_untill-now)/bounce_duration);
+			if(p >= 1.0) {
+				bounce_enabled = false;
+				shader.setUniform1i("fx_bounce", 2);
+			}
+			shader.setUniform1f("fx_bounce_p", p);
+		}
+		
+		if(shockwave_enabled) {
+			float p = 1.0 - MIN(1.0, (shockwave_untill-now)/shockwave_duration);
+			if(p >= 1.0) {
+				shockwave_enabled = false;
+				shader.setUniform1i("fx_shockwave", 2);
+			} 
+			shader.setUniform1f("fx_shockwave_p",p);
+		}
+		
 	shader.end();
 }
 
@@ -165,10 +190,49 @@ void Effects::pixelate(bool apply, float x, float y) {
 	shader.end();
 }
 
+void Effects::posterize(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_posterize", apply ? 1: 2);
+	shader.end();
+}
+
+
+// radius: [0-1]
+// angle: 0 - ?? PI
+void Effects::swirl(bool apply, float radius, float angle) {
+	shader.begin();
+		shader.setUniform1i("fx_swirl", apply ? 1 : 2);
+		shader.setUniform1f("fx_swirl_radius", radius);
+		shader.setUniform1f("fx_swirl_angle", angle);
+	shader.end();
+}
+
+void Effects::shockwave(bool apply, float seconds) {
+	shockwave_enabled = apply;
+	shockwave_duration = seconds;
+	shockwave_untill = ofGetElapsedTimef() + seconds;
+	shader.begin();
+		shader.setUniform1i("fx_shockwave", apply ? 1 : 2);
+		shader.setUniform3f("fx_shockwave_params", 10.0, 0.9, 0.1);
+	shader.end();
+}
+
 void Effects::invert(bool apply) {
 	shader.begin();
 		shader.setUniform1i("fx_invert", apply ? 1: 2);
 	shader.end();
+}
+
+void Effects::bounce(bool apply, float seconds, float number, float amplitude) {
+	bounce_untill = ofGetElapsedTimef() + seconds;
+	bounce_enabled = apply;
+	bounce_duration = seconds;
+	shader.begin();
+		shader.setUniform1i("fx_bounce", apply ? 1: 2);
+		shader.setUniform1f("fx_bounce_number", number);
+		shader.setUniform1f("fx_bounce_amplitude", amplitude);
+	shader.end();
+
 }
 
 void Effects::applyEffect(const string& fx) {

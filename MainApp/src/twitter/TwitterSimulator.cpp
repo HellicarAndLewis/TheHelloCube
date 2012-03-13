@@ -11,11 +11,16 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_pixelate(false)
 	,fx_shake(false)
 	,fx_invert(false)
+	,fx_swirl(false)
+	,fx_posterize(false)
     ,fx_pixelate_x(5.0f)
     ,fx_pixelate_y(5.0f)
 	,fx_shake_displace(0.01f)
 	,fx_shake_speed(1.001f)
 	,fx_shake_waves(5.0f)
+	,fx_bounce_number(6.0f)
+	,fx_bounce_amplitude(0.4f)
+	,fx_bounce_duration(3.5f)
 {
 	
 	gui.addString("fake_tweet", fake_tweet);
@@ -24,7 +29,8 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	gui.addCallback("take_screenshot", 3, this);
 	gui.addCallback("reload_badwords", 4, this);
 	gui.addCallback("save_settings", 5, this);
-	gui.addCallback("update_fx",6 , this);
+	gui.addCallback("bounce_fx", 6, this); 
+	gui.addCallback("shock_fx", 7, this);
 }
 
 TwitterSimulator::~TwitterSimulator() {
@@ -65,10 +71,12 @@ void TwitterSimulator::guiCallback(int v) {
 		saveSettings();
 	}
 	else if(v == 6) {
-	
-		fx->mirror(fx_mirror);
-		fx->flip(fx_flip);
-		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
+		printf("> bounce: duration: %f seconds, %f bounces, %f amplitude.\n", fx_bounce_duration, fx_bounce_number, fx_bounce_amplitude);
+		fx->bounce(true, fx_bounce_duration, fx_bounce_number, fx_bounce_amplitude);
+	}
+	else if(v == 7) {
+		printf("> shock!\n");
+		fx->shockwave(true, 3.5);
 	}
 }
 
@@ -81,6 +89,8 @@ void TwitterSimulator::update() {
 		fx->pixelate(fx_pixelate, fx_pixelate_x, fx_pixelate_y);
 		fx->shake(fx_shake, fx_shake_speed, fx_shake_displace, fx_shake_waves);
 		fx->invert(fx_invert);
+		fx->swirl(fx_swirl, fx_swirl_radius, fx_swirl_angle);
+		fx->posterize(fx_posterize);
 	}
 	
 }
@@ -92,11 +102,17 @@ void TwitterSimulator::setEffects(Effects& f) {
 	gui.addBool("fx_shake", fx_shake);
 	gui.addBool("fx_pixelate", fx_pixelate);
 	gui.addBool("fx_invert", fx_invert);
+	gui.addBool("fx_swirl", fx_swirl);
+	gui.addBool("fx_posterize", fx_posterize);
 	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
 	gui.addFloat("fx_pixelate_y", fx_pixelate_y);
 	gui.addFloat("fx_shake_displace", fx_shake_displace);
 	gui.addFloat("fx_shake_speed", fx_shake_speed);
 	gui.addFloat("fx_shake_waves", fx_shake_waves);
-	
+	gui.addFloat("fx_bounce_duration", fx_bounce_duration);
+	gui.addFloat("fx_bounce_number", fx_bounce_number);
+	gui.addFloat("fx_bounce_amplitude", fx_bounce_amplitude);
+	gui.addFloat("fx_swirl_angle", fx_swirl_angle);
+	gui.addFloat("fx_swirl_radius", fx_swirl_radius);
 	
 }

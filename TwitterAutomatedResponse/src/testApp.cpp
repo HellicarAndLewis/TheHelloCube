@@ -18,12 +18,12 @@ void testApp::setup() {
 	mentions_params["count"] = 10;
 	
 	// test account.
-	//twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
-	//twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
+	twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
+	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
 	// thehellocube account
-	twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
-	twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
+	//twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
+	//twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
 	//tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
 	tokens_file = ofToDataPath("twitter_roxlutest.txt", true);
 	if(!twitter.loadTokens(tokens_file)) {
@@ -115,13 +115,21 @@ void testApp::fetchMentions() {
 	std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
 	
 	if(!is_first_request) {
+		
 		vector<rtt::Tweet>::iterator it = mentions.begin();
 		while(it != mentions.end()) {
 			rtt::Tweet& tweet = *it;
-			string message = "@" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!";
+			
+			// ok.. not optimized .... 
+			vector<string> messages;
+			messages.push_back("1. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
+			messages.push_back("2. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
+			messages.push_back("3. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
+			messages.push_back("4. @" +tweet.getScreenName() +" " +ofToString(time_to_online.days()) +" days to go!"); 
+			string message = messages.at((int)ofRandom(0,messages.size()-1));
 			printf("< %s\n", tweet.getText().c_str());
 			printf("> %s\n", message.c_str());
-			twitter.statusesUpdate(message);
+			//twitter.statusesUpdate(message);
 			last_tweet = tweet.getText();
 			++it;
 		}

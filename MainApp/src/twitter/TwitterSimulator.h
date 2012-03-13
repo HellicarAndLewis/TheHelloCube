@@ -33,12 +33,21 @@ public:
 	bool fx_pixelate;
 	bool fx_shake;
 	bool fx_invert;
+	bool fx_swirl;
+	bool fx_posterize;
+	
 	float fx_pixelate_x;
 	float fx_pixelate_y;
 
 	float fx_shake_displace;
 	float fx_shake_speed;
 	float fx_shake_waves;
+	float fx_bounce_number;
+	float fx_bounce_amplitude;
+	float fx_bounce_duration;
+	float fx_swirl_radius;
+	float fx_swirl_angle;
+	float fx_shockwave_duration;
 
 private:
 	string settings_file;

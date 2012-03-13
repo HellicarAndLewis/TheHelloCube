@@ -87,11 +87,8 @@ void App::update() {
 		}
 		command_timeout = now + fx_duration;
 	}
-	
 
 	fx.update();
-
-
     twitter.update();
 	vidGrabber.update();
 	
