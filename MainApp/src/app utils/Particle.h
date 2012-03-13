@@ -19,8 +19,10 @@ public:
     float   drag;
     float   uniquef;
     int     uniquei;
+    bool    bRemove;
     
     Particle();
+    static bool shouldRemove(const Particle &p);
     void draw();
     
     void setPosition(float x, float y);

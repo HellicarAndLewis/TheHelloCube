@@ -37,8 +37,9 @@ public:
     vector <TexturedShape>   shapes;
     vector <ofVec2f>         pts;
     vector <TriangleShape>   tris;
-    int index;
-    
+   
+    bool     circleFrcFlip;
+    ofVec2f circleFrc;
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxShapesOnScreen;
     

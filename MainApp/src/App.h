@@ -36,7 +36,6 @@ public:
     void gotMessage(ofMessage msg);
     
     
-    bool                 bExportPDF;
     int                  sceneIndex;
     
     // scenes

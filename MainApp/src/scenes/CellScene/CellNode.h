@@ -24,7 +24,4 @@ public:
         ofCircle(pos, 1);
     }
     
-    static bool shouldRemove(const CellNode &c) {
-        return c.bRemove;
-    }
 };

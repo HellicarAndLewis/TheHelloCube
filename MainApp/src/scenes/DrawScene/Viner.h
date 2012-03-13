@@ -14,24 +14,49 @@ class Viner {
     
 public:
     
+    enum {
+        TOP,
+        BOTTOM,
+        LEFT,
+        RIGHT
+    };
+    
     // -------------------------------------------------------
     ofxBox2dCircle					anchor;			  
     vector		<ofxBox2dCircle>	circles;		  
     vector		<ofxBox2dJoint>		joints;
+    ofVec2f                         pullForce;
+    int                             location;
     
     // -------------------------------------------------------
-    void make(float x, float y, ofxBox2d &box2d) {
+    void make(float x, float y, int loc, ofxBox2d &box2d) {
         
+        location = loc;
         anchor.setup(box2d.getWorld(), x, y, 4);
         
-        int nStart = (int)ofRandom(3, 5);
+        int nStart = (int)ofRandom(3, 10);
         
         // first we add just a few circles
         for (int i=0; i<nStart; i++) {
             
             ofxBox2dCircle circle;
             circle.setPhysics(3.0, 0.53, 0.1);
-            circle.setup(box2d.getWorld(), x, y+(i*20), 3);
+           
+            float ypos = 0;
+            if(location == TOP) {
+                ypos = y+(i*20);
+            }
+            else if(location == BOTTOM) {
+                ypos = y-(i*20);
+            }
+            else if(location == LEFT) {
+                
+            }
+            else if(location == RIGHT) {
+                
+            }
+            
+            circle.setup(box2d.getWorld(), x, ypos, 3);
             circles.push_back(circle);
         
         }
@@ -49,7 +74,7 @@ public:
                 joint.setup(box2d.getWorld(), circles[i-1].body, circles[i].body, BOX2D_DEFAULT_FREQ, BOX2D_DEFAULT_DAMPING, false);
             }
           
-            joint.setLength(25);
+            joint.setLength(20);
             joints.push_back(joint);
         }
     }
@@ -73,13 +98,18 @@ public:
 		// now connect the new circle with a joint
 		ofxBox2dJoint joint;
 		joint.setup(box2d.getWorld(), circles[a].body, circles[b].body);
-		joint.setLength(5);
+		joint.setLength(20);
 		joints.push_back(joint);
     }
     
     // -------------------------------------------------------
-    ofxBox2dCircle& getHead() {
-        return circles.back();
+    ofxBox2dCircle * getHead() {
+        return &circles.back();
+    }
+    
+    // -------------------------------------------------------
+    void update() {
+        
     }
     
     // -------------------------------------------------------
@@ -106,14 +136,23 @@ public:
         vector <ofVec2f> verts;
         ofVec2f firstPt = anchor.getPosition();
         
-        verts.push_back(ofVec2f(firstPt.x-20, firstPt.y));
-        verts.push_back(ofVec2f(firstPt.x+20, firstPt.y));
+
+        //verts.push_back(ofVec2f(firstPt.x-20, firstPt.y));
+        //verts.push_back(ofVec2f(firstPt.x+20, firstPt.y));
         
-     
+        ofVec2f a, b;
         
-        for(int i=1; i<circles.size(); i++) {
-            ofVec2f a   = circles[i].getPosition();
-            ofVec2f b   = circles[i-1].getPosition();
+        for(int i=0; i<circles.size(); i++) {
+            
+
+            a   = circles[i].getPosition();
+            if(i == 0) {
+                b = anchor.getPosition();
+            }
+            else {
+                b = circles[i-1].getPosition();
+            }
+            
             ofVec2f vec = a - b;
             ofVec2f perp = vec.perpendicular();
            

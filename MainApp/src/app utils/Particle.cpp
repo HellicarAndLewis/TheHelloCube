@@ -4,7 +4,13 @@
 Particle::Particle() {
     uniquef = ofRandomuf();
     uniquei = ofRandom(-1000000, 1000000);
+    bRemove = false;
 }
+
+bool Particle::shouldRemove(const Particle &p) {
+    return p.bRemove;
+}
+
 void Particle::draw() {
     ofCircle(pos, radius);
 }

@@ -27,7 +27,7 @@ void CellScene::update() {
         it->frc = 0;
         it->bRemove = isPointInScreen(it->pos, 100) == false;
     }
-    ofRemove(cells, CellNode::shouldRemove);
+    ofRemove(cells, Particle::shouldRemove);
     
     
     float t = ofGetElapsedTimef()*0.02;
@@ -122,6 +122,7 @@ void CellScene::draw() {
     for(vector<ofxVoronoiEdge>::iterator it=voronoi.edges.begin(); it!=voronoi.edges.end(); ++it) {
         it->draw();
     }
+    
     
     // draw the gui
     gui.draw();
