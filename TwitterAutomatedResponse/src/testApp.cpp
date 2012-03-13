@@ -33,7 +33,7 @@ void testApp::setup() {
 		twitter.accessToken();
 		twitter.saveTokens(tokens_file);
 	}
-	fetch_again_on = ofGetElapsedTimeMillis() +10000;
+	fetch_again_on = ofGetElapsedTimeMillis() +1000;
 	font.loadFont("font.otf", 30);
 	last_tweet = "...";
 }

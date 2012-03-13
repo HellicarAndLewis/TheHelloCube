@@ -78,15 +78,21 @@ void TwitterThread::fetchMentions() {
 		return;
 	}
 
-
+	printf("Fetched.. first request:%c found mentionds: %zu\n", (is_first_request) ? 'y' : 'n', newer_mentions.size());
+	
 	// STORE NEW MENTIONS
 	// ------------------
-	if(!is_first_request) {
+	if(!is_first_request && newer_mentions.size()) {
+		printf("> copying...\n");
 		last_mention = newer_mentions.at(0);			
 		mentions_params["since_id"] = last_mention.getTweetID();
 		lock();
 			std::copy(newer_mentions.begin(), newer_mentions.end(), std::back_inserter(mentions));
 		unlock();
+	}
+	else {
+		last_mention = newer_mentions.at(0);			
+		mentions_params["since_id"] = last_mention.getTweetID();
 	}
 
 	is_first_request = false;

@@ -82,6 +82,7 @@ void App::update() {
 				}	
 			}
 			currentScene->handleCommands(command, fx);
+			twitter.getSimulator().take_screenshot = true;
 		}
 		else {
 			fx.reset();

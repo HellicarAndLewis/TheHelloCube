@@ -119,7 +119,7 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 				string photo_url = URL_TWITTER_UPLOADER +"uploads/"  +created_file;					
 				string message = "@" +up->tweet.getScreenName() +" your result ... See here " +photo_url;
 				printf(">>>>>>> %s\n", message.c_str());
-				//twitter.statusesUpdate(message);
+				twitter.statusesUpdate(message);
 				
 				json_decref(root);
 			}

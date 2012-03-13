@@ -260,6 +260,9 @@ void Effects::applyEffect(const string& fx) {
 	else if(fx == "swirl") {
 		swirl(true, 0.5, PI);
 	}
+	else if(fx == "shake") {
+		shake(true, 1.5, 15, 0.05);
+	}
 }
 
 void Effects::reset() {
@@ -271,6 +274,6 @@ void Effects::reset() {
 		shader.setUniform1i("fx_posterize", 2);
 		shader.setUniform1i("fx_pixelate", 2);
 		shader.setUniform1i("fx_wave", 2);
-		shader.setUniform1i("fx_swurk", 2);
+		shader.setUniform1i("fx_swirl", 2);
 	shader.end();
 }
