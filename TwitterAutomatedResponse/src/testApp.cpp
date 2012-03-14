@@ -128,10 +128,10 @@ void testApp::fetchMentions() {
 			 http://bit.ly/xrx1xP
 			// ok.. not optimized .... 
 			vector<string> messages;
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
 			string message = messages.at((int)ofRandom(0,messages.size()-1));
 			printf("< %s\n", tweet.getText().c_str());
 			printf("> %s\n", message.c_str());
