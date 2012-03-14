@@ -1,5 +1,7 @@
 #include "TwitterPhotoUploaderThread.h"
-TwitterPhotoUploaderThread::TwitterPhotoUploaderThread() {
+TwitterPhotoUploaderThread::TwitterPhotoUploaderThread()
+	:verbose(false)
+{
 }
 
 TwitterPhotoUploaderThread::~TwitterPhotoUploaderThread() {
@@ -70,7 +72,9 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 
 				string response;
 				req.doPost(uploader_curl, response, true);
-				printf("Upload response: %s\n", response.c_str());
+				if(verbose) {
+					printf("Upload response: %s\n", response.c_str());
+				}
 				
 				
 				// PARSE RESULT
@@ -118,7 +122,9 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 				
 				string photo_url = URL_TWITTER_UPLOADER +"uploads/"  +created_file;					
 				string message = "@" +up->tweet.getScreenName() +" your result ... See here " +photo_url;
-				printf(">>>>>>> %s\n", message.c_str());
+				if(verbose) {
+					printf(">>>>>>> %s\n", message.c_str());
+				}
 				twitter.statusesUpdate(message);
 				
 				json_decref(root);
@@ -136,4 +142,8 @@ void TwitterPhotoUploaderThread::uploadScreenshot(unsigned char* pixels, int w, 
 	lock();
 		tasks.push(up);
 	unlock();
+}
+
+void TwitterPhotoUploaderThread::setVerbose(bool v) {
+	verbose = v;
 }

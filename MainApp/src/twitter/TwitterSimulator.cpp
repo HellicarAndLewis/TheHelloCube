@@ -5,6 +5,7 @@
 TwitterSimulator::TwitterSimulator(TwitterManager& manager) 
 	:manager(manager)
 	,gui(4000)
+	,verbose(false)
 	,take_screenshot(false)
 	,fx_mirror(false)
 	,fx_flip(false)
@@ -51,32 +52,44 @@ void TwitterSimulator::setup(const string& settingsFile) {
 
 void TwitterSimulator::guiCallback(int v) {
 	if(v == 1 && fake_tweet.length())  {
-		printf("> fake tweet\n");
+		if(verbose) {
+			printf("> fake tweet\n");
+		}
 		rtt::Tweet tweet;
 		tweet.setText(fake_tweet);
 		manager.parseTweet(tweet);		
 	}
 	else if(v == 2) {
-		printf("> reload commands\n");
+		if(verbose) {
+			printf("> reload commands\n");
+		}
 		manager.getCommands().load();
 	}
 	else if(v == 3) {
 		take_screenshot = true;
 	}
 	else if(v == 4) {
-		printf("> reload bad words\n");
+		if(verbose) {
+			printf("> reload bad words\n");
+		}
 		manager.reloadBadWords();
 	}
 	else if(v == 5) {
-		printf("> save settings.\n");
+		if(verbose) {
+			printf("> save settings.\n");
+		}
 		saveSettings();
 	}
-	else if(v == 6) {
-		printf("> bounce: duration: %f seconds, %f bounces, %f amplitude.\n", fx_shake_duration, fx_shake_number, fx_shake_amplitude);
+	else if(v == 6) {	
+		if(verbose) {
+			printf("> bounce: duration: %f seconds, %f bounces, %f amplitude.\n", fx_shake_duration, fx_shake_number, fx_shake_amplitude);
+		}
 		fx->shake(true, fx_shake_duration, fx_shake_number, fx_shake_amplitude);
 	}
 	else if(v == 7) {
-		printf("> ripple!\n");
+		if(verbose) {
+			printf("> ripple!\n");
+		}
 		fx->ripple(true, 3.5);
 	}
 }

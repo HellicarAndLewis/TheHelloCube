@@ -68,11 +68,14 @@ public:
 	
 	void setup(const string& consumerKey, const string& consumerSecret, const string& tokensPath);	
 	void uploadScreenshot(unsigned char* pixels, int w, int h, rtt::Tweet tweet);
-
+	void setVerbose(bool v);
 private:
+	bool verbose;
 	rc::Curl uploader_curl;
 	rt::Twitter twitter;
 	queue<TwitterPhotoUploaderTask*> tasks;
 };
+
+
 
 #endif

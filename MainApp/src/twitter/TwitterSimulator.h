@@ -24,6 +24,7 @@ public:
 	void update();
 	void guiCallback(int t);
 	void setEffects(Effects& f);
+	void setVerbose(bool v);
 	
 	string fake_tweet;	
 	bool take_screenshot;
@@ -51,10 +52,17 @@ public:
 
 
 private:
+	bool verbose;
 	string settings_file;
 	TwitterManager& manager;
 	OSCGui gui;
 	Effects* fx;
 	
 };
+
+inline void TwitterSimulator::setVerbose(bool v) {
+	verbose = v;	
+}
+
+
 #endif
