@@ -19,6 +19,8 @@ void CellScene::setup() {
     // we need some nice colors...
     bgColorTarget = ofRandomColor();
     
+    drawGUI = true; //for screen grabbing...
+    
 }
 
 // ----------------------------------------------------
@@ -114,20 +116,30 @@ void CellScene::draw() {
     
     drawBackground();
     
-    ofSetColor(255);
-    for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
-        it->draw();
-    }
+    //draws the dot in the centre
+//    ofSetColor(255);
+//    for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
+//        it->draw();
+//    }
     
+    ofPushStyle();
+//    ofEnableSmoothing();
     
+    ofSetLineWidth(40.f);
+    
+    //draws the edges
     ofSetColor(0);
     for(vector<ofxVoronoiEdge>::iterator it=voronoi.edges.begin(); it!=voronoi.edges.end(); ++it) {
         it->draw();
     }
     
+//    ofDisableSmoothing();
+    ofPopStyle();
+    
     
     // draw the gui
-    gui.draw();
+    if(drawGUI)
+        gui.draw();
 }
 
 // ----------------------------------------------------
@@ -146,6 +158,10 @@ void CellScene::keyPressed(int key) {
     
     if(key == 'b') {
         bgColorTarget = ofRandomColor();
+    }
+    
+    if(key == 'g'){
+        drawGUI = !drawGUI;
     }
 }
 

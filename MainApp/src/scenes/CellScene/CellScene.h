@@ -33,7 +33,7 @@ public:
     
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxCellsOnScreen;
-    
+    bool drawGUI;
     
 
 };
