@@ -1,5 +1,7 @@
 #include "CellScene.h"
-
+static bool shouldRemove(const CellNode &p) {
+    return p.bRemove;
+}
 // ----------------------------------------------------
 void CellScene::setup() {
     name = "cell scene";
@@ -27,7 +29,7 @@ void CellScene::update() {
         it->frc = 0;
         it->bRemove = isPointInScreen(it->pos, 100) == false;
     }
-    ofRemove(cells, Particle::shouldRemove);
+    ofRemove(cells, shouldRemove);
     
     
     float t = ofGetElapsedTimef()*0.02;

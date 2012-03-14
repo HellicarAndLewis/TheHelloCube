@@ -109,6 +109,7 @@
 		5F615422150BE56D009BCA78 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61541C150BE56D009BCA78 /* tinyxmlparser.cpp */; };
 		5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61541E150BE56D009BCA78 /* ofxXmlSettings.cpp */; };
 		5F624CF11501791B0081827B /* TexturedShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F624CF01501791B0081827B /* TexturedShape.cpp */; };
+		5F89938C150FC6FC00B214FB /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F89938A150FC6FC00B214FB /* AudioManager.cpp */; };
 		5FE8944B14FDD56B002C15D0 /* ofxTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8943B14FDD56B002C15D0 /* ofxTimer.cpp */; };
 		5FE8944C14FDD56B002C15D0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8943F14FDD56B002C15D0 /* Utils.cpp */; };
 		5FE8945C14FDD586002C15D0 /* BaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8944E14FDD586002C15D0 /* BaseScene.cpp */; };
@@ -483,6 +484,8 @@
 		5F624CEF150179140081827B /* TexturedShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturedShape.h; sourceTree = "<group>"; };
 		5F624CF01501791B0081827B /* TexturedShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TexturedShape.cpp; sourceTree = "<group>"; };
 		5F7BE6CB15058D2500F8495B /* GeometryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryUtils.h; sourceTree = "<group>"; };
+		5F89938A150FC6FC00B214FB /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
+		5F89938B150FC6FC00B214FB /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		5F8B9259150D2C2300F811EF /* Viner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viner.h; sourceTree = "<group>"; };
 		5F8ED670150BCB5F0082F12D /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
 		5FE6CE1D150A841F00C31FF2 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
@@ -1208,6 +1211,15 @@
 			name = TexturedShape;
 			sourceTree = "<group>";
 		};
+		5F899389150FC6FC00B214FB /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				5F89938A150FC6FC00B214FB /* AudioManager.cpp */,
+				5F89938B150FC6FC00B214FB /* AudioManager.h */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
 		5FE8941814FDD56B002C15D0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,6 +1390,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5F899389150FC6FC00B214FB /* audio */,
 				544C7AA3150BB94E003E8B76 /* twitter */,
 				544C7AA2150BB947003E8B76 /* effects */,
 				5FE8946514FDD645002C15D0 /* app utils */,
@@ -1589,6 +1602,7 @@
 				5F615421150BE56D009BCA78 /* tinyxmlerror.cpp in Sources */,
 				5F615422150BE56D009BCA78 /* tinyxmlparser.cpp in Sources */,
 				5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */,
+				5F89938C150FC6FC00B214FB /* AudioManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
