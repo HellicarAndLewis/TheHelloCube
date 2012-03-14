@@ -4,8 +4,8 @@
 void App::setup() {
     
     ofBackground(255);
-    ofSetFrameRate(60);
-    //ofSetVerticalSync(true);
+    ofSetFrameRate(30);
+    ofSetVerticalSync(true);
     
     //initialise camera
 	camWidth 		= CAM_WIDTH;	// try to grab at this size. 
@@ -114,7 +114,8 @@ void App::update() {
 }
 
 //--------------------------------------------------------------
-void App::draw() {
+void App::draw(){
+    //ofEnableSmoothing();
 	fx.beginGrabPixels();
 	
     // we only want to draw the current screen
