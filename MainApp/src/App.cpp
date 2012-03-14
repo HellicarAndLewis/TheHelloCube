@@ -60,6 +60,7 @@ void App::setup() {
     fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
+	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
