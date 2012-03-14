@@ -26,13 +26,14 @@ public:
 	bool copyMentions(vector<rtt::Tweet>& mentions);
 	rt::Twitter& getTwitter();
 	string getTokensFile();
-	
+	void setVerbose(bool v);
 private:
 	void initializeTwitter();
 	void fetchMentions();
 	
 	rt::Twitter twitter;
 	string tokens_file;
+	bool verbose;
 	bool is_first_request;
 	int rate_remaining;
 	int rate_limit;
@@ -55,4 +56,7 @@ inline string TwitterThread::getTokensFile() {
 	return tokens_file;
 }
 
+inline void TwitterThread::setVerbose(bool v) {
+	verbose = v;
+}
 #endif

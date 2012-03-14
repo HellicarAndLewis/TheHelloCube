@@ -3,6 +3,7 @@
 TwitterCommands::TwitterCommands()
 	:commands_filepath("")
 	,colours_filepath("")
+	,verbose(false)
 {
 	scenes.insert("cell");
 	scenes.insert("drawn");
@@ -20,7 +21,7 @@ void TwitterCommands::setup(const string& commandsFilePath, const string& colour
 
 void TwitterCommands::load() {
 	if(!commands_filepath.size() || !colours_filepath.size()) {
-		printf("Call setup first before loading commands.\n");
+		printf("Warning: call setup first before loading commands.\n");
 		return;
 	}
 	
@@ -30,12 +31,12 @@ void TwitterCommands::load() {
 
 void TwitterCommands::loadCommands(const string& filePath) {
 	if(!commands_filepath.size()) {
-		printf("No file path given to load commands.");
+		printf("Warning: no file path given to load commands.");
 		return;
 	}
 	ifstream ifs(commands_filepath.c_str());
 	if(!ifs.is_open()) {
-		printf("Cannot open commands file");
+		printf("Warnin: cannot open commands file");
 		return;
 	}
 	commands.clear();
@@ -71,20 +72,20 @@ void TwitterCommands::loadCommands(const string& filePath) {
 void TwitterCommands::loadColours(const string& filePath) {
 	ofxXmlSettings xml;
 	if(!xml.loadFile(filePath) ){
-		printf("Unable to load: '%s'\n", filePath.c_str());
+		printf("Warning: unable to load: '%s'\n", filePath.c_str());
 		return;
 	}
 	
 	int num = xml.getNumTags("colourlist");
 	if(num <= 0) {
-		printf("No colour list found.\n");
+		printf("Warning: no colour list found.\n");
 		return;
 	}
 
 	xml.pushTag("colourlist", num-1);
 	int num_tags = xml.getNumTags("colour");
 	if(num_tags <= 0) {
-		printf("No colours found.\n");
+		printf("Warning: No colours found.\n");
 		return;
 	}
 	

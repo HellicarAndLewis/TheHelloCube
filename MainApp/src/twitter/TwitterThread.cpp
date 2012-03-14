@@ -2,6 +2,7 @@
 
 TwitterThread::TwitterThread()
 	:is_first_request(true)
+	,verbose(false)
 	,rate_limit(0)
 	,rate_reset(0)
 	,rate_remaining(0)
@@ -33,7 +34,7 @@ void TwitterThread::fetchMentions() {
 	long resp_code = twitter.getHTTPResponseCode();
 		
 	if(resp_code != 200) {
-		printf("mentions: wrong response code: %lu\n", resp_code);		
+		printf("warning: mentions: wrong response code: %lu\n", resp_code);		
 		return;
 	}
 	
@@ -74,16 +75,22 @@ void TwitterThread::fetchMentions() {
 	}
 	
 	if(newer_mentions.size() <= 0) {
-		printf("No new mentions found.\n");
+		if(verbose) {
+			printf("No new mentions found.\n");
+		}
 		return;
 	}
-
-	printf("Fetched.. first request:%c found mentionds: %zu\n", (is_first_request) ? 'y' : 'n', newer_mentions.size());
+	
+	if(verbose) {
+		printf("Fetched.. first request:%c found mentions: %zu\n", (is_first_request) ? 'y' : 'n', newer_mentions.size());
+	}
 	
 	// STORE NEW MENTIONS
 	// ------------------
 	if(!is_first_request && newer_mentions.size()) {
-		printf("> copying...\n");
+		if(verbose) {
+			printf("> copying new mentions to queue.\n");
+		} 
 		last_mention = newer_mentions.at(0);			
 		mentions_params["since_id"] = last_mention.getTweetID();
 		lock();

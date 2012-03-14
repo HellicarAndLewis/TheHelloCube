@@ -37,6 +37,7 @@ public:
 	bool hasNewCommands();
 	bool getNextCommand(TwitterCommand& result);
 	void reloadBadWords();
+	void setVerbose(bool verbose);
 	TwitterThread& getThread();
 	TwitterCommands& getCommands();
 	TwitterPhotoUploaderThread& getUploader();
@@ -44,6 +45,7 @@ public:
 	TwitterBadWords& getBadWords();
 
 private:
+	bool verbose;
 	TwitterCommands allowed_commands;
 	TwitterSimulator simulator;
 	TwitterThread twitter_thread;
@@ -71,6 +73,15 @@ inline TwitterSimulator& TwitterManager::getSimulator() {
 
 inline TwitterBadWords& TwitterManager::getBadWords() {
 	return bad_words;
+}
+
+inline void TwitterManager::setVerbose(bool v) {
+	verbose = v;
+	simulator.setVerbose(v);
+	twitter_thread.setVerbose(v);
+	uploader_thread.setVerbose(v);
+	allowed_commands.setVerbose(v);
+	
 }
 
 /*

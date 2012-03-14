@@ -39,10 +39,11 @@ public:
 		,map<string, ofColor>& coloursResult
 		,set<string>& scenesResult
 	);
-	
+	void setVerbose(bool v);	
 private:
 	void loadCommands(const string& filePath);
 	void loadColours(const string& filePath);
+	bool verbose;
 	string commands_filepath;
 	string colours_filepath;
 	set<string> commands;
@@ -52,4 +53,8 @@ private:
 	set<string> aliased_words;
 	set<string> scenes;
 };
+
+inline void TwitterCommands::setVerbose(bool v) {
+	verbose = v;
+}
 #endif
