@@ -17,15 +17,21 @@ void testApp::setup() {
 	last_timestamp = 0;
 	mentions_params["count"] = 10;
 	
-	// test account.
-	twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
-	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
-	// thehellocube account
-	//twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
-	//twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
-	//tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
-	tokens_file = ofToDataPath("twitter_roxlutest.txt", true);
+	bool use_test_account = false;
+	if(use_test_account) {
+		// test account.
+		twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
+		twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
+		tokens_file = ofToDataPath("twitter_roxlutest.txt", true);
+	}
+	else {
+		// thehellocube account
+		twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
+		twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
+		tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
+	}
+	
 	if(!twitter.loadTokens(tokens_file)) {
 		string auth_url;
 		twitter.requestToken(auth_url);
@@ -36,7 +42,6 @@ void testApp::setup() {
 	fetch_again_on = ofGetElapsedTimeMillis() +1000;
 	font.loadFont("font.otf", 30);
 	last_tweet = "...";
-	
 }
 
 //--------------------------------------------------------------
@@ -120,13 +125,13 @@ void testApp::fetchMentions() {
 		vector<rtt::Tweet>::iterator it = mentions.begin();
 		while(it != mentions.end()) {
 			rtt::Tweet& tweet = *it;
-			
+			 http://bit.ly/xrx1xP
 			// ok.. not optimized .... 
 			vector<string> messages;
-			messages.push_back("@" +tweet.getScreenName() +" Your message 1 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
-			messages.push_back("@" +tweet.getScreenName() +" Your message 2 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
-			messages.push_back("@" +tweet.getScreenName() +" Your message 3 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
-			messages.push_back("@" +tweet.getScreenName() +" Your message 4 here (" +ofToString(time_to_online.days()) +" days to go!)"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in Only " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama "); 
 			string message = messages.at((int)ofRandom(0,messages.size()-1));
 			printf("< %s\n", tweet.getText().c_str());
 			printf("> %s\n", message.c_str());
