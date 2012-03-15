@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02E228E3151209470029F677 /* SpotShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02E228E1151209470029F677 /* SpotShape.cpp */; };
 		544C7AB1150BB960003E8B76 /* TwitterBadWords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA4150BB960003E8B76 /* TwitterBadWords.cpp */; };
 		544C7AB2150BB960003E8B76 /* TwitterCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA6150BB960003E8B76 /* TwitterCommands.cpp */; };
 		544C7AB3150BB960003E8B76 /* TwitterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA8150BB960003E8B76 /* TwitterManager.cpp */; };
@@ -168,6 +169,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02E228E1151209470029F677 /* SpotShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotShape.cpp; sourceTree = "<group>"; };
+		02E228E2151209470029F677 /* SpotShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotShape.h; sourceTree = "<group>"; };
 		544C7AA4150BB960003E8B76 /* TwitterBadWords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterBadWords.cpp; path = twitter/TwitterBadWords.cpp; sourceTree = "<group>"; };
 		544C7AA5150BB960003E8B76 /* TwitterBadWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterBadWords.h; path = twitter/TwitterBadWords.h; sourceTree = "<group>"; };
 		544C7AA6150BB960003E8B76 /* TwitterCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterCommands.cpp; path = twitter/TwitterCommands.cpp; sourceTree = "<group>"; };
@@ -1287,6 +1290,8 @@
 		5FE8945614FDD586002C15D0 /* SpotsScene */ = {
 			isa = PBXGroup;
 			children = (
+				02E228E1151209470029F677 /* SpotShape.cpp */,
+				02E228E2151209470029F677 /* SpotShape.h */,
 				5FE8945714FDD586002C15D0 /* SpotsScene.cpp */,
 				5FE8945814FDD586002C15D0 /* SpotsScene.h */,
 			);
@@ -1603,6 +1608,7 @@
 				5F615422150BE56D009BCA78 /* tinyxmlparser.cpp in Sources */,
 				5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */,
 				54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */,
+				02E228E3151209470029F677 /* SpotShape.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
