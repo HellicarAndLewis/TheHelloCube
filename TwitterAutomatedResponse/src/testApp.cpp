@@ -18,7 +18,7 @@ void testApp::setup() {
 	mentions_params["count"] = 10;
 	
 	
-	bool use_test_account = false;
+	bool use_test_account = true;
 	if(use_test_account) {
 		// test account.
 		twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
@@ -57,7 +57,8 @@ void testApp::fetchMentions() {
 	int millis = ofGetElapsedTimeMillis();
 	DateTime now;
 	Poco::Timespan time_to_online = online_date - now;
-		
+	string time_to_online_str = ofToString(time_to_online.days()) +"d "  +ofToString(time_to_online.hours()) +"h " +ofToString(time_to_online.minutes()) +"m!";
+
 	// FETCH MENTIONS
 	// -----------------------
 	twitter.statusesMentions(&mentions_params);
@@ -128,15 +129,17 @@ void testApp::fetchMentions() {
 			 http://bit.ly/xrx1xP
 			// ok.. not optimized .... 
 			vector<string> messages;
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
-			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only  " +ofToString(time_to_online.days()) +" days + come & play! #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet commands in only " +time_to_online_str +" #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only " +time_to_online_str +" #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only " +time_to_online_str +" #InfiniteKusama http://bit.ly/xrx1xP"); 
+			messages.push_back("@" +tweet.getScreenName() +" INTERACT with me 23-25 March @Tate Modern. Tweet Commands in only " +time_to_online_str +" #InfiniteKusama http://bit.ly/xrx1xP"); 
 			string message = messages.at((int)ofRandom(0,messages.size()-1));
 			printf("< %s\n", tweet.getText().c_str());
 			printf("> %s\n", message.c_str());
 			twitter.statusesUpdate(message);
 			last_tweet = tweet.getText();
+			printf("response:\n-------------\n%s\n-------------\n\n", twitter.getResponse().c_str());
+			
 			++it;
 		}
 	
