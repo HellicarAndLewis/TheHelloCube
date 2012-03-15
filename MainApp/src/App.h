@@ -46,7 +46,7 @@ public:
     CellScene            cellSC;
     DrawnScene           drawnSC;
     TextureScene         textureSC;
-    SpotScene            spotsSC;
+    SpotsScene            spotsSC;
 	
     // twitter
 	float				 command_timeout;	

@@ -7,16 +7,40 @@
 //
 
 #pragma once
+#include "ofMain.h"
 #include "BaseScene.h"
+#include "ofxBox2d.h"
+#include "SpotShape.h"
+#include "ofxBox2dPolygonUtils.h"
+#include "GeometryUtils.h"
 
 
-class SpotScene : public BaseScene {
+class SpotsScene : public BaseScene {
     
 private:
 protected:
 public:
     
     void setup();
-    void handleCommands(TwitterCommand& cmd, Effects& fx);
+    void update();
+    void draw();
+    void keyPressed(int key);
+    void addPoints();
+    void makeObstacles();
+    void addShape();
+    void exitScene();
+    
+	void handleCommands(TwitterCommand& cmd, Effects& fx);
+    
+    ofxBox2d box2d;
+    vector <ofxBox2dCircle> obsticals;
+    vector <SpotShape>   shapes;
+    vector <ofVec2f>         pts;
+    vector <TriangleShape>   tris;
+    
+    bool     circleFrcFlip;
+    ofVec2f circleFrc;
+    ofxFloatSlider releaseRate;
+    ofxIntSlider   maxShapesOnScreen;
     
 };
