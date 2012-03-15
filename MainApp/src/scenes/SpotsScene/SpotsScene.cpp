@@ -7,8 +7,8 @@ void SpotsScene::setup() {
     string safeName = name;
     ofStringReplace(safeName, " ", "_");
     gui.setup(name, safeName+".xml", 20, 20);
-    gui.add(maxShapesOnScreen.setup("max shapes", 250, 1, 1000));
-    gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0));
+    gui.add(maxShapesOnScreen.setup("max shapes", 50, 1, 500));
+    gui.add(releaseRate.setup("release rate", 0.1, 0.0, 1.0));
     
     // setup box2d
     box2d.init();
@@ -38,8 +38,8 @@ void SpotsScene::update() {
         it->update();
         
         
-        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
-        
+//        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
+//        
         if(it->getPosition().distance(ofGetCenterScreen()) < 300) {
             it->addRepulsionForce(ofGetCenterScreen(), 0.002);
         }
@@ -78,7 +78,7 @@ void SpotsScene::addShape() {
         SpotShape shape;
         shape.setPhysics(1, 0.1, 1);
         shape.setup(box2d.getWorld(), pt, 1);
-        shape.radiusTarget = ofRandom(70, 100);
+        shape.radiusTarget = ofRandom(20, 50);
         shapes.push_back(shape);
     }
 }
@@ -135,6 +135,7 @@ void SpotsScene::draw() {
     ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     
     ofEnableAlphaBlending();
+    
     if((int)ofRandom(0, 300) == 30) {
         circleFrcFlip = !circleFrcFlip;
     }
@@ -161,7 +162,8 @@ void SpotsScene::draw() {
 //        glVertex2f(p.x+r, p.y+r); glTexCoord2f(1, 1);
 //        glVertex2f(p.x-r, p.y+r); glTexCoord2f(0, 1);
 //        
-        ofSphere(p, 10);
+        //ofSphere(p, 10);
+        ofCircle(p, r); //draw the spot
 //        glEnd();
 //        it->tex->unbind();  
         
