@@ -237,7 +237,8 @@ void TextureScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	// handle colour
 	map<string, ofColor>::const_iterator cit = cmd.colours.begin();
 	while(cit != cmd.colours.end()) {	
-		bgColorTarget = cit->second;
+		BaseScene::twitterColour = cit->second;
+		bgColor = BaseScene::twitterColour;
 		break;
 	}
 }

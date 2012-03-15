@@ -203,7 +203,9 @@ void DrawnScene::keyPressed(int key) {
 
 
 // ----------------------------------------------------
+// @todd you can handle commands here events to change the scene....
 void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
+
 	// handle commands.
 	set<string>::const_iterator it = cmd.tokens.begin();
 	while(it != cmd.tokens.end()) {
@@ -219,7 +221,8 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	// handle colour
 	map<string, ofColor>::const_iterator cit = cmd.colours.begin();
 	while(cit != cmd.colours.end()) {	
-		//bgColorTarget = cit->second;
+		BaseScene::twitterColour = cit->second;
+		bgColor = BaseScene::twitterColour;
 		break;
 	}
 }
