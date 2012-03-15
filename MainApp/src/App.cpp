@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void App::setup() {
-    
+ 	ofSetCircleResolution(120);
     ofBackground(255);
     ofSetFrameRate(30);
     ofSetVerticalSync(true);
