@@ -33,7 +33,7 @@ public:
 	~TwitterManager();
 	void init();
 	void update();
-	void parseTweet(rtt::Tweet& tweet);
+	void parseTweet(rtt::Tweet& tweet, bool isFake = false);
 	bool hasNewCommands();
 	bool getNextCommand(TwitterCommand& result);
 	void reloadBadWords();

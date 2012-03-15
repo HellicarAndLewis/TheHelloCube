@@ -167,6 +167,7 @@ void CellScene::keyPressed(int key) {
 
 // ----------------------------------------------------
 void CellScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
+	printf("Cellscene handle commands.\n");
 	// handle commands.
 	set<string>::const_iterator it = cmd.tokens.begin();
 	while(it != cmd.tokens.end()) {
