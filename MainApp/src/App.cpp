@@ -15,6 +15,8 @@ void App::setup() {
     vidGrabber.setVideoDeviceID(0); //0 is first, iSight is always last, so this is safe...
 	vidGrabber.initGrabber(camWidth, camHeight);  
     
+    audioManager.setup(this);
+    
     //now LUTs
     
     dir.allowExt("cube");
@@ -102,6 +104,7 @@ void App::update() {
 	fx.update();
     twitter.update();
 	vidGrabber.update();
+    audioManager.update();
 	
 	if (vidGrabber.isFrameNew()){
         //new frame fun here....
@@ -342,4 +345,9 @@ void App::applyLUT(ofPixelsRef pix){
      
      lutImg.update();
     }
+}
+
+void App::audioIn(float * input, int bufferSize, int nChannels){
+    audioManager.audioIn(input, bufferSize, nChannels);
+    
 }
