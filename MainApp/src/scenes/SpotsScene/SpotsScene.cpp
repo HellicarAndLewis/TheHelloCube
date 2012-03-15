@@ -78,7 +78,7 @@ void SpotsScene::addShape() {
         SpotShape shape;
         shape.setPhysics(1, 0.1, 1);
         shape.setup(box2d.getWorld(), pt, 1);
-        shape.radiusTarget = ofRandom(10, 30);
+        shape.radiusTarget = ofRandom(70, 100);
         shapes.push_back(shape);
     }
 }
@@ -128,8 +128,12 @@ void SpotsScene::keyPressed(int key) {
 
 // ----------------------------------------------------
 void SpotsScene::draw() {
+    drawBackground(); //just to update the background colour, sloppy           
     
-    drawBackground();
+    ofSetColor(ofColor::black);
+    ofFill();
+    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    
     ofEnableAlphaBlending();
     if((int)ofRandom(0, 300) == 30) {
         circleFrcFlip = !circleFrcFlip;
@@ -143,7 +147,7 @@ void SpotsScene::draw() {
     ofCircle(circleFrc+ofGetCenterScreen(), 13);
     
     
-    ofSetColor(255);
+    ofSetColor(bgColor);
     for (vector<SpotShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         
         ofVec2f p = it->getPosition();
@@ -171,13 +175,13 @@ void SpotsScene::draw() {
     
     
     ofFill();
-    ofSetColor(255, 100);
+    ofSetColor(bgColor, 100);
     for (vector<ofVec2f>::iterator it=pts.begin(); it!=pts.end(); ++it) {
         ofCircle(*it, 2);
     }
     
     for (vector<TriangleShape>::iterator it=tris.begin(); it!=tris.end(); ++it) {
-        ofSetColor(255, 10);
+        ofSetColor(bgColor, 10);
         ofNoFill();
         ofTriangle(it->a, it->b, it->c);
         
