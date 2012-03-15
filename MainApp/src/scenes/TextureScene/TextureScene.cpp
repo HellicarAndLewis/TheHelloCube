@@ -19,7 +19,7 @@ void TextureScene::setup() {
     // setup box2d
     box2d.init();
     box2d.setGravity(0, 0);
-    box2d.setFPS(60);
+    box2d.setFPS(30);
     
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
