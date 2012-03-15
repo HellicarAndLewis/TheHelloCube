@@ -54,7 +54,7 @@ void TwitterManager::update() {
 	}
 }
 
-void TwitterManager::parseTweet(rtt::Tweet& tweet) {
+void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 	string command;
 	string lower = tweet.getText();
 	std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
@@ -88,14 +88,17 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet) {
 				,found_colours
 				,found_scenes
 			);
-			
+			printf("Handle tweet: %c\n", (must_handle) ? 'y' : 'n');
 			if(must_handle) {
+
 				TwitterCommand cmd(
 					 tweet
 					,found_commands
 					,found_colours
 					,found_scenes
+					,isFake
 				);
+			
 				commands.push(cmd);
 			}
 		}

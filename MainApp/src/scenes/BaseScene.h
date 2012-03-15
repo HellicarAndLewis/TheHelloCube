@@ -30,10 +30,12 @@ public:
     
     ofColor         bgColor;
     ofColor         bgColorTarget;
+	static ofColor	twitterColour;
     AudioManager *  audioPtr;
     
     // ----------------------------------------------------
     virtual void exitScene() {
+		bgColor = BaseScene::twitterColour;
         ofUnregisterMouseEvents(&gui);
     }
     

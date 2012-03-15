@@ -30,11 +30,12 @@ struct TwitterCommand {
 	TwitterCommand() {
 	}
 	
-	TwitterCommand(rtt::Tweet tweet, set<string> tokens, map<string, ofColor> colours, set<string> scenes)	
+	TwitterCommand(rtt::Tweet tweet, set<string> tokens, map<string, ofColor> colours, set<string> scenes, bool isFake = false)	
 		:tweet(tweet)
 		,tokens(tokens)
 		,colours(colours)
 		,scenes(scenes)
+		,is_fake(isFake)
 	{
 	}
 	
@@ -67,6 +68,11 @@ struct TwitterCommand {
 		}
 	}
 	
+	bool isFake() {
+		return is_fake;
+	}
+	
+	bool is_fake;
 	rtt::Tweet tweet;
 	set<string> tokens;
 	set<string> scenes;

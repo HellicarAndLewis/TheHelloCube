@@ -57,7 +57,7 @@ void TwitterSimulator::guiCallback(int v) {
 		}
 		rtt::Tweet tweet;
 		tweet.setText(fake_tweet);
-		manager.parseTweet(tweet);		
+		manager.parseTweet(tweet, true);		
 	}
 	else if(v == 2) {
 		if(verbose) {

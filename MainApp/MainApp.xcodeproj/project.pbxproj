@@ -51,6 +51,7 @@
 		544C7BA6150BB9E8003E8B76 /* libpcrecpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 544C7B96150BB9E8003E8B76 /* libpcrecpp.a */; };
 		544C7BA9150BBA40003E8B76 /* effects.frag in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA7150BBA40003E8B76 /* effects.frag */; };
 		544C7BAA150BBA40003E8B76 /* effects.vert in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA8150BBA40003E8B76 /* effects.vert */; };
+		54761491151224BA00842F13 /* SpotShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5476148F151224BA00842F13 /* SpotShape.cpp */; };
 		54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54F686AF15108F73006BDEFD /* AudioManager.cpp */; };
 		5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80CB0B150B864800F8C65F /* CoreVideo.framework */; };
 		5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA11969150A5D300011C6A8 /* QTKit.framework */; };
@@ -358,6 +359,8 @@
 		544C7B9C150BB9E8003E8B76 /* pcreposix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcreposix.h; sourceTree = "<group>"; };
 		544C7BA7150BBA40003E8B76 /* effects.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.frag; path = bin/data/effects/effects.frag; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		544C7BA8150BBA40003E8B76 /* effects.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.vert; path = bin/data/effects/effects.vert; sourceTree = SOURCE_ROOT; };
+		5476148F151224BA00842F13 /* SpotShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotShape.cpp; sourceTree = "<group>"; };
+		54761490151224BA00842F13 /* SpotShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotShape.h; sourceTree = "<group>"; };
 		54F686AF15108F73006BDEFD /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
 		54F686B015108F73006BDEFD /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		5D80CB0B150B864800F8C65F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = ../../../../../../../../../../../System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
@@ -1287,6 +1290,8 @@
 		5FE8945614FDD586002C15D0 /* SpotsScene */ = {
 			isa = PBXGroup;
 			children = (
+				5476148F151224BA00842F13 /* SpotShape.cpp */,
+				54761490151224BA00842F13 /* SpotShape.h */,
 				5FE8945714FDD586002C15D0 /* SpotsScene.cpp */,
 				5FE8945814FDD586002C15D0 /* SpotsScene.h */,
 			);
@@ -1603,6 +1608,7 @@
 				5F615422150BE56D009BCA78 /* tinyxmlparser.cpp in Sources */,
 				5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */,
 				54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */,
+				54761491151224BA00842F13 /* SpotShape.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

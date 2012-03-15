@@ -60,7 +60,7 @@ void App::setup() {
     fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
-	twitter.setVerbose(false);
+	twitter.setVerbose(true);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
@@ -70,6 +70,7 @@ void App::update() {
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
+			printf("NEW COMMAND\n");
 			string switch_scene;
 			if(command.mustSwitchScene(switch_scene)) {
                 cout << "changeScene:  "<< switch_scene << endl; 
@@ -87,7 +88,10 @@ void App::update() {
                 }	
 			}
 			currentScene->handleCommands(command, fx);
-			twitter.getSimulator().take_screenshot = true;
+			
+			if(!command.isFake()) {
+				twitter.getSimulator().take_screenshot = true;
+			}
 		}
 		else {
 			fx.reset();

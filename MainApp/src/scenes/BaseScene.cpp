@@ -1,5 +1,6 @@
 #include "BaseScene.h"
 
+ofColor BaseScene::twitterColour = ofColor(255,0,0);
 
 // ----------------------------------------------------
 BaseScene::BaseScene() {
@@ -13,10 +14,12 @@ BaseScene::~BaseScene() {
 
 // ----------------------------------------------------
 void BaseScene::drawBackground() {
-    
+
+	/*	
     bgColor.r += (bgColorTarget.r - bgColor.r) * 0.2;
     bgColor.g += (bgColorTarget.g - bgColor.g) * 0.2;
     bgColor.b += (bgColorTarget.b - bgColor.b) * 0.2;
+	*/
     bgColor.a = 255;
 
     ofSetColor(bgColor);
