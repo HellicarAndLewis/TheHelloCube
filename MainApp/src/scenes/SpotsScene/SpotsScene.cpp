@@ -79,6 +79,7 @@ void SpotsScene::addShape() {
         shape.setPhysics(1, 0.1, 1);
         shape.setup(box2d.getWorld(), pt, 1);
         shape.radiusTarget = ofRandom(20, 50);
+        shape.colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         shapes.push_back(shape);
     }
 }
@@ -163,6 +164,9 @@ void SpotsScene::draw() {
 //        glVertex2f(p.x-r, p.y+r); glTexCoord2f(0, 1);
 //        
         //ofSphere(p, 10);
+        
+        ofSetColor(it->colour);
+        
         ofCircle(p, r); //draw the spot
 //        glEnd();
 //        it->tex->unbind();  
@@ -237,6 +241,7 @@ void SpotsScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	while(cit != cmd.colours.end()) {	
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
+        generateComplimentaryColours();
 		break;
 	}
 }

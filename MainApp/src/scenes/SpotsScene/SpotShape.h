@@ -23,4 +23,5 @@ public:
     
     float       growSpeed;
     float       radiusTarget;
+    ofColor     colour;
 };

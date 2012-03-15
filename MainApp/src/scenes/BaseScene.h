@@ -32,6 +32,7 @@ public:
     ofColor         bgColorTarget;
 	static ofColor	twitterColour;
     AudioManager *  audioPtr;
+    vector<ofColor> complimentaryColours;
     
     // ----------------------------------------------------
     virtual void exitScene() {
@@ -62,5 +63,5 @@ public:
     virtual void mousePressed(int x, int y, int button){};
     virtual void mouseReleased(int x, int y, int button){};
     
-    
+    virtual void generateComplimentaryColours(); //generate complimentaryColours vector of colours that are close to twitterColour
 };

@@ -5,6 +5,7 @@ ofColor BaseScene::twitterColour = ofColor(255,0,0);
 // ----------------------------------------------------
 BaseScene::BaseScene() {
     audioPtr = NULL;
+    generateComplimentaryColours();
 }
 
 // ----------------------------------------------------
@@ -30,4 +31,29 @@ void BaseScene::drawBackground() {
 void BaseScene::draw() {
     ofSetColor(255);
     AppAssets::inst()->appFont.drawString(name, 10, 15);
+};
+
+void BaseScene::generateComplimentaryColours(){
+    cout << "Making new complimentary colours " << endl;
+    
+    //twitterColour is the value that we are going to work with
+    float hue, saturation, brightness;
+    twitterColour.getHsb( hue, saturation, brightness );
+    
+    //lets clear out any old colours 
+    complimentaryColours.clear();
+    
+    size_t numberOfComplimentaryColours = 42;
+    
+    complimentaryColours.resize(numberOfComplimentaryColours);
+    
+    //first pass at a colour generator
+    
+    for(int i = 0; i < complimentaryColours.size(); i++){
+        float newHue = fmodf(hue + ofRandom(-12.f, 12.f), 255.f);
+        float newSaturation = saturation;//fmodf(saturation + ofRandom(-10.f, 10.f), 255.f);
+        float newBrightness = brightness;//fmodf(brightness + ofRandom(-10.f, 10.f), 255.f);
+        
+        complimentaryColours[i] = ofColor::fromHsb(newHue, newSaturation, newBrightness);
+    }
 };

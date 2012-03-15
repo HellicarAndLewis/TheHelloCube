@@ -223,6 +223,7 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	while(cit != cmd.colours.end()) {	
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
+        generateComplimentaryColours();
 		break;
 	}
 }
