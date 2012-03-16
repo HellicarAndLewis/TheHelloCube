@@ -43,16 +43,22 @@ void BaseScene::generateComplimentaryColours(){
     //lets clear out any old colours 
     complimentaryColours.clear();
     
-    size_t numberOfComplimentaryColours = 42;
+    size_t numberOfComplimentaryColours = 16;
     
     complimentaryColours.resize(numberOfComplimentaryColours);
     
     //first pass at a colour generator
     
     for(int i = 0; i < complimentaryColours.size(); i++){
-        float newHue = fmodf(hue + ofRandom(-12.f, 12.f), 255.f);
-        float newSaturation = saturation;//fmodf(saturation + ofRandom(-10.f, 10.f), 255.f);
-        float newBrightness = brightness;//fmodf(brightness + ofRandom(-10.f, 10.f), 255.f);
+        float newHue = hue;//fmodf(hue + ofRandom(0, 12.f), 255.f);
+        float newSaturation = saturation;//fmodf(saturation + ofRandom(0.f, 255.f), 255.f);
+        float newBrightness = fmodf(brightness + ofRandom(0.f, 128.f), 255.f);
+        
+        if(i==0){
+            newHue = hue;
+            newSaturation = saturation;
+            newBrightness = brightness;            
+        }
         
         complimentaryColours[i] = ofColor::fromHsb(newHue, newSaturation, newBrightness);
     }

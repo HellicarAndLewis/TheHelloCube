@@ -155,7 +155,7 @@ void App::draw(){
 		//tweet.setScreenName("roxlutest");
 		tweet = command.tweet;
 		printf("screenname from tweet: %s\n", tweet.getScreenName().c_str());
-		bool grab = 1; // 0 = screen, 1 = webcam	
+		bool grab = 0; // 0 = screen, 1 = webcam	
 
 		if(grab == 0) {
 			ofImage img;

@@ -71,14 +71,14 @@ void SpotsScene::addPoints() {
 void SpotsScene::addShape() {
     if(shapes.size() < maxShapesOnScreen) {
         ofVec2f pt = ofGetCenterScreen();
-        float r = ofRandom(10, 30);
+        float r = ofRandom(5.f, 40.f);
         pt.x += cos(ofRandomuf()*TWO_PI) * r;
         pt.y += sin(ofRandomuf()*TWO_PI) * r;
         
         SpotShape shape;
         shape.setPhysics(1, 0.1, 1);
         shape.setup(box2d.getWorld(), pt, 1);
-        shape.radiusTarget = ofRandom(20, 50);
+        shape.radiusTarget = ofRandom(5.f, 60.f);
         shape.colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         shapes.push_back(shape);
     }
@@ -131,7 +131,9 @@ void SpotsScene::keyPressed(int key) {
 void SpotsScene::draw() {
     drawBackground(); //just to update the background colour, sloppy           
     
-    ofSetColor(ofColor::black);
+    ofColor peteBack = ofColor(255,242,240);
+    
+    ofSetColor(peteBack);
     ofFill();
     ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     
