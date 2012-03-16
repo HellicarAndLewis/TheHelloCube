@@ -1,4 +1,21 @@
 #include "testApp.h"
+#include "stdio.h"
+
+
+#define NUM_AUDIO_CHANNELS 6
+float volumes[NUM_AUDIO_CHANNELS];
+float meters[NUM_AUDIO_CHANNELS];
+float gains[NUM_AUDIO_CHANNELS];
+float thruBuffer[NUM_AUDIO_CHANNELS][4096];
+bool oscIsSetup;
+bool mustStopAudio;
+
+bool testing = false;
+bool playThruAudio = false;
+void testApp::exit() {
+	printf("Exited\n");
+	soundStream.close();
+}
 
 //--------------------------------------------------------------
 void testApp::setup(){	 
@@ -7,44 +24,80 @@ void testApp::setup(){
 	ofSetCircleResolution(80);
 	ofBackground(54, 54, 54);	
 	
-	// 0 output channels, 
-	// 2 input channels
-	// 44100 samples per second
-	// 256 samples per buffer
-	// 4 num buffers (latency)
-	
 	soundStream.listDevices();
 	
-	//if you want to set a different device id 
-	//soundStream.setDeviceID(0); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
-	
-	int bufferSize = 256;
-	
+	bufferSize = 256;
 	
 	left.assign(bufferSize, 0.0);
 	right.assign(bufferSize, 0.0);
-	volHistory.assign(400, 0.0);
-	
-	bufferCounter	= 0;
-	drawCounter		= 0;
-	smoothedVol     = 0.0;
-	scaledVol		= 0.0;
-
-	soundStream.setup(this, 0, 2, 44100, bufferSize, 4);
+    top.assign(bufferSize, 0.0);
+    bottom.assign(bufferSize, 0.0);
+    
+    /*device = 4 (M-Audio, Inc.: M-Audio Fast Track Ultra)
+    ----* default ----* 
+    maximum output channels = 8
+    maximum input channels = 8*/
+    
+//    // 0 output channels, 
+//	// 2 input channels
+//	// 44100 samples per second
+//	// 256 samples per buffer
+//	// 4 num buffers (latency)
+//	soundStream.setup(this, 0, 2, 44100, bufferSize, 4);
+    
+    // 8 output channels, 
+	// 8 input channels
+	// 44100 samples per second
+	// 256 samples per buffer
+	// 1 num buffers (latency)
+    bool mAudioPresent = true; //need to do this sensibly
+        
+	if(mAudioPresent) {
+        //if you want to set a different device id 
+        soundStream.setDeviceID(4); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
+		soundStream.setup(this, 8, 8, 44100, 256, 1);
+	} else {
+        soundStream.setDeviceID(0); 
+		soundStream.setup(this, 0, 2, 44100, 256, 1);
+	}
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	//lets scale the vol up to a 0-1 range 
-	scaledVol = ofMap(smoothedVol, 0.0, 0.17, 0.0, 1.0, true);
+//	//lets scale the vol up to a 0-1 range 
+//	scaledVol = ofMap(smoothedVol, 0.0, 0.17, 0.0, 1.0, true);
+//
+//	//lets record the volume into an array
+//	volHistory.push_back( scaledVol );
+//	
+//	//if we are bigger the the size we want to record - lets drop the oldest value
+//	if( volHistory.size() >= 400 ){
+//		volHistory.erase(volHistory.begin(), volHistory.begin()+1);
+//	}
 
-	//lets record the volume into an array
-	volHistory.push_back( scaledVol );
-	
+    left.push_back(volumes[0]);
+    right.push_back(volumes[1]);
+    top.push_back(volumes[2]);
+    bottom.push_back(volumes[3]);
+
+//    left.push_back(ofMap(volumes[0], 0.0, 0.17, 0.0, 1.0, true));
+//    right.push_back(ofMap(volumes[1], 0.0, 0.17, 0.0, 1.0, true));
+//    top.push_back(ofMap(volumes[2], 0.0, 0.17, 0.0, 1.0, true));
+//    bottom.push_back(ofMap(volumes[3], 0.0, 0.17, 0.0, 1.0, true));
+    
 	//if we are bigger the the size we want to record - lets drop the oldest value
-	if( volHistory.size() >= 400 ){
-		volHistory.erase(volHistory.begin(), volHistory.begin()+1);
+	if( left.size() >= bufferSize ){
+		left.erase(left.begin(), left.begin()+1);
+	}
+    if( right.size() >= bufferSize ){
+		right.erase(right.begin(), right.begin()+1);
+	}
+    if( top.size() >= bufferSize ){
+		top.erase(top.begin(), top.begin()+1);
+	}
+    if( bottom.size() >= bufferSize ){
+		bottom.erase(bottom.begin(), bottom.begin()+1);
 	}
 }
 
@@ -102,33 +155,52 @@ void testApp::draw(){
 			
 		ofPopMatrix();
 	ofPopStyle();
-	
-	// draw the average volume:
+    
+	// draw the top channel:
 	ofPushStyle();
-		ofPushMatrix();
-		ofTranslate(565, 170, 0);
-			
-		ofSetColor(225);
-		ofDrawBitmapString("Scaled average vol (0-100): " + ofToString(scaledVol * 100.0, 0), 4, 18);
-		ofRect(0, 0, 400, 400);
-		
-		ofSetColor(245, 58, 135);
-		ofFill();		
-		ofCircle(200, 200, scaledVol * 190.0f);
-		
-		//lets draw the volume history as a graph
-		ofBeginShape();
-		for (int i = 0; i < volHistory.size(); i++){
-			if( i == 0 ) ofVertex(i, 400);
-
-			ofVertex(i, 400 - volHistory[i] * 70);
-			
-			if( i == volHistory.size() -1 ) ofVertex(i, 400);
-		}
-		ofEndShape(false);		
-			
-		ofPopMatrix();
+    ofPushMatrix();
+    ofTranslate(32 + (bufferSize*2), 170, 0);
+    
+    ofSetColor(225);
+    ofDrawBitmapString("Top Channel", 4, 18);
+    
+    ofSetLineWidth(1);	
+    ofRect(0, 0, 512, 200);
+    
+    ofSetColor(245, 58, 135);
+    ofSetLineWidth(3);
+    
+    ofBeginShape();
+    for (int i = 0; i < top.size(); i++){
+        ofVertex(i*2, 100 -top[i]*180.0f);
+    }
+    ofEndShape(false);
+    
+    ofPopMatrix();
 	ofPopStyle();
+    
+	// draw the bottom channel:
+	ofPushStyle();
+    ofPushMatrix();
+    ofTranslate(32 + (bufferSize*2), 370, 0);
+    
+    ofSetColor(225);
+    ofDrawBitmapString("Bottom Channel", 4, 18);
+    
+    ofSetLineWidth(1);	
+    ofRect(0, 0, 512, 200);
+    
+    ofSetColor(245, 58, 135);
+    ofSetLineWidth(3);
+    
+    ofBeginShape();
+    for (int i = 0; i < bottom.size(); i++){
+        ofVertex(i*2, 100 -bottom[i]*180.0f);
+    }
+    ofEndShape(false);
+    
+    ofPopMatrix();
+	ofPopStyle();    
 	
 	drawCounter++;
 	
@@ -141,32 +213,34 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::audioIn(float * input, int bufferSize, int nChannels){	
 	
-	float curVol = 0.0;
-	
-	// samples are "interleaved"
-	int numCounted = 0;	
-
-	//lets go through each sample and calculate the root mean square which is a rough way to calculate volume	
-	for (int i = 0; i < bufferSize; i++){
-		left[i]		= input[i*2]*0.5;
-		right[i]	= input[i*2+1]*0.5;
-
-		curVol += left[i] * left[i];
-		curVol += right[i] * right[i];
-		numCounted+=2;
+	// clear out the thru buffer because we don't know if we're
+	// going to use every channel yet.
+	for(int i = 0; i < NUM_AUDIO_CHANNELS; i++) {
+		memset(thruBuffer[i], 0, 4096*sizeof(float));
 	}
+    
+	for(int channel = 0; channel < NUM_AUDIO_CHANNELS && channel < nChannels; channel++) {
+		for(int i = 0; i < bufferSize; i++) {
+			float absSignal;
+			absSignal = ABS(input[i*nChannels+channel]);
+            thruBuffer[channel][i] = input[i*nChannels+channel]*gains[channel];
+			if(absSignal>volumes[channel]) {
+				volumes[channel] = absSignal;
+			} else {
+				volumes[channel] *= smoothing;
+			}
+		}
+		// clip 
+		meters[channel] = MIN(volumes[channel]*gains[channel], 1);
+		meters[channel] = pow(meters[channel], exponent);
+	}
+    
+	audioMutex.lock();
+	float framePeriod = 1.f/audioFps;
+    
+	audioMutex.unlock();
 	
-	//this is how we get the mean of rms :) 
-	curVol /= (float)numCounted;
-	
-	// this is how we get the root of rms :) 
-	curVol = sqrt( curVol );
-	
-	smoothedVol *= 0.93;
-	smoothedVol += 0.07 * curVol;
-	
-	bufferCounter++;
-	
+    
 }
 
 //--------------------------------------------------------------
