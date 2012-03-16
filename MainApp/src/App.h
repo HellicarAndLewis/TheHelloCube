@@ -26,6 +26,7 @@ public:
     void update();
     void draw();
     void changeScene(int scene);
+    void exit();
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -58,6 +59,7 @@ public:
 	
     // Audio
     AudioManager         audioManager;
+    bool                 drawAudio;
     
     // Video
 	ofxQTKitVideoGrabber vidGrabber;	

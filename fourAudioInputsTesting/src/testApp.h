@@ -46,7 +46,7 @@ class testApp : public ofBaseApp{
         int bufferCounter;
         int drawCounter;
     
-    bool mAudioPresent;
+        bool mAudioPresent;
 };
 
 #endif	

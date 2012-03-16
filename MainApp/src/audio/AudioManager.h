@@ -7,18 +7,30 @@ public:
         
     void setup(ofBaseApp * app);
     void update();
-    
+    void draw();
+    void exit();
     void audioIn(float * input, int bufferSize, int nChannels); 
 	
     vector <float> left;
     vector <float> right;
-    vector <float> volHistory;
+    vector <float> top;
+    vector <float> bottom;
     
-    int 	bufferCounter;
-    int 	drawCounter;
+    ofSoundStream soundStream;
     
-    float smoothedVol;
-    float scaledVol;
+    //from Marek Project Donk Audio Server...
     
-    ofSoundStream soundStream;    
+    // locking stuff
+    ofMutex audioMutex;
+    float audioFps;
+    float audioPos;
+    float lastTimeSent;
+    float smoothing;
+    float exponent;
+    
+    int bufferSize;
+    int bufferCounter;
+    int drawCounter;
+    
+    bool mAudioPresent;  
 };
