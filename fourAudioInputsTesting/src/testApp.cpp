@@ -50,7 +50,7 @@ void testApp::setup(){
 	// 44100 samples per second
 	// 256 samples per buffer
 	// 1 num buffers (latency)
-    bool mAudioPresent = true; //need to do this sensibly
+    mAudioPresent = false; //need to do this sensibly
         
 	if(mAudioPresent) {
         //if you want to set a different device id 
@@ -61,6 +61,8 @@ void testApp::setup(){
 		soundStream.setup(this, 0, 2, 44100, 256, 1);
 	}
 
+    bufferCounter = 0;
+    drawCounter = 0;
 }
 
 //--------------------------------------------------------------
@@ -76,10 +78,18 @@ void testApp::update(){
 //		volHistory.erase(volHistory.begin(), volHistory.begin()+1);
 //	}
 
+    //always have left and right
     left.push_back(volumes[0]);
     right.push_back(volumes[1]);
-    top.push_back(volumes[2]);
-    bottom.push_back(volumes[3]);
+
+    //if we have mAudio then we have the top and bottom too
+    if(mAudioPresent){
+        top.push_back(volumes[2]);
+        bottom.push_back(volumes[3]);
+    }else{ //else lets just duplicate the values going into left/right
+        top.push_back(volumes[0]);
+        bottom.push_back(volumes[1]);        
+    }
 
 //    left.push_back(ofMap(volumes[0], 0.0, 0.17, 0.0, 1.0, true));
 //    right.push_back(ofMap(volumes[1], 0.0, 0.17, 0.0, 1.0, true));
@@ -213,34 +223,55 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::audioIn(float * input, int bufferSize, int nChannels){	
 	
-	// clear out the thru buffer because we don't know if we're
-	// going to use every channel yet.
-	for(int i = 0; i < NUM_AUDIO_CHANNELS; i++) {
-		memset(thruBuffer[i], 0, 4096*sizeof(float));
-	}
-    
-	for(int channel = 0; channel < NUM_AUDIO_CHANNELS && channel < nChannels; channel++) {
-		for(int i = 0; i < bufferSize; i++) {
-			float absSignal;
-			absSignal = ABS(input[i*nChannels+channel]);
-            thruBuffer[channel][i] = input[i*nChannels+channel]*gains[channel];
-			if(absSignal>volumes[channel]) {
-				volumes[channel] = absSignal;
-			} else {
-				volumes[channel] *= smoothing;
-			}
-		}
-		// clip 
-		meters[channel] = MIN(volumes[channel]*gains[channel], 1);
-		meters[channel] = pow(meters[channel], exponent);
-	}
+    if(mAudioPresent){
+        // clear out the thru buffer because we don't know if we're
+        // going to use every channel yet.
+        for(int i = 0; i < NUM_AUDIO_CHANNELS; i++) {
+            memset(thruBuffer[i], 0, 4096*sizeof(float));
+        }
+        
+        for(int channel = 0; channel < NUM_AUDIO_CHANNELS && channel < nChannels; channel++) {
+            for(int i = 0; i < bufferSize; i++) {
+                float absSignal;
+                absSignal = ABS(input[i*nChannels+channel]);
+                thruBuffer[channel][i] = input[i*nChannels+channel]*gains[channel];
+                if(absSignal>volumes[channel]) {
+                    volumes[channel] = absSignal;
+                } else {
+                    volumes[channel] *= smoothing;
+                }
+            }
+            // clip 
+            meters[channel] = MIN(volumes[channel]*gains[channel], 1);
+            meters[channel] = pow(meters[channel], exponent);
+        }        
+    }else{
+        // clear out the thru buffer because we don't know if we're
+        // going to use every channel yet.
+        for(int i = 0; i < NUM_AUDIO_CHANNELS; i++) {
+            memset(thruBuffer[i], 0, 4096*sizeof(float));
+        }
+        
+        for(int channel = 0; channel < NUM_AUDIO_CHANNELS && channel < nChannels; channel++) {
+            for(int i = 0; i < bufferSize; i++) {
+                float absSignal;
+                absSignal = ABS(input[i*nChannels+channel]);
+                thruBuffer[channel][i] = input[i*nChannels+channel]*gains[channel];
+                if(absSignal>volumes[channel]) {
+                    volumes[channel] = absSignal;
+                } else {
+                    volumes[channel] *= smoothing;
+                }
+            }
+            // clip 
+            meters[channel] = MIN(volumes[channel]*gains[channel], 1);
+            meters[channel] = pow(meters[channel], exponent);
+        }
+    }
     
 	audioMutex.lock();
 	float framePeriod = 1.f/audioFps;
-    
 	audioMutex.unlock();
-	
-    
 }
 
 //--------------------------------------------------------------

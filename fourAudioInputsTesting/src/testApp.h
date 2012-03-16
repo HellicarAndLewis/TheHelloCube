@@ -42,9 +42,11 @@ class testApp : public ofBaseApp{
         float smoothing;
         float exponent;
     
-    int bufferSize;
-    int bufferCounter;
-    int drawCounter;
+        int bufferSize;
+        int bufferCounter;
+        int drawCounter;
+    
+    bool mAudioPresent;
 };
 
 #endif	
