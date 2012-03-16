@@ -137,6 +137,8 @@ void App::draw(){
 	fx.endGrabPixels();
     fx.draw();
     
+    ofSetColor(255);
+    
     if(doLUT){
         lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
 //		lutImg.draw(lutPos.x, lutPos.y);

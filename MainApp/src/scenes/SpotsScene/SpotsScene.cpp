@@ -40,8 +40,8 @@ void SpotsScene::update() {
         
 //        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
 //        
-        if(it->getPosition().distance(ofGetCenterScreen()) < 300) {
-            it->addRepulsionForce(ofGetCenterScreen(), 0.002);
+        if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
+            it->addRepulsionForce(getCentreCubeScreen(), 0.002);
         }
         
         
@@ -70,7 +70,7 @@ void SpotsScene::addPoints() {
 // ----------------------------------------------------
 void SpotsScene::addShape() {
     if(shapes.size() < maxShapesOnScreen) {
-        ofVec2f pt = ofGetCenterScreen();
+        ofVec2f pt = getCentreCubeScreen();
         float r = ofRandom(5.f, 40.f);
         pt.x += cos(ofRandomuf()*TWO_PI) * r;
         pt.y += sin(ofRandomuf()*TWO_PI) * r;
@@ -148,7 +148,7 @@ void SpotsScene::draw() {
     circleFrc.x = cos(n*TWO_PI) * r;
     circleFrc.y = sin(n*TWO_PI) * r;
     ofSetColor(255, 0, 0);
-    ofCircle(circleFrc+ofGetCenterScreen(), 13);
+    ofCircle(circleFrc+getCentreCubeScreen(), 13);
     
     
     ofSetColor(bgColor);

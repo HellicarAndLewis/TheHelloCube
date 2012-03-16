@@ -64,4 +64,6 @@ public:
     virtual void mouseReleased(int x, int y, int button){};
     
     virtual void generateComplimentaryColours(); //generate complimentaryColours vector of colours that are close to twitterColour
+    
+    virtual ofVec2f getCentreCubeScreen(){ return ofVec2f(CUBE_SCREEN_WIDTH /2.f, CUBE_SCREEN_HEIGHT/2.f);};
 };

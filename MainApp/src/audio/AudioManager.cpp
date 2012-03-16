@@ -38,7 +38,7 @@ void AudioManager::setup(ofBaseApp * app){
 	// 44100 samples per second
 	// 256 samples per buffer
 	// 1 num buffers (latency)
-    mAudioPresent = false; //need to do this sensibly
+    mAudioPresent = true; //need to do this sensibly
     
 	if(mAudioPresent) {
         //if you want to set a different device id 
