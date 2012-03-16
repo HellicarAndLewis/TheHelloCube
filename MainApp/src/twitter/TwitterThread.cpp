@@ -32,9 +32,14 @@ void TwitterThread::fetchMentions() {
 	// -----------------------
 	twitter.statusesMentions(&mentions_params);
 	long resp_code = twitter.getHTTPResponseCode();
-		
+	if(verbose) {
+		printf("------------------------------------\n");
+		twitter.printResponseHeaders();	
+		printf("------------------------------------\n");
+	}
 	if(resp_code != 200) {
 		printf("warning: mentions: wrong response code: %lu\n", resp_code);		
+		
 		return;
 	}
 	
