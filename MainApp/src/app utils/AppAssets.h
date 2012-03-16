@@ -10,6 +10,8 @@
 #define CAM_HEIGHT 720
 #define USE_FX
 
+#define NUM_AUDIO_CHANNELS 6
+
 class AppAssets {
     
 private:

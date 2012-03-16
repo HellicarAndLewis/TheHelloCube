@@ -19,7 +19,7 @@ void TextureScene::setup() {
     // setup box2d
     box2d.init();
     box2d.setGravity(0, 0);
-    box2d.setFPS(60);
+    box2d.setFPS(30);
     
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
@@ -41,14 +41,16 @@ void TextureScene::update() {
         addShape();
     }
     
+    
+    
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         it->update();
         
 
-        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
+        it->addAttractionPoint(circleFrc + getCentreCubeScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
 
-        if(it->getPosition().distance(ofGetCenterScreen()) < 300) {
-            it->addRepulsionForce(ofGetCenterScreen(), 0.002);
+        if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
+            it->addRepulsionForce(getCentreCubeScreen(), 0.002);
         }
         
         
@@ -77,7 +79,7 @@ void TextureScene::addPoints() {
 // ----------------------------------------------------
 void TextureScene::addShape() {
     if(shapes.size() < maxShapesOnScreen) {
-        ofVec2f pt = ofGetCenterScreen();
+        ofVec2f pt = getCentreCubeScreen();
         float r = ofRandom(10, 30);
         pt.x += cos(ofRandomuf()*TWO_PI) * r;
         pt.y += sin(ofRandomuf()*TWO_PI) * r;
@@ -148,7 +150,7 @@ void TextureScene::draw() {
     circleFrc.x = cos(n*TWO_PI) * r;
     circleFrc.y = sin(n*TWO_PI) * r;
     ofSetColor(255, 0, 0);
-    ofCircle(circleFrc+ofGetCenterScreen(), 13);
+    ofCircle(circleFrc+getCentreCubeScreen(), 13);
     
     
     ofSetColor(255);
@@ -239,6 +241,7 @@ void TextureScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	while(cit != cmd.colours.end()) {	
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
+        generateComplimentaryColours();
 		break;
 	}
 }

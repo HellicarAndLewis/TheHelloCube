@@ -13,7 +13,7 @@ void SpotsScene::setup() {
     // setup box2d
     box2d.init();
     box2d.setGravity(0, 0);
-    box2d.setFPS(60);
+    box2d.setFPS(30);
     
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
@@ -40,8 +40,8 @@ void SpotsScene::update() {
         
 //        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
 //        
-        if(it->getPosition().distance(ofGetCenterScreen()) < 300) {
-            it->addRepulsionForce(ofGetCenterScreen(), 0.002);
+        if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
+            it->addRepulsionForce(getCentreCubeScreen(), 0.002);
         }
         
         
@@ -70,15 +70,16 @@ void SpotsScene::addPoints() {
 // ----------------------------------------------------
 void SpotsScene::addShape() {
     if(shapes.size() < maxShapesOnScreen) {
-        ofVec2f pt = ofGetCenterScreen();
-        float r = ofRandom(10, 30);
+        ofVec2f pt = getCentreCubeScreen();
+        float r = ofRandom(5.f, 40.f);
         pt.x += cos(ofRandomuf()*TWO_PI) * r;
         pt.y += sin(ofRandomuf()*TWO_PI) * r;
         
         SpotShape shape;
         shape.setPhysics(1, 0.1, 1);
         shape.setup(box2d.getWorld(), pt, 1);
-        shape.radiusTarget = ofRandom(20, 50);
+        shape.radiusTarget = ofRandom(5.f, 60.f);
+        shape.colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         shapes.push_back(shape);
     }
 }
@@ -130,7 +131,9 @@ void SpotsScene::keyPressed(int key) {
 void SpotsScene::draw() {
     drawBackground(); //just to update the background colour, sloppy           
     
-    ofSetColor(ofColor::black);
+    ofColor peteBack = ofColor(255,242,240);
+    
+    ofSetColor(peteBack);
     ofFill();
     ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     
@@ -145,7 +148,7 @@ void SpotsScene::draw() {
     circleFrc.x = cos(n*TWO_PI) * r;
     circleFrc.y = sin(n*TWO_PI) * r;
     ofSetColor(255, 0, 0);
-    ofCircle(circleFrc+ofGetCenterScreen(), 13);
+    ofCircle(circleFrc+getCentreCubeScreen(), 13);
     
     
     ofSetColor(bgColor);
@@ -163,6 +166,9 @@ void SpotsScene::draw() {
 //        glVertex2f(p.x-r, p.y+r); glTexCoord2f(0, 1);
 //        
         //ofSphere(p, 10);
+        
+        ofSetColor(it->colour);
+        
         ofCircle(p, r); //draw the spot
 //        glEnd();
 //        it->tex->unbind();  
@@ -237,6 +243,7 @@ void SpotsScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	while(cit != cmd.colours.end()) {	
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
+        generateComplimentaryColours();
 		break;
 	}
 }

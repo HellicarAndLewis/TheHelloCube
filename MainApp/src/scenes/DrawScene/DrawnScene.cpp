@@ -54,7 +54,7 @@ void DrawnScene::update() {
     
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
         
-        ofVec2f v = ofGetCenterScreen() -  it->circles.back().getPosition();
+        ofVec2f v = getCentreCubeScreen() -  it->circles.back().getPosition();
         v.normalize();
         
        // it->circles.back().addAttractionPoint(ofGetMouse(), .08);
@@ -223,6 +223,7 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	while(cit != cmd.colours.end()) {	
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
+        generateComplimentaryColours();
 		break;
 	}
 }

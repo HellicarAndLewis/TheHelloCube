@@ -11,6 +11,7 @@ class testApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+        void exit();
 		
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -26,15 +27,26 @@ class testApp : public ofBaseApp{
 	
 		vector <float> left;
 		vector <float> right;
-		vector <float> volHistory;
-		
-		int 	bufferCounter;
-		int 	drawCounter;
-		
-		float smoothedVol;
-		float scaledVol;
+        vector <float> top;
+        vector <float> bottom;
 		
 		ofSoundStream soundStream;
+    
+        //from Marek Project Donk Audio Server...
+    
+        // locking stuff
+        ofMutex audioMutex;
+        float audioFps;
+        float audioPos;
+        float lastTimeSent;
+        float smoothing;
+        float exponent;
+    
+        int bufferSize;
+        int bufferCounter;
+        int drawCounter;
+    
+        bool mAudioPresent;
 };
 
 #endif	

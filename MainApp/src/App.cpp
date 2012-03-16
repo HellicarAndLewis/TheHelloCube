@@ -16,6 +16,7 @@ void App::setup() {
 	vidGrabber.initGrabber(camWidth, camHeight);  
     
     audioManager.setup(this);
+    drawAudio = false;
     
     //now LUTs
     
@@ -136,6 +137,8 @@ void App::draw(){
 	fx.endGrabPixels();
     fx.draw();
     
+    ofSetColor(255);
+    
     if(doLUT){
         lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
 //		lutImg.draw(lutPos.x, lutPos.y);
@@ -149,6 +152,10 @@ void App::draw(){
 	}else {
         vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
 	}
+    
+    if(drawAudio){
+        audioManager.draw();
+    }
    
 	if(twitter.getSimulator().take_screenshot) {	
 		rtt::Tweet tweet;
@@ -177,7 +184,6 @@ void App::draw(){
 		}
 		twitter.getSimulator().take_screenshot = false;
 	}
-
     
     // draw some stats about the app...
     ofEnableAlphaBlending();
@@ -206,28 +212,23 @@ void App::changeScene(int scene) {
 
 //--------------------------------------------------------------
 void App::keyPressed(int key) {
-    
-    
-    // scene changing
-    if(key == OF_KEY_RIGHT) sceneIndex++;
-    if(key == OF_KEY_LEFT)  sceneIndex--;
-    sceneIndex %= (int)scenes.size();
-    if(sceneIndex < 0) sceneIndex = scenes.size()-1;
-    
-    changeScene(sceneIndex);
-    
-    if(currentScene!=NULL)currentScene->keyPressed(key);
-    
-    // for exporting a screen grab
-    if(key == 'E') {
-        ofSaveScreen("exports/"+ofToString(ofGetUnixTime())+".png");
-    }
-    
-    // fullscreen or not
-    if(key == 'f') ofToggleFullscreen();
-    
-    switch (key) { //JGL should clean this up
-		case 'L':
+    switch (key) { 
+        case 'a': 
+			drawAudio = !drawAudio;
+			break; 
+        case OF_KEY_RIGHT:  //scene changing
+			sceneIndex++;
+			break;              
+        case OF_KEY_LEFT:
+			sceneIndex--;
+			break;              
+        case 'e': // for exporting a screen grab
+			ofSaveScreen("exports/"+ofToString(ofGetUnixTime())+".png");
+			break;            
+        case 'f':
+			ofToggleFullscreen();
+			break;
+		case 'l':
 			doLUT^=true;
 			break;
 		case OF_KEY_UP:
@@ -248,6 +249,13 @@ void App::keyPressed(int key) {
 		default:
 			break;
 	}  
+    
+    sceneIndex %= (int)scenes.size();
+    if(sceneIndex < 0) sceneIndex = scenes.size()-1;
+    
+    changeScene(sceneIndex);
+    
+    if(currentScene!=NULL)currentScene->keyPressed(key);
 }
 
 //--------------------------------------------------------------
@@ -350,4 +358,8 @@ void App::applyLUT(ofPixelsRef pix){
 void App::audioIn(float * input, int bufferSize, int nChannels){
     audioManager.audioIn(input, bufferSize, nChannels);
     
+}
+
+void App::exit(){
+    audioManager.exit();
 }
