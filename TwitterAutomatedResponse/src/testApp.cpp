@@ -18,18 +18,18 @@ void testApp::setup() {
 	mentions_params["count"] = 10;
 	
 	
-	bool use_test_account = true;
+	bool use_test_account = false;
 	if(use_test_account) {
 		// test account.
-		twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
-		twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
-		tokens_file = ofToDataPath("twitter_roxlutest.txt", true);
+		twitter.setConsumerKey("jVENEu6j6bEPnY3LQsPYA");
+		twitter.setConsumerSecret("IGP9D4Ov2BoJYAhCqEY0iOgEoFARLQlk3qUuuCJ8");
+		tokens_file = ofToDataPath("twitter_roxlutest_responder.txt", true);
 	}
 	else {
-		// thehellocube account
-		twitter.setConsumerKey("C8YVIwfx5YIUbSlo9jEcw");
-		twitter.setConsumerSecret("YOlD5AW0S8wmaDoGzMp09KQxd08M3cuT6kySPdeGfA");
-		tokens_file = ofToDataPath("twitter_thehellocube.txt", true);
+		// thehellocube account, TheHelloCubeResponder app.
+		twitter.setConsumerKey("jVENEu6j6bEPnY3LQsPYA");
+		twitter.setConsumerSecret("IGP9D4Ov2BoJYAhCqEY0iOgEoFARLQlk3qUuuCJ8");
+		tokens_file = ofToDataPath("twitter_thehellocube_responder.txt", true);
 	}
 	
 	if(!twitter.loadTokens(tokens_file)) {
