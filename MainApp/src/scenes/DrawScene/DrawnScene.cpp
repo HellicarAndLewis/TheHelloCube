@@ -42,6 +42,7 @@ void DrawnScene::setup() {
         v.triImg = &tris[ranTriIndex];
         v.pullForce.set(0, 2);
         v.make(x, 0, Viner::TOP, box2d);
+        v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         vines.push_back(v);
     }
     
@@ -54,6 +55,7 @@ void DrawnScene::setup() {
         v.triImg = &tris[ranTriIndex];
         v.pullForce.set(0, -2);
         v.make(x, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
+        v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         vines.push_back(v);
     }
     
@@ -90,6 +92,8 @@ void DrawnScene::addBush(float startX) {
         v.dotImg = &dots[ranDotImg];
         v.pullForce.set(0, -2);
         v.make(ofRandom(-10, 10)+startX, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
+        v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
+
         vines.push_back(v);
         
     }
@@ -132,17 +136,6 @@ void DrawnScene::update() {
     bgColor.setHex(0xE1E3D3);
     ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
 
-    for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
-        
-        for(int i=0; i<it->joints.size(); ++i) {
-            it->joints[i].setFrequency(frequency);
-            it->joints[i].setDamping(damping);
-        }
-        
-        
-    }
-    
-    
     // Poop 
     for(vector<VinePoop>::iterator it=poop.begin(); it!=poop.end(); ++it) {
         
@@ -168,7 +161,15 @@ void DrawnScene::update() {
 
     }    
     
+    
+    // Vines
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
+        
+        for(int i=0; i<it->joints.size(); ++i) {
+            it->joints[i].setFrequency(frequency);
+            it->joints[i].setDamping(damping);
+        }
+        
         
         ofVec2f v = getCentreCubeScreen() -  it->circles.back().getPosition();
         v.normalize();

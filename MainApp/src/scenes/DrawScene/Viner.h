@@ -33,7 +33,7 @@ public:
     ofVec2f                         pullForce;
     int                             location;
     int                             type;
-    
+    ofColor                         color, colorDes;
     ofImage * dotImg;
     ofImage * triImg;
     float dotSize;
@@ -52,7 +52,11 @@ public:
         dotImg = NULL;
         triImg = NULL;
         bAddPopForceThisFrame = false;
+        
+
     }
+    
+    
     // -------------------------------------------------------
     void make(float x, float y, int loc, ofxBox2d &box2d) {
         
@@ -145,6 +149,10 @@ public:
         
         dotSize += (dotSizeD-dotSize) * 0.1;
         
+        color.r += (colorDes.r - color.r) * 0.2;
+        color.g += (colorDes.g - color.g) * 0.2;
+        color.b += (colorDes.b - color.b) * 0.2;
+        
         // ofXeno(dotSize, dotSizeD, 0.2);
         
         /*
@@ -225,7 +233,7 @@ public:
                 // ofLine(a, a-(perp*10));
                 
                 if(triImg != NULL) {
-                    ofSetColor(255);
+                    ofSetColor(color);
                         
                     if(location == BOTTOM) {
                         float triScale = ofMap(i, 1, circles.size()-1, 0.5, 0.2);
@@ -272,7 +280,7 @@ public:
                 }
                 
                 
-                ofSetColor(0);
+                ofSetColor(color);
                 glLineWidth(2);
                 glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
                 glEnableClientState(GL_VERTEX_ARRAY);
@@ -283,7 +291,7 @@ public:
                 glLineWidth(1);
             }
             else {
-                ofSetColor(0);
+                ofSetColor(color);
                 glLineWidth(2);
                 glEnableClientState(GL_VERTEX_ARRAY);
                 glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
