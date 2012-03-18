@@ -449,6 +449,11 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
         generateComplimentaryColours();
+        
+        for(int i=0; i<vines.size(); i++) {
+            vines[i].colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
+        }
+        
 		break;
 	}
 }
