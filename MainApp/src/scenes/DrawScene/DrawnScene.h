@@ -34,11 +34,18 @@ public:
 class VinePoop : public ofxBox2dCircle {
 public:
     VinePoop() {
-        size = 1;
+        dotSize = 1;
+        dotSizeD = 1;
         img = NULL;
+        birthdate = ofGetElapsedTimef();
+        bFade =false;
+        alpha = 255;
     }
   
-    float size;
+    bool bFade;
+    float alpha;
+    float birthdate;
+    float dotSize, dotSizeD;
     ofImage * img;
     
 };
@@ -52,7 +59,6 @@ protected:
 public:
     
     ofxBox2d        box2d;
-    vector <Viner>  vines;
     
     ofxFloatSlider  damping;
     ofxFloatSlider  frequency;
@@ -66,10 +72,13 @@ public:
     VectorField field;
     
     // chasers and the stuff that comes out of them
+    void makePoop();
     void addChasers();
     void addBush(float startX);
-    vector <Chaser> chasers;
-    vector <VinePoop> poop;
+    vector <Chaser>     chasers;
+    vector <VinePoop>   poop;
+    vector <Viner>      vines;
+    vector <Viner*>     poopVines;
     
     // images
     vector <ofImage> tris;

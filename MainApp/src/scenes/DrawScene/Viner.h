@@ -37,12 +37,21 @@ public:
     ofImage * dotImg;
     ofImage * triImg;
     float dotSize;
+    float dotSizeD;
+    bool  bPop;
+    bool  bAddPopForceThisFrame;
+
     Viner() {
-        dotSize = ofRandom(.03, 0.2);
+        
+        dotSizeD = ofRandom(.03, 0.2);
+        dotSize  = 0;
+        bPop     = false;
+        
         //default
         type = THICK;
         dotImg = NULL;
         triImg = NULL;
+        bAddPopForceThisFrame = false;
     }
     // -------------------------------------------------------
     void make(float x, float y, int loc, ofxBox2d &box2d) {
@@ -134,6 +143,18 @@ public:
     // -------------------------------------------------------
     void update() {
         
+        dotSize += (dotSizeD-dotSize) * 0.1;
+        
+        // ofXeno(dotSize, dotSizeD, 0.2);
+        
+        /*
+        vine->dotSize  = 0;
+        vine->dotSizeD = ofRandom(.03, 0.2);
+        vine->dotImg   = &dots[(int)ofRandomIndex(dots)];
+        
+        if(bPop && abs(dotSize-dotSizeD) < 0.1) {
+            bPop = false;
+        }*/
     }
     
     // -------------------------------------------------------
@@ -187,6 +208,14 @@ public:
                 ofVec2f pa = b + perp;
                 ofVec2f pb = b - perp;
                 
+                if(location == TOP) {
+                    pa.y -= 20;
+                    pb.y -= 20;
+                }
+                else if(location == BOTTOM) {
+                    pa.y += 20;
+                    pb.y += 20;
+                }
                 
                 verts.push_back(pa);
                 verts.push_back(pb);
@@ -206,7 +235,7 @@ public:
                         
                         triImg->setAnchorPoint(offx, offy);
                         ofPushMatrix();
-                        ofTranslate(b.x, b.y);
+                        ofTranslate(b.x, b.y+20);
                         ofRotate(angle);
                         ofPushStyle();
                         ofSetRectMode(OF_RECTMODE_CENTER);
@@ -218,7 +247,7 @@ public:
                         
                         triImg->setAnchorPoint(offx, offy);
                         ofPushMatrix();
-                        ofTranslate(b.x, b.y+r);
+                        ofTranslate(b.x, b.y+20);
                         ofRotate(angle+180);
                         ofPushStyle();
                         ofSetRectMode(OF_RECTMODE_CENTER);

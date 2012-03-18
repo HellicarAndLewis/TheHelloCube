@@ -49,7 +49,7 @@ void DrawnScene::setup() {
     nVines = 3;
     ranTriIndex = ofRandomIndex(tris);
     for(int i=0; i<nVines; i++) {
-        float x = ofRandom(100, CUBE_SCREEN_WIDTH-100);
+        float x = ofMap(i, 0, nVines-1, 100, CUBE_SCREEN_WIDTH-100) + ofRandom(-50, 50);
         Viner v;
         v.triImg = &tris[ranTriIndex];
         v.pullForce.set(0, -2);
@@ -59,12 +59,24 @@ void DrawnScene::setup() {
     
 
     addBush(30);
-    addBush(CUBE_SCREEN_WIDTH/2);    
+    addBush(500);    
     addBush(CUBE_SCREEN_WIDTH-300);
     
     field.setupField(60, 60, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     field.randomizeField(3);
     field.fadeField(0.8);
+    
+    bgColor.setHex(0xE1E3D3);
+    
+    
+    // get all the bushes
+    for(int i=0; i<vines.size(); i++) {
+        
+        if(vines[i].type == Viner::LINER) {
+            poopVines.push_back(&vines[i]);
+        }
+    
+    }
 }
 
 
@@ -79,14 +91,47 @@ void DrawnScene::addBush(float startX) {
         v.pullForce.set(0, -2);
         v.make(ofRandom(-10, 10)+startX, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
         vines.push_back(v);
+        
     }
     
 }
 
 
 // ----------------------------------------------------
+void DrawnScene::makePoop() {
+    if(poop.size() < 50) {
+        int ranVine  = ofRandomIndex(poopVines);
+        
+        Viner * vine = poopVines[ranVine];
+        if(vine->type == Viner::LINER) {
+            int nPoops = 2;
+            for(int i=0; i<nPoops; i++) {
+                
+                
+                ofVec2f pt = vine->circles.back().getPosition();
+                float   r  = (vine->dotImg->getWidth() * vine->dotSize)/2;
+                
+                VinePoop p;
+                p.setPhysics(0.2, 0.2, 0.9);
+                p.setup(box2d.getWorld(), pt.x, pt.y, r);
+                p.img = vine->dotImg;
+                p.dotSizeD = vine->dotSizeD;
+                p.dotSize  = vine->dotSizeD;
+                
+                poop.push_back(p);
+                
+            }
+            vine->bPop = true;
+        }
+    }
+}
+
+// ----------------------------------------------------
 void DrawnScene::update() {
-	
+
+    bgColor.setHex(0xE1E3D3);
+    ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
         
         for(int i=0; i<it->joints.size(); ++i) {
@@ -98,6 +143,30 @@ void DrawnScene::update() {
     }
     
     
+    // Poop 
+    for(vector<VinePoop>::iterator it=poop.begin(); it!=poop.end(); ++it) {
+        
+        ofVec2f frc;
+        int nFrc = 0;
+        ofVec2f pos = it->getPosition();
+        ofVec2f vel = it->getVelocity();
+        
+        float   r   = it->getRadius();
+        for(vector<Chaser>::iterator itC=chasers.begin(); itC!=chasers.end(); ++itC) {
+            ofVec2f vec = itC->pos - pos;
+            if(vec.length() <  r*2) {
+                vec.normalize();
+                frc += vec;
+                ++nFrc;
+            }
+        }
+        if(nFrc > 0) {
+            frc /= nFrc;
+        }
+        it->addForce(frc, 1);
+        field.addVectorCircle(pos.x, pos.y, vel.x, vel.y, r*2, .1);
+
+    }    
     
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
         
@@ -121,6 +190,18 @@ void DrawnScene::update() {
             frc /= nFrc;
         }
         it->circles.back().addForce(frc, 1);
+        
+        if(it->bPop) {
+            
+            it->dotSize  = 0;
+            it->dotSizeD = ofRandom(.03, 0.2);
+            it->dotImg   = &dots[(int)ofRandomIndex(dots)];
+            
+            it->bPop = false;
+            
+        }
+        
+        it->update();
 
     }   
     
@@ -183,7 +264,7 @@ void DrawnScene::update() {
 		it->vel += it->frc;
         it->pos += it->vel;
         
-        it->bRemove = isPointInScreen(it->pos) == false;
+        it->bRemove = !screen.inside(it->pos);
         
         field.addVectorCircle(it->pos.x, it->pos.y, it->vel.x, it->vel.y, 30, .1);
         
@@ -214,7 +295,7 @@ void DrawnScene::draw() {
     float scalex = (float)field.externalWidth / (float)field.fieldWidth;
     float scaley = (float)field.externalHeight / (float)field.fieldHeight;
     
-    ofSetColor(0);
+    ofSetColor(150);
     for (int i = 0; i < field.fieldWidth; i++){
         for (int j = 0; j < field.fieldHeight; j++){
             
@@ -227,19 +308,7 @@ void DrawnScene::draw() {
             float py2 = py + field.field[pos].y * 5;
             
             ofLine(px,py, px2, py2);
-            
-            
-            // draw an baseline to show direction
-            // get the line as vector, calculate length, then normalize. 
-            // rotate and draw based on length
-            /*
-            ofVec2f line;
-            line.set(px2-px, py2-py);
-            float length = line.length();
-            line.normalize();
-            line.rotate(90);  // these are angles in degrees
-            ofLine(px - line.x*length*0.2, py - line.y*length*0.2, px + line.x*length*0.2, py + line.y*length*0.2);
-            */
+          
             
         }
     }
@@ -288,35 +357,49 @@ void DrawnScene::draw() {
         it->drawAsVine();
     }
     
-    
+    ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     for(vector<VinePoop>::iterator it=poop.begin(); it!=poop.end(); ++it) {
       
-        /*
-        float angle = ofRadToDeg( atan2(it->vel.y, it->vel.x) );
-        it->rotation += (angle-it->rotation) * 0.3;
+        float r = it->getRadius() * 2;
+        ofVec2f pos = it->getPosition();
         ofEnableAlphaBlending();
-        ofSetColor(255);
+        ofSetColor(255, it->alpha);
         ofPushMatrix();
-        ofTranslate(it->pos);
-        ofRotate(it->rotation);
+        ofTranslate(pos);
+        ofRotate(it->getRotation());
         ofPushStyle();
         ofSetRectMode(OF_RECTMODE_CENTER);
-        eyeA.draw(0, 0, it->radius, it->radius * eyeRatio);
+        it->img->draw(0, 0, r, r);
         ofPopStyle();
         ofPopMatrix();
-        */
+        
+        float age = ofGetElapsedTimef() - it->birthdate;
+        if(!screen.inside(pos.x, pos.y)) {
+            it->alive  = false;
+            it->dead   = true;
+        }
+        
+        if(age > 10 && it->alpha>0){
+            it->alpha -= 3.0;
+            if(it->alpha <= 0) {
+                it->alive  = false;
+                it->dead   = true;
+            }
+        }
     }
+    ofRemove(poop, ofxBox2dBaseShape::shouldRemove);
     
     gui.draw();
     
     if((int)ofRandom(0, 40)==10) addChasers();
+    if((int)ofRandom(0, 4)==2)   makePoop();
 }
 
 // ----------------------------------------------------
 void DrawnScene::keyPressed(int key) {
     
-    if(key == 'b') {
-        bgColorTarget = ofRandomColor();
+    if(key == 'g') {
+        addChasers();
     }
     
     if(key == ' ') {
@@ -335,9 +418,11 @@ void DrawnScene::keyPressed(int key) {
         //vines[ranVine].joints.erase( vines[ranVine].joints.begin() + ranJoint );// + ranJoint);
     }
     
-    if(key == 'c') {
-        addChasers();
+    if(key == 'p') {
+        makePoop();
+
     }
+    
 }
 
 
