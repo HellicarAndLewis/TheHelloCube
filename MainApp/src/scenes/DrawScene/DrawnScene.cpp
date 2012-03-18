@@ -12,32 +12,77 @@ void DrawnScene::setup() {
     gui.add(damping.setup("damping", 1, 0.0003, 1.0));
     
     
-    bgColorTarget = ofRandomColor();
     
-	box2d.init();
+	// box2d
+    box2d.init();
 	box2d.setGravity(0, 0);
 	box2d.setFPS(30.0);
-
+    
+    // images
+    eyeA.loadImage("graphics/drawn/eye_002.png");
+    eyeRatio = (eyeA.getHeight()/eyeA.getWidth());
+    
+    for(int i=0; i<6; i++) {
+        dots.push_back(ofImage());
+        dots.back().loadImage("graphics/drawn/dot_"+ofToString(i)+".png");
+    }
+    
+    for(int i=0; i<3; i++) {
+        tris.push_back(ofImage());
+        tris.back().loadImage("graphics/drawn/triangle_"+ofToString(i)+".png");
+    }
+    
+    
 	// TOP
     int nVines = 20;
+    int ranTriIndex = ofRandomIndex(tris);
     for(int i=0; i<nVines; i++) {
         float x = ofMap(i, 0, nVines-1, 20, CUBE_SCREEN_WIDTH-20);
         Viner v;
+        v.triImg = &tris[ranTriIndex];
         v.pullForce.set(0, 2);
         v.make(x, 0, Viner::TOP, box2d);
         vines.push_back(v);
     }
     
     // BOTTOM
-    nVines = 10;
+    nVines = 3;
+    ranTriIndex = ofRandomIndex(tris);
     for(int i=0; i<nVines; i++) {
-        float x = ofMap(i, 0, nVines-1, 20, CUBE_SCREEN_WIDTH-20);
+        float x = ofRandom(100, CUBE_SCREEN_WIDTH-100);
         Viner v;
+        v.triImg = &tris[ranTriIndex];
         v.pullForce.set(0, -2);
         v.make(x, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
         vines.push_back(v);
     }
+    
+
+    addBush(30);
+    addBush(CUBE_SCREEN_WIDTH/2);    
+    addBush(CUBE_SCREEN_WIDTH-300);
+    
+    field.setupField(60, 60, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    field.randomizeField(3);
+    field.fadeField(0.8);
 }
+
+
+// ----------------------------------------------------
+void DrawnScene::addBush(float startX) {
+    int n = ofRandom(3, 10);
+    int ranDotImg = ofRandomIndex(dots);
+    for(int i=0; i<n; i++) {
+        Viner v;
+        v.type = Viner::LINER;
+        v.dotImg = &dots[ranDotImg];
+        v.pullForce.set(0, -2);
+        v.make(ofRandom(-10, 10)+startX, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
+        vines.push_back(v);
+    }
+    
+}
+
 
 // ----------------------------------------------------
 void DrawnScene::update() {
@@ -51,6 +96,8 @@ void DrawnScene::update() {
         
         
     }
+    
+    
     
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
         
@@ -108,9 +155,27 @@ void DrawnScene::update() {
         }
         
         
+        ofVec2f avoidFrc = 0;
+        int nAvoidFrc = 0;
+        for(vector<Chaser>::iterator other=it; other!=chasers.end(); ++other) {
+            ofVec2f vec = other->pos - it->pos;
+            float minDis = 50;
+            if(vec.length() < minDis) {
+                vec.normalize();
+                avoidFrc -= vec; // avoid
+                ++nAvoidFrc;
+            }
+        }    
+        if(nAvoidFrc > 0) {
+            avoidFrc /= nAvoidFrc;
+            avoidFrc *= 1.2;
+        }
+        
+        
         // add forces
         it->frc += noiseFrc;        
-        it->frc += vineFrc;        
+        it->frc += vineFrc;
+        it->frc += avoidFrc;
         it->frc.limit(3.0);
         
         // applu the forces
@@ -120,19 +185,23 @@ void DrawnScene::update() {
         
         it->bRemove = isPointInScreen(it->pos) == false;
         
+        field.addVectorCircle(it->pos.x, it->pos.y, it->vel.x, it->vel.y, 30, .1);
+        
+        
     }
     ofRemove(chasers, Particle::shouldRemove);
 
-    
     box2d.update();	
+    
+    field.fadeField(0.98);
 }
 
 // ----------------------------------------------------
 void DrawnScene::addChasers() {
     
     Chaser p;
-    p.radius = 3;
-    p.setPosition(0, ofRandom(-300, 300) + CUBE_SCREEN_HEIGHT/2);
+    p.radius = ofRandom(20, 50);
+    p.setPosition(ofRandom(CUBE_SCREEN_WIDTH), ofRandom(-300, 300) + CUBE_SCREEN_HEIGHT/2);
     
     chasers.push_back(p);
 }
@@ -141,9 +210,45 @@ void DrawnScene::addChasers() {
 void DrawnScene::draw() {
     
     drawBackground();
+
+    float scalex = (float)field.externalWidth / (float)field.fieldWidth;
+    float scaley = (float)field.externalHeight / (float)field.fieldHeight;
     
- 
+    ofSetColor(0);
+    for (int i = 0; i < field.fieldWidth; i++){
+        for (int j = 0; j < field.fieldHeight; j++){
+            
+            // pos in array
+            int pos = j * field.fieldWidth + i;
+            // pos externally
+            float px = 	i * scalex;
+            float py = 	j * scaley;
+            float px2 = px + field.field[pos].x * 5;
+            float py2 = py + field.field[pos].y * 5;
+            
+            ofLine(px,py, px2, py2);
+            
+            
+            // draw an baseline to show direction
+            // get the line as vector, calculate length, then normalize. 
+            // rotate and draw based on length
+            /*
+            ofVec2f line;
+            line.set(px2-px, py2-py);
+            float length = line.length();
+            line.normalize();
+            line.rotate(90);  // these are angles in degrees
+            ofLine(px - line.x*length*0.2, py - line.y*length*0.2, px + line.x*length*0.2, py + line.y*length*0.2);
+            */
+            
+        }
+    }
+    
+    
+    
+    
     for(vector<Chaser>::iterator it=chasers.begin(); it!=chasers.end(); ++it) {
+        
         
         it->nConnections = 0;
 
@@ -153,14 +258,28 @@ void DrawnScene::draw() {
                 ofVec2f b = itB->pos;
                 if(a.distance(b) < 20) {
                     it->nConnections ++;
+                    ofSetColor(0);
                     ofLine(it->pos, itB->pos);
                 }
             }
         }
         
-        ofSetColor(0);
-        ofNoFill();
-        it->draw();
+        //ofSetColor(0);
+        //ofNoFill();
+        //it->draw();
+        
+        float angle = ofRadToDeg( atan2(it->vel.y, it->vel.x) );
+        it->rotation += (angle-it->rotation) * 0.3;
+        ofEnableAlphaBlending();
+        ofSetColor(255);
+        ofPushMatrix();
+        ofTranslate(it->pos);
+        ofRotate(it->rotation);
+        ofPushStyle();
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        eyeA.draw(0, 0, it->radius, it->radius * eyeRatio);
+        ofPopStyle();
+        ofPopMatrix();
     }
 
     
@@ -169,8 +288,28 @@ void DrawnScene::draw() {
         it->drawAsVine();
     }
     
+    
+    for(vector<VinePoop>::iterator it=poop.begin(); it!=poop.end(); ++it) {
+      
+        /*
+        float angle = ofRadToDeg( atan2(it->vel.y, it->vel.x) );
+        it->rotation += (angle-it->rotation) * 0.3;
+        ofEnableAlphaBlending();
+        ofSetColor(255);
+        ofPushMatrix();
+        ofTranslate(it->pos);
+        ofRotate(it->rotation);
+        ofPushStyle();
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        eyeA.draw(0, 0, it->radius, it->radius * eyeRatio);
+        ofPopStyle();
+        ofPopMatrix();
+        */
+    }
+    
     gui.draw();
     
+    if((int)ofRandom(0, 40)==10) addChasers();
 }
 
 // ----------------------------------------------------

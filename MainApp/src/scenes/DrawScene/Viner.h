@@ -21,27 +21,51 @@ public:
         RIGHT
     };
     
+    enum {
+        LINER,
+        THICK
+    };
+    
     // -------------------------------------------------------
     ofxBox2dCircle					anchor;			  
     vector		<ofxBox2dCircle>	circles;		  
     vector		<ofxBox2dJoint>		joints;
     ofVec2f                         pullForce;
     int                             location;
+    int                             type;
     
+    ofImage * dotImg;
+    ofImage * triImg;
+    float dotSize;
+    Viner() {
+        dotSize = ofRandom(.03, 0.2);
+        //default
+        type = THICK;
+        dotImg = NULL;
+        triImg = NULL;
+    }
     // -------------------------------------------------------
     void make(float x, float y, int loc, ofxBox2d &box2d) {
         
         location = loc;
         anchor.setup(box2d.getWorld(), x, y, 4);
         
-        int nStart = (int)ofRandom(3, 10);
+        int nStart = (int)ofRandom(3, 15);
+        
+        if(type == LINER) {
+            nStart = 4;
+        }
+        
+        if(loc == BOTTOM) {
+            nStart = ofRandom(10, 15);
+        }
         
         // first we add just a few circles
         for (int i=0; i<nStart; i++) {
             
             ofxBox2dCircle circle;
             circle.setPhysics(3.0, 0.53, 0.1);
-           
+            
             float ypos = 0;
             if(location == TOP) {
                 ypos = y+(i*20);
@@ -58,7 +82,7 @@ public:
             
             circle.setup(box2d.getWorld(), x, ypos, 3);
             circles.push_back(circle);
-        
+            
         }
         
         // now connect each circle with a joint
@@ -73,7 +97,7 @@ public:
             else {
                 joint.setup(box2d.getWorld(), circles[i-1].body, circles[i].body, BOX2D_DEFAULT_FREQ, BOX2D_DEFAULT_DAMPING, false);
             }
-          
+            
             joint.setLength(20);
             joints.push_back(joint);
         }
@@ -133,74 +157,137 @@ public:
     // -------------------------------------------------------
     void drawAsVine() {
         
-        vector <ofVec2f> verts;
-        ofVec2f firstPt = anchor.getPosition();
-        
-
-        //verts.push_back(ofVec2f(firstPt.x-20, firstPt.y));
-        //verts.push_back(ofVec2f(firstPt.x+20, firstPt.y));
-        
-        ofVec2f a, b;
-        
-        for(int i=0; i<circles.size(); i++) {
+        if(type == THICK) {
+            vector <ofVec2f> verts;
+            ofVec2f firstPt = anchor.getPosition();
             
-
-            a   = circles[i].getPosition();
-            if(i == 0) {
-                b = anchor.getPosition();
+            
+            //verts.push_back(ofVec2f(firstPt.x-20, firstPt.y));
+            //verts.push_back(ofVec2f(firstPt.x+20, firstPt.y));
+            
+            ofVec2f a, b;
+            
+            for(int i=0; i<circles.size(); i++) {
+                
+                
+                a   = circles[i].getPosition();
+                if(i == 0) {
+                    b = anchor.getPosition();
+                }
+                else {
+                    b = circles[i-1].getPosition();
+                }
+                
+                ofVec2f vec = a - b;
+                ofVec2f perp = vec.perpendicular();
+                
+                float r = ofMap(i, 1, circles.size()-1, 10, 4);
+                perp *= r*2;
+                
+                ofVec2f pa = b + perp;
+                ofVec2f pb = b - perp;
+                
+                
+                verts.push_back(pa);
+                verts.push_back(pb);
+                //            verts.push_back(pb);
+                
+                // ofLine(a, a+(perp*10));
+                // ofLine(a, a-(perp*10));
+                
+                if(triImg != NULL) {
+                    ofSetColor(255);
+                        
+                    if(location == BOTTOM) {
+                        float triScale = ofMap(i, 1, circles.size()-1, 0.5, 0.2);
+                        float angle = ofRadToDeg( atan2(perp.y, perp.x) );
+                        float offx  = -(((triImg->getWidth()*triScale)/2) + r);
+                        float offy  = (triImg->getHeight()*triScale)/2;
+                        
+                        triImg->setAnchorPoint(offx, offy);
+                        ofPushMatrix();
+                        ofTranslate(b.x, b.y);
+                        ofRotate(angle);
+                        ofPushStyle();
+                        ofSetRectMode(OF_RECTMODE_CENTER);
+                        triImg->draw(0, offy+r, triImg->getWidth()*triScale, triImg->getHeight()*triScale);
+                        ofPopStyle();
+                        ofPopMatrix();
+                        triImg->resetAnchor();
+                        
+                        
+                        triImg->setAnchorPoint(offx, offy);
+                        ofPushMatrix();
+                        ofTranslate(b.x, b.y+r);
+                        ofRotate(angle+180);
+                        ofPushStyle();
+                        ofSetRectMode(OF_RECTMODE_CENTER);
+                        triImg->draw(0, 0, triImg->getWidth()*triScale, triImg->getHeight()*triScale);
+                        ofPopStyle();
+                        ofPopMatrix();
+                        triImg->resetAnchor();
+                        
+                    
+                    
+                    }
+                }
+            }
+            
+            if(location==TOP) {
+                vector <ofVec2f> linestrip;
+                for(int i=0; i<verts.size(); i++) {
+                    if(i%2==0) linestrip.push_back(verts[i]);   
+                }
+                for(int i=verts.size()-1; i>=0; i--) {
+                    if(i%2==1) linestrip.push_back(verts[i]);   
+                }
+                
+                
+                ofSetColor(0);
+                glLineWidth(2);
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                glEnableClientState(GL_VERTEX_ARRAY);
+                glVertexPointer(2, GL_FLOAT, 0, &linestrip[0]);
+                glDrawArrays(GL_LINE_STRIP, 0, (int)linestrip.size());
+                glDisableClientState(GL_VERTEX_ARRAY);
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);        
+                glLineWidth(1);
             }
             else {
-                b = circles[i-1].getPosition();
+                ofSetColor(0);
+                glLineWidth(2);
+                glEnableClientState(GL_VERTEX_ARRAY);
+                glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
+                glDrawArrays(GL_QUAD_STRIP, 0, (int)verts.size());
+                glDisableClientState(GL_VERTEX_ARRAY);
+                glLineWidth(1);
+            }
+        }
+        
+        else if(type == LINER) {
+            
+            ofSetColor(0);
+            ofNoFill();
+            ofBeginShape();
+            ofPoint anc = anchor.getPosition();
+            ofVertex(anc);
+            for(int i=0; i<circles.size(); i++) {
+                ofPoint a   = circles[i].getPosition();
+                ofVertex(a);
+            }
+            ofEndShape();
+            
+            if(dotImg!=NULL) {
+                ofPushStyle();
+                ofSetColor(255);
+                ofEnableAlphaBlending();
+                ofSetRectMode(OF_RECTMODE_CENTER);
+                ofPoint dp = getHead()->getPosition();
+                dotImg->draw(dp, dotImg->getWidth()*dotSize, dotImg->getHeight()*dotSize);
+                ofPopStyle();
             }
             
-            ofVec2f vec = a - b;
-            ofVec2f perp = vec.perpendicular();
-           
-            float r = ofMap(i, 1, circles.size()-1, 10, 4);
-            perp *= r;
-            
-            ofVec2f pa = b + perp;
-            ofVec2f pb = b - perp;
-            
-            
-            verts.push_back(pa);
-            verts.push_back(pb);
-            //            verts.push_back(pb);
-
-           // ofLine(a, a+(perp*10));
-           // ofLine(a, a-(perp*10));
-        }
-        
-        
-        for(int i=1; i<circles.size(); i++) {
-            ofVec2f a   = circles[i].getPosition();
-            ofVec2f b   = circles[i-1].getPosition();
-            ofSetColor(100, 0, 0);
-            ofLine(a, b);
-        }
-        
-        ofSetColor(0);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glVertexPointer(2, GL_FLOAT, 0, &verts[0]);
-        glDrawArrays(GL_QUAD_STRIP, 0, (int)verts.size());
-        glDisableClientState(GL_VERTEX_ARRAY);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);        
-        
-        return;
-        ofSetHexColor(0xf2ab01);
-        anchor.draw();
-        
-        for(int i=0; i<circles.size(); i++) {
-            ofFill();
-            ofSetHexColor(0x01b1f2);
-            circles[i].draw();
-        }
-        
-        for(int i=0; i<joints.size(); i++) {
-            ofSetHexColor(0x444342);
-            joints[i].draw();
         }
     }
-
+    
 };

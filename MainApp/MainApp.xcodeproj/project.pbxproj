@@ -111,6 +111,7 @@
 		5F615422150BE56D009BCA78 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61541C150BE56D009BCA78 /* tinyxmlparser.cpp */; };
 		5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61541E150BE56D009BCA78 /* ofxXmlSettings.cpp */; };
 		5F624CF11501791B0081827B /* TexturedShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F624CF01501791B0081827B /* TexturedShape.cpp */; };
+		5FB33B071515605300A87F16 /* VectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FB33B051515605300A87F16 /* VectorField.cpp */; };
 		5FE8944B14FDD56B002C15D0 /* ofxTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8943B14FDD56B002C15D0 /* ofxTimer.cpp */; };
 		5FE8944C14FDD56B002C15D0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8943F14FDD56B002C15D0 /* Utils.cpp */; };
 		5FE8945C14FDD586002C15D0 /* BaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8944E14FDD586002C15D0 /* BaseScene.cpp */; };
@@ -491,6 +492,8 @@
 		5F7BE6CB15058D2500F8495B /* GeometryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryUtils.h; sourceTree = "<group>"; };
 		5F8B9259150D2C2300F811EF /* Viner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viner.h; sourceTree = "<group>"; };
 		5F8ED670150BCB5F0082F12D /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
+		5FB33B051515605300A87F16 /* VectorField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorField.cpp; sourceTree = "<group>"; };
+		5FB33B061515605300A87F16 /* VectorField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorField.h; sourceTree = "<group>"; };
 		5FE6CE1D150A841F00C31FF2 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		5FE8943B14FDD56B002C15D0 /* ofxTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimer.cpp; sourceTree = "<group>"; };
 		5FE8943C14FDD56B002C15D0 /* ofxTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimer.h; sourceTree = "<group>"; };
@@ -1311,6 +1314,8 @@
 		5FE8946514FDD645002C15D0 /* app utils */ = {
 			isa = PBXGroup;
 			children = (
+				5FB33B051515605300A87F16 /* VectorField.cpp */,
+				5FB33B061515605300A87F16 /* VectorField.h */,
 				5FE8946614FDD645002C15D0 /* AppAssets.cpp */,
 				5FE8946714FDD645002C15D0 /* AppAssets.h */,
 				5F6153DE150BDDD5009BCA78 /* Particle.cpp */,
@@ -1609,6 +1614,7 @@
 				5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */,
 				54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */,
 				02E228E3151209470029F677 /* SpotShape.cpp in Sources */,
+				5FB33B071515605300A87F16 /* VectorField.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1636,6 +1642,7 @@
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = USE_SMALL_APP;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;

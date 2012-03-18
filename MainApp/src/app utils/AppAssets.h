@@ -21,4 +21,6 @@ public:
     ~AppAssets();
     static AppAssets * inst();
     ofTrueTypeFont     appFont;
+    
+    
 };
