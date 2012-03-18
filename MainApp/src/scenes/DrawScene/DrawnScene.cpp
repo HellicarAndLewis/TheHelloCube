@@ -328,7 +328,8 @@ void DrawnScene::draw() {
                 ofVec2f b = itB->pos;
                 if(a.distance(b) < 20) {
                     it->nConnections ++;
-                    ofSetColor(0);
+                    //ofSetColor(0);
+                    ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
                     ofLine(it->pos, itB->pos);
                 }
             }
@@ -341,7 +342,8 @@ void DrawnScene::draw() {
         float angle = ofRadToDeg( atan2(it->vel.y, it->vel.x) );
         it->rotation += (angle-it->rotation) * 0.3;
         ofEnableAlphaBlending();
-        ofSetColor(255);
+        //ofSetColor(255);
+        ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
         ofPushMatrix();
         ofTranslate(it->pos);
         ofRotate(it->rotation);
@@ -355,6 +357,7 @@ void DrawnScene::draw() {
     
     // draw the vines
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
+        ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
         it->drawAsVine();
     }
     
@@ -364,7 +367,8 @@ void DrawnScene::draw() {
         float r = it->getRadius() * 2;
         ofVec2f pos = it->getPosition();
         ofEnableAlphaBlending();
-        ofSetColor(255, it->alpha);
+        //previously just black
+        ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())], it->alpha);
         ofPushMatrix();
         ofTranslate(pos);
         ofRotate(it->getRotation());
