@@ -1,4 +1,7 @@
 #pragma once
+
+#define USE_SWIRPS
+
 #include "ofMain.h"
 #include "AppAssets.h"
 #include "CellScene.h"
@@ -10,6 +13,9 @@
 #include "ofxQTKitVideoGrabber.h"
 #include "AudioManager.h"
 
+#include "physics/rxSpring.h"
+#include "physics/rxParticles.h"
+#include "physics/rxParticle.h"
 
 class App : public ofBaseApp{
     
@@ -65,6 +71,13 @@ public:
 	ofxQTKitVideoGrabber vidGrabber;	
 	int 				 camWidth;
 	int 				 camHeight;  
+	
+	// Particles test
+#ifdef USE_SWIRPS
+	rxParticles particles;
+	float repel_effect;
+	float follow_effect;
+#endif
     
     // Video FX
     //LUT bits from openFrameworks/examples/graphics/InstagramLikeImageFilters example 

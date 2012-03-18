@@ -52,6 +52,10 @@
 		544C7BA6150BB9E8003E8B76 /* libpcrecpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 544C7B96150BB9E8003E8B76 /* libpcrecpp.a */; };
 		544C7BA9150BBA40003E8B76 /* effects.frag in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA7150BBA40003E8B76 /* effects.frag */; };
 		544C7BAA150BBA40003E8B76 /* effects.vert in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA8150BBA40003E8B76 /* effects.vert */; };
+		5463A9C115154263004B9066 /* rxParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C015154263004B9066 /* rxParticles.cpp */; };
+		5463A9C415154436004B9066 /* rxParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C315154436004B9066 /* rxParticle.cpp */; };
+		5463A9C715154AAA004B9066 /* rxSpring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C615154AAA004B9066 /* rxSpring.cpp */; };
+		5463A9CA15154E52004B9066 /* rxSwirp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C915154E52004B9066 /* rxSwirp.cpp */; };
 		54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54F686AF15108F73006BDEFD /* AudioManager.cpp */; };
 		5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80CB0B150B864800F8C65F /* CoreVideo.framework */; };
 		5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA11969150A5D300011C6A8 /* QTKit.framework */; };
@@ -361,6 +365,14 @@
 		544C7B9C150BB9E8003E8B76 /* pcreposix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcreposix.h; sourceTree = "<group>"; };
 		544C7BA7150BBA40003E8B76 /* effects.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.frag; path = bin/data/effects/effects.frag; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		544C7BA8150BBA40003E8B76 /* effects.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.vert; path = bin/data/effects/effects.vert; sourceTree = SOURCE_ROOT; };
+		5463A9BF15154185004B9066 /* rxParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticles.h; sourceTree = "<group>"; };
+		5463A9C015154263004B9066 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticles.cpp; sourceTree = "<group>"; };
+		5463A9C2151542AD004B9066 /* rxParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticle.h; sourceTree = "<group>"; };
+		5463A9C315154436004B9066 /* rxParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticle.cpp; sourceTree = "<group>"; };
+		5463A9C515154A1C004B9066 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
+		5463A9C615154AAA004B9066 /* rxSpring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSpring.cpp; sourceTree = "<group>"; };
+		5463A9C815154DDC004B9066 /* rxSwirp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSwirp.h; sourceTree = "<group>"; };
+		5463A9C915154E52004B9066 /* rxSwirp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSwirp.cpp; sourceTree = "<group>"; };
 		54F686AF15108F73006BDEFD /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
 		54F686B015108F73006BDEFD /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		5D80CB0B150B864800F8C65F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = ../../../../../../../../../../../System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
@@ -917,6 +929,21 @@
 			path = pcre;
 			sourceTree = "<group>";
 		};
+		5463A9BE15154174004B9066 /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				5463A9BF15154185004B9066 /* rxParticles.h */,
+				5463A9C015154263004B9066 /* rxParticles.cpp */,
+				5463A9C2151542AD004B9066 /* rxParticle.h */,
+				5463A9C315154436004B9066 /* rxParticle.cpp */,
+				5463A9C515154A1C004B9066 /* rxSpring.h */,
+				5463A9C615154AAA004B9066 /* rxSpring.cpp */,
+				5463A9C815154DDC004B9066 /* rxSwirp.h */,
+				5463A9C915154E52004B9066 /* rxSwirp.cpp */,
+			);
+			path = physics;
+			sourceTree = "<group>";
+		};
 		54F686AE15108F73006BDEFD /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1395,6 +1422,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5463A9BE15154174004B9066 /* physics */,
 				54F686AE15108F73006BDEFD /* audio */,
 				544C7AA3150BB94E003E8B76 /* twitter */,
 				544C7AA2150BB947003E8B76 /* effects */,
@@ -1609,6 +1637,10 @@
 				5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */,
 				54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */,
 				02E228E3151209470029F677 /* SpotShape.cpp in Sources */,
+				5463A9C115154263004B9066 /* rxParticles.cpp in Sources */,
+				5463A9C415154436004B9066 /* rxParticle.cpp in Sources */,
+				5463A9C715154AAA004B9066 /* rxSpring.cpp in Sources */,
+				5463A9CA15154E52004B9066 /* rxSwirp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

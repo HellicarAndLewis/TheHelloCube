@@ -63,13 +63,24 @@ void App::setup() {
     fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
-	twitter.setVerbose(true);
+	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
+	
+#ifdef USE_SWIRPS
+	repel_effect = 0.3;
+	follow_effect = 0.001;
+#endif
 }
 
 //--------------------------------------------------------------
 void App::update() {
-    
+#ifdef USE_SWIRPS
+	ofVec3f m(mouseX, mouseY, 0);
+	particles.follow(m,follow_effect);
+    particles.repel(repel_effect);
+	particles.update();
+#endif	
+	
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
@@ -185,16 +196,24 @@ void App::draw(){
 		twitter.getSimulator().take_screenshot = false;
 	}
     
+
+	
     // draw some stats about the app...
     ofEnableAlphaBlending();
     ofFill();
     ofSetColor(255, 130);
-    ofRect(0, ofGetHeight()-60, 255, 60);
+    ofRect(0, ofGetHeight()-90, 255, 90);
     ofSetColor(0);
     string info;
     info += ofToString(ofGetFrameRate(), 0)+" fps\n";
     if(currentScene) info += "scene "+currentScene->name+"\n";
-    ofDrawBitmapString(info, 10, ofGetHeight()-40);
+    ofDrawBitmapString(info, 10, ofGetHeight()-70);
+	
+#ifdef USE_SWIRPS	
+	particles.draw();
+	glColor3f(0,0,0);
+	ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
+#endif
 
 }
 
@@ -246,6 +265,19 @@ void App::keyPressed(int key) {
 			}
 			loadLUT(dir.getPath(dirLoadIndex));
 			break;
+			
+#ifdef USE_SWIRPS
+		case '1': {
+			repel_effect = 0.3;
+			follow_effect = 0.001;
+			break;
+		}
+		case '2': {
+			repel_effect = 0.24;
+			follow_effect = 0.002;
+		}
+#endif
+
 		default:
 			break;
 	}  
@@ -276,6 +308,11 @@ void App::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void App::mousePressed(int x, int y, int button){
+#ifdef USE_SWIRPS
+	rxSwirp* sw = new rxSwirp(ofVec3f(x,y,0),particles, (int)ofRandom(5,15));
+	particles.addSwirp(sw);
+#endif
+
     if(currentScene!=NULL)currentScene->mousePressed(x, y, button);
 }
 
