@@ -6,7 +6,14 @@ int main() {
     ofAppGlutWindow window;
 	
 	window.setGlutDisplayString("rgba double samples>=4 depth");
-	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
-//	ofSetupOpenGL(&window, CUBE_SCREEN_WIDTH + CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT, OF_WINDOW);
-	ofRunApp( new App());
+
+    
+#ifdef USE_SMALL_APP
+    ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+#else
+	ofSetupOpenGL(&window, CUBE_SCREEN_WIDTH + CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT, OF_WINDOW);
+#endif
+    
+    ofRunApp( new App());
+
 }

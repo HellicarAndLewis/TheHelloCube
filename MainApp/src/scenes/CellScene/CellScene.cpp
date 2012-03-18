@@ -106,7 +106,7 @@ void CellScene::update() {
 void CellScene::addCells() {
     if(cells.size() < maxCellsOnScreen) {
         CellNode c;
-        c.setPosition(-50, ofRandom(-400, 400)+CUBE_SCREEN_HEIGHT/2);
+        c.setPosition(ofRandom(0, CUBE_SCREEN_WIDTH), ofRandom(-400, 400)+CUBE_SCREEN_HEIGHT/2);
         cells.push_back(c);
     }
 }

@@ -52,10 +52,10 @@
 		544C7BA6150BB9E8003E8B76 /* libpcrecpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 544C7B96150BB9E8003E8B76 /* libpcrecpp.a */; };
 		544C7BA9150BBA40003E8B76 /* effects.frag in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA7150BBA40003E8B76 /* effects.frag */; };
 		544C7BAA150BBA40003E8B76 /* effects.vert in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA8150BBA40003E8B76 /* effects.vert */; };
-		5463A9C115154263004B9066 /* rxParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C015154263004B9066 /* rxParticles.cpp */; };
-		5463A9C415154436004B9066 /* rxParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C315154436004B9066 /* rxParticle.cpp */; };
-		5463A9C715154AAA004B9066 /* rxSpring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C615154AAA004B9066 /* rxSpring.cpp */; };
-		5463A9CA15154E52004B9066 /* rxSwirp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9C915154E52004B9066 /* rxSwirp.cpp */; };
+		5463A9DE151680AC004B9066 /* rxParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9D6151680AC004B9066 /* rxParticle.cpp */; };
+		5463A9DF151680AC004B9066 /* rxParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9D8151680AC004B9066 /* rxParticles.cpp */; };
+		5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9DA151680AC004B9066 /* rxSpring.cpp */; };
+		5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9DC151680AC004B9066 /* rxSwirp.cpp */; };
 		54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54F686AF15108F73006BDEFD /* AudioManager.cpp */; };
 		5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80CB0B150B864800F8C65F /* CoreVideo.framework */; };
 		5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA11969150A5D300011C6A8 /* QTKit.framework */; };
@@ -115,6 +115,7 @@
 		5F615422150BE56D009BCA78 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61541C150BE56D009BCA78 /* tinyxmlparser.cpp */; };
 		5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61541E150BE56D009BCA78 /* ofxXmlSettings.cpp */; };
 		5F624CF11501791B0081827B /* TexturedShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F624CF01501791B0081827B /* TexturedShape.cpp */; };
+		5FB33B071515605300A87F16 /* VectorField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FB33B051515605300A87F16 /* VectorField.cpp */; };
 		5FE8944B14FDD56B002C15D0 /* ofxTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8943B14FDD56B002C15D0 /* ofxTimer.cpp */; };
 		5FE8944C14FDD56B002C15D0 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8943F14FDD56B002C15D0 /* Utils.cpp */; };
 		5FE8945C14FDD586002C15D0 /* BaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8944E14FDD586002C15D0 /* BaseScene.cpp */; };
@@ -365,14 +366,14 @@
 		544C7B9C150BB9E8003E8B76 /* pcreposix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcreposix.h; sourceTree = "<group>"; };
 		544C7BA7150BBA40003E8B76 /* effects.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.frag; path = bin/data/effects/effects.frag; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		544C7BA8150BBA40003E8B76 /* effects.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.vert; path = bin/data/effects/effects.vert; sourceTree = SOURCE_ROOT; };
-		5463A9BF15154185004B9066 /* rxParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticles.h; sourceTree = "<group>"; };
-		5463A9C015154263004B9066 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticles.cpp; sourceTree = "<group>"; };
-		5463A9C2151542AD004B9066 /* rxParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticle.h; sourceTree = "<group>"; };
-		5463A9C315154436004B9066 /* rxParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticle.cpp; sourceTree = "<group>"; };
-		5463A9C515154A1C004B9066 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
-		5463A9C615154AAA004B9066 /* rxSpring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSpring.cpp; sourceTree = "<group>"; };
-		5463A9C815154DDC004B9066 /* rxSwirp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSwirp.h; sourceTree = "<group>"; };
-		5463A9C915154E52004B9066 /* rxSwirp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSwirp.cpp; sourceTree = "<group>"; };
+		5463A9D6151680AC004B9066 /* rxParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticle.cpp; sourceTree = "<group>"; };
+		5463A9D7151680AC004B9066 /* rxParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticle.h; sourceTree = "<group>"; };
+		5463A9D8151680AC004B9066 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticles.cpp; sourceTree = "<group>"; };
+		5463A9D9151680AC004B9066 /* rxParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticles.h; sourceTree = "<group>"; };
+		5463A9DA151680AC004B9066 /* rxSpring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSpring.cpp; sourceTree = "<group>"; };
+		5463A9DB151680AC004B9066 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
+		5463A9DC151680AC004B9066 /* rxSwirp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSwirp.cpp; sourceTree = "<group>"; };
+		5463A9DD151680AC004B9066 /* rxSwirp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSwirp.h; sourceTree = "<group>"; };
 		54F686AF15108F73006BDEFD /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
 		54F686B015108F73006BDEFD /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		5D80CB0B150B864800F8C65F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = ../../../../../../../../../../../System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
@@ -503,6 +504,8 @@
 		5F7BE6CB15058D2500F8495B /* GeometryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryUtils.h; sourceTree = "<group>"; };
 		5F8B9259150D2C2300F811EF /* Viner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Viner.h; sourceTree = "<group>"; };
 		5F8ED670150BCB5F0082F12D /* CellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellNode.h; sourceTree = "<group>"; };
+		5FB33B051515605300A87F16 /* VectorField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VectorField.cpp; sourceTree = "<group>"; };
+		5FB33B061515605300A87F16 /* VectorField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VectorField.h; sourceTree = "<group>"; };
 		5FE6CE1D150A841F00C31FF2 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		5FE8943B14FDD56B002C15D0 /* ofxTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimer.cpp; sourceTree = "<group>"; };
 		5FE8943C14FDD56B002C15D0 /* ofxTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimer.h; sourceTree = "<group>"; };
@@ -929,17 +932,17 @@
 			path = pcre;
 			sourceTree = "<group>";
 		};
-		5463A9BE15154174004B9066 /* physics */ = {
+		5463A9D5151680AC004B9066 /* physics */ = {
 			isa = PBXGroup;
 			children = (
-				5463A9BF15154185004B9066 /* rxParticles.h */,
-				5463A9C015154263004B9066 /* rxParticles.cpp */,
-				5463A9C2151542AD004B9066 /* rxParticle.h */,
-				5463A9C315154436004B9066 /* rxParticle.cpp */,
-				5463A9C515154A1C004B9066 /* rxSpring.h */,
-				5463A9C615154AAA004B9066 /* rxSpring.cpp */,
-				5463A9C815154DDC004B9066 /* rxSwirp.h */,
-				5463A9C915154E52004B9066 /* rxSwirp.cpp */,
+				5463A9D6151680AC004B9066 /* rxParticle.cpp */,
+				5463A9D7151680AC004B9066 /* rxParticle.h */,
+				5463A9D8151680AC004B9066 /* rxParticles.cpp */,
+				5463A9D9151680AC004B9066 /* rxParticles.h */,
+				5463A9DA151680AC004B9066 /* rxSpring.cpp */,
+				5463A9DB151680AC004B9066 /* rxSpring.h */,
+				5463A9DC151680AC004B9066 /* rxSwirp.cpp */,
+				5463A9DD151680AC004B9066 /* rxSwirp.h */,
 			);
 			path = physics;
 			sourceTree = "<group>";
@@ -1338,6 +1341,8 @@
 		5FE8946514FDD645002C15D0 /* app utils */ = {
 			isa = PBXGroup;
 			children = (
+				5FB33B051515605300A87F16 /* VectorField.cpp */,
+				5FB33B061515605300A87F16 /* VectorField.h */,
 				5FE8946614FDD645002C15D0 /* AppAssets.cpp */,
 				5FE8946714FDD645002C15D0 /* AppAssets.h */,
 				5F6153DE150BDDD5009BCA78 /* Particle.cpp */,
@@ -1422,7 +1427,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				5463A9BE15154174004B9066 /* physics */,
+				5463A9D5151680AC004B9066 /* physics */,
 				54F686AE15108F73006BDEFD /* audio */,
 				544C7AA3150BB94E003E8B76 /* twitter */,
 				544C7AA2150BB947003E8B76 /* effects */,
@@ -1637,10 +1642,11 @@
 				5F615423150BE56D009BCA78 /* ofxXmlSettings.cpp in Sources */,
 				54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */,
 				02E228E3151209470029F677 /* SpotShape.cpp in Sources */,
-				5463A9C115154263004B9066 /* rxParticles.cpp in Sources */,
-				5463A9C415154436004B9066 /* rxParticle.cpp in Sources */,
-				5463A9C715154AAA004B9066 /* rxSpring.cpp in Sources */,
-				5463A9CA15154E52004B9066 /* rxSwirp.cpp in Sources */,
+				5FB33B071515605300A87F16 /* VectorField.cpp in Sources */,
+				5463A9DE151680AC004B9066 /* rxParticle.cpp in Sources */,
+				5463A9DF151680AC004B9066 /* rxParticles.cpp in Sources */,
+				5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */,
+				5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1668,6 +1674,7 @@
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = USE_SMALL_APP;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;

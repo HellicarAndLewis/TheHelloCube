@@ -10,10 +10,12 @@ void App::setup() {
     //initialise camera
 	camWidth 		= CAM_WIDTH;	// try to grab at this size. 
 	camHeight 		= CAM_HEIGHT;
-	
+
+#ifndef USE_SMALL_APP
 	//vidGrabber.listVideoDevices();											
     vidGrabber.setVideoDeviceID(0); //0 is first, iSight is always last, so this is safe...
 	vidGrabber.initGrabber(camWidth, camHeight);  
+#endif
     
     audioManager.setup(this);
     drawAudio = false;
@@ -54,7 +56,7 @@ void App::setup() {
     }
     
     // start with the frist scene
-    sceneIndex = SCENE_CELL;
+    sceneIndex = SCENE_DRAWN;
     changeScene(sceneIndex);
     
 
@@ -115,7 +117,9 @@ void App::update() {
 
 	fx.update();
     twitter.update();
-	vidGrabber.update();
+#ifndef USE_SMALL_APP
+    vidGrabber.update();
+#endif
     audioManager.update();
 	
 	if (vidGrabber.isFrameNew()){
@@ -150,19 +154,13 @@ void App::draw(){
     
     ofSetColor(255);
     
+#ifndef USE_SMALL_APP
     if(doLUT){
         lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
-//		lutImg.draw(lutPos.x, lutPos.y);
-//		ofRect(thumbPos.x-3, thumbPos.y-3, 166, 126);
-//		vidGrabber.draw(thumbPos.x, thumbPos.y, 160, 120);
-//		
-//		ofDrawBitmapString(dir.getName(dirLoadIndex), lutPos.x, -lutPos.y+50);
-//		
-//		ofDrawBitmapString("Use the up and down arrows of your keyboard \nto go through the different filters", lutPos.x, -lutPos.y+100);
-		
 	}else {
         vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
 	}
+#endif
     
     if(drawAudio){
         audioManager.draw();
