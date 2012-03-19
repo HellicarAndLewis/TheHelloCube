@@ -20,10 +20,10 @@ void TextureScene::setup() {
 	gui.add(radialForce.setup("radial force", 0.4, 0.0001, 1.0, gui_w));
     gui.loadFromFile(gui_file);
 	  
-    ofDisableArbTex();
-    for(int i=0; i<26; i++) {
+ //   ofDisableArbTex();
+    for(int i=1; i<26; i++) {
         textures.push_back(ofTexture());
-        if(!ofLoadImage(textures.back(), "graphics/text_"+ofToString(i)+".png")) printf("error loading\n");
+        if(!ofLoadImage(textures.back(), "graphics/texture/"+ofToString(i)+".png")) printf("error loading: '%d.png'\n", i);
     }
 	
     // setup box2d
