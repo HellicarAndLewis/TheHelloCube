@@ -18,8 +18,10 @@ void TwitterThread::threadedFunction() {
 	initializeTwitter();
 	
 	while(true) {
+        printf("+++++++++++++++++++++++++++++++\n");
 		fetchMentions();
-		sleep(25);
+        ofSleepMillis(25000); //different sleep lengths on different machines
+		//sleep(25);
 	}
 }
 
@@ -111,8 +113,8 @@ void TwitterThread::fetchMentions() {
 }
 
 void TwitterThread::initializeTwitter() {
-	twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
-	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
+    twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
+    twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
 	if(!twitter.loadTokens(tokens_file)) {
 		string auth_url;

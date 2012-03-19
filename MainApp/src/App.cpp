@@ -65,7 +65,7 @@ void App::setup() {
     fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	twitter.getSimulator().setEffects(fx);
-	twitter.setVerbose(false);
+	twitter.setVerbose(true);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
@@ -162,6 +162,8 @@ void App::draw(){
 		printf("screenname from tweet: %s\n", tweet.getScreenName().c_str());
 		bool grab = 1; // 0 = screen, 1 = webcam	
 
+        printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
+        
 		if(grab == 0) {
 			ofImage img;
 			img.grabScreen(0,0,ofGetWidth(), ofGetHeight());
