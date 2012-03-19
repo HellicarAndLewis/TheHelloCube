@@ -32,7 +32,7 @@ void TwitterManager::init() {
 	
 	// photo uploader + reply
 	uploader_thread.setup(
-		twitter_thread.getTwitter().getConsumerKey()
+		 twitter_thread.getTwitter().getConsumerKey()
 		,twitter_thread.getTwitter().getConsumerSecret()
 		,tokens_file
 	);
