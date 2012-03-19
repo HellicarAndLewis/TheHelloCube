@@ -163,6 +163,7 @@ void TextureScene::draw() {
         float r = it->getRadius();
         
         ofSetColor(it->colour);
+        ofSetColor(255,255,255);
         
         it->tex->bind();
         glBegin(GL_QUADS);
