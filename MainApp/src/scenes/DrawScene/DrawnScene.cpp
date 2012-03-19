@@ -121,6 +121,7 @@ void DrawnScene::makePoop() {
                 p.img = vine->dotImg;
                 p.dotSizeD = vine->dotSizeD;
                 p.dotSize  = vine->dotSizeD;
+                p.colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
                 
                 poop.push_back(p);
                 
@@ -156,6 +157,7 @@ void DrawnScene::update() {
         if(nFrc > 0) {
             frc /= nFrc;
         }
+        it->updateColor();
         it->addForce(frc, 1);
         field.addVectorCircle(pos.x, pos.y, vel.x, vel.y, r*2, .1);
 
@@ -368,7 +370,7 @@ void DrawnScene::draw() {
         ofVec2f pos = it->getPosition();
         ofEnableAlphaBlending();
         //previously just black
-        ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())], it->alpha);
+        ofSetColor(it->color, it->alpha);
         ofPushMatrix();
         ofTranslate(pos);
         ofRotate(it->getRotation());
@@ -457,6 +459,11 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
         for(int i=0; i<vines.size(); i++) {
             vines[i].colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
         }
+        for(int i=0; i<poop.size(); i++) {
+            poop[i].colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
+        }
+        
+        
         
 		break;
 	}
