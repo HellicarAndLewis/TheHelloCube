@@ -126,6 +126,17 @@ void CellScene::draw() {
         it->draw();
     }
     
+    //draws lines between cell nodes as in Screen shot 2012-03-15 at 18.21.41.png from pete
+    //not quite...
+//    for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
+//        //it->draw();
+//        for (vector<CellNode>::iterator jt=cells.begin(); jt!=cells.end(); ++jt) {
+//            //it->draw();
+//            ofSetColor(it->colour);
+//            ofLine(it->pos, jt->pos);
+//        } 
+//    }    
+    
     ofPushStyle();
 //    ofEnableSmoothing();
     
