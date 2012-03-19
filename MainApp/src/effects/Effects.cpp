@@ -1,3 +1,4 @@
+#include "AppAssets.h"
 #include "Effects.h"
 #include "Error.h"
 #include <cstdlib>
@@ -99,6 +100,19 @@ void Effects::setup(int w, int h) {
 	
 	flip(false);
 	mirror(false);
+	
+#ifndef USE_SMALL_APP
+	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
+	float cx = ((float)CUBE_SCREEN_WIDTH * 0.5/total_w);
+	float cy = (1.0 - (float)(CUBE_SCREEN_HEIGHT * 0.5) /(float)CAMERA_PROJECTION_SCREEN_HEIGHT);
+#else
+	float cx = 0.5;
+	float cy = 0.5;
+#endif
+
+	shader.begin();
+	shader.setUniform2f("center", cx, cy);
+
 }
 
 void Effects::beginGrabPixels() {
@@ -265,7 +279,7 @@ void Effects::applyEffect(const string& fx) {
 		wave(true, 1.4, 0.01, 14.0);
 	}	
 	else if(fx == "swirl") {
-		swirl(true, 0.5, PI);
+		swirl(true, 0.23, 5.6);
 	}
 	else if(fx == "shake") {
 		shake(true, 1.5, 15, 0.05);

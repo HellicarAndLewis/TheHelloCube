@@ -61,9 +61,11 @@ void App::setup() {
     
 
 	twitter.init();
-	// fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+	//fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     fx_duration = 5.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
+	delay_between_fx_and_screenshot = 1000; //millis
+	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
 	twitter.setVerbose(true);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
@@ -96,6 +98,8 @@ void App::update() {
 			
 			if(!command.isFake()) {
 				twitter.getSimulator().take_screenshot = true;
+				take_screenshot_on = ofGetElapsedTimeMillis() + delay_between_fx_and_screenshot;
+				printf("+++++++++++++++++++++++++++++++++++++ FLAG TAKE SCREENSHOT: %d\n", ofGetElapsedTimeMillis());
 			}
 		}
 		else {
@@ -140,7 +144,7 @@ void App::draw(){
 
 	fx.endGrabPixels();
     fx.draw();
-    
+//	return;    
     ofSetColor(255);
     
 #ifndef USE_SMALL_APP
@@ -155,7 +159,10 @@ void App::draw(){
         audioManager.draw();
     }
    
-	if(twitter.getSimulator().take_screenshot) {	
+	int now = ofGetElapsedTimeMillis();
+	if(twitter.getSimulator().take_screenshot && now > take_screenshot_on) {	
+		
+		printf("====================================  TAKE SCREENSHOT: %d\n", ofGetElapsedTimeMillis());
 		rtt::Tweet tweet;
 		//tweet.setScreenName("roxlutest");
 		tweet = command.tweet;
@@ -181,6 +188,7 @@ void App::draw(){
 				,tweet
 			);
 		}
+		take_screenshot_on = 0;
 		twitter.getSimulator().take_screenshot = false;
 	}
     

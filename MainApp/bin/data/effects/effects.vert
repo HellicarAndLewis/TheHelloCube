@@ -1,5 +1,6 @@
 uniform int fx_mirror;
 uniform int fx_flip;
+uniform vec2 center;
 
 attribute vec4 pos;
 attribute vec2 tex;
@@ -11,10 +12,11 @@ void main() {
 	texcoord = tex ;
 	
 	if(fx_mirror == 1) {
-		texcoord.x = 1.0 - texcoord.x;
+		texcoord.x = center.x + (center.x - texcoord.x);
 	}
 	
 	if(fx_flip == 1) {
-		texcoord.y = 1.0 - texcoord.y;
+		float h = center.y * 2.0;
+		texcoord.y = h -  texcoord.y;
 	}
 }

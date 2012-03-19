@@ -1,6 +1,5 @@
 #pragma once
 
-//#define USE_SWIRPS
 
 #include "ofMain.h"
 #include "AppAssets.h"
@@ -62,6 +61,8 @@ public:
     TwitterManager		 twitter;
     Effects				 fx;
 	float				 fx_duration;
+	int 				 delay_between_fx_and_screenshot;
+	int					 take_screenshot_on;
 	
     // Audio
     AudioManager         audioManager;
