@@ -8,20 +8,25 @@
 
 #pragma once
 #include "Particle.h"
+#include "ofMain.h"
 
 class CellNode : public Particle {
   
 public:
     
     bool bRemove;
+    ofColor colour;
     
     CellNode() {
         bRemove = false;
-        radius  = 3;  
+        radius  = ofRandom(2,10);  
         drag    = ofRandom(0.97, 0.99);
+        colour = ofColor(255,0,0);
     }
+    
     void draw() {
-        ofCircle(pos, 1);
+        ofSetColor(colour);
+        ofCircle(pos, radius);
     }
     
 };
