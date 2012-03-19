@@ -12,6 +12,8 @@
 
 #define NUM_AUDIO_CHANNELS 6
 
+//#define USE_SWIRPS
+
 class AppAssets {
     
 private:

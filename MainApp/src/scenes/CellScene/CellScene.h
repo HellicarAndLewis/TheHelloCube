@@ -11,6 +11,7 @@
 #include "CellNode.h"
 #include "ofxVoronoi.h"
 #include "Utils.h"
+
 class CellScene : public BaseScene {
     
 private:
@@ -21,6 +22,8 @@ public:
     void update();
     void draw();
     void keyPressed(int key);
+    void mousePressed(int x, int y, int button);
+    void mouseMoved(int x, int y );
     void addCells();
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
     void respondToNewComplimentaryColours();
@@ -35,6 +38,4 @@ public:
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxCellsOnScreen;
     bool drawGUI;
-    
-
 };

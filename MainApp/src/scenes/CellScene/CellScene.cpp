@@ -19,8 +19,7 @@ void CellScene::setup() {
     // we need some nice colors...
     bgColorTarget = ofRandomColor();
     
-    drawGUI = true; //for screen grabbing...
-    
+    drawGUI = true; //for screen grabbing...    
 }
 
 // ----------------------------------------------------
@@ -152,7 +151,6 @@ void CellScene::draw() {
 //    ofDisableSmoothing();
     ofPopStyle();
     
-    
     // draw the gui
     if(drawGUI)
         gui.draw();
@@ -166,25 +164,30 @@ void CellScene::respondToNewComplimentaryColours(){
 
 // ----------------------------------------------------
 void CellScene::keyPressed(int key) {
-    if(key == ' ') {
+    switch (key) { 
+        case ' ': {
+                addCells();
+                break;
+            }    
+        case 'r': {
+            for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
+                it->radius = ofRandom(10, separationDistance);
+            }    
+            break;
+            }
+        case 'b': {
+            bgColorTarget = ofRandomColor();
+            break;
+        }
         
-        addCells();
-        
-    }
-    
-    if(key == 'r') {
-        for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
-            it->radius = ofRandom(10, separationDistance);
-        }    
-    }
-    
-    if(key == 'b') {
-        bgColorTarget = ofRandomColor();
-    }
-    
-    if(key == 'g'){
-        drawGUI = !drawGUI;
-    }
+        case 'g': {
+            drawGUI = !drawGUI;
+            break;
+        }
+        default:{
+            break;
+        }
+	}  
 }
 
 // ----------------------------------------------------

@@ -79,6 +79,11 @@ void DrawnScene::setup() {
         }
     
     }
+    
+#ifdef USE_SWIRPS
+	repel_effect = 0.3;
+	follow_effect = 0.001;
+#endif
 }
 
 
@@ -400,38 +405,76 @@ void DrawnScene::draw() {
     
     if((int)ofRandom(0, 40)==10) addChasers();
     if((int)ofRandom(0, 4)==2)   makePoop();
+    
+#ifdef USE_SWIRPS
+    ofSetColor(BaseScene::twitterColour);
+	particles.draw();
+	glColor3f(0,0,0);
+	ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
+#endif
 }
 
 // ----------------------------------------------------
 void DrawnScene::keyPressed(int key) {
-    
-    if(key == 'g') {
+    switch (key) { 
+        case 'g': {
         addChasers();
-    }
-    
-    if(key == ' ') {
+            break;
+        }    
+            case ' ': {
         int ranVine = ofRandomIndex(vines);
         vines[ranVine].add(box2d);
-    }
-    
+                break;
+        }
+        case 's':{
     // *****************************
     // *** working on this still ***
     // *****************************
-    if(key == 's') {
         int ranVine  = ofRandomIndex(vines);
         int ranJoint = ofRandomIndex(vines[ranVine].joints);
         
         //vines[ranVine].joints[ranJoint].destroy();
         //vines[ranVine].joints.erase( vines[ranVine].joints.begin() + ranJoint );// + ranJoint);
-    }
-    
-    if(key == 'p') {
+            break;
+        }
+        case 'p' : {
         makePoop();
-
+            break;
+        }    
+        #ifdef USE_SWIRPS
+        case '1': {
+            repel_effect = 0.3;
+            follow_effect = 0.001;
+            break;
+        }
+        case '2': {
+            repel_effect = 0.24;
+            follow_effect = 0.002;
+            break;
+        }
+        #endif		
+        default: {
+            break;
+        } 
     }
     
 }
 
+void DrawnScene::mousePressed(int x, int y, int button){
+#ifdef USE_SWIRPS
+    rxSwirp* sw = new rxSwirp(ofVec3f(x,y,0),particles, (int)ofRandom(5,15));
+    particles.addSwirp(sw);
+#endif   
+}
+
+void DrawnScene::mouseMoved(int x, int y ){
+#ifdef USE_SWIRPS
+    ofVec3f m(x, y, 0);
+    particles.follow(m,follow_effect);
+    particles.repel(repel_effect);
+    particles.update();
+#endif	
+}
 
 // ----------------------------------------------------
 // @todd you can handle commands here events to change the scene....

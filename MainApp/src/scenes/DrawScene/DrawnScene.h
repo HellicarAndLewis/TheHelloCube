@@ -13,6 +13,16 @@
 #include "Particle.h"
 #include "VectorField.h"
 
+#include "rxSpring.h"
+#include "rxParticles.h"
+#include "rxParticle.h"
+// Particles test
+#ifdef USE_SWIRPS
+rxParticles particles;
+float repel_effect;
+float follow_effect;
+#endif
+
 
 // ----------------------------------------------------
 class Chaser : public Particle {
@@ -73,6 +83,8 @@ public:
     void update();
     void draw(); 
     void keyPressed(int key);
+    void mousePressed(int x, int y, int button);
+    void mouseMoved(int x, int y );
 	void handleCommands(TwitterCommand& cmd, Effects& fx);    
     
     VectorField field;
@@ -91,5 +103,12 @@ public:
     vector <ofImage> dots;
     ofImage          eyeA;
     float            eyeRatio;
+    
+    // Particles test
+#ifdef USE_SWIRPS
+	rxParticles particles;
+	float repel_effect;
+	float follow_effect;
+#endif
     
 };
