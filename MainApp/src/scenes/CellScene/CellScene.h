@@ -23,6 +23,7 @@ public:
     void keyPressed(int key);
     void addCells();
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
+    void respondToNewComplimentaryColours();
 	
     ofxVoronoi        voronoi;
     vector <CellNode> cells;

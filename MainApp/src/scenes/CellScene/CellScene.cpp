@@ -105,8 +105,10 @@ void CellScene::update() {
 // ----------------------------------------------------
 void CellScene::addCells() {
     if(cells.size() < maxCellsOnScreen) {
+        ofColor newColourForCellNode = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
         CellNode c;
         c.setPosition(ofRandom(0, CUBE_SCREEN_WIDTH), ofRandom(-400, 400)+CUBE_SCREEN_HEIGHT/2);
+        c.colour = newColourForCellNode;
         cells.push_back(c);
     }
 }
@@ -114,13 +116,15 @@ void CellScene::addCells() {
 // ----------------------------------------------------
 void CellScene::draw() {
     
-    drawBackground();
+    //drawBackground();
+    ofSetColor(ofColor::white);
+    ofFill();
+    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     
     //draws the dot in the centre
-//    ofSetColor(255);
-//    for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
-//        it->draw();
-//    }
+    for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
+        it->draw();
+    }
     
     ofPushStyle();
 //    ofEnableSmoothing();
@@ -130,6 +134,7 @@ void CellScene::draw() {
     //draws the edges
     ofSetColor(0);
     for(vector<ofxVoronoiEdge>::iterator it=voronoi.edges.begin(); it!=voronoi.edges.end(); ++it) {
+        ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
         it->draw();
     }
     
@@ -140,6 +145,12 @@ void CellScene::draw() {
     // draw the gui
     if(drawGUI)
         gui.draw();
+}
+
+void CellScene::respondToNewComplimentaryColours(){
+    for(vector<CellNode>::iterator it=cells.begin(); it!= cells.end(); ++it) {
+        it->colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
+    }    
 }
 
 // ----------------------------------------------------
@@ -186,6 +197,7 @@ void CellScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
         generateComplimentaryColours();
+        respondToNewComplimentaryColours();
 		break;
 	}
 }
