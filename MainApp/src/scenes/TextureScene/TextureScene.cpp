@@ -25,6 +25,7 @@ void TextureScene::setup() {
         textures.push_back(ofTexture());
         if(!ofLoadImage(textures.back(), "graphics/text_"+ofToString(i)+".png")) printf("error loading\n");
     }
+	
     // setup box2d
     box2d.init();
     box2d.setGravity(0, 0);
