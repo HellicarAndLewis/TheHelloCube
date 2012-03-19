@@ -152,7 +152,7 @@ public:
         color.r += (colorDes.r - color.r) * 0.2;
         color.g += (colorDes.g - color.g) * 0.2;
         color.b += (colorDes.b - color.b) * 0.2;
-        
+        color.a = 255;
         // ofXeno(dotSize, dotSizeD, 0.2);
         
         /*
@@ -303,7 +303,7 @@ public:
         
         else if(type == LINER) {
             
-            ofSetColor(0);
+            ofSetColor(color);
             ofNoFill();
             ofBeginShape();
             ofPoint anc = anchor.getPosition();
@@ -316,7 +316,7 @@ public:
             
             if(dotImg!=NULL) {
                 ofPushStyle();
-                ofSetColor(255);
+                ofSetColor(color);
                 ofEnableAlphaBlending();
                 ofSetRectMode(OF_RECTMODE_CENTER);
                 ofPoint dp = getHead()->getPosition();
