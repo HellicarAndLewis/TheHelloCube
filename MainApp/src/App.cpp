@@ -184,8 +184,10 @@ void App::draw(){
 		take_screenshot_on = 0;
 		twitter.getSimulator().take_screenshot = false;
 	}
-    
-	gui.draw();
+	
+    if(draw_gui) {
+		gui.draw();
+	}
 	
     // draw some stats about the app...
     ofEnableAlphaBlending();
@@ -229,6 +231,13 @@ void App::keyPressed(int key) {
         case 'f':
 			ofToggleFullscreen();
 			break;
+			
+		
+		case 'g': {
+			draw_gui = !draw_gui;
+			break;
+		}
+		
 		case 'l':
 			doLUT^=true;
 			break;
@@ -388,6 +397,7 @@ void App::onGuiUpdateSettings(bool& on) {
 
 void App::setupEffectsGui() {
 	int gui_w = 500;
+	draw_gui = false;
 	gui.setSize(gui_w, 200);
 	gui.setup("app", "app.xml", CUBE_SCREEN_WIDTH-(gui.getWidth()+20), 20);
 	gui.add(fx_duration.setup("Duration of effect (sec)", 20, 1, 500,gui_w));

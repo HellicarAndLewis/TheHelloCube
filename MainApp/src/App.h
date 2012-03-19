@@ -63,6 +63,7 @@ public:
     TwitterManager		 twitter;
     Effects				 fx;
 	int					 take_screenshot_on;
+	bool				draw_gui;
 	ofxPanel 			gui;
 	ofxIntSlider		fx_duration;
 	ofxIntSlider		delay_between_fx_and_screenshot;
