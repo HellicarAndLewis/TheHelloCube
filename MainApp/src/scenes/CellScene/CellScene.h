@@ -25,6 +25,11 @@ public:
     void addCells();
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
     void respondToNewComplimentaryColours();
+    void enterScene() {
+        generateComplimentaryColours();
+        respondToNewComplimentaryColours();
+        ofRegisterMouseEvents(&gui);
+    }
 	
     ofxVoronoi        voronoi;
     vector <CellNode> cells;
