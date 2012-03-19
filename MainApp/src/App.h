@@ -12,6 +12,7 @@
 #include "ofxQTKitVideoGrabber.h"
 #include "AudioManager.h"
 
+#include "ofxGui.h"
 #include "physics/rxSpring.h"
 #include "physics/rxParticles.h"
 #include "physics/rxParticle.h"
@@ -45,8 +46,9 @@ public:
     void audioIn(float * input, int bufferSize, int nChannels); 
     
     
-    int                  sceneIndex;
+    int                 sceneIndex;
     
+					
     // scenes
     vector <BaseScene*>  scenes;
     BaseScene *          currentScene;
@@ -55,14 +57,56 @@ public:
     TextureScene         textureSC;
     SpotsScene            spotsSC;
 	
-    // twitter
+    // twitter & FX
 	float				 command_timeout;	
 	TwitterCommand		 command;
     TwitterManager		 twitter;
     Effects				 fx;
-	float				 fx_duration;
-	int 				 delay_between_fx_and_screenshot;
 	int					 take_screenshot_on;
+	ofxPanel 			gui;
+	ofxIntSlider		fx_duration;
+	ofxIntSlider		delay_between_fx_and_screenshot;
+	ofxFloatSlider		fx_pixelate_x;
+	ofxFloatSlider		fx_pixelate_y;
+	ofxFloatSlider		fx_wave_displace;
+	ofxFloatSlider		fx_wave_speed;
+	ofxFloatSlider		fx_wave_num;
+	ofxFloatSlider		fx_shake_number;
+	ofxFloatSlider		fx_shake_amplitude;
+	ofxFloatSlider		fx_shake_duration;
+	ofxFloatSlider		fx_swirl_radius;
+	ofxFloatSlider		fx_swirl_angle;
+	ofxButton			fx_test_ripple;
+	ofxButton			fx_test_shake;
+	ofxToggle			fx_toggle_pixelate;
+	ofxToggle			fx_toggle_swirl;
+	ofxToggle			fx_toggle_wave;
+	ofxToggle			fx_toggle_mirror;
+	ofxToggle			fx_toggle_reflect;
+	ofxToggle			fx_toggle_invert;
+	ofxToggle			fx_toggle_posterize;
+	ofxToggle			fx_toggle_flip;
+	ofxToggle			fx_reset_automatically;
+	
+	void setupEffectsGui();
+	void onGuiUpdateSettings(bool& on);
+	void onGuiTogglePixelate(bool& on);
+	void onGuiTestShake(bool& on);
+	void onGuiTestRipple(bool& on);
+	void onGuiPixelateX(float& v);
+	void onGuiPixelateY(float& v);	
+	void onGuiToggleWave(bool& on);
+	void onGuiWaveSpeed(float& v);
+	void onGuiWaveNum(float& v);
+	void onGuiWaveDisplace(float& v);
+	void onGuiToggleSwirl(bool& on);
+	void onGuiSwirlRadius(float& v);
+	void onGuiSwirlAngle(float& v);
+	void onGuiInvert(bool& on);
+	void onGuiMirror(bool& on);
+	void onGuiReflect(bool& on);
+	void onGuiPosterize(bool& on);
+	void onGuiFlip(bool& on);
 	
     // Audio
     AudioManager         audioManager;

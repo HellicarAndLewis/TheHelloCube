@@ -57,11 +57,24 @@ private:
 	bool cleared;
 	int width;
 	int height;
+	
 	float shake_untill;
-	float shake_duration;
 	bool shake_enabled;
 	bool ripple_enabled;
 	float ripple_duration;
 	float ripple_untill;
+
+public:
+	// used when calling applyEffect
+	float shake_duration;
+	float shake_number;
+	float shake_amplitude;
+	float pixelate_x;
+	float pixelate_y;
+	float wave_displace;
+	float wave_num;
+	float wave_speed;
+	float swirl_radius;
+	float swirl_angle;
 };
 #endif
