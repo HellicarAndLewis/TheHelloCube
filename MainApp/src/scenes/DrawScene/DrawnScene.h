@@ -41,13 +41,19 @@ public:
         bFade =false;
         alpha = 255;
     }
+    
+    void updateColor() {
+        color.r += (colorD.r - color.r) * 0.2;
+        color.g += (colorD.g - color.g) * 0.2;
+        color.b += (colorD.b - color.b) * 0.2;
+    }
   
     bool bFade;
     float alpha;
     float birthdate;
     float dotSize, dotSizeD;
     ofImage * img;
-    
+    ofColor color, colorD;    
 };
 
 
