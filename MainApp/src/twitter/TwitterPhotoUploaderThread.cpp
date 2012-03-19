@@ -108,7 +108,7 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 					printf("Warning: got message form server %s\n", upload_message.c_str());
 					printf("Warning: we cannot upload the image; we get an unexpected error from the remote server.\n");
 					printf("Warning: we do not remove this item from the queue; we will wait and retry\n");
-					sleep(5);
+					ofSleepMillis(5000);
 					json_decref(root);
 					continue;
 				}
@@ -131,7 +131,7 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 			}
 			delete task;
 		}
-		sleep(5);
+		ofSleepMillis(5000);
 	}
 }
 

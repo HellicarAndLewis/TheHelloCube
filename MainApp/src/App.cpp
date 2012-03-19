@@ -162,6 +162,7 @@ void App::draw(){
 		printf("screenname from tweet: %s\n", tweet.getScreenName().c_str());
 		bool grab = 1; // 0 = screen, 1 = webcam	
 
+        
 		if(grab == 0) {
 			ofImage img;
 			img.grabScreen(0,0,ofGetWidth(), ofGetHeight());
