@@ -5,17 +5,27 @@
 void TextureScene::setup() {
     name = "texture scene";    
     string safeName = name;
+	
+	int gui_w = 500;
     ofStringReplace(safeName, " ", "_");
-    gui.setup(name, safeName+".xml", 20, 20);
-    gui.add(maxShapesOnScreen.setup("max shapes", 250, 1, 1000));
-    gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0));
-    
-        
+	string gui_file = safeName+".xml";
+	
+	gui.setSize(gui_w, 300);
+    gui.setup(name,gui_file,CUBE_SCREEN_WIDTH-(gui_w+20), ofGetHeight()-150);
+    gui.add(maxShapesOnScreen.setup("max shapes", 250, 1, 1000, gui_w));
+    gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0, gui_w));
+	gui.add(repulsionForce.setup("repulsion force", 0.002, 0.0001, 0.2, gui_w));
+	gui.add(attractionForce.setup("attraction force", 0.03, 0.01, 0.2, gui_w));
+	gui.add(shapeBounceForce.setup("bounce force", 0.001, 0.0001, 0.01, gui_w));
+	gui.add(radialForce.setup("radial force", 0.4, 0.0001, 1.0, gui_w));
+    gui.loadFromFile(gui_file);
+	  
     ofDisableArbTex();
-    for(int i=0; i<3; i++) {
+    for(int i=0; i<26; i++) {
         textures.push_back(ofTexture());
         if(!ofLoadImage(textures.back(), "graphics/text_"+ofToString(i)+".png")) printf("error loading\n");
     }
+	
     // setup box2d
     box2d.init();
     box2d.setGravity(0, 0);
@@ -23,14 +33,12 @@ void TextureScene::setup() {
     
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
-
 }
 
 
 // ----------------------------------------------------
 void TextureScene::exitScene() {
     BaseScene::exitScene();
-    //shapes.clear();
 }
 
 // ----------------------------------------------------
@@ -41,37 +49,25 @@ void TextureScene::update() {
         addShape();
     }
     
-    
-    
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         it->update();
-        
-
-        it->addAttractionPoint(circleFrc + getCentreCubeScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
+        it->addAttractionPoint((circleFrc*radialForce) + getCentreCubeScreen(), attractionForce);
 
         if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
-            it->addRepulsionForce(getCentreCubeScreen(), 0.002);
+            it->addRepulsionForce(getCentreCubeScreen(), repulsionForce);
         }
-        
-        
-        
     }
-    
-    
     box2d.update();
 }
 
 // ----------------------------------------------------
 void TextureScene::addPoints() {
     pts.clear();
-    
     for(int i=0; i<6; i++) {
         float x = ofRandom(10, CUBE_SCREEN_WIDTH-10);
         float y = ofRandom(10, CUBE_SCREEN_HEIGHT-10);
         pts.push_back(ofVec2f(x, y));
     }   
-    
-    
     tris = triangulatePolygon(pts);
 }
 
@@ -86,7 +82,7 @@ void TextureScene::addShape() {
         
         TexturedShape shape;
         shape.colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
-        shape.setPhysics(1, 0.1, 1);
+        shape.setPhysics(1, shapeBounceForce, 1);
         shape.setup(box2d.getWorld(), pt, 1);
         shape.radiusTarget = ofRandom(10, 30);
         shape.tex = &textures[(int)ofRandom(0, textures.size()-1)];
