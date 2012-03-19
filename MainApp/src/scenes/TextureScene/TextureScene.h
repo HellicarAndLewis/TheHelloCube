@@ -26,7 +26,14 @@ public:
     void addPoints();
     void makeObstacles();
     void addShape();
+    void respondToNewComplimentaryColours();
+    void enterScene() {
+        generateComplimentaryColours();
+        respondToNewComplimentaryColours();
+        ofRegisterMouseEvents(&gui);
+    }
     void exitScene();
+    
     
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
 	

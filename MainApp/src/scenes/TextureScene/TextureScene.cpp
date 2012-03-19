@@ -85,6 +85,7 @@ void TextureScene::addShape() {
         pt.y += sin(ofRandomuf()*TWO_PI) * r;
         
         TexturedShape shape;
+        shape.colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
         shape.setPhysics(1, 0.1, 1);
         shape.setup(box2d.getWorld(), pt, 1);
         shape.radiusTarget = ofRandom(10, 30);
@@ -152,12 +153,12 @@ void TextureScene::draw() {
     ofSetColor(255, 0, 0);
     ofCircle(circleFrc+getCentreCubeScreen(), 13);
     
-    
-    ofSetColor(255);
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         
         ofVec2f p = it->getPosition();
         float r = it->getRadius();
+        
+        ofSetColor(it->colour);
         
         it->tex->bind();
         glBegin(GL_QUADS);
@@ -214,6 +215,12 @@ void TextureScene::draw() {
     gui.draw();
 }
 
+void TextureScene::respondToNewComplimentaryColours(){
+    for(vector<TexturedShape>::iterator it=shapes.begin(); it!= shapes.end(); ++it) {
+        it->colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
+    }    
+}
+
 // ----------------------------------------------------
 void TextureScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	// handle commands.
@@ -242,6 +249,7 @@ void TextureScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
         generateComplimentaryColours();
+        respondToNewComplimentaryColours();
 		break;
 	}
 }

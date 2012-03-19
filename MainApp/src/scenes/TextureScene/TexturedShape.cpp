@@ -11,6 +11,7 @@
 TexturedShape::TexturedShape() {
     tex = NULL;
     growSpeed = ofRandom(0.03, 0.1);    
+    colour = ofColor(255,0,0);
 }
 
 TexturedShape::~TexturedShape() {
