@@ -115,8 +115,11 @@ void CellScene::addCells() {
 // ----------------------------------------------------
 void CellScene::draw() {
     
-    //drawBackground();
-    ofSetColor(ofColor::white);
+    drawBackground();
+    
+    ofColor peteBlack = ofColor(0,4,2);
+    
+    ofSetColor(peteBlack);
     ofFill();
     ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     

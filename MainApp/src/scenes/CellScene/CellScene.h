@@ -22,8 +22,6 @@ public:
     void update();
     void draw();
     void keyPressed(int key);
-    void mousePressed(int x, int y, int button);
-    void mouseMoved(int x, int y );
     void addCells();
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
     void respondToNewComplimentaryColours();

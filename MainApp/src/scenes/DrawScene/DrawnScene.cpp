@@ -299,6 +299,14 @@ void DrawnScene::addChasers() {
 void DrawnScene::draw() {
     
     drawBackground();
+    
+    drawBackground();
+    
+    ofColor peteWhite = ofColor(255,255,255);
+    
+    ofSetColor(peteWhite);
+    ofFill();
+    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
 
     float scalex = (float)field.externalWidth / (float)field.fieldWidth;
     float scaley = (float)field.externalHeight / (float)field.fieldHeight;
