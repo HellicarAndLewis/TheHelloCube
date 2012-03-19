@@ -19,7 +19,9 @@ void CellScene::setup() {
     // we need some nice colors...
     bgColorTarget = ofRandomColor();
     
-    drawGUI = true; //for screen grabbing...    
+    drawGUI = true; //for screen grabbing...   
+    
+    cellWallWidth = 1.f; //v thin line to start...
 }
 
 // ----------------------------------------------------
@@ -142,7 +144,7 @@ void CellScene::draw() {
     ofPushStyle();
 //    ofEnableSmoothing();
     
-    ofSetLineWidth(40.f);
+    ofSetLineWidth(cellWallWidth);
     
     //draws the edges
     ofSetColor(BaseScene::twitterColour);
