@@ -62,7 +62,7 @@ void App::setup() {
 
 	twitter.init();
 	//fx.setup(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
-    fx_duration = 5.0; // sec
+    fx_duration = 20.0; // sec
 	fx.setup(ofGetWidth(), ofGetHeight()); //like this for now....
 	delay_between_fx_and_screenshot = 1000; //millis
 	take_screenshot_on = 0;
