@@ -1,6 +1,6 @@
 #pragma once
 
-#define USE_SWIRPS
+//#define USE_SWIRPS
 
 #include "ofMain.h"
 #include "AppAssets.h"

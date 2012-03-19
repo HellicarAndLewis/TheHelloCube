@@ -41,6 +41,7 @@ public:
     }
     
     virtual void enterScene() {
+        generateComplimentaryColours();
         ofRegisterMouseEvents(&gui);
     }
 

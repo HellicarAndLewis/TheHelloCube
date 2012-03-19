@@ -143,9 +143,9 @@ void CellScene::draw() {
     ofSetLineWidth(40.f);
     
     //draws the edges
-    ofSetColor(0);
+    ofSetColor(BaseScene::twitterColour);
     for(vector<ofxVoronoiEdge>::iterator it=voronoi.edges.begin(); it!=voronoi.edges.end(); ++it) {
-        ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
+        //ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
         it->draw();
     }
     
