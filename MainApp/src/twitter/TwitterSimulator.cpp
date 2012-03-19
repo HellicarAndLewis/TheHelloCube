@@ -4,7 +4,7 @@
 
 TwitterSimulator::TwitterSimulator(TwitterManager& manager) 
 	:manager(manager)
-	,gui(4000)
+	,gui()
 	,verbose(false)
 	,take_screenshot(false)
 	,fx_mirror(false)

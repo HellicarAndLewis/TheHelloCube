@@ -64,6 +64,7 @@ void App::setup() {
 	fx.setup(ofGetWidth(), ofGetHeight()); 
 	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
+	twitter.getSimulator().loadSettings();
 	twitter.setVerbose(true);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 }

@@ -12,8 +12,7 @@ TwitterManager::~TwitterManager() {
 void TwitterManager::init() {
 	// simulator + remote gui
 	simulator.setup(ofToDataPath("twitter/simulator.ini",true));
-	simulator.loadSettings();
-	
+		
 	// bad words
 	reloadBadWords();
 	

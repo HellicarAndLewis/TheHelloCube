@@ -82,7 +82,7 @@ void TextureScene::addShape() {
         
         TexturedShape shape;
         shape.colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
-        shape.setPhysics(1, shapeBounceForce, 1);
+        shape.setPhysics(2.5, shapeBounceForce, 0.0001); // rox: looks like 3rd param isn't doing anything. set density to 2.5 made the anim more smooth.
         shape.setup(box2d.getWorld(), pt, 1);
         shape.radiusTarget = ofRandom(10, 30);
         shape.tex = &textures[(int)ofRandom(0, textures.size()-1)];

@@ -22,7 +22,7 @@
 	
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	oscu = [[Osculator alloc] init];
-	[oscu generateFromWindow:[self window] port:4000];
+	[oscu generateFromWindow:[self window] senderPort:4000 receiverPort:4001];
 	[fake_tweet setStringValue:@"@thehellocube"];
 	[oscu sendSliderChanged:"fx_swirl_radius" sender:swirl_radius];
 	[oscu sendSliderChanged	:"fx_swirl_angle" sender:swirl_angle];
@@ -56,6 +56,10 @@
 	[oscu sendSliderChanged:"fx_shake_number" sender:shake_number];
 	[oscu sendSliderChanged:"fx_shake_amplitude" sender:shake_amplitude];
 	[oscu sendButtonChanged:"shake_fx" sender:shake_button];
+}
+
+- (IBAction)onLoadSettings:(id)sender {
+	[oscu loadSettings];
 }
 
 -(void) updateShake {

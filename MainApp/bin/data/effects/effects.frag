@@ -48,11 +48,6 @@ void main() {
 	}
 	
 	if(fx_swirl == 1) {
-		//vec2 c = vec2(2304.0 * 0.5, 1025.0 * 0.5);
-		//vec2 center = vec2(gl_FragCoord.x / c.x, gl_FragCoord.y / c.y);
-//		vec2 center = vec2(0.5, 0.5);
-//		vec2 center = vec2((1024.*0.5)/2304., 1.0-(768. * 0.5)/1024.);
-//		vec2 center = vec2(0.25, 0.5);
 		tc -= center;
 		float dist = length(tc);
 		if(dist < fx_swirl_radius) {
@@ -70,7 +65,6 @@ void main() {
 	}
 
 	if(fx_ripple == 1) {
-		//vec2 center = vec2(0.5, 0.5);
 		float d = distance(tc, center);
 		if( (d <= (fx_ripple_p + fx_ripple_params.z)) &&
 			(d >= (fx_ripple_p - fx_ripple_params.z)) )

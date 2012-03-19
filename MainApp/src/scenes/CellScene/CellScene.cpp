@@ -47,8 +47,6 @@ void CellScene::update() {
 		noiseFrc.y = ofSignedNoise(itA->uniquef, pos.x * 0.006, t);
         noiseFrc *= damping;
         
-        
-        
         ofVec2f sepFrc = 0;
         for (vector<CellNode>::iterator itB = itA; itB!=cells.end(); ++itB) {
             if (itA==itB) continue;
