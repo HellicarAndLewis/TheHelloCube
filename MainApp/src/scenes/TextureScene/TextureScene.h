@@ -48,6 +48,10 @@ public:
     bool     circleFrcFlip;
     ofVec2f circleFrc;
     ofxFloatSlider releaseRate;
+	ofxFloatSlider repulsionForce;
+	ofxFloatSlider attractionForce;
+	ofxFloatSlider shapeBounceForce;
+	ofxFloatSlider radialForce;
     ofxIntSlider   maxShapesOnScreen;
     
 };
