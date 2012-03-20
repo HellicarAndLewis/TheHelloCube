@@ -24,6 +24,22 @@ void TextureScene::setup() {
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
 
+    
+    Attractor attTL;
+    attTL.pos.set(20, 20);
+    attractors.push_back(attTL);
+    
+    Attractor attTR;
+    attTR.pos.set(CUBE_SCREEN_WIDTH-20, 20);
+    attractors.push_back(attTR);
+    
+    Attractor attBR;
+    attBR.pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT-20);
+    attractors.push_back(attBR);
+    
+    Attractor attBL;
+    attBL.pos.set(20, CUBE_SCREEN_HEIGHT-20);
+    attractors.push_back(attBL);
 }
 
 
@@ -35,6 +51,12 @@ void TextureScene::exitScene() {
 
 // ----------------------------------------------------
 void TextureScene::update() {
+    
+    for(int i=0; i<attractors.size(); i++) {
+        if(i == 0) {
+            attractors[i] = audioPtr->l
+        }
+    }
     
     int nShapesToAdd = MAX(1, 10 * releaseRate);
     for(int i=0; i<nShapesToAdd; i++) {
@@ -204,6 +226,12 @@ void TextureScene::draw() {
          ofDrawBitmapString("c", it->c+10);*/
         ofCircle(center, 3);
         
+    }
+    
+    
+    for(int i=0; i<attractors.size(); i++) {
+        ofSetColor(255, 0, 255);
+        ofCircle(attractors[i].pos, 20*attractors[i].amp);
     }
     
     

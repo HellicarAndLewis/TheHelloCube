@@ -13,6 +13,16 @@
 #include "TexturedShape.h"
 #include "ofxBox2dPolygonUtils.h"
 #include "GeometryUtils.h"
+
+class Attractor {
+public:
+    Attractor() {
+        amp = 1;
+    }
+    ofVec2f pos;
+    float   amp; // 0 - 1;
+};
+
 class TextureScene : public BaseScene {
     
 private:
@@ -37,7 +47,10 @@ public:
     vector <TexturedShape>   shapes;
     vector <ofVec2f>         pts;
     vector <TriangleShape>   tris;
-   
+
+    vector <Attractor>      attractors;
+
+    
     bool     circleFrcFlip;
     ofVec2f circleFrc;
     ofxFloatSlider releaseRate;
