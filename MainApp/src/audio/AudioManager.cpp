@@ -57,6 +57,42 @@ void AudioManager::setup(ofBaseApp * app){
     drawCounter = 0;
 }
 
+float AudioManager::getVolume(int side) {
+    switch (side) {
+        
+        case TL:
+            return volumes[0];
+            break;
+            
+        case TR:
+        {
+            if(mAudioPresent) {
+                return volumes[2];
+            }
+            else {
+                return volumes[0];
+            }
+        }
+            break;
+            
+        case BR:
+        {
+            if(mAudioPresent) {
+                return volumes[3];
+            }
+            else {
+                return volumes[1];
+            }
+        }
+            break;
+        case BL:
+            return volumes[1];
+            break;
+    }
+}
+
+
+
 void AudioManager::update(){
     //	//lets scale the vol up to a 0-1 range 
     //	scaledVol = ofMap(smoothedVol, 0.0, 0.17, 0.0, 1.0, true);

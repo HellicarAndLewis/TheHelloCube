@@ -42,13 +42,15 @@ void TextureScene::setup() {
     attTR.pos.set(CUBE_SCREEN_WIDTH-20, 20);
     attractors.push_back(attTR);
     
+    Attractor attBL;
+    attBL.pos.set(20, CUBE_SCREEN_HEIGHT-20);
+    attractors.push_back(attBL);
+    
     Attractor attBR;
     attBR.pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT-20);
     attractors.push_back(attBR);
     
-    Attractor attBL;
-    attBL.pos.set(20, CUBE_SCREEN_HEIGHT-20);
-    attractors.push_back(attBL);
+   
     
 }
 
@@ -63,7 +65,16 @@ void TextureScene::update() {
     
     for(int i=0; i<attractors.size(); i++) {
         if(i == 0) {
-        //    attractors[i] = audioPtr->
+            attractors[i].amp = audioPtr->getVolume(AudioManager::TL);
+        }
+        if(i == 1) {
+            attractors[i].amp = audioPtr->getVolume(AudioManager::TR);
+        }
+        if(i == 2) {
+            attractors[i].amp = audioPtr->getVolume(AudioManager::BL);
+        }
+        if(i == 3) {
+            attractors[i].amp = audioPtr->getVolume(AudioManager::BR);
         }
     }
     
@@ -79,6 +90,13 @@ void TextureScene::update() {
         if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
             it->addRepulsionForce(getCentreCubeScreen(), repulsionForce);
         }
+        
+        for(int i=0; i<attractors.size(); i++) {
+            if(attractors[i].getAmp() > 0.3) {
+                it->addAttractionPoint(attractors[i].pos, attractors[i].getAmp()*0.2);
+            }
+        }
+        
     }
     box2d.update();
 }
@@ -229,8 +247,10 @@ void TextureScene::draw() {
     
     
     for(int i=0; i<attractors.size(); i++) {
+        ofSetColor(255);
+        ofCircle(attractors[i].pos, 25);
         ofSetColor(255, 0, 255);
-        ofCircle(attractors[i].pos, 20*attractors[i].amp);
+        ofCircle(attractors[i].pos, 5+(20*attractors[i].getAmp()));
     }
     
     

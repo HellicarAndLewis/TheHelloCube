@@ -21,6 +21,10 @@ public:
     }
     ofVec2f pos;
     float   amp; // 0 - 1;
+    
+    float getAmp() {
+        return ofClamp(amp, 0, 1);
+    }
 };
 
 class TextureScene : public BaseScene {

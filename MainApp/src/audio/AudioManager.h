@@ -4,6 +4,13 @@
 class AudioManager {
     
 public:
+      
+    enum {
+      TL = 0,
+      TR = 1,
+      BL = 2,
+      BR = 3  
+    };
         
     void setup(ofBaseApp * app);
     void update();
@@ -17,6 +24,8 @@ public:
     vector <float> bottom;
     
     ofSoundStream soundStream;
+    
+    float getVolume(int side);
     
     //from Marek Project Donk Audio Server...
     
