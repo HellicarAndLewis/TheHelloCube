@@ -11,6 +11,7 @@
 - (IBAction)onShakeAmplitude:(id)sender;
 - (IBAction)onShakeNumber:(id)sender;
 - (IBAction)onShakeButton:(id)sender;
+- (IBAction)onLoadSettings:(id)sender;
 - (void) updateShake;
 
 @property (assign) IBOutlet Plot *plot;

@@ -1,0 +1,26 @@
+<Duration_of_effect>20.96</Duration_of_effect>
+<Duration_of_effect__sec_>20</Duration_of_effect__sec_>
+<Delay_between_fx_and_screengrab__millis_>1000</Delay_between_fx_and_screengrab__millis_>
+<FX>
+    <_Pixelate_X>10</_Pixelate_X>
+    <_Pixelate_Y>10</_Pixelate_Y>
+    <_Wave_displace>0.01</_Wave_displace>
+    <_Wave_speed>1.4</_Wave_speed>
+    <_Wave_amount>14</_Wave_amount>
+    <_Shake_amount>12.544</_Shake_amount>
+    <_Shake_amplitude>0.01</_Shake_amplitude>
+    <_Shake_duration__sec_>0.8</_Shake_duration__sec_>
+    <_Swirl_radius>0.23</_Swirl_radius>
+    <_Swirl_angle>2.9531</_Swirl_angle>
+</FX>
+<Reset_effects_automatically>0</Reset_effects_automatically>
+<Ripple>0</Ripple>
+<Shake>0</Shake>
+<Pixelate>0</Pixelate>
+<Swirl>0</Swirl>
+<Wave>0</Wave>
+<Mirror>0</Mirror>
+<Reflect>0</Reflect>
+<Invert>0</Invert>
+<Posterize>0</Posterize>
+<Flip>0</Flip>

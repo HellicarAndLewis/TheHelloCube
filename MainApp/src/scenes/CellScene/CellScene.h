@@ -25,6 +25,12 @@ public:
     void addCells();
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
     void respondToNewComplimentaryColours();
+    void enterScene() {
+        cellWallWidth = ofRandom(1.f, 20.f);
+        generateComplimentaryColours();
+        respondToNewComplimentaryColours();
+        ofRegisterMouseEvents(&gui);
+    }
 	
     ofxVoronoi        voronoi;
     vector <CellNode> cells;
@@ -36,4 +42,6 @@ public:
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxCellsOnScreen;
     bool drawGUI;
+    
+    float cellWallWidth;
 };

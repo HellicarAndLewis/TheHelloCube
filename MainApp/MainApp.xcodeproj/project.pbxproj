@@ -368,7 +368,7 @@
 		544C7BA8150BBA40003E8B76 /* effects.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.vert; path = bin/data/effects/effects.vert; sourceTree = SOURCE_ROOT; };
 		5463A9D6151680AC004B9066 /* rxParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticle.cpp; sourceTree = "<group>"; };
 		5463A9D7151680AC004B9066 /* rxParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticle.h; sourceTree = "<group>"; };
-		5463A9D8151680AC004B9066 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rxParticles.cpp; path = ../physics/rxParticles.cpp; sourceTree = "<group>"; };
+		5463A9D8151680AC004B9066 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticles.cpp; sourceTree = "<group>"; };
 		5463A9D9151680AC004B9066 /* rxParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticles.h; sourceTree = "<group>"; };
 		5463A9DA151680AC004B9066 /* rxSpring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSpring.cpp; sourceTree = "<group>"; };
 		5463A9DB151680AC004B9066 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
@@ -935,6 +935,7 @@
 		5463A9D5151680AC004B9066 /* physics */ = {
 			isa = PBXGroup;
 			children = (
+				5463A9D8151680AC004B9066 /* rxParticles.cpp */,
 				5463A9D6151680AC004B9066 /* rxParticle.cpp */,
 				5463A9D7151680AC004B9066 /* rxParticle.h */,
 				5463A9D9151680AC004B9066 /* rxParticles.h */,
@@ -1341,7 +1342,6 @@
 			isa = PBXGroup;
 			children = (
 				5FB33B051515605300A87F16 /* VectorField.cpp */,
-				5463A9D8151680AC004B9066 /* rxParticles.cpp */,
 				5FB33B061515605300A87F16 /* VectorField.h */,
 				5FE8946614FDD645002C15D0 /* AppAssets.cpp */,
 				5FE8946714FDD645002C15D0 /* AppAssets.h */,

@@ -12,8 +12,7 @@ TwitterManager::~TwitterManager() {
 void TwitterManager::init() {
 	// simulator + remote gui
 	simulator.setup(ofToDataPath("twitter/simulator.ini",true));
-	simulator.loadSettings();
-	
+		
 	// bad words
 	reloadBadWords();
 	
@@ -32,7 +31,7 @@ void TwitterManager::init() {
 	
 	// photo uploader + reply
 	uploader_thread.setup(
-		twitter_thread.getTwitter().getConsumerKey()
+		 twitter_thread.getTwitter().getConsumerKey()
 		,twitter_thread.getTwitter().getConsumerSecret()
 		,tokens_file
 	);

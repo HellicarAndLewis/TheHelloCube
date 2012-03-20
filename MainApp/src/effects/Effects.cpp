@@ -1,3 +1,4 @@
+#include "AppAssets.h"
 #include "Effects.h"
 #include "Error.h"
 #include <cstdlib>
@@ -99,6 +100,19 @@ void Effects::setup(int w, int h) {
 	
 	flip(false);
 	mirror(false);
+	
+#ifndef USE_SMALL_APP
+	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
+	float cx = ((float)CUBE_SCREEN_WIDTH * 0.5/total_w);
+	float cy = (1.0 - (float)(CUBE_SCREEN_HEIGHT * 0.5) /(float)CAMERA_PROJECTION_SCREEN_HEIGHT);
+#else
+	float cx = 0.5;
+	float cy = 0.5;
+#endif
+
+	shader.begin();
+	shader.setUniform2f("center", cx, cy);
+
 }
 
 void Effects::beginGrabPixels() {
@@ -232,6 +246,7 @@ void Effects::reflect(bool apply) {
 
 void Effects::shake(bool apply, float seconds, float number, float amplitude) {
 	shake_untill = ofGetElapsedTimef() + seconds;
+	printf("SHAKE: %f\n", seconds);
 	shake_enabled = apply;
 	shake_duration = seconds;
 	shader.begin();
@@ -243,6 +258,27 @@ void Effects::shake(bool apply, float seconds, float number, float amplitude) {
 }
 
 void Effects::applyEffect(const string& fx) {
+	/*
+			fx.pixelate_x = fx_pixelate_x;
+		fx.pixelate_y= fx_pixelate_y;
+		fx.wave_displace = fx_wave_displace;
+		fx.wave_num = fx_wave_num;
+		fx.wave_speed = fx_wave_speed;
+		fx.shake_number = fx_shake_number;
+		fx.shake_amplitude = fx_shake_amplitude;
+		fx.shake_duration = fx_shake_duration;
+		fx.swirl_radius = fx_swirl_radius;
+		fx.swirl_angle = fx_swirl_angle;
+			void pixelate(bool apply, float x, float y);
+	void wave(bool apply, float speed, float displace, float num);
+	void shake(bool apply, float seconds, float number, float amplitude);
+	void swirl(bool apply, float radius, float angle);
+	void ripple(bool apply, float seconds);
+	void reflect(bool apply);
+	void posterize(bool apply);
+
+	*/
+	
 	if(fx == "flip") {
 		flip(true);
 	}
@@ -259,16 +295,16 @@ void Effects::applyEffect(const string& fx) {
 		posterize(true);
 	}
 	else if(fx == "pixelate") {
-		pixelate(true, 10.0f, 10.0f);
+		pixelate(true, pixelate_x, pixelate_y);
 	}
 	else if(fx == "wave") {
-		wave(true, 1.4, 0.01, 14.0);
+		wave(true, wave_speed, wave_displace, wave_num);
 	}	
 	else if(fx == "swirl") {
-		swirl(true, 0.5, PI);
+		swirl(true, swirl_radius, swirl_angle);
 	}
 	else if(fx == "shake") {
-		shake(true, 1.5, 15, 0.05);
+		shake(true, shake_duration, shake_number, shake_amplitude);
 	}
 	else if(fx == "reflect") {
 		reflect(true);

@@ -24,6 +24,7 @@ uniform float fx_swirl_angle;
 uniform vec3 fx_ripple_params;
 uniform float fx_ripple_p;
 
+uniform vec2 center;
 uniform sampler2D img;
 varying vec2 texcoord;
 
@@ -47,7 +48,6 @@ void main() {
 	}
 	
 	if(fx_swirl == 1) {
-		vec2 center = vec2(0.5, 0.5);
 		tc -= center;
 		float dist = length(tc);
 		if(dist < fx_swirl_radius) {
@@ -65,7 +65,6 @@ void main() {
 	}
 
 	if(fx_ripple == 1) {
-		vec2 center = vec2(0.5, 0.5);
 		float d = distance(tc, center);
 		if( (d <= (fx_ripple_p + fx_ripple_params.z)) &&
 			(d >= (fx_ripple_p - fx_ripple_params.z)) )
@@ -77,8 +76,8 @@ void main() {
 		}
 	}
 	if(fx_reflect == 1) {
-		if(tc.s > 0.5) {
-			tc.s = 1.0 - tc.s;
+		if(tc.s > center.x) {
+			tc.s = center.x - (tc.s - center.x );
 		}
 	}
 	

@@ -19,7 +19,7 @@ void TwitterThread::threadedFunction() {
 	
 	while(true) {
 		fetchMentions();
-		sleep(25);
+		ofSleepMillis(25000);
 	}
 }
 
@@ -111,8 +111,8 @@ void TwitterThread::fetchMentions() {
 }
 
 void TwitterThread::initializeTwitter() {
-	twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
-	twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
+    twitter.setConsumerKey("e0vURm6xhSYaS0nsS97pQ");
+    twitter.setConsumerSecret("R7HfL0vgy2FvQsnYaPAaPy1P1QokzeaBSLXCyboNYo");
 	
 	if(!twitter.loadTokens(tokens_file)) {
 		string auth_url;

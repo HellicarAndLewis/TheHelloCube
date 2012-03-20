@@ -21,4 +21,5 @@ public:
     float       growSpeed;
     float       radiusTarget;
     ofTexture * tex;
+    ofColor colour;
 };

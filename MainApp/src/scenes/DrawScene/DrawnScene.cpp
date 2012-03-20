@@ -484,6 +484,15 @@ void DrawnScene::mouseMoved(int x, int y ){
 #endif	
 }
 
+void DrawnScene::respondToNewComplimentaryColours(){
+    for(int i=0; i<vines.size(); i++) {
+        vines[i].colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
+    }
+    for(int i=0; i<poop.size(); i++) {
+        poop[i].colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
+    }
+}
+
 // ----------------------------------------------------
 // @todd you can handle commands here events to change the scene....
 void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
@@ -506,16 +515,7 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 		BaseScene::twitterColour = cit->second;
 		bgColor = BaseScene::twitterColour;
         generateComplimentaryColours();
-        
-        for(int i=0; i<vines.size(); i++) {
-            vines[i].colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
-        }
-        for(int i=0; i<poop.size(); i++) {
-            poop[i].colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
-        }
-        
-        
-        
+        respondToNewComplimentaryColours();
 		break;
 	}
 }

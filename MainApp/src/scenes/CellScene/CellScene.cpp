@@ -19,7 +19,9 @@ void CellScene::setup() {
     // we need some nice colors...
     bgColorTarget = ofRandomColor();
     
-    drawGUI = true; //for screen grabbing...    
+    drawGUI = true; //for screen grabbing...   
+    
+    cellWallWidth = 1.f; //v thin line to start...
 }
 
 // ----------------------------------------------------
@@ -44,8 +46,6 @@ void CellScene::update() {
      	noiseFrc.x = frwX + ofSignedNoise(t, pos.y * 0.04) * 0.6;
 		noiseFrc.y = ofSignedNoise(itA->uniquef, pos.x * 0.006, t);
         noiseFrc *= damping;
-        
-        
         
         ofVec2f sepFrc = 0;
         for (vector<CellNode>::iterator itB = itA; itB!=cells.end(); ++itB) {
@@ -142,7 +142,7 @@ void CellScene::draw() {
     ofPushStyle();
 //    ofEnableSmoothing();
     
-    ofSetLineWidth(40.f);
+    ofSetLineWidth(cellWallWidth);
     
     //draws the edges
     ofSetColor(BaseScene::twitterColour);

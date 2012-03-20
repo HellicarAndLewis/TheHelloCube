@@ -41,7 +41,7 @@ void SpotsScene::update() {
 //        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
 //        
         if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
-            it->addRepulsionForce(getCentreCubeScreen(), 0.002);
+			it->addRepulsionForce(getCentreCubeScreen(), 0.002);
         }
         
         
