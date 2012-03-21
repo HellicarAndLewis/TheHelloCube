@@ -13,6 +13,42 @@
 #include "TexturedShape.h"
 #include "ofxBox2dPolygonUtils.h"
 #include "GeometryUtils.h"
+
+class Attractor {
+public:
+    Attractor() {
+        amp  = 1;
+        ampD = 0;
+    }
+    ofVec2f pos;
+    float   amp; // 0 - 1;
+    float   ampD;
+    int     side;
+    
+    float getAmp() {
+        return ofClamp(amp, 0, 1);
+    }
+    void setAmp(float v) {
+        ampD = v;
+    }
+    
+    void update() {
+        amp += (ampD-amp) * 0.7;
+    }
+    
+    void draw() {
+        
+        ofSetColor(255);
+        ofCircle(pos, 25);
+        ofSetColor(255, 0, 255);
+        ofCircle(pos, 5+(20*getAmp()));
+        
+        ofSetColor(0, 250, 250);
+        ofDrawBitmapString(AudioManager::getSideName(side), pos);
+        
+    }
+};
+
 class TextureScene : public BaseScene {
     
 private:
@@ -44,7 +80,10 @@ public:
     vector <TexturedShape>   shapes;
     vector <ofVec2f>         pts;
     vector <TriangleShape>   tris;
-   
+
+    vector <Attractor>      attractors;
+
+    
     bool     circleFrcFlip;
     ofVec2f circleFrc;
     ofxFloatSlider releaseRate;
@@ -52,6 +91,9 @@ public:
 	ofxFloatSlider attractionForce;
 	ofxFloatSlider shapeBounceForce;
 	ofxFloatSlider radialForce;
+	ofxFloatSlider peakValue;
+    ofxFloatSlider attractionDamping;
+
     ofxIntSlider   maxShapesOnScreen;
     
 };
