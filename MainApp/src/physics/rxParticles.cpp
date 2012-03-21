@@ -120,3 +120,34 @@ void rxParticles::repel(float effect) {
 	int end = ofGetElapsedTimeMillis();
 }
 
+bool rxParticles::isPositionFree(ofVec3f& pos, float radius) {
+	list<rxParticle*>::iterator it = particles.begin();
+	ofVec3f dir(0,0,0);
+	float radius_sq = radius * radius;
+	float dist_sq = 0;
+	while(it != particles.end()) {
+		dir = (*it)->position - pos;
+		dist_sq = dir.lengthSquared();
+		if(dist_sq <= radius_sq) {
+			return false;
+		}
+		++it;
+	}
+	return true;
+}
+
+list<rxParticle*>::iterator rxParticles::begin() {
+	return particles.begin();
+}
+
+list<rxParticle*>::iterator rxParticles::end() {
+	return particles.end();
+}
+
+void rxParticles::clear() {
+	list<rxParticle*>::iterator it = begin();
+	while(it != end()) {	
+		delete *it;
+		it = particles.erase(it);
+	}
+}

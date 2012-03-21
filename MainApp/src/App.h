@@ -18,6 +18,7 @@
 #include "physics/rxParticle.h"
 #include "physics/rxVeins.h"
 
+
 class App : public ofBaseApp{
     
 public:
@@ -51,6 +52,8 @@ public:
 #ifdef USE_VEINS	
     rxVeins				veins;
 #endif					
+	//rxCracks			cracks;
+	
     // scenes
     vector <BaseScene*>  scenes;
     BaseScene *          currentScene;
@@ -90,6 +93,7 @@ public:
 	ofxToggle			fx_toggle_posterize;
 	ofxToggle			fx_toggle_flip;
 	ofxToggle			fx_reset_automatically;
+	ofxToggle			fx_crack;
 	
 	void setupEffectsGui();
 	void onGuiUpdateSettings(bool& on);
@@ -110,6 +114,7 @@ public:
 	void onGuiReflect(bool& on);
 	void onGuiPosterize(bool& on);
 	void onGuiFlip(bool& on);
+	void onGuiCrack(bool& on);
 	
     // Audio
     AudioManager         audioManager;

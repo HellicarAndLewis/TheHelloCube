@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02E228E3151209470029F677 /* SpotShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02E228E1151209470029F677 /* SpotShape.cpp */; };
+		4898E533151A551B00DFB38D /* rxCracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4898E532151A551B00DFB38D /* rxCracks.cpp */; };
 		544C7AB1150BB960003E8B76 /* TwitterBadWords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA4150BB960003E8B76 /* TwitterBadWords.cpp */; };
 		544C7AB2150BB960003E8B76 /* TwitterCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA6150BB960003E8B76 /* TwitterCommands.cpp */; };
 		544C7AB3150BB960003E8B76 /* TwitterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA8150BB960003E8B76 /* TwitterManager.cpp */; };
@@ -177,6 +178,8 @@
 /* Begin PBXFileReference section */
 		02E228E1151209470029F677 /* SpotShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotShape.cpp; sourceTree = "<group>"; };
 		02E228E2151209470029F677 /* SpotShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotShape.h; sourceTree = "<group>"; };
+		4898E531151A54AA00DFB38D /* rxCracks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxCracks.h; sourceTree = "<group>"; };
+		4898E532151A551B00DFB38D /* rxCracks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxCracks.cpp; sourceTree = "<group>"; };
 		544C7AA4150BB960003E8B76 /* TwitterBadWords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterBadWords.cpp; path = twitter/TwitterBadWords.cpp; sourceTree = "<group>"; };
 		544C7AA5150BB960003E8B76 /* TwitterBadWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterBadWords.h; path = twitter/TwitterBadWords.h; sourceTree = "<group>"; };
 		544C7AA6150BB960003E8B76 /* TwitterCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterCommands.cpp; path = twitter/TwitterCommands.cpp; sourceTree = "<group>"; };
@@ -948,6 +951,8 @@
 				5463A9DD151680AC004B9066 /* rxSwirp.h */,
 				54A467EE1519157F00B1075E /* rxVeins.h */,
 				54A467EF151915D800B1075E /* rxVeins.cpp */,
+				4898E531151A54AA00DFB38D /* rxCracks.h */,
+				4898E532151A551B00DFB38D /* rxCracks.cpp */,
 			);
 			path = physics;
 			sourceTree = "<group>";
@@ -1653,6 +1658,7 @@
 				5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */,
 				5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */,
 				54A467F0151915D800B1075E /* rxVeins.cpp in Sources */,
+				4898E533151A551B00DFB38D /* rxCracks.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@ rxParticle::rxParticle(ofVec3f pos, float mass)
 }
 
 rxParticle::~rxParticle() {
-	printf("~rxParticle, lifetime: %f\n", lifetime);
+	//printf("~rxParticle, lifetime: %f\n", lifetime);
 }
 
 void rxParticle::update() {

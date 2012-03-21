@@ -67,7 +67,8 @@ void App::setup() {
 	twitter.getSimulator().loadSettings();
 	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
-    
+//    cracks.setup(ofGetWidth(), ofGetHeight());
+	
     showMouse = false;
     ofHideCursor();
 }
@@ -132,7 +133,9 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw(){
-    //ofEnableSmoothing();
+	
+
+	//ofEnableSmoothing();
 	fx.beginGrabPixels();
 	
     // we only want to draw the current screen
@@ -149,7 +152,10 @@ void App::draw(){
 	veins.draw();
 #endif
 
+	//cracks.draw();
+		
 	fx.endGrabPixels();
+
     fx.draw();
  
     ofSetColor(255);
@@ -215,8 +221,6 @@ void App::draw(){
 //--------------------------------------------------------------
 void App::changeScene(int scene) {
     
-    draw_gui = false;
-    
     BaseScene * lastScene = scenes[sceneIndex];
     lastScene->exitScene();
     
@@ -246,6 +250,7 @@ void App::keyPressed(int key) {
 			break;
 		case 'g': {
 			draw_gui = !draw_gui;
+
 			break;
 		}
         case 'm':{
@@ -257,6 +262,8 @@ void App::keyPressed(int key) {
             showMouse = !showMouse;
             break;
         }
+		
+		
 #ifdef USE_VEINS		
 		case 'v': {
 			float cx = ofGetWidth() * 0.5;
@@ -478,6 +485,7 @@ void App::setupEffectsGui() {
 	gui.add(fx_toggle_invert.setup("Invert", false, gui_w));
 	gui.add(fx_toggle_posterize.setup("Posterize", false, gui_w));
 	gui.add(fx_toggle_flip.setup("Flip", false, gui_w));
+	gui.add(fx_crack.setup("Crack", false, gui_w));
 	
 	fx_test_shake.addListener(this, &App::onGuiTestShake);
 	fx_test_ripple.addListener(this, &App::onGuiTestRipple);
@@ -496,10 +504,15 @@ void App::setupEffectsGui() {
 	fx_toggle_invert.addListener(this, &App::onGuiInvert);
 	fx_toggle_posterize.addListener(this, &App::onGuiPosterize);
 	fx_toggle_flip.addListener(this, &App::onGuiFlip);
+	fx_crack.addListener(this, &App::onGuiCrack);
 	
 	gui.loadFromFile("app.xml");
 	bool b = true;
 	onGuiUpdateSettings(b);
+}
+
+void App::onGuiCrack(bool& on) {
+	fx.crack(on);
 }
 
 void App::onGuiTestShake(bool& on) {

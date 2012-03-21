@@ -8,7 +8,7 @@ uniform int fx_swirl;
 uniform int fx_ripple;
 uniform int fx_posterize;
 uniform int fx_reflect;
-
+uniform int fx_cracks;
 
 uniform float fx_time;
 uniform float fx_shake_p;
@@ -115,6 +115,10 @@ void main() {
 		color.g = max(0.0, 1.0 - color.g);
 		color.b = max(0.0, 1.0 - color.b);
 	}
-	
+	if(fx_cracks == 1) {
+		if(color.r != 0.1 && color.g != 0.1 && color.b != 0.1) {
+			color += 0.7;
+		}
+	}
 	gl_FragColor = color;
 }

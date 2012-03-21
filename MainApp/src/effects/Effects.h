@@ -10,6 +10,7 @@
 #define ROXLU_EFFECTSH
 
 #include "ofMain.h"
+#include "rxCracks.h"
 
 struct Vertex {
 	float pos[3];
@@ -44,6 +45,7 @@ public:
 	void ripple(bool apply, float seconds);
 	void reflect(bool apply);
 	void posterize(bool apply);
+	void crack(bool apply);
 	
 private:
 	ofShader shader;
@@ -61,8 +63,10 @@ private:
 	float shake_untill;
 	bool shake_enabled;
 	bool ripple_enabled;
+	bool cracks_enabled;
 	float ripple_duration;
 	float ripple_untill;
+	rxCracks cracks;
 
 public:
 	// used when calling applyEffect
