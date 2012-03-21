@@ -65,7 +65,7 @@ void App::setup() {
 	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
 	twitter.getSimulator().loadSettings();
-	twitter.setVerbose(true);
+	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
@@ -137,14 +137,18 @@ void App::draw(){
     // one scene to the next
     if(currentScene != NULL) {
         ofSetColor(255);
-//        currentScene->draw();
+        currentScene->draw();
     }
+
+
+#ifdef USE_VEINS
 	ofBackground(33);
 	veins.draw();
+#endif
 
 	fx.endGrabPixels();
     fx.draw();
-	return;    
+ 
     ofSetColor(255);
     
 #ifndef USE_SMALL_APP
@@ -241,7 +245,7 @@ void App::keyPressed(int key) {
 			draw_gui = !draw_gui;
 			break;
 		}
-		
+#ifdef USE_VEINS		
 		case 'v': {
 			float cx = ofGetWidth() * 0.5;
 			float cy = ofGetHeight() * 0.5;
@@ -276,7 +280,7 @@ void App::keyPressed(int key) {
 			veins.update();
 			break;
 		}
-		
+#endif		
 		case 'l':
 			doLUT^=true;
 			break;
