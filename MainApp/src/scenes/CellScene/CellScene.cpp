@@ -37,13 +37,36 @@ void CellScene::update() {
     
     float t = ofGetElapsedTimef()*0.02;
     
+    ofVec2f dirVec = 0;    
+    for(int i=0; i<4; i++) {
+        
+        float amp = audioPtr->getVolume(i) * 10.0;
+        
+        if(i == AudioManager::TOP) {
+            dirVec.y -= amp;
+        }
+        else if(i == AudioManager::BOTTOM) {
+             dirVec.y += amp;
+        }
+        else if(i == AudioManager::LEFT) {
+             dirVec.x -= amp;
+        }
+        else if(i == AudioManager::RIGHT) {
+             dirVec.x += amp;
+        }
+        
+    }
+    
+    dirVec *= 100;
+    //printf("%f %f\n", dirVec.x, dirVec.y);
+    
     for (vector<CellNode>::iterator itA=cells.begin(); itA!=cells.end(); ++itA) {
         
         ofVec2f pos = itA->pos;
         float frwX  = ofNoise(pos.x * 0.003, pos.y * 0.006, ofGetElapsedTimef() * 0.6);
         
         ofVec2f noiseFrc;
-     	noiseFrc.x = frwX + ofSignedNoise(t, pos.y * 0.04) * 0.6;
+     	noiseFrc.x = ofSignedNoise(t, pos.y * 0.04) * 0.6;
 		noiseFrc.y = ofSignedNoise(itA->uniquef, pos.x * 0.006, t);
         noiseFrc *= damping;
         
@@ -66,6 +89,8 @@ void CellScene::update() {
         // add forces
         itA->frc += noiseFrc;
         itA->frc += sepFrc;
+        
+        itA->frc += dirVec;
         
         itA->frc.limit(maxParticleSpeed);
         
@@ -155,8 +180,42 @@ void CellScene::draw() {
     ofPopStyle();
     
     // draw the gui
-    if(drawGUI)
-        gui.draw();
+    if(drawGUI) gui.draw();
+    
+    
+    for(int i=0; i<4; i++) {
+
+        float amp = audioPtr->getVolume(i);
+        ofVec2f pos;
+        // TOP
+        if(i == AudioManager::TOP) {
+            pos.set(CUBE_SCREEN_WIDTH/2, 20);
+        }
+        
+        // BOTTOM
+        if(i == AudioManager::BOTTOM) {
+            pos.set(CUBE_SCREEN_WIDTH/2, CUBE_SCREEN_HEIGHT-20);
+        }
+        
+        // LEFT
+        if(i == AudioManager::LEFT) {
+            pos.set(20, CUBE_SCREEN_HEIGHT/2);
+        }
+        
+        // RIGHT
+        if(i == AudioManager::RIGHT) {
+            pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT/2);
+        }
+        
+        
+        // draw
+        ofSetColor(255);
+        ofCircle(pos, 25);
+        ofSetColor(255, 0, 255);
+        ofCircle(pos, 5+(20*amp));
+        ofSetColor(0, 250, 250);
+        ofDrawBitmapString(AudioManager::getSideName(i), pos);
+    }
 }
 
 void CellScene::respondToNewComplimentaryColours(){

@@ -58,21 +58,46 @@ void AudioManager::setup(ofBaseApp * app){
 }
 
 float AudioManager::getVolume(int side) {
-   
+#ifdef USE_MOUSE_HACK
+    ofVec2f pos;
+    // TOP
+    if(side == AudioManager::TOP) {
+        pos.set(CUBE_SCREEN_WIDTH/2, 20);
+    }
+    
+    // BOTTOM
+    if(side == AudioManager::BOTTOM) {
+        pos.set(CUBE_SCREEN_WIDTH/2, CUBE_SCREEN_HEIGHT-20);
+    }
+    
+    // LEFT
+    if(side == AudioManager::LEFT) {
+        pos.set(20, CUBE_SCREEN_HEIGHT/2);
+    }
+    
+    // RIGHT
+    if(side == AudioManager::RIGHT) {
+        pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT/2);
+    }    
+    ofVec2f mouseVec = pos - ofGetMouse();
+    float damp = 1.0 - ofClamp(mouseVec.length() / CUBE_SCREEN_WIDTH, 0.0, 1.0);
+#endif
+    
+    float amp = 0;
     
     switch (side) {
         
         case LEFT:
-            return volumes[0];
+            amp = volumes[0];
             break;
             
         case TOP:
         {
             if(mAudioPresent) {
-                return volumes[2];
+                amp = volumes[2];
             }
             else {
-                return volumes[0];
+                amp = volumes[0];
             }
         }
             break;
@@ -80,17 +105,24 @@ float AudioManager::getVolume(int side) {
         case BOTTOM:
         {
             if(mAudioPresent) {
-                return volumes[3];
+                amp = volumes[3];
             }
             else {
-                return volumes[1];
+                amp = volumes[1];
             }
         }
             break;
         case RIGHT:
-            return volumes[1];
+            amp = volumes[1];
             break;
     }
+    
+#ifdef USE_MOUSE_HACK
+    return amp * damp;
+#else 
+    return amp;
+#endif
+    
 }
 
 

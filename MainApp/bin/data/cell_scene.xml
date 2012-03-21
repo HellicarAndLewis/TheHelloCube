@@ -1,5 +1,5 @@
 <separation>10</separation>
 <damping>0.4</damping>
-<speed>0.1</speed>
-<max_cells>70</max_cells>
-<release_rate>0.455</release_rate>
+<speed>0.350247</speed>
+<max_cells>880</max_cells>
+<release_rate>0.295</release_rate>

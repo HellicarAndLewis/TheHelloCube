@@ -12,6 +12,7 @@
 
 #define NUM_AUDIO_CHANNELS 6
 #define USE_SMALL_APP
+#define USE_MOUSE_HACK      // use the mouse to damp the mic....
 //#define USE_SWIRPS
 
 class AppAssets {

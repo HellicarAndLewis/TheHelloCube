@@ -1,5 +1,6 @@
 #pragma once
 #include "ofMain.h"
+#include "../../../addons/Tools/Utils/Utils.h"
 
 class AudioManager {
     
