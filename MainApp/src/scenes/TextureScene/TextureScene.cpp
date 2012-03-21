@@ -15,7 +15,7 @@ void TextureScene::setup() {
     gui.add(maxShapesOnScreen.setup("max shapes", 250, 1, 1000, gui_w));
     gui.add(releaseRate.setup("release rate", 0.2, 0.0, 1.0, gui_w));
 	gui.add(repulsionForce.setup("repulsion force", 0.002, 0.0001, 0.2, gui_w));
-	gui.add(attractionForce.setup("attraction force", 0.03, 0.01, 0.2, gui_w));
+	gui.add(attractionForce.setup("attraction force", 0.0003, 0.001, 0.1, gui_w));
 	gui.add(shapeBounceForce.setup("bounce force", 0.001, 0.0001, 0.01, gui_w));
 	gui.add(radialForce.setup("radial force", 0.4, 0.0001, 1.0, gui_w));
 	gui.add(peakValue.setup("vol peak", 0.4, 0.0, 1.0, gui_w));
@@ -95,7 +95,10 @@ void TextureScene::update() {
         addShape();
     }
     
+    
+    
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
+       
         it->update();
         it->addAttractionPoint((circleFrc*radialForce) + getCentreCubeScreen(), attractionForce);
 
@@ -103,6 +106,7 @@ void TextureScene::update() {
             it->addRepulsionForce(getCentreCubeScreen(), repulsionForce);
         }
         
+        // attracted to the 4 mics
         for(int i=0; i<attractors.size(); i++) {
             if(attractors[i].getAmp() > peakValue) {
                 it->addAttractionPoint(attractors[i].pos, attractors[i].getAmp() * attractionDamping);
