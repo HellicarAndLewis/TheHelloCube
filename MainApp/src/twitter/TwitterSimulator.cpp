@@ -15,6 +15,7 @@ TwitterSimulator::TwitterSimulator(TwitterManager& manager)
 	,fx_swirl(false)
 	,fx_posterize(false)
 	,fx_reflect(false)
+	,fx_crack(false)
     ,fx_pixelate_x(5.0f)
     ,fx_pixelate_y(5.0f)
 	,fx_wave_displace(0.01f)
@@ -106,6 +107,7 @@ void TwitterSimulator::update() {
 		fx->swirl(fx_swirl, fx_swirl_radius, fx_swirl_angle);
 		fx->posterize(fx_posterize);
 		fx->reflect(fx_reflect);
+		fx->crack(fx_crack);
 	}
 	
 }
@@ -120,6 +122,7 @@ void TwitterSimulator::setEffects(Effects& f) {
 	gui.addBool("fx_swirl", fx_swirl);
 	gui.addBool("fx_reflect", fx_reflect);
 	gui.addBool("fx_posterize", fx_posterize);
+	gui.addBool("fx_crack", fx_crack);
 	gui.addFloat("fx_pixelate_x", fx_pixelate_x);
 	gui.addFloat("fx_pixelate_y", fx_pixelate_y);
 	gui.addFloat("fx_wave_displace", fx_wave_displace);
@@ -130,5 +133,5 @@ void TwitterSimulator::setEffects(Effects& f) {
 	gui.addFloat("fx_shake_amplitude", fx_shake_amplitude);
 	gui.addFloat("fx_swirl_angle", fx_swirl_angle);
 	gui.addFloat("fx_swirl_radius", fx_swirl_radius);
-	
+
 }

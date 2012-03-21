@@ -22,12 +22,18 @@ void TwitterPhotoUploaderThread::setup(
 					 const string& consumerKey
 					,const string& consumerSecret
 					,const string& tokensPath
+					,const string& replyBeginningsPath
 ) 
 {
 	twitter.setConsumerKey(consumerKey);
 	twitter.setConsumerSecret(consumerSecret);
 	if(!twitter.loadTokens(tokensPath)) {
 		printf("Error: cannot load tokens file for photo uploader: '%s'...\n", tokensPath.c_str());
+	}
+	
+	if(!loadReplyBeginnings(replyBeginningsPath)) {
+		printf("Cannot load reply beginnings file. Update GIT? Path: '%s'\n", replyBeginningsPath.c_str());
+		exit(0);
 	}
 }
 
@@ -121,7 +127,9 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 				}
 				
 				string photo_url = URL_TWITTER_UPLOADER +"uploads/"  +created_file;					
-				string message = "@" +up->tweet.getScreenName() +" your result ... See here " +photo_url;
+				string message = "@" +up->tweet.getScreenName();
+				
+				 // +" your result ... See here " +photo_url;
 				if(verbose) {
 					printf(">>>>>>> %s\n", message.c_str());
 				}
@@ -135,7 +143,14 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 	}
 }
 
-
+#define RRR(max) rand() % (max) 
+string TwitterPhotoUploaderThread::generateMessage(const string& username, const string& photourl) {
+	
+	string beginning = reply_beginnings[RRR(reply_beginnings.size())];
+	string end = reply_endings[RRR(reply_endings.size())];
+	string message = "@" +username +" " +beginning  +" " +photourl +" " +end ;
+	return message;
+}
 
 void TwitterPhotoUploaderThread::uploadScreenshot(unsigned char* pixels, int w, int h, rtt::Tweet tweet) {
 	TwitterPhotoUploaderTask_Upload* up = new TwitterPhotoUploaderTask_Upload(pixels, w, h, tweet);
@@ -146,4 +161,33 @@ void TwitterPhotoUploaderThread::uploadScreenshot(unsigned char* pixels, int w, 
 
 void TwitterPhotoUploaderThread::setVerbose(bool v) {
 	verbose = v;
+}
+
+bool TwitterPhotoUploaderThread::loadReplyBeginnings(const string& filepath) {
+	std::ifstream ifs(filepath.c_str());
+	if(!ifs.is_open()) {
+		return false;
+	}
+	string line;
+	while(std::getline(ifs, line)) {
+		reply_beginnings.push_back(line);
+		if(verbose) {
+			printf("> %s\n", line.c_str());
+		}
+	}
+	return true;
+}
+
+void TwitterPhotoUploaderThread::setReplyEndings(const set<string>& cmd) {
+	reply_endings.clear();
+	set<string>::iterator it = cmd.begin();
+	int i = 0;
+	while(it != cmd.end()) {
+		reply_endings.push_back("No try this command '" +(*it) +"'");
+		if(i%5 == 0) {
+			reply_endings.push_back("Also try these colors: http://is.gd/9TkO2");		
+		}
+		++it; 
+		++i;
+	}
 }

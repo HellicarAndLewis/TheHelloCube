@@ -15,6 +15,7 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <sstream>
 
 using std::set;
 using std::string;
@@ -39,7 +40,10 @@ public:
 		,map<string, ofColor>& coloursResult
 		,set<string>& scenesResult
 	);
+	void print();
 	void setVerbose(bool v);	
+	void testCommandString(string msg);
+	set<string> getCommands();
 private:
 	void loadCommands(const string& filePath);
 	void loadColours(const string& filePath);
@@ -57,4 +61,9 @@ private:
 inline void TwitterCommands::setVerbose(bool v) {
 	verbose = v;
 }
+
+inline set<string> TwitterCommands::getCommands() {
+	return commands;
+}
+
 #endif

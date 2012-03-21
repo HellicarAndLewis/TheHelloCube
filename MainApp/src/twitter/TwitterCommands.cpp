@@ -102,6 +102,27 @@ void TwitterCommands::loadColours(const string& filePath) {
 	xml.popTag();
 }
 
+void TwitterCommands::testCommandString(string msg) {
+	std::stringstream ss(msg);
+	string word;
+	set<string> unfiltered_tokens;
+	while(std::getline(ss, word, ' ')) {
+		printf("-- '%s'\n", word.c_str());
+		unfiltered_tokens.insert(word);
+	}
+	
+	set<string> command_result;
+	map<string, ofColor> color_result;
+	set<string> scene_result;
+	
+	// filter, and print result.
+	filterCommands(unfiltered_tokens, command_result, color_result, scene_result);
+	set<string>::iterator cit = command_result.begin();
+	while(cit != command_result.end()) {
+		printf("Found command: '%s'\n", (*cit).c_str());
+		++cit;
+	}
+}
 
 
 // returns true when we found something we need handle
@@ -132,7 +153,7 @@ bool TwitterCommands::filterCommands(
 		,commands.begin(), commands.end()
 		,std::inserter(commandsResult, commandsResult.end())
 	);
-	
+
 	// and find the colours.
 	set<string> found_colours;
 	std::set_intersection(
@@ -158,4 +179,22 @@ bool TwitterCommands::filterCommands(
 	return commandsResult.size() || coloursResult.size() || scenesResult.size();
 }
 
+void TwitterCommands::print() {
+	set<string>::iterator cit = commands.begin();
+	while(cit != commands.end()) {
+		printf("Command: %s\n", (*cit).c_str());
+		++cit;
+	}
+	map<string, string>::iterator it = aliases.begin();
+	while(it != aliases.end()) {
+		printf("Alias: %s = %s\n", (it->first.c_str()), (it->second.c_str()));
+		++it;
+	}
+	
+	set<string>::iterator aw = aliased_words.begin();
+	while(aw != aliased_words.begin()) {
+		printf("Aliased word: %s\n", (*aw).c_str());
+		++aw;
+	}
+}
 

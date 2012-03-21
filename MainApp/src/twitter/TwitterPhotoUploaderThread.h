@@ -17,10 +17,14 @@
 #include "jansson.h"
 #include <string>
 #include <queue>
+#include <fstream>
+#include <set>
+#include <vector>
 
-
+using std::set;
 using std::queue;
 using std::string;
+using std::vector;
 
 //const string URL_TWITTER_UPLOADER = "http://hellocube.localhost/images/";
 const string URL_TWITTER_UPLOADER = "http://www.thehellocube.com/images/";
@@ -66,14 +70,25 @@ public:
 	~TwitterPhotoUploaderThread();
 	void threadedFunction();
 	
-	void setup(const string& consumerKey, const string& consumerSecret, const string& tokensPath);	
+	void setup(
+		 const string& consumerKey
+		,const string& consumerSecret
+		,const string& tokensPath
+		,const string& replyBeginningsPath
+	);
+		
 	void uploadScreenshot(unsigned char* pixels, int w, int h, rtt::Tweet tweet);
 	void setVerbose(bool v);
+	void setReplyEndings(const set<string>& cmd);
+	string generateMessage(const string& username, const string& photourl);
 private:
+	bool loadReplyBeginnings(const string& file);
 	bool verbose;
 	rc::Curl uploader_curl;
 	rt::Twitter twitter;
 	queue<TwitterPhotoUploaderTask*> tasks;
+	vector<string> reply_beginnings;
+	vector<string> reply_endings;
 };
 
 
