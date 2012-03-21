@@ -58,13 +58,15 @@ void AudioManager::setup(ofBaseApp * app){
 }
 
 float AudioManager::getVolume(int side) {
+   
+    
     switch (side) {
         
-        case TL:
+        case LEFT:
             return volumes[0];
             break;
             
-        case TR:
+        case TOP:
         {
             if(mAudioPresent) {
                 return volumes[2];
@@ -75,7 +77,7 @@ float AudioManager::getVolume(int side) {
         }
             break;
             
-        case BR:
+        case BOTTOM:
         {
             if(mAudioPresent) {
                 return volumes[3];
@@ -85,7 +87,7 @@ float AudioManager::getVolume(int side) {
             }
         }
             break;
-        case BL:
+        case RIGHT:
             return volumes[1];
             break;
     }

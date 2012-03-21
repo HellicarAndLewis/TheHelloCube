@@ -18,6 +18,8 @@ void TextureScene::setup() {
 	gui.add(attractionForce.setup("attraction force", 0.03, 0.01, 0.2, gui_w));
 	gui.add(shapeBounceForce.setup("bounce force", 0.001, 0.0001, 0.01, gui_w));
 	gui.add(radialForce.setup("radial force", 0.4, 0.0001, 1.0, gui_w));
+	gui.add(peakValue.setup("vol peak", 0.4, 0.0, 1.0, gui_w));
+	gui.add(attractionDamping.setup("att damping", 0.3, 0.0, 1.0, gui_w));
     gui.loadFromFile(gui_file);
 	  
  //   ofDisableArbTex();
@@ -34,21 +36,29 @@ void TextureScene::setup() {
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
     
-    Attractor attTL;
-    attTL.pos.set(20, 20);
-    attractors.push_back(attTL);
+    // TOP
+    Attractor attT;
+    attT.side = AudioManager::TOP;
+    attT.pos.set(CUBE_SCREEN_WIDTH/2, 20);
+    attractors.push_back(attT);
     
-    Attractor attTR;
-    attTR.pos.set(CUBE_SCREEN_WIDTH-20, 20);
-    attractors.push_back(attTR);
+    // BOTTOM
+    Attractor attB;
+    attB.side = AudioManager::BOTTOM;
+    attB.pos.set(CUBE_SCREEN_WIDTH/2, CUBE_SCREEN_HEIGHT-20);
+    attractors.push_back(attB);
     
-    Attractor attBL;
-    attBL.pos.set(20, CUBE_SCREEN_HEIGHT-20);
-    attractors.push_back(attBL);
+    // LEFT
+    Attractor attL;
+    attL.side = AudioManager::LEFT;
+    attL.pos.set(20, CUBE_SCREEN_HEIGHT/2);
+    attractors.push_back(attL);
     
-    Attractor attBR;
-    attBR.pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT-20);
-    attractors.push_back(attBR);
+    // RIGHT
+    Attractor attR;
+    attR.side = AudioManager::RIGHT;
+    attR.pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT/2);
+    attractors.push_back(attR);
     
    
     
@@ -65,17 +75,19 @@ void TextureScene::update() {
     
     for(int i=0; i<attractors.size(); i++) {
         if(i == 0) {
-            attractors[i].amp = audioPtr->getVolume(AudioManager::TL);
+            attractors[i].setAmp(audioPtr->getVolume(AudioManager::TOP));
         }
         if(i == 1) {
-            attractors[i].amp = audioPtr->getVolume(AudioManager::TR);
+            attractors[i].setAmp(audioPtr->getVolume(AudioManager::BOTTOM));
         }
         if(i == 2) {
-            attractors[i].amp = audioPtr->getVolume(AudioManager::BL);
+            attractors[i].setAmp(audioPtr->getVolume(AudioManager::LEFT));
         }
         if(i == 3) {
-            attractors[i].amp = audioPtr->getVolume(AudioManager::BR);
+            attractors[i].setAmp(audioPtr->getVolume(AudioManager::RIGHT));
         }
+        
+        attractors[i].update();
     }
     
     int nShapesToAdd = MAX(1, 10 * releaseRate);
@@ -92,8 +104,8 @@ void TextureScene::update() {
         }
         
         for(int i=0; i<attractors.size(); i++) {
-            if(attractors[i].getAmp() > 0.3) {
-                it->addAttractionPoint(attractors[i].pos, attractors[i].getAmp()*0.2);
+            if(attractors[i].getAmp() > peakValue) {
+                it->addAttractionPoint(attractors[i].pos, attractors[i].getAmp() * attractionDamping);
             }
         }
         
@@ -245,12 +257,9 @@ void TextureScene::draw() {
         
     }
     
-    
+    // attractors
     for(int i=0; i<attractors.size(); i++) {
-        ofSetColor(255);
-        ofCircle(attractors[i].pos, 25);
-        ofSetColor(255, 0, 255);
-        ofCircle(attractors[i].pos, 5+(20*attractors[i].getAmp()));
+        attractors[i].draw();
     }
     
     
@@ -261,6 +270,7 @@ void TextureScene::draw() {
     gui.draw();
 }
 
+// ----------------------------------------------------
 void TextureScene::respondToNewComplimentaryColours(){
     for(vector<TexturedShape>::iterator it=shapes.begin(); it!= shapes.end(); ++it) {
         it->colour = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
