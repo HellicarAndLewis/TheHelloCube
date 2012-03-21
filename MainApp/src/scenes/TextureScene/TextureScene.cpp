@@ -197,7 +197,12 @@ void TextureScene::keyPressed(int key) {
 // ----------------------------------------------------
 void TextureScene::draw() {
     
-    drawBackground();
+    //drawBackground();
+    
+    ofSetColor(twitterColour); //fill the background!
+    ofFill();
+    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    
     ofEnableAlphaBlending();
     if((int)ofRandom(0, 300) == 30) {
         circleFrcFlip = !circleFrcFlip;
@@ -207,8 +212,8 @@ void TextureScene::draw() {
     float r = 5 + ofNoise(n, circleFrc.x/3000.0) * 300;
     circleFrc.x = cos(n*TWO_PI) * r;
     circleFrc.y = sin(n*TWO_PI) * r;
-    ofSetColor(255, 0, 0);
-    ofCircle(circleFrc+getCentreCubeScreen(), 13);
+//    ofSetColor(255, 0, 0);
+//    ofCircle(circleFrc+getCentreCubeScreen(), 13); //don't draw the red dot...
     
     for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
         

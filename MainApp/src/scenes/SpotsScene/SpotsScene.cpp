@@ -153,8 +153,8 @@ void SpotsScene::draw() {
     float r = 5 + ofNoise(n, circleFrc.x/3000.0) * 300;
     circleFrc.x = cos(n*TWO_PI) * r;
     circleFrc.y = sin(n*TWO_PI) * r;
-    ofSetColor(255, 0, 0);
-    ofCircle(circleFrc+getCentreCubeScreen(), 13);
+//    ofSetColor(255, 0, 0);
+//    ofCircle(circleFrc+getCentreCubeScreen(), 13); //don't draw red dot...
     
     
     ofSetColor(bgColor);

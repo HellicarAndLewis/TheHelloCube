@@ -137,4 +137,6 @@ public:
 	bool                 LUTloaded;
 	ofVec3f              lut[32][32][32];
 	ofImage              lutImg;
+    
+    bool                 showMouse;
 };

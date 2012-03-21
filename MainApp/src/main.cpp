@@ -9,9 +9,9 @@ int main() {
 
     
 #ifdef USE_SMALL_APP
-    ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+    ofSetupOpenGL(&window, 1024, 768, OF_FULLSCREEN);
 #else
-	ofSetupOpenGL(&window, CUBE_SCREEN_WIDTH + CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT, OF_WINDOW);
+	ofSetupOpenGL(&window, CUBE_SCREEN_WIDTH + CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT, OF_FULLSCREEN);
 #endif
     
     ofRunApp( new App());

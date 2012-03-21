@@ -67,6 +67,9 @@ void App::setup() {
 	twitter.getSimulator().loadSettings();
 	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
+    
+    showMouse = false;
+    ofHideCursor();
 }
 
 //--------------------------------------------------------------
@@ -241,12 +244,19 @@ void App::keyPressed(int key) {
         case 'f':
 			ofToggleFullscreen();
 			break;
-			
-		
 		case 'g': {
 			draw_gui = !draw_gui;
 			break;
 		}
+        case 'm':{
+            if(showMouse){
+                ofHideCursor();
+            }else{
+                ofShowCursor();
+            }
+            showMouse = !showMouse;
+            break;
+        }
 #ifdef USE_VEINS		
 		case 'v': {
 			float cx = ofGetWidth() * 0.5;
