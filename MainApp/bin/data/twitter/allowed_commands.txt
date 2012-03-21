@@ -15,7 +15,7 @@ bigger,big,yes
 faster,fast
 slower,slow
 sparkle
-love,hearts,heart,peace,claire,ulla,tim,chris,sarah,rosa,lorna,georgia,buddy,wietske,diederick,roxlu,todd,harri,catrin,rollo,tish,tate,recreative,louisvuitton,kusama,joel,pete,peter,emelia,jeanette,jesse,jordan,jeremy,bryony,chris,tim,charlotte,fred,carri,grace,thristian,lilly,marek,niamh,kath,tim,luke,jody,jethro,james,steve,dan,rebecca,sharmadean,lewis,nexus,nia,kate,simon,nick,toby,guy,ralph,anke,anna,melanie,shaun,katie,jo,carla,alistair,bip,dylan,recreativeuk,openframeworks,of,opensource,slg,tatemodern,youngtate,artassassins,absentfriends,arturo,zach,theo,igor,jason,memo,jane,marcus,vera,andreas,arthur,josh,joshua,blaise,andy,durrell,jer,sharna,tatecollective,damian,jared,jessi,amanda,carly,iain,matt,chris,ash,annika,dave,barry,lorna,irini,jenn
+love,hearts,heart,peace,claire,ulla,tim,chris,sarah,rosa,lorna,georgia,buddy,wietske,diederick,roxlu,todd,harri,catrin,rollo,tish,tate,recreative,louisvuitton,kusama,joel,pete,peter,emelia,jeanette,jesse,jordan,jeremy,bryony,chris,tim,charlotte,fred,carri,grace,thristian,lilly,marek,niamh,kath,tim,luke,jody,jethro,james,steve,dan,rebecca,sharmadean,lewis,nexus,nia,kate,simon,nick,toby,guy,ralph,anke,anna,melanie,shaun,katie,jo,carla,alistair,bip,dylan,recreativeuk,openframeworks,of,opensource,slg,tatemodern,youngtate,artassassins,absentfriends,arturo,zach,theo,igor,jason,memo,jane,marcus,vera,andreas,arthur,josh,joshua,blaise,andy,durrell,jer,sharna,tatecollective,damian,jared,jessi,amanda,carly,iain,matt,chris,ash,annika,dave,barry,lorna,irini,jenn,shape,rupert,shapeconstruction
 cell,cells,lattice,mesh
 drawn,pen,animals,jungle,world
 spots
