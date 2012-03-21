@@ -200,8 +200,9 @@ void TextureScene::draw() {
     //drawBackground();
     
     ofSetColor(twitterColour); //fill the background!
-    ofFill();
-    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+//    ofFill();
+//    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    ofBackgroundGradient(twitterColour, ofColor::black, OF_GRADIENT_CIRCULAR);
     
     ofEnableAlphaBlending();
     if((int)ofRandom(0, 300) == 30) {
