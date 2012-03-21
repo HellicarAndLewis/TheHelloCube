@@ -50,6 +50,14 @@ void rxParticles::addParticle(rxParticle* p) {
 	particles.push_back(p);
 }
 
+// only remove, no delete
+void rxParticles::removeParticle(rxParticle* p) {
+	list<rxParticle*>::iterator it = std::find(particles.begin(), particles.end(), p);
+	if(it != particles.end()) {
+		particles.erase(it);
+	}
+}
+
 void rxParticles::addSpring(rxSpring* s) {
 	springs.push_back(s);
 }

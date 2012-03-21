@@ -16,6 +16,7 @@
 #include "physics/rxSpring.h"
 #include "physics/rxParticles.h"
 #include "physics/rxParticle.h"
+#include "physics/rxVeins.h"
 
 class App : public ofBaseApp{
     
@@ -47,8 +48,9 @@ public:
     
     
     int                 sceneIndex;
-    
-					
+#ifdef USE_VEINS	
+    rxVeins				veins;
+#endif					
     // scenes
     vector <BaseScene*>  scenes;
     BaseScene *          currentScene;
@@ -120,7 +122,7 @@ public:
 	
 	// Particles test
 #ifdef USE_SWIRPS
-	rxParticles particles;
+	rxParticles swirp_particles;
 	float repel_effect;
 	float follow_effect;
 #endif

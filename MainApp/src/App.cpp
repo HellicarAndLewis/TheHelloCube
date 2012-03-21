@@ -65,12 +65,13 @@ void App::setup() {
 	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
 	twitter.getSimulator().loadSettings();
-	twitter.setVerbose(true);
+	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 }
 
 //--------------------------------------------------------------
 void App::update() {
+	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 	
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
@@ -139,9 +140,15 @@ void App::draw(){
         currentScene->draw();
     }
 
+
+#ifdef USE_VEINS
+	ofBackground(33);
+	veins.draw();
+#endif
+
 	fx.endGrabPixels();
     fx.draw();
-//	return;    
+ 
     ofSetColor(255);
     
 #ifndef USE_SMALL_APP
@@ -185,7 +192,7 @@ void App::draw(){
 		take_screenshot_on = 0;
 		twitter.getSimulator().take_screenshot = false;
 	}
-	
+		
     if(draw_gui) {
 		gui.draw();
         
@@ -240,7 +247,42 @@ void App::keyPressed(int key) {
 			draw_gui = !draw_gui;
 			break;
 		}
+#ifdef USE_VEINS		
+		case 'v': {
+			float cx = ofGetWidth() * 0.5;
+			float cy = ofGetHeight() * 0.5;
+			for(int i = 0; i < 300; ++i) {
+				float l = ofRandom(0,300);
+				float a = ofRandom(0,TWO_PI);
+				float x = cx + cos(a) * l;
+				float y = cy + sin(a) * l;
+				rxParticle* p = new rxParticle(ofVec3f(x,y,0),1);
+				veins.addSource(p);
+			}
+			break;
+		}
 		
+		case 'o': {
+			float cx = ofGetWidth() * 0.5;
+			float cy = ofGetHeight() * 0.5;
+			float l = 300;
+			float a = ofRandom(0,TWO_PI);
+			float x = cx + cos(a) * l;
+			float y = cy + sin(a) * l;
+			rxParticle* p = new rxParticle(ofVec3f(x,y,0),1);
+			veins.addRoot(p);
+			break;			
+		}
+		case 's': {
+			veins.step();
+			printf("step.\n");
+			break;
+		}
+		case 'u': {
+			veins.update();
+			break;
+		}
+#endif		
 		case 'l':
 			doLUT^=true;
 			break;
