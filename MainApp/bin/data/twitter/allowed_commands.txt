@@ -1,13 +1,13 @@
 flip,flipper,dolphin,switch
 mirror 
-invert,inverted,opposite,dark,night
-ripple,hello,please,wobble,flex,drop,water
+invert,inverted,opposite,dark,night,goodnight,nightnight,bed,tired
+ripple,hello,please,wobble,flex,drop,water,splash,hello!
 posterize,posterise
-wave,smile, warp
+wave,smile,warp
 pixelate,square,resolution,enhance
 shake,dance,move
 swirl,twist,melt,stir,mix
-reflect,kaleidoscope,vogue
+reflect,kaleidoscope,vogue,bye,byebye,goodbye
 more,lots,lot,mores
 less,few,lesser
 smaller,small,no
@@ -18,3 +18,4 @@ cell,cells,lattice,mesh
 drawn,pen,animals,jungle,world
 spots,kusama
 texture,marbles,marble,balls
+sparkle
