@@ -96,4 +96,6 @@ public:
 
     ofxIntSlider   maxShapesOnScreen;
     
+    bool drawGUI;
+    
 };

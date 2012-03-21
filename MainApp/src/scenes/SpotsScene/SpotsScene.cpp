@@ -17,6 +17,8 @@ void SpotsScene::setup() {
     
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
+    
+    drawGUI = false;
 }
 
 
@@ -124,6 +126,10 @@ void SpotsScene::keyPressed(int key) {
     if(key == 'b') {
         bgColorTarget = ofRandomColor();    
     }
+    
+    if(key == 'g'){
+        drawGUI = !drawGUI;
+    }
 }
 
 
@@ -208,12 +214,14 @@ void SpotsScene::draw() {
         
     }
     
-    
-    ofSetColor(255);
-    ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
-    ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
-    ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
-    gui.draw();
+    if(drawGUI){
+        ofSetColor(255);
+        ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
+        ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
+        ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
+        gui.draw();        
+    }
+
 }
 
 // ----------------------------------------------------

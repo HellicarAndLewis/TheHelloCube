@@ -19,7 +19,7 @@ void CellScene::setup() {
     // we need some nice colors...
     bgColorTarget = ofRandomColor();
     
-    drawGUI = true; //for screen grabbing...   
+    drawGUI = false; //for screen grabbing...   
     
     cellWallWidth = 1.f; //v thin line to start...
 }
@@ -180,41 +180,44 @@ void CellScene::draw() {
     ofPopStyle();
     
     // draw the gui
-    if(drawGUI) gui.draw();
+    if(drawGUI){
+        
+        gui.draw();
     
     
-    for(int i=0; i<4; i++) {
+        for(int i=0; i<4; i++) {
 
-        float amp = audioPtr->getVolume(i);
-        ofVec2f pos;
-        // TOP
-        if(i == AudioManager::TOP) {
-            pos.set(CUBE_SCREEN_WIDTH/2, 20);
+            float amp = audioPtr->getVolume(i);
+            ofVec2f pos;
+            // TOP
+            if(i == AudioManager::TOP) {
+                pos.set(CUBE_SCREEN_WIDTH/2, 20);
+            }
+            
+            // BOTTOM
+            if(i == AudioManager::BOTTOM) {
+                pos.set(CUBE_SCREEN_WIDTH/2, CUBE_SCREEN_HEIGHT-20);
+            }
+            
+            // LEFT
+            if(i == AudioManager::LEFT) {
+                pos.set(20, CUBE_SCREEN_HEIGHT/2);
+            }
+            
+            // RIGHT
+            if(i == AudioManager::RIGHT) {
+                pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT/2);
+            }
+            
+            
+            // draw
+            ofSetColor(255);
+            ofCircle(pos, 25);
+            ofSetColor(255, 0, 255);
+            ofCircle(pos, 5+(20*amp));
+            ofSetColor(0, 250, 250);
+            ofDrawBitmapString(AudioManager::getSideName(i), pos);
         }
-        
-        // BOTTOM
-        if(i == AudioManager::BOTTOM) {
-            pos.set(CUBE_SCREEN_WIDTH/2, CUBE_SCREEN_HEIGHT-20);
-        }
-        
-        // LEFT
-        if(i == AudioManager::LEFT) {
-            pos.set(20, CUBE_SCREEN_HEIGHT/2);
-        }
-        
-        // RIGHT
-        if(i == AudioManager::RIGHT) {
-            pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT/2);
-        }
-        
-        
-        // draw
-        ofSetColor(255);
-        ofCircle(pos, 25);
-        ofSetColor(255, 0, 255);
-        ofCircle(pos, 5+(20*amp));
-        ofSetColor(0, 250, 250);
-        ofDrawBitmapString(AudioManager::getSideName(i), pos);
     }
 }
 

@@ -116,5 +116,5 @@ public:
 	float repel_effect;
 	float follow_effect;
 #endif
-    
+        bool drawGUI;
 };

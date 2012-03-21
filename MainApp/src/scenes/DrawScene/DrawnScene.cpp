@@ -84,6 +84,8 @@ void DrawnScene::setup() {
 	repel_effect = 0.3;
 	follow_effect = 0.001;
 #endif
+    
+    drawGUI = false;
 }
 
 
@@ -409,23 +411,28 @@ void DrawnScene::draw() {
     }
     ofRemove(poop, ofxBox2dBaseShape::shouldRemove);
     
-    gui.draw();
+    if(drawGUI){
+        gui.draw();
+#ifdef USE_SWIRPS
+        ofSetColor(BaseScene::twitterColour);
+        particles.draw();
+        glColor3f(0,0,0);
+        ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
+#endif        
+    }
     
     if((int)ofRandom(0, 40)==10) addChasers();
     if((int)ofRandom(0, 4)==2)   makePoop();
-    
-#ifdef USE_SWIRPS
-    ofSetColor(BaseScene::twitterColour);
-	particles.draw();
-	glColor3f(0,0,0);
-	ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
-#endif
 }
 
 // ----------------------------------------------------
 void DrawnScene::keyPressed(int key) {
     switch (key) { 
         case 'g': {
+            drawGUI = !drawGUI;
+            break;
+        }
+        case 'c': {
         addChasers();
             break;
         }    

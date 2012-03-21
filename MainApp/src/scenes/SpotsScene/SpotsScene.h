@@ -43,4 +43,6 @@ public:
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxShapesOnScreen;
     
+        bool drawGUI;
+    
 };

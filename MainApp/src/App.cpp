@@ -188,22 +188,24 @@ void App::draw(){
 	
     if(draw_gui) {
 		gui.draw();
+        
+        // draw some stats about the app...
+        ofEnableAlphaBlending();
+        ofFill();
+        ofSetColor(255, 130);
+        ofRect(0, ofGetHeight()-90, 255, 90);
+        ofSetColor(0);
+        string info;
+        info += ofToString(ofGetFrameRate(), 0)+" fps\n";
+        if(currentScene) info += "scene "+currentScene->name+"\n";
+        ofDrawBitmapString(info, 10, ofGetHeight()-70);
 	}
-	
-    // draw some stats about the app...
-    ofEnableAlphaBlending();
-    ofFill();
-    ofSetColor(255, 130);
-    ofRect(0, ofGetHeight()-90, 255, 90);
-    ofSetColor(0);
-    string info;
-    info += ofToString(ofGetFrameRate(), 0)+" fps\n";
-    if(currentScene) info += "scene "+currentScene->name+"\n";
-    ofDrawBitmapString(info, 10, ofGetHeight()-70);
 }
 
 //--------------------------------------------------------------
 void App::changeScene(int scene) {
+    
+    draw_gui = false;
     
     BaseScene * lastScene = scenes[sceneIndex];
     lastScene->exitScene();
