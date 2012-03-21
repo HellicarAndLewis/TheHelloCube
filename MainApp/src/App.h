@@ -16,6 +16,7 @@
 #include "physics/rxSpring.h"
 #include "physics/rxParticles.h"
 #include "physics/rxParticle.h"
+#include "physics/rxVeins.h"
 
 class App : public ofBaseApp{
     
@@ -47,7 +48,7 @@ public:
     
     
     int                 sceneIndex;
-    
+    rxVeins				veins;
 					
     // scenes
     vector <BaseScene*>  scenes;

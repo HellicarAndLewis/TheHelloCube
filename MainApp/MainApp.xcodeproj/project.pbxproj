@@ -56,6 +56,7 @@
 		5463A9DF151680AC004B9066 /* rxParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9D8151680AC004B9066 /* rxParticles.cpp */; };
 		5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9DA151680AC004B9066 /* rxSpring.cpp */; };
 		5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9DC151680AC004B9066 /* rxSwirp.cpp */; };
+		54A467F0151915D800B1075E /* rxVeins.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54A467EF151915D800B1075E /* rxVeins.cpp */; };
 		54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54F686AF15108F73006BDEFD /* AudioManager.cpp */; };
 		5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80CB0B150B864800F8C65F /* CoreVideo.framework */; };
 		5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA11969150A5D300011C6A8 /* QTKit.framework */; };
@@ -374,6 +375,8 @@
 		5463A9DB151680AC004B9066 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
 		5463A9DC151680AC004B9066 /* rxSwirp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSwirp.cpp; sourceTree = "<group>"; };
 		5463A9DD151680AC004B9066 /* rxSwirp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSwirp.h; sourceTree = "<group>"; };
+		54A467EE1519157F00B1075E /* rxVeins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxVeins.h; sourceTree = "<group>"; };
+		54A467EF151915D800B1075E /* rxVeins.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxVeins.cpp; sourceTree = "<group>"; };
 		54F686AF15108F73006BDEFD /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
 		54F686B015108F73006BDEFD /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		5D80CB0B150B864800F8C65F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = ../../../../../../../../../../../System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
@@ -943,6 +946,8 @@
 				5463A9DB151680AC004B9066 /* rxSpring.h */,
 				5463A9DC151680AC004B9066 /* rxSwirp.cpp */,
 				5463A9DD151680AC004B9066 /* rxSwirp.h */,
+				54A467EE1519157F00B1075E /* rxVeins.h */,
+				54A467EF151915D800B1075E /* rxVeins.cpp */,
 			);
 			path = physics;
 			sourceTree = "<group>";
@@ -1647,6 +1652,7 @@
 				5463A9DF151680AC004B9066 /* rxParticles.cpp in Sources */,
 				5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */,
 				5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */,
+				54A467F0151915D800B1075E /* rxVeins.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

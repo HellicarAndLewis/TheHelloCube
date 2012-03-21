@@ -5,11 +5,17 @@ rxParticle::rxParticle(ofVec3f pos, float mass)
 	,mass(mass)
 	,velocity(0)
 	,forces(0)
+	,age(0)
+	,lifetime(10)
 {
 	if(mass < 0.001) {
 		mass = 0.001;
 	}	
 	inv_mass = 1.0/mass;
+}
+
+rxParticle::~rxParticle() {
+	printf("~rxParticle, lifetime: %f\n", lifetime);
 }
 
 void rxParticle::update() {
@@ -24,3 +30,8 @@ void rxParticle::draw() {
 	glVertex3fv(&position.x);
 }
 
+void rxParticle::reset() {
+	neighbors.clear();
+	//age = 0;
+	lifetime = 10;
+}

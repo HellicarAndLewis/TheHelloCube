@@ -22,6 +22,7 @@ public:
 	void follow(const ofVec3f& pos, float effect = 0.001f);
 	void addForce(const ofVec3f& f);
 	void addParticle(rxParticle* p);
+	void removeParticle(rxParticle* p);
 	void addSpring(rxSpring* s);
 	void addSwirp(rxSwirp* s);
 	
