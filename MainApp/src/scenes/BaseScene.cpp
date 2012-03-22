@@ -6,7 +6,7 @@ ofColor BaseScene::twitterColour = ofColor(255,0,0);
 BaseScene::BaseScene() {
     audioPtr = NULL;
     generateComplimentaryColours();
-	mustDrawGui = true;
+	mustDrawGui = false;
 }
 
 // ----------------------------------------------------
