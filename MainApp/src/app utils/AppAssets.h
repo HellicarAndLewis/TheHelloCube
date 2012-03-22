@@ -11,20 +11,29 @@
 #define USE_FX
 
 #define NUM_AUDIO_CHANNELS 6
-//#define USE_SMALL_APP
-#define USE_MOUSE_HACK      // use the mouse to damp the mic....
 //#define USE_SWIRPS
 //#define USE_VEINS
+
+// Use this to switch code between prouction and development
+// production running at the Turbine Hall
+#define RUN_MODE_DEVELOPMENT 	1
+#define RUN_MODE_PRODUCTION		2
+//#define RUN_MODE				RUN_MODE_PRODUCTION
+#define RUN_MODE				RUN_MODE_DEVELOPMENT
+
+#if RUN_MODE == RUN_MODE_DEVELOPMENT
+	#define USE_SMALL_APP
+#else
+
+#endif
+#define USE_MOUSE_HACK      // use the mouse to damp the mic....
 
 class AppAssets {
     
 private:
     static AppAssets * instance;
 public:
-    
     ~AppAssets();
     static AppAssets * inst();
     ofTrueTypeFont     appFont;
-    
-    
 };

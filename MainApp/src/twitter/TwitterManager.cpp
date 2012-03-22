@@ -1,4 +1,5 @@
 #include "TwitterManager.h"
+#include "AppAssets.h"
 
 TwitterManager::TwitterManager()
 	:simulator(*this)
@@ -23,9 +24,19 @@ void TwitterManager::init() {
 	);
 	allowed_commands.load();
 	
+	// load messages we send when someone is not using a command
+	if(!loadUnhandledCommandMessages(ofToDataPath("twitter/no_command_found_replies.txt",true))) {
+		printf("Error: cannot load the twitter/no_command_found_replies.txt file. Please update git or create it.\n");
+		exit(0);
+	}
+	
 	// twitter mentions
+#if RUN_MODE == RUN_MODE_PRODUCTION
 	twitter_user = "thehellocube";
+#else
 	twitter_user = "roxlutest";
+#endif
+
 	string tokens_file = ofToDataPath("twitter/twitter_" +twitter_user +".txt",true);
 	twitter_thread.setup(tokens_file);
 	twitter_thread.startThread(false, false);
@@ -98,7 +109,6 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 			}
 			
 			if(must_handle) {
-
 				TwitterCommand cmd(
 					 tweet
 					,found_commands
@@ -108,6 +118,15 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 				);
 				cmd.print();
 				commands.push(cmd);
+			}
+			else {
+				printf("Tweet not handled\n");
+				size_t num_messages = unhandled_commands_messages.size();
+				unsigned int rnd_dx = (rand() * num_messages) % num_messages;
+				printf("RANDOM INDEX: %d\n", rnd_dx); 
+				string rnd_message = "@" +tweet.getScreenName() +" " +unhandled_commands_messages[rnd_dx];
+				printf("Use: %s\n", rnd_message.c_str());
+				uploader_thread.sendMessage(rnd_message, tweet);
 			}
 		}
 	}
@@ -128,4 +147,17 @@ bool TwitterManager::getNextCommand(TwitterCommand& result)  {
 
 void TwitterManager::reloadBadWords() {
 	bad_words.reloadWordsFile(ofToDataPath("twitter/bad_words.txt", true));
+}
+
+bool TwitterManager::loadUnhandledCommandMessages(const string& filepath) {
+	std::ifstream ifs(filepath.c_str());
+	if(!ifs.is_open()) {
+		return false;
+	}
+	string msg;
+	while(std::getline(ifs, msg)) {
+		printf("Loaded mesage: %s\n", msg.c_str());
+		unhandled_commands_messages.push_back(msg);
+	}
+	return true;
 }

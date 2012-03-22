@@ -29,7 +29,8 @@ using std::vector;
 //const string URL_TWITTER_UPLOADER = "http://hellocube.localhost/images/";
 const string URL_TWITTER_UPLOADER = "http://www.thehellocube.com/images/";
 enum TwitterPhotoUploaderTaskType {
-	TASK_UPLOAD_PHOTO
+	 TASK_UPLOAD_PHOTO
+	,TASK_GENERAL_MESSAGE
 };
 
 class TwitterPhotoUploaderTask {
@@ -64,6 +65,18 @@ public:
 };
 
 
+class TwitterPhotoUploaderTask_GeneralMessage : public TwitterPhotoUploaderTask {
+public:
+	TwitterPhotoUploaderTask_GeneralMessage(const string& msg, rtt::Tweet tweet)
+		:TwitterPhotoUploaderTask(TASK_GENERAL_MESSAGE)
+		,message(msg)
+	{
+	}
+	
+	string message;
+	rtt::Tweet tweet;
+};
+
 class TwitterPhotoUploaderThread : public ofThread {
 public:
 	TwitterPhotoUploaderThread();
@@ -78,6 +91,7 @@ public:
 	);
 		
 	void uploadScreenshot(unsigned char* pixels, int w, int h, rtt::Tweet tweet);
+	void sendMessage(const string& msg, rtt::Tweet);
 	void setVerbose(bool v);
 	void setReplyEndings(const set<string>& cmd);
 	string generateMessage(const string& username, const string& photourl);

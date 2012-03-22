@@ -18,6 +18,7 @@
 #include "pcrecpp.h"
 #include <vector>
 #include <queue>
+#include <fstream>
 #include <Poco/String.h>
 #include <Poco/StringTokenizer.h>
 
@@ -38,6 +39,7 @@ public:
 	bool getNextCommand(TwitterCommand& result);
 	void reloadBadWords();
 	void setVerbose(bool verbose);
+	bool loadUnhandledCommandMessages(const string& filepath);
 	TwitterThread& getThread();
 	TwitterCommands& getCommands();
 	TwitterPhotoUploaderThread& getUploader();
@@ -53,6 +55,7 @@ private:
 	TwitterBadWords bad_words;
 	queue<TwitterCommand> commands;
 	string twitter_user;
+	vector<string> unhandled_commands_messages;
 };
 
 inline TwitterThread& TwitterManager::getThread() {

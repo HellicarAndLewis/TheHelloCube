@@ -137,6 +137,13 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 				
 				json_decref(root);
 			}
+			else if(task->type == TASK_GENERAL_MESSAGE) {	
+				TwitterPhotoUploaderTask_GeneralMessage* gen = static_cast<TwitterPhotoUploaderTask_GeneralMessage*>(task);
+				printf("Message general: %s\n", gen->message.c_str());
+//				twitter.statusesUpdate(task->message);
+				//if(task->type == TASK_UPLOAD_PHOTO) {
+			}
+			
 			delete task;
 		}
 		ofSleepMillis(5000);
@@ -145,7 +152,6 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 
 #define RRR(max) rand() % (max) 
 string TwitterPhotoUploaderThread::generateMessage(const string& username, const string& photourl) {
-	
 	string beginning = reply_beginnings[RRR(reply_beginnings.size())];
 	string end = reply_endings[RRR(reply_endings.size())];
 	string message = "@" +username +" " +beginning  +" " +photourl +" " +end ;
@@ -156,6 +162,13 @@ void TwitterPhotoUploaderThread::uploadScreenshot(unsigned char* pixels, int w, 
 	TwitterPhotoUploaderTask_Upload* up = new TwitterPhotoUploaderTask_Upload(pixels, w, h, tweet);
 	lock();
 		tasks.push(up);
+	unlock();
+}
+
+void TwitterPhotoUploaderThread::sendMessage(const string& msg, rtt::Tweet tweet) {
+	TwitterPhotoUploaderTask_GeneralMessage* general_message = new TwitterPhotoUploaderTask_GeneralMessage(msg, tweet);
+	lock();
+		tasks.push(general_message);
 	unlock();
 }
 
