@@ -85,9 +85,7 @@ void DrawnScene::setup() {
 	repel_effect = 0.3;
 	follow_effect = 0.001;
 #endif
-    
-
-    drawGUI = false;
+   
     
     // make 3 wigglers...
     for(int i=0; i<3; i++) {
@@ -153,12 +151,13 @@ void DrawnScene::addBush(float startX) {
 
 // ----------------------------------------------------
 void DrawnScene::addChasers(float x, float y) {
-    
-    Chaser p;
-    p.radius = ofRandom(20, 50);
-    p.setPosition(x, y);
-    
-    chasers.push_back(p);
+    if(chasers.size() < MAX_CHASERS) {
+        Chaser p;
+        p.radius = ofRandom(20, 50);
+        p.setPosition(x, y);
+        
+        chasers.push_back(p);
+    }
 }
 
 // ----------------------------------------------------
@@ -283,7 +282,7 @@ void DrawnScene::update() {
         float frwX  = ofNoise(pos.x * 0.003, pos.y * 0.006, ofGetElapsedTimef() * 0.6);
         
         ofVec2f noiseFrc;
-     	noiseFrc.x = frwX + ofSignedNoise(t, pos.y * 0.04) * 0.6;
+     	noiseFrc.x = ofSignedNoise(t, pos.y * 0.04) * 0.6;
 		noiseFrc.y = ofSignedNoise(it->uniquef, pos.x * 0.006, t);
         noiseFrc *= 0.94;
   
@@ -493,7 +492,7 @@ void DrawnScene::draw() {
     // ----------------------
     // gui
     // ----------------------
-    if(drawGUI){
+    /*if(drawGUI){
         gui.draw();
 #ifdef USE_SWIRPS
         ofSetColor(BaseScene::twitterColour);
@@ -501,7 +500,7 @@ void DrawnScene::draw() {
         glColor3f(0,0,0);
         ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
 #endif        
-    }
+    }*/
     
     // ----------------------
     // sound

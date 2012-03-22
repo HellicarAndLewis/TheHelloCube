@@ -27,6 +27,7 @@ float repel_effect;
 float follow_effect;
 #endif
 
+#define MAX_CHASERS 200
 
 // ----------------------------------------------------
 class Chaser : public Particle {
