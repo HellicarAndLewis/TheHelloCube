@@ -528,14 +528,15 @@ void DrawnScene::draw() {
         
         if(amp>peak) addChasers(pos.x, pos.y);
 
-        
-        // draw
-        ofSetColor(255);
-        ofCircle(pos, 25);
-        ofSetColor(255, 0, 255);
-        ofCircle(pos, 5+(20*amp));
-        ofSetColor(0, 250, 250);
-        ofDrawBitmapString(AudioManager::getSideName(i), pos);
+        if(mustDrawGui){
+            // draw
+            ofSetColor(255);
+            ofCircle(pos, 25);
+            ofSetColor(255, 0, 255);
+            ofCircle(pos, 5+(20*amp));
+            ofSetColor(0, 250, 250);
+            ofDrawBitmapString(AudioManager::getSideName(i), pos);
+        }
     }
 
     
