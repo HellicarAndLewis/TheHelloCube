@@ -15,8 +15,10 @@ public:
 	ofPolyline pts;
     ofVec2f    dir;
     bool       bMade;
+    float      rnd;
     Hair() {
         bMade = false;
+        rnd   = 0.92;
     }
     void init(int n) {
         for (int i=0; i<n; i++) {
@@ -32,7 +34,6 @@ public:
         if(pts.size()>3) {
             pts[0] = base;
             pts[1] = base;
-            float rnd = 0.92;
             pts[1].x += ofRandom(-rnd, rnd);
             pts[1].y += ofRandom(-rnd, rnd);
             for (int i=2; i<pts.size(); i++) {

@@ -27,7 +27,7 @@ float repel_effect;
 float follow_effect;
 #endif
 
-#define MAX_CHASERS 200
+#define MAX_CHASERS 100
 
 // ----------------------------------------------------
 class Chaser : public Particle {
@@ -121,6 +121,7 @@ public:
     vector <ofImage> dots;
     ofImage          eyeA;
     float            eyeRatio;
+    ofImage          dotRepeatImg;
     
     // Particles test
 #ifdef USE_SWIRPS

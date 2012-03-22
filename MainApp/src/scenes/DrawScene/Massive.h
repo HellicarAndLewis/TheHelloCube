@@ -11,7 +11,7 @@
 #include "ofxBox2d.h"
 #include "Hair.h"
 
-class Wiggler {
+class Massive {
     
 public:
     
@@ -23,28 +23,22 @@ public:
     float               girth;
     float               seperation;  
     float               unique;
-    float               div;
-    ofTexture  *        txt;
-    float               soundAmp;
+    
     //--------------------------------------------------------------
-    Wiggler() {
-        soundAmp = 0.1;
-        txt     = NULL;
-        bMade   = false;
-        unique  = ofRandomuf();
-        div     = ofRandom(200, 900);
-
+    Massive() {
+        bMade = false;
+        unique = ofRandomuf();
     }
     //--------------------------------------------------------------
-    ~Wiggler() {
+    ~Massive() {
         
     }
     
     //--------------------------------------------------------------
     void make(float x, float y) {
-        int nPts = ofRandom(20, 30);
+        int nPts = ofRandom(10, 20);
         girth    = ofRandom(MAX(3, nPts-5), nPts);
-        root.set(x, y+20);
+        root.set(x, y);
         
         for (int i=0; i<nPts; i++) {
             pts.push_back(ofVec2f(x, y-i*2));
@@ -65,7 +59,8 @@ public:
         if(!bMade) return;
        
         float rnd = 0.2;
-        float t   = ofGetElapsedTimef() * 0.3;
+        float div = 500.0;
+        float t   = ofGetElapsedTimef()*0.3;
         pts[0].set(ofGetMouseX(), ofGetMouseY());
         pts[0].set(root.x, root.y+seperation+4);
         
@@ -94,57 +89,20 @@ public:
     //--------------------------------------------------------------
     void drawThick() {
         if(!bMade) return;
-        
-        ofPolyline resampled;
-        for(int i=0; i<pts.size(); i++) {
-            resampled.addVertex(pts[i].x, pts[i].y);
-        }
-        resampled = resampled.getResampledByCount(30);
-       
-        
-       
-        glEnable(txt->texData.textureTarget);
-        glBindTexture(txt->texData.textureTarget, txt->texData.textureID);
-        glTexParameterf(txt->texData.textureTarget, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameterf(txt->texData.textureTarget, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(txt->texData.textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(txt->texData.textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        ofSetColor(255);
-        
-        glBegin (GL_QUAD_STRIP);
-
-       
-        ofVec2f v, p, a, b;
         vector <ofVec2f> perps;
-        for(int i=0; i<resampled.size()-1; i++) {
+        ofVec2f v, p;
+        for(int i=2; i<pts.size(); i++) {
             
-            a = resampled[i];
-            b = resampled[i+1];
-            
-            v = a - b;
+            v = pts[i] - pts[i-1];
             p = v.perpendicular();
             
-            float r = ofMap(i, 0, resampled.size()-2, girth, 2); 
-            p *= r;
+            float r = ofMap(i, 2, pts.size()-1, girth, 2);
+            p *= r * 2;
             
-            float w = (girth*2) / 64.0;
-            float per = ofMap(i, 0, resampled.size()-2, 0, seperation*(resampled.size()-2)) / 64.0;
-            glTexCoord2f(0.0, per);  glVertex2f(a.x - p.x, a.y - p.y);
-            glTexCoord2f(w, per);    glVertex2f(a.x + p.x, a.y + p.y);
-            
-            
-            perps.push_back(ofVec2f(a.x - p.x, a.y - p.y));
-            perps.push_back(ofVec2f(a.x + p.x, a.y + p.y));            
+            perps.push_back(ofVec2f(pts[i] + p));
+            perps.push_back(ofVec2f(pts[i] - p));            
             
         }
-        
-        glEnd ();
-        glDisable(txt->texData.textureTarget);
-        
-        
-        
-        
-        // line strip
         ofPolyline linestrip;
         for(int i=0; i<perps.size(); i++) {
             if(i%2==0) linestrip.addVertex(perps[i]);   
@@ -156,6 +114,21 @@ public:
         
         linestrip = linestrip.getResampledByCount(nHairs);
         
+        
+        // find the general perp
+        for(int i=1; i<linestrip.size(); i++) {
+            v = linestrip[i] - linestrip[i-1];
+            p = v.perpendicular();
+            hair[i].dir = p;
+        }
+        
+        for(int i=0; i<linestrip.size(); i++) {
+            ofCircle(linestrip[i], 1);
+            int hairIndex = MIN(i, hair.size()-1);
+            hair[hairIndex].draw(linestrip[i], 3);
+        }
+        
+        
         ofSetColor(20);
         glLineWidth(2);
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -165,23 +138,8 @@ public:
         glDisableClientState(GL_VERTEX_ARRAY);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);        
         glLineWidth(1);
-             
-        // find the general perp
-        for(int i=1; i<linestrip.size(); i++) {
-            v = linestrip[i] - linestrip[i-1];
-            p = v.perpendicular();
-            hair[i].dir = p;
-        }
         
-        for(int i=0; i<hair.size(); i++) {
-            
-            int hairIndex = MIN(i, hair.size());
-            
-            hair[hairIndex].rnd = soundAmp;
-            hair[hairIndex].draw(linestrip[i], 3);
-        }
         
-                
     }
     
     

@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void App::setup() {
+    
  	ofSetCircleResolution(120);
     ofBackground(255);
     ofSetFrameRate(30);
@@ -68,6 +69,7 @@ void App::setup() {
 	twitter.setVerbose(true);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 	
+    
     showMouse = false;
     //ofHideCursor();
 }
@@ -253,7 +255,7 @@ void App::keyPressed(int key) {
 			ofToggleFullscreen();
 			break;
 		case 'g': {
-			draw_gui = !draw_gui;
+			//draw_gui = !draw_gui;
 
 			break;
 		}

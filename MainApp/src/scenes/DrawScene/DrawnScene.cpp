@@ -31,6 +31,8 @@ void DrawnScene::setup() {
         tris.push_back(ofImage());
         tris.back().loadImage("graphics/drawn/triangle_"+ofToString(i)+".png");
     }
+    ofDisableArbTex();
+    dotRepeatImg.loadImage("graphics/drawn/kusamadot_repeat.png");
     
     /*
 	// TOP
@@ -45,7 +47,7 @@ void DrawnScene::setup() {
         v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         vines.push_back(v);
     }
-    */
+  
     
     // BOTTOM
     int nVines = 3;
@@ -59,7 +61,7 @@ void DrawnScene::setup() {
         v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         vines.push_back(v);
     }
-    
+      */
 
     addBush(30);
     addBush(500);    
@@ -88,10 +90,8 @@ void DrawnScene::setup() {
    
     
     // make 3 wigglers...
-    for(int i=0; i<3; i++) {
+    for(int i=0; i<4; i++) {
         makeWiggler();
-        
-        makeTinyVine();
     }
     
     for(int i=0; i<10; i++) {
@@ -107,6 +107,7 @@ void DrawnScene::makeWiggler() {
     float y = CUBE_SCREEN_HEIGHT+10;
     
     Wiggler w;
+    w.txt = &dotRepeatImg.getTextureReference();
     w.make(x, y);
     
     
@@ -119,16 +120,15 @@ void DrawnScene::makeTinyVine() {
     float x     = ofRandom(50, CUBE_SCREEN_WIDTH-50);
     float y     = 0;
     int   side  = BaseScene::TOP;// ofRandom(0, 4);
-    for(int i=0; i<2; i++) {
+    for(int i=0; i<5; i++) {
         TinyVine w;
         w.side = side;
-        w.make(x+ofRandom(-3,3), y, 4);
+        w.make(x+ofRandom(-3,3), y, ofRandom(4, 10));
         w.headImg = &dots[ofRandomIndex(dots)];
         w.colorD  = complimentaryColours[ofRandomIndex(complimentaryColours)]; 
         tinyVines.push_back(w);
     }
 }
-
 
 // ----------------------------------------------------
 void DrawnScene::addBush(float startX) {
@@ -345,6 +345,7 @@ void DrawnScene::update() {
     // ----------------------
     for(vector<Wiggler>::iterator it=wigglers.begin(); it!=wigglers.end(); ++it) {
         it->update();
+        it->soundAmp = audioPtr->getVolume(0);
     }
     
     // Tiny Vines
@@ -489,23 +490,11 @@ void DrawnScene::draw() {
     }
     ofRemove(poop, ofxBox2dBaseShape::shouldRemove);
     
-    // ----------------------
-    // gui
-    // ----------------------
-    /*if(drawGUI){
-        gui.draw();
-#ifdef USE_SWIRPS
-        ofSetColor(BaseScene::twitterColour);
-        particles.draw();
-        glColor3f(0,0,0);
-        ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
-#endif        
-    }*/
     
     // ----------------------
     // sound
     // ----------------------
-    float peak = 0.2;
+    float peak = 0.5;
     for(int i=0; i<4; i++) {
         
         float amp = audioPtr->getVolume(i);
@@ -558,8 +547,10 @@ void DrawnScene::draw() {
     if((int)ofRandom(0, 4)==2)   makePoop();
 }
 
+// ----------------------------------------------------
 void DrawnScene::drawGui() {
-	if(!mustDrawGui){
+
+    if(!mustDrawGui){
 		return;
 	}
 	
