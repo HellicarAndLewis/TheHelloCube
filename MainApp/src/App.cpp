@@ -133,7 +133,6 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw(){
-	
 
 	//ofEnableSmoothing();
 	fx.beginGrabPixels();
@@ -143,7 +142,7 @@ void App::draw(){
     // one scene to the next
     if(currentScene != NULL) {
         ofSetColor(255);
-        currentScene->draw();
+       currentScene->draw();
     }
 
 
@@ -153,7 +152,7 @@ void App::draw(){
 #endif
 		
 	fx.endGrabPixels();
-    fx.draw();
+	fx.draw();
 	
 	if(currentScene != NULL) {
 	 	currentScene->drawGui();
