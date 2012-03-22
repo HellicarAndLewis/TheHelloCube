@@ -65,9 +65,8 @@ void App::setup() {
 	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
 	twitter.getSimulator().loadSettings();
-	twitter.setVerbose(false);
+	twitter.setVerbose(true);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
-//    cracks.setup(ofGetWidth(), ofGetHeight());
 	
     showMouse = false;
     //ofHideCursor();
@@ -75,15 +74,18 @@ void App::setup() {
 
 //--------------------------------------------------------------
 void App::update() {
+	// set center of screen for effects (quickfixes)
+	fx.cx = fx_center_x;
+	fx.cy = fx_center_y;
+	fx.fx_flip_adjust_y = fx_flip_adjust_y;
+	
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 	
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
-			printf("NEW COMMAND\n");
 			string switch_scene;
 			if(command.mustSwitchScene(switch_scene)) {
-                cout << "changeScene:  "<< switch_scene << endl; 
 				if(switch_scene == "cell") {
                     changeScene(SCENE_CELL);
 				}
@@ -142,7 +144,7 @@ void App::draw(){
     // one scene to the next
     if(currentScene != NULL) {
         ofSetColor(255);
-       currentScene->draw();
+		currentScene->draw();
     }
 
 
@@ -476,6 +478,9 @@ void App::setupEffectsGui() {
 	gui.add(fx_shake_duration.setup("FX: Shake duration (sec)",14,0,25,gui_w));	
 	gui.add(fx_swirl_radius.setup("FX: Swirl radius",0.23,0,1,gui_w));		
 	gui.add(fx_swirl_angle.setup("FX: Swirl angle",5.6,0,TWO_PI	,gui_w));		
+	gui.add(fx_center_x.setup("Center X",0.5,0,0.55,gui_w));		
+	gui.add(fx_center_y.setup("Center Y",0.5,0,0.7,gui_w));		
+	gui.add(fx_flip_adjust_y.setup("Flip adjust Y",0.0,-0.5,0.5,gui_w));		
 	gui.add(fx_reset_automatically.setup("Reset effects automatically",false,gui_w));
 	gui.add(fx_test_ripple.setup("Ripple", gui_w));
 	gui.add(fx_test_shake.setup("Shake", gui_w));

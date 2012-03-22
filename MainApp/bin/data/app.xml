@@ -11,7 +11,7 @@
     <_Shake_amplitude>0.01</_Shake_amplitude>
     <_Shake_duration__sec_>0.8</_Shake_duration__sec_>
     <_Swirl_radius>0.23</_Swirl_radius>
-    <_Swirl_angle>2.9531</_Swirl_angle>
+    <_Swirl_angle>5.62973</_Swirl_angle>
 </FX>
 <Reset_effects_automatically>1</Reset_effects_automatically>
 <Ripple>0</Ripple>
@@ -19,9 +19,12 @@
 <Pixelate>0</Pixelate>
 <Swirl>0</Swirl>
 <Wave>0</Wave>
-<Mirror>0</Mirror>
+<Mirror>1</Mirror>
 <Reflect>0</Reflect>
 <Invert>0</Invert>
 <Posterize>0</Posterize>
-<Flip>0</Flip>
+<Flip>1</Flip>
 <Crack>1</Crack>
+<Center_X>0.3047</Center_X>
+<Center_Y>0.644</Center_Y>
+<Flip_adjust_Y>-0.02</Flip_adjust_Y>

@@ -103,11 +103,25 @@ void Effects::setup(int w, int h) {
 		,(GLvoid*)offsetof(Vertex, tex)
 	);
 	
+	calcCenter();	
+	
 	unbind();
 	
 	flip(false);
 	mirror(false);	
 	crack(false);
+}
+
+void Effects::calcCenter() {
+#ifndef USE_SMALL_APP
+	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
+	cx = (((float)CUBE_SCREEN_WIDTH) * 0.5/total_w);
+	cy = (1.0 - ((float)(CUBE_SCREEN_HEIGHT * 0.5)) /((float)CAMERA_PROJECTION_SCREEN_HEIGHT));
+#else
+	cx = 0.5;
+	cy = 0.5;
+#endif
+
 }
 
 void Effects::beginGrabPixels() {
@@ -126,16 +140,8 @@ void Effects::endGrabPixels() {
 void Effects::update() {
 	shader.begin();
 
-#ifndef USE_SMALL_APP
-	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
-	float cx = (((float)CUBE_SCREEN_WIDTH) * 0.5/total_w);
-	float cy = (1.0 - ((float)(CUBE_SCREEN_HEIGHT * 0.5)) /((float)CAMERA_PROJECTION_SCREEN_HEIGHT));
-#else
-	float cx = 0.5;
-	float cy = 0.5;
-#endif
-	//printf("XXXXXXXXXXXXXXXXXXXXXX: %f --- %f ------ %f\n", cx, total_w, (float)CUBE_SCREEN_WIDTH);
-	shader.setUniform2f("center", cx, cy);
+		shader.setUniform2f("center", cx, cy);
+		shader.setUniform1f("fx_flip_adjust_y", fx_flip_adjust_y);
 	
 		float now = ofGetElapsedTimef();
 		shader.setUniform1f("fx_time", now);

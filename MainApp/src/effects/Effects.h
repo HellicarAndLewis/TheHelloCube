@@ -32,6 +32,7 @@ public:
 	void endGrabPixels();	
 	void bind();
 	void unbind();
+	void calcCenter();
 	
 	void reset(); 
 	void applyEffect(const string& fx);
@@ -70,6 +71,11 @@ private:
 	rxCracks cracks;
 
 public:
+	// quickfixes
+	float cx; 
+	float cy; 
+	float fx_flip_adjust_y;
+	
 	// used when calling applyEffect
 	float shake_duration;
 	float shake_number;

@@ -82,6 +82,9 @@ public:
 	ofxFloatSlider		fx_shake_duration;
 	ofxFloatSlider		fx_swirl_radius;
 	ofxFloatSlider		fx_swirl_angle;
+	ofxFloatSlider		fx_center_x;
+	ofxFloatSlider		fx_center_y;
+	ofxFloatSlider		fx_flip_adjust_y;	
 	ofxButton			fx_test_ripple;
 	ofxButton			fx_test_shake;
 	ofxToggle			fx_toggle_pixelate;
@@ -94,6 +97,7 @@ public:
 	ofxToggle			fx_toggle_flip;
 	ofxToggle			fx_reset_automatically;
 	ofxToggle			fx_crack;
+	
 	
 	void setupEffectsGui();
 	void onGuiUpdateSettings(bool& on);
