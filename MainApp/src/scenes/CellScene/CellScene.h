@@ -21,6 +21,7 @@ public:
     void setup();
     void update();
     void draw();
+	virtual void drawGui();
     void keyPressed(int key);
     void addCells();
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
@@ -41,7 +42,8 @@ public:
     
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxCellsOnScreen;
-    bool drawGUI;
+   // bool drawGUI; // see baseScene mustDrawGui
+
     
     float cellWallWidth;
 };

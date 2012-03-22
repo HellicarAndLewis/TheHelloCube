@@ -61,7 +61,7 @@ void TextureScene::setup() {
     attractors.push_back(attR);
     
    
-    drawGUI = false;
+    mustDrawGui = false;
 }
 
 
@@ -189,7 +189,7 @@ void TextureScene::keyPressed(int key) {
     }
     
     if(key == 'g'){
-        drawGUI = !drawGUI;
+        mustDrawGui = !mustDrawGui;
     }
 }
 
@@ -270,22 +270,24 @@ void TextureScene::draw() {
         ofCircle(center, 3);
         
     }
-    
-    
-    if(drawGUI){
-        // attractors
-        for(int i=0; i<attractors.size(); i++) {
-            attractors[i].draw();
-        }
-        
-        
-        ofSetColor(255);
-        ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
-        ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
-        ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
-        gui.draw();        
-    }
+}
 
+void TextureScene::drawGui() {
+	 if(!mustDrawGui){
+	 	return;
+	 }
+	 
+	// attractors
+	for(int i=0; i<attractors.size(); i++) {
+		attractors[i].draw();
+	}
+	
+	
+	ofSetColor(255);
+	ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
+	ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
+	ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
+	gui.draw();        
 }
 
 // ----------------------------------------------------

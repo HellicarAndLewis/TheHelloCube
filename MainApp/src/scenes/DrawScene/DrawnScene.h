@@ -86,6 +86,7 @@ public:
     void setup();
     void update();
     void draw(); 
+	virtual void drawGui();
     void keyPressed(int key);
     void mousePressed(int x, int y, int button);
     void mouseMoved(int x, int y );
@@ -126,5 +127,5 @@ public:
 	float repel_effect;
 	float follow_effect;
 #endif
-        bool drawGUI;
+  
 };

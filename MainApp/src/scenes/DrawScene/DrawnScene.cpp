@@ -86,6 +86,7 @@ void DrawnScene::setup() {
 	follow_effect = 0.001;
 #endif
     
+
     drawGUI = false;
     
     // make 3 wigglers...
@@ -489,7 +490,6 @@ void DrawnScene::draw() {
     }
     ofRemove(poop, ofxBox2dBaseShape::shouldRemove);
     
-    
     // ----------------------
     // gui
     // ----------------------
@@ -554,8 +554,23 @@ void DrawnScene::draw() {
     // ----------------------
     // add some randomly
     // ----------------------
+
     if((int)ofRandom(0, 40)==10) addChasers();
     if((int)ofRandom(0, 4)==2)   makePoop();
+}
+
+void DrawnScene::drawGui() {
+	if(!mustDrawGui){
+		return;
+	}
+	
+	gui.draw();
+#ifdef USE_SWIRPS
+	ofSetColor(BaseScene::twitterColour);
+	particles.draw();
+	glColor3f(0,0,0);
+	ofDrawBitmapString("Click to create SWIRP\n1 - repel\n2 - atract",10,ofGetHeight()-35);
+#endif        
 }
 
 // ----------------------------------------------------
@@ -571,7 +586,7 @@ void DrawnScene::keyPressed(int key) {
     
     switch (key) { 
         case 'g': {
-            drawGUI = !drawGUI;
+            mustDrawGui = !mustDrawGui;
             break;
         }
         case 'c': {

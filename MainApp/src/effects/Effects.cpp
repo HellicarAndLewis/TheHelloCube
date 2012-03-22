@@ -12,6 +12,7 @@ Effects::Effects()
 	,ripple_enabled(false)
 	,ripple_duration(0)
 	,ripple_untill(0)
+	,cracks_enabled(false)
 {
 }
 
@@ -21,6 +22,8 @@ Effects::~Effects() {
 void Effects::setup(int w, int h) {
 	width = w;
 	height = h;
+	
+	cracks.setup(w,h);
 	
 	// create fbo
 	glGenFramebuffers(1, &fbo_handle); eglGetError();
@@ -36,6 +39,8 @@ void Effects::setup(int w, int h) {
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fbo_tex, 0); eglGetError();
 	glGenRenderbuffers(1, &fbo_depth); eglGetError();
+
+	// render buffer
 	glBindRenderbuffer(GL_RENDERBUFFER, fbo_depth); eglGetError();	
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, w, h);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, fbo_depth); eglGetError();
@@ -99,7 +104,8 @@ void Effects::setup(int w, int h) {
 	unbind();
 	
 	flip(false);
-	mirror(false);
+	mirror(false);	
+	crack(false);
 	
 #ifndef USE_SMALL_APP
 	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
@@ -158,6 +164,10 @@ void Effects::draw() {
 	bind();
 		glDrawArrays(GL_QUADS, 0, 4);
 	unbind();
+	
+	if(cracks_enabled) {
+		cracks.draw();
+	}
 }
 
 void Effects::bind() {
@@ -210,6 +220,19 @@ void Effects::posterize(bool apply) {
 	shader.end();
 }
 
+void Effects::crack(bool apply) {
+	cracks_enabled = apply;
+	
+	shader.begin();
+		shader.setUniform1i("fx_cracks", apply ? 1: 2);
+	shader.end();
+	
+	if(apply) {
+		cracks.clear();
+		cracks.generateCracks();
+	}
+}
+
 
 // radius: [0-1]
 // angle: 0 - ?? PI
@@ -243,10 +266,14 @@ void Effects::reflect(bool apply) {
 	shader.end();
 }
 
+void Effects::love(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_love", apply ? 1: 2);
+	shader.end();
+}
 
 void Effects::shake(bool apply, float seconds, float number, float amplitude) {
 	shake_untill = ofGetElapsedTimef() + seconds;
-	printf("SHAKE: %f\n", seconds);
 	shake_enabled = apply;
 	shake_duration = seconds;
 	shader.begin();
@@ -258,26 +285,6 @@ void Effects::shake(bool apply, float seconds, float number, float amplitude) {
 }
 
 void Effects::applyEffect(const string& fx) {
-	/*
-			fx.pixelate_x = fx_pixelate_x;
-		fx.pixelate_y= fx_pixelate_y;
-		fx.wave_displace = fx_wave_displace;
-		fx.wave_num = fx_wave_num;
-		fx.wave_speed = fx_wave_speed;
-		fx.shake_number = fx_shake_number;
-		fx.shake_amplitude = fx_shake_amplitude;
-		fx.shake_duration = fx_shake_duration;
-		fx.swirl_radius = fx_swirl_radius;
-		fx.swirl_angle = fx_swirl_angle;
-			void pixelate(bool apply, float x, float y);
-	void wave(bool apply, float speed, float displace, float num);
-	void shake(bool apply, float seconds, float number, float amplitude);
-	void swirl(bool apply, float radius, float angle);
-	void ripple(bool apply, float seconds);
-	void reflect(bool apply);
-	void posterize(bool apply);
-
-	*/
 	
 	if(fx == "flip") {
 		flip(true);
@@ -309,9 +316,16 @@ void Effects::applyEffect(const string& fx) {
 	else if(fx == "reflect") {
 		reflect(true);
 	}
+	else if(fx == "crack") {
+		crack(true);
+	}
+	else if(fx == "love") {
+		love(true);
+	}
 }
 
 void Effects::reset() {
+	crack(false);
 	shader.begin();
 		shader.setUniform1i("fx_flip", 2);
 		shader.setUniform1i("fx_mirror", 2);
@@ -323,5 +337,6 @@ void Effects::reset() {
 		shader.setUniform1i("fx_swirl", 2);
 		shader.setUniform1i("fx_reflect", 2);
 		shader.setUniform1i("fx_shake", 2);
+		shader.setUniform1i("fx_love", 2);
 	shader.end();
 }

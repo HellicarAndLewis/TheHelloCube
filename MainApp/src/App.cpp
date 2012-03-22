@@ -67,7 +67,8 @@ void App::setup() {
 	twitter.getSimulator().loadSettings();
 	twitter.setVerbose(false);
 	command_timeout = ofGetElapsedTimef() + fx_duration;
-    
+//    cracks.setup(ofGetWidth(), ofGetHeight());
+	
     showMouse = false;
     //ofHideCursor();
 }
@@ -132,7 +133,9 @@ void App::update() {
 
 //--------------------------------------------------------------
 void App::draw(){
-    //ofEnableSmoothing();
+	
+
+	//ofEnableSmoothing();
 	fx.beginGrabPixels();
 	
     // we only want to draw the current screen
@@ -148,10 +151,14 @@ void App::draw(){
 	ofBackground(33);
 	veins.draw();
 #endif
-
+		
 	fx.endGrabPixels();
     fx.draw();
- 
+	
+	if(currentScene != NULL) {
+	 	currentScene->drawGui();
+	}
+	
     ofSetColor(255);
     
 #ifndef USE_SMALL_APP
@@ -196,7 +203,7 @@ void App::draw(){
 		twitter.getSimulator().take_screenshot = false;
 	}
 		
-    if(draw_gui) {
+    if(currentScene != NULL && currentScene->mustDrawGui) {
 		gui.draw();
         
         // draw some stats about the app...
@@ -215,8 +222,6 @@ void App::draw(){
 //--------------------------------------------------------------
 void App::changeScene(int scene) {
     
-    draw_gui = false;
-    
     BaseScene * lastScene = scenes[sceneIndex];
     lastScene->exitScene();
     
@@ -234,9 +239,11 @@ void App::keyPressed(int key) {
 			break; 
         case OF_KEY_RIGHT:  //scene changing
 			sceneIndex++;
+			draw_gui = true;
 			break;              
         case OF_KEY_LEFT:
 			sceneIndex--;
+			draw_gui = true;
 			break;              
         case 'e': // for exporting a screen grab
 			ofSaveScreen("exports/"+ofToString(ofGetUnixTime())+".png");
@@ -246,6 +253,7 @@ void App::keyPressed(int key) {
 			break;
 		case 'g': {
 			draw_gui = !draw_gui;
+
 			break;
 		}
         case 'm':{
@@ -257,6 +265,8 @@ void App::keyPressed(int key) {
             showMouse = !showMouse;
             break;
         }
+		
+		
 #ifdef USE_VEINS		
 		case 'v': {
 			float cx = ofGetWidth() * 0.5;
@@ -478,6 +488,7 @@ void App::setupEffectsGui() {
 	gui.add(fx_toggle_invert.setup("Invert", false, gui_w));
 	gui.add(fx_toggle_posterize.setup("Posterize", false, gui_w));
 	gui.add(fx_toggle_flip.setup("Flip", false, gui_w));
+	gui.add(fx_crack.setup("Crack", false, gui_w));
 	
 	fx_test_shake.addListener(this, &App::onGuiTestShake);
 	fx_test_ripple.addListener(this, &App::onGuiTestRipple);
@@ -496,10 +507,15 @@ void App::setupEffectsGui() {
 	fx_toggle_invert.addListener(this, &App::onGuiInvert);
 	fx_toggle_posterize.addListener(this, &App::onGuiPosterize);
 	fx_toggle_flip.addListener(this, &App::onGuiFlip);
+	fx_crack.addListener(this, &App::onGuiCrack);
 	
 	gui.loadFromFile("app.xml");
 	bool b = true;
 	onGuiUpdateSettings(b);
+}
+
+void App::onGuiCrack(bool& on) {
+	fx.crack(on);
 }
 
 void App::onGuiTestShake(bool& on) {

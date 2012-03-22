@@ -58,6 +58,7 @@ public:
     void setup();
     void update();
     void draw();
+	virtual void drawGui();
     void keyPressed(int key);
     void addPoints();
     void makeObstacles();
@@ -95,7 +96,5 @@ public:
     ofxFloatSlider attractionDamping;
 
     ofxIntSlider   maxShapesOnScreen;
-    
-    bool drawGUI;
     
 };

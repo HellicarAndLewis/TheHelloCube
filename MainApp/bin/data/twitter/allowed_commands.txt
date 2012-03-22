@@ -20,4 +20,4 @@ cell,cells,lattice,mesh
 drawn,pen,animals,jungle,world
 spots
 texture,marbles,marble,balls
-shatter,break,smash,tap
+crack,break,smash,tap,shatter

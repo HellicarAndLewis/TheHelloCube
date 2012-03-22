@@ -29,14 +29,18 @@ void TwitterManager::init() {
 	twitter_thread.setup(tokens_file);
 	twitter_thread.startThread(false, false);
 	
+	// file with sentences we use for replies.
+	string replies_file = ofToDataPath("twitter/reply_beginnings.txt",true); 
+	
 	// photo uploader + reply
 	uploader_thread.setup(
 		 twitter_thread.getTwitter().getConsumerKey()
 		,twitter_thread.getTwitter().getConsumerSecret()
 		,tokens_file
+		,replies_file
 	);
-	
-	uploader_thread.startThread(false, false);	
+	uploader_thread.setReplyEndings(allowed_commands.getCommands());	
+	uploader_thread.startThread(false, false);		
 }
 
 void TwitterManager::update() {
@@ -87,7 +91,11 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 				,found_colours
 				,found_scenes
 			);
-			printf("Handle tweet: %c\n", (must_handle) ? 'y' : 'n');
+			
+			if(verbose) {
+				printf("Handle tweet: %c\n", (must_handle) ? 'y' : 'n');
+			}
+			
 			if(must_handle) {
 
 				TwitterCommand cmd(
@@ -97,7 +105,7 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 					,found_scenes
 					,isFake
 				);
-			
+				cmd.print();
 				commands.push(cmd);
 			}
 		}

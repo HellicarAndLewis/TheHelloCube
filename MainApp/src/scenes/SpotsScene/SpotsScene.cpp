@@ -18,7 +18,7 @@ void SpotsScene::setup() {
     circleFrcFlip = false;
     bgColorTarget = ofRandomColor();    
     
-    drawGUI = false;
+    mustDrawGui = false;
 }
 
 
@@ -105,30 +105,23 @@ void SpotsScene::makeObstacles() {
 
 // ----------------------------------------------------
 void SpotsScene::keyPressed(int key) {
-    if(key == ' ') {
-        //addPoints();
-        //makeObstacles();
-    }
-    
     if(key == 'r') {
         for(int i=0; i<MIN(30, shapes.size()-1); i++) {
             int ranId = (int)ofRandom(0, shapes.size()-1);
             shapes[ranId].radiusTarget = ofRandom(30, 100);
         }
     }
-    if(key == 's') {
+    else if(key == 's') {
         for(int i=0; i<MIN(230, shapes.size()-1); i++) {
             int ranId = (int)ofRandom(0, shapes.size()-1);
             shapes[ranId].radiusTarget = ofRandom(2, 10);
         }
     }
-    
-    if(key == 'b') {
+    else if(key == 'b') {
         bgColorTarget = ofRandomColor();    
     }
-    
-    if(key == 'g'){
-        drawGUI = !drawGUI;
+    else if(key == 'g'){
+        mustDrawGui = !mustDrawGui;
     }
 }
 
@@ -213,16 +206,19 @@ void SpotsScene::draw() {
         ofCircle(center, 3);
         
     }
-    
-    if(drawGUI){
-        ofSetColor(255);
-        ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
-        ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
-        ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
-        gui.draw();        
-    }
-
 }
+
+void SpotsScene::drawGui() {
+	if(!mustDrawGui){
+		return;
+	}
+	ofSetColor(255);
+	ofDrawBitmapString(ofToString(box2d.getBodyCount()), 20, 50);
+	ofDrawBitmapString(ofToString(shapes.size()), 20, 90);
+	ofDrawBitmapString("r make bigger\ns make smaller", 20, 120);
+	gui.draw();        
+}
+
 
 // ----------------------------------------------------
 void SpotsScene::handleCommands(TwitterCommand& cmd, Effects& fx) {

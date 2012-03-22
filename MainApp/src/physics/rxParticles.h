@@ -25,7 +25,10 @@ public:
 	void removeParticle(rxParticle* p);
 	void addSpring(rxSpring* s);
 	void addSwirp(rxSwirp* s);
-	
+	bool isPositionFree(ofVec3f& pos, float radius);
+	void clear();
+	list<rxParticle*>::iterator begin();
+	list<rxParticle*>::iterator end();
 	list<rxParticle*> particles;	
 	list<rxSpring*> springs;
 	list<rxSwirp*> swirps;

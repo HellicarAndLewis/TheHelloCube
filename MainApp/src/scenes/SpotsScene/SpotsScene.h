@@ -24,6 +24,7 @@ public:
     void setup();
     void update();
     void draw();
+	virtual void drawGui();
     void keyPressed(int key);
     void addPoints();
     void makeObstacles();
@@ -42,7 +43,5 @@ public:
     ofVec2f circleFrc;
     ofxFloatSlider releaseRate;
     ofxIntSlider   maxShapesOnScreen;
-    
-        bool drawGUI;
     
 };

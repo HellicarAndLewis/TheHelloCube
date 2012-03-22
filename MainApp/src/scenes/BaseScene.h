@@ -40,6 +40,7 @@ public:
 	static ofColor	twitterColour;
     AudioManager *  audioPtr;
     vector<ofColor> complimentaryColours;
+	bool 			mustDrawGui;
     
     // ----------------------------------------------------
     virtual void exitScene() {
@@ -57,6 +58,7 @@ public:
 	
     // ----------------------------------------------------
     virtual void drawBackground();
+	virtual void drawGui();
     
     // ----------------------------------------------------
     virtual void setup() = 0;
