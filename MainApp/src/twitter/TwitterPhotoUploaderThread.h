@@ -95,6 +95,7 @@ public:
 	void setVerbose(bool v);
 	void setReplyEndings(const set<string>& cmd);
 	string generateMessage(const string& username, const string& photourl);
+	string getRandomReplyEnding();
 private:
 	bool loadReplyBeginnings(const string& file);
 	bool verbose;

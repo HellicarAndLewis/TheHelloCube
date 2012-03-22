@@ -19,7 +19,7 @@ void TwitterThread::threadedFunction() {
 	
 	while(true) {
 		fetchMentions();
-		ofSleepMillis(25000);
+		ofSleepMillis(FETCH_MENTION_DELAY_MILLIS);
 	}
 }
 

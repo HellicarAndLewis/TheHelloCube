@@ -9,6 +9,7 @@
 #ifndef TWITTER_THREADH
 #define TWITTER_THREADH
 
+#include "AppAssets.h"
 #include "ofMain.h"
 #include "Twitter.h"
 #include "TwitterTypes.h"

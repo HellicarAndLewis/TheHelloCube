@@ -45,13 +45,14 @@ void App::setup() {
     sceneIndex = SCENE_DRAWN;
     changeScene(sceneIndex);
     
-
+	
+	twitter.setVerbose(true);
 	twitter.init();
 	fx.setup(ofGetWidth(), ofGetHeight()); 
 	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
 	twitter.getSimulator().loadSettings();
-	twitter.setVerbose(true);
+	
 	command_timeout = ofGetElapsedTimef() + fx_duration;
 	
     

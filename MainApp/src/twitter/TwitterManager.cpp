@@ -120,13 +120,13 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 				commands.push(cmd);
 			}
 			else {
-				printf("Tweet not handled\n");
 				size_t num_messages = unhandled_commands_messages.size();
 				unsigned int rnd_dx = (rand() * num_messages) % num_messages;
-				printf("RANDOM INDEX: %d\n", rnd_dx); 
 				string rnd_message = "@" +tweet.getScreenName() +" " +unhandled_commands_messages[rnd_dx];
-				printf("Use: %s\n", rnd_message.c_str());
 				uploader_thread.sendMessage(rnd_message, tweet);
+				if(verbose) {
+					printf("Tweet not handled, but we send back a general message: %s.\n", rnd_message.c_str());
+				}
 			}
 		}
 	}

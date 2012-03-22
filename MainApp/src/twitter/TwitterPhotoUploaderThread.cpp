@@ -127,35 +127,47 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 				}
 				
 				string photo_url = URL_TWITTER_UPLOADER +"uploads/"  +created_file;					
-				string message = "@" +up->tweet.getScreenName();
+				string message = generateMessage(up->tweet.getScreenName(), photo_url);
 				
-				 // +" your result ... See here " +photo_url;
 				if(verbose) {
 					printf(">>>>>>> %s\n", message.c_str());
 				}
+				
 				twitter.statusesUpdate(message);
 				
 				json_decref(root);
 			}
 			else if(task->type == TASK_GENERAL_MESSAGE) {	
 				TwitterPhotoUploaderTask_GeneralMessage* gen = static_cast<TwitterPhotoUploaderTask_GeneralMessage*>(task);
-				printf("Message general: %s\n", gen->message.c_str());
-//				twitter.statusesUpdate(task->message);
-				//if(task->type == TASK_UPLOAD_PHOTO) {
+				if(!gen->tweet.getScreenName().size()) {
+					if(verbose) {
+						printf("Trying to send general twitter message, but no screenname found. This probably means you're using the gui.\n");	
+					}
+				}
+				else {
+					string message = gen->message +" " +getRandomReplyEnding();
+					if(verbose) {
+						printf("Message general: %s (%zu)\n", message.c_str(), message.size());
+					}
+					twitter.statusesUpdate(message);
+				}
 			}
-			
 			delete task;
 		}
 		ofSleepMillis(5000);
 	}
 }
 
-#define RRR(max) rand() % (max) 
+#define RRR(max) (rand() % (max)) 
 string TwitterPhotoUploaderThread::generateMessage(const string& username, const string& photourl) {
 	string beginning = reply_beginnings[RRR(reply_beginnings.size())];
-	string end = reply_endings[RRR(reply_endings.size())];
+	string end = getRandomReplyEnding();
 	string message = "@" +username +" " +beginning  +" " +photourl +" " +end ;
 	return message;
+}
+
+string TwitterPhotoUploaderThread::getRandomReplyEnding() {
+	return reply_endings[RRR(reply_endings.size())];
 }
 
 void TwitterPhotoUploaderThread::uploadScreenshot(unsigned char* pixels, int w, int h, rtt::Tweet tweet) {
@@ -196,7 +208,10 @@ void TwitterPhotoUploaderThread::setReplyEndings(const set<string>& cmd) {
 	set<string>::iterator it = cmd.begin();
 	int i = 0;
 	while(it != cmd.end()) {
-		reply_endings.push_back("No try this command '" +(*it) +"'");
+		if(verbose) {
+			printf("reply ending: %s\n", (*it).c_str());
+		}
+		reply_endings.push_back("Now try this command '" +(*it) +"'");
 		if(i%5 == 0) {
 			reply_endings.push_back("Also try these colors: http://is.gd/9TkO2");		
 		}
