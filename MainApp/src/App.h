@@ -52,7 +52,7 @@ public:
 #ifdef USE_VEINS	
     rxVeins				veins;
 #endif					
-	//rxCracks			cracks;
+
 	
     // scenes
     vector <BaseScene*>  scenes;
@@ -135,17 +135,6 @@ public:
 	float repel_effect;
 	float follow_effect;
 #endif
-    
-    // Video FX
-    //LUT bits from openFrameworks/examples/graphics/InstagramLikeImageFilters example 
-    void                 loadLUT(string path);
-	void                 applyLUT(ofPixelsRef pix);
-	bool                 doLUT;
-	int                  dirLoadIndex;
-	ofDirectory          dir;
-	bool                 LUTloaded;
-	ofVec3f              lut[32][32][32];
-	ofImage              lutImg;
     
     bool                 showMouse;
 };

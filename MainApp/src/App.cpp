@@ -22,21 +22,6 @@ void App::setup() {
     audioManager.setup(this);
     drawAudio = false;
     
-    //now LUTs
-    dir.allowExt("cube");
-	dir.listDir("LUTs/");
-	dir.sort();
-	if (dir.size()>0) {
-		dirLoadIndex=0;
-		loadLUT(dir.getPath(dirLoadIndex));
-		doLUT = true;
-	}else{
-		doLUT = false;
-	}
-	doLUT = false; // roxlu (drops fps to 11)
-	
-	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
-    
     //now fonts
     AppAssets::inst()->appFont.loadFont("fonts/Helvetica.ttf", 12);
     
@@ -142,15 +127,7 @@ void App::update() {
     vidGrabber.update();
 #endif
     audioManager.update();
-	
-	if (vidGrabber.isFrameNew()){
-        //new frame fun here....
-        
-        if (doLUT) {
-           // applyLUT(vidGrabber.getPixelsRef());
-        }
-	}    
-    
+	    
     // later maybe just update the scene that needs to be rendered
     for(vector<BaseScene*>::iterator it = scenes.begin(); it != scenes.end(); ++it) {
         (*it)->update();
@@ -202,7 +179,6 @@ void App::draw(){
 	if(twitter.getSimulator().take_screenshot && now > take_screenshot_on) {	
 		
 		rtt::Tweet tweet;
-		//tweet.setScreenName("roxlutest");
 		tweet = command.tweet;
 		bool grab = 1; // 0 = screen, 1 = webcam	
   
@@ -276,11 +252,10 @@ void App::keyPressed(int key) {
         case 'f':
 			ofToggleFullscreen();
 			break;
-		case 'g': {
+//		case 'g': {
 			//draw_gui = !draw_gui;
-
-			break;
-		}
+//			break;
+//		}
         case 'm':{
             if(showMouse){
                 ofHideCursor();
@@ -320,7 +295,6 @@ void App::keyPressed(int key) {
 		}
 		case 's': {
 			veins.step();
-			printf("step.\n");
 			break;
 		}
 		case 'u': {
@@ -328,25 +302,6 @@ void App::keyPressed(int key) {
 			break;
 		}
 #endif		
-		case 'l':
-			doLUT^=true;
-			break;
-		case OF_KEY_UP:
-			dirLoadIndex++;
-			if (dirLoadIndex>=dir.size()) {
-				dirLoadIndex=0;
-			}
-			loadLUT(dir.getPath(dirLoadIndex));
-			
-			break;
-		case OF_KEY_DOWN:
-			dirLoadIndex--;
-			if (dirLoadIndex<0) {
-				dirLoadIndex=dir.size()-1;
-			}
-			loadLUT(dir.getPath(dirLoadIndex));
-			break;
-
 		default:
 			break;
 	}  
@@ -402,61 +357,6 @@ void App::dragEvent(ofDragInfo dragInfo){
 }
 
 //--------------------------------------------------------------
-void App::loadLUT(string path){
-    LUTloaded=false;
-
-    ofFile file(path);
-    string line;
-    for(int i = 0; i < 5; i++) {
-     getline(file, line);
-     ofLog() << "Skipped line: " << line;	
-    }
-    for(int z=0; z<32; z++){
-     for(int y=0; y<32; y++){
-         for(int x=0; x<32; x++){
-             ofVec3f cur;
-             file >> cur.x >> cur.y >> cur.z;
-             lut[x][y][z] = cur;
-         }
-     }
-    }
-
-    LUTloaded = true;
-}
-//--------------------------------------------------------------
-void App::applyLUT(ofPixelsRef pix){
-    if (LUTloaded) {
-     
-     for(int y = 0; y < pix.getHeight(); y++){
-         for(int x = 0; x < pix.getWidth(); x++){
-             
-             ofColor color = pix.getColor(x, y);
-             
-             int lutPos [3];
-             for (int m=0; m<3; m++) {
-                 lutPos[m] = color[m] / 8;
-                 if (lutPos[m]==31) {
-                     lutPos[m]=30;
-                 }
-             }
-             
-             ofVec3f start = lut[lutPos[0]][lutPos[1]][lutPos[2]];
-             ofVec3f end = lut[lutPos[0]+1][lutPos[1]+1][lutPos[2]+1]; 
-             
-             for (int k=0; k<3; k++) {
-                 float amount = (color[k] % 8) / 8.0f;
-                 color[k]= (start[k] + amount * (end[k] - start[k])) * 255;
-             }
-             
-             lutImg.setColor(x, y, color);
-             
-         }			
-     }
-     
-     lutImg.update();
-    }
-}
-
 void App::audioIn(float * input, int bufferSize, int nChannels){
     audioManager.audioIn(input, bufferSize, nChannels);
     
