@@ -65,6 +65,9 @@ void App::update() {
 	fx.cx = fx_center_x;
 	fx.cy = fx_center_y;
 	fx.fx_flip_adjust_y = fx_flip_adjust_y;
+	fx.fx_love_scale = fx_love_scale;
+	fx.fx_love_x = fx_love_x;
+	fx.fx_love_y = fx_love_y;
 	
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 	
@@ -164,11 +167,7 @@ void App::draw(){
     ofSetColor(255);
     
 #ifndef USE_SMALL_APP
-    if(doLUT){
-        lutImg.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT);
-	}else {
-        vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
-	}
+	vidGrabber.draw(CUBE_SCREEN_WIDTH,0,CAMERA_PROJECTION_SCREEN_WIDTH, CAMERA_PROJECTION_SCREEN_HEIGHT); //stick the camera up on screen....
 #endif
     
     if(drawAudio){
@@ -402,6 +401,9 @@ void App::setupEffectsGui() {
 	gui.add(fx_shake_duration.setup("FX: Shake duration (sec)",14,0,25,gui_w));	
 	gui.add(fx_swirl_radius.setup("FX: Swirl radius",0.23,0,1,gui_w));		
 	gui.add(fx_swirl_angle.setup("FX: Swirl angle",5.6,0,TWO_PI	,gui_w));		
+	gui.add(fx_love_scale.setup("FX: Heart scale",0.8,-2,2, gui_w));		
+	gui.add(fx_love_x.setup("FX: Heart x",0.0,-2,2, gui_w));		
+	gui.add(fx_love_y.setup("FX: Heart y",0.0,-2,2, gui_w));		
 	gui.add(fx_center_x.setup("Center X",0.5,0,0.55,gui_w));		
 	gui.add(fx_center_y.setup("Center Y",0.5,0,0.7,gui_w));		
 	gui.add(fx_flip_adjust_y.setup("Flip adjust Y",0.0,-0.5,0.5,gui_w));		
@@ -417,6 +419,7 @@ void App::setupEffectsGui() {
 	gui.add(fx_toggle_posterize.setup("Posterize", false, gui_w));
 	gui.add(fx_toggle_flip.setup("Flip", false, gui_w));
 	gui.add(fx_crack.setup("Crack", false, gui_w));
+	gui.add(fx_heart.setup("Heart", false, gui_w));
 	
 	fx_test_shake.addListener(this, &App::onGuiTestShake);
 	fx_test_ripple.addListener(this, &App::onGuiTestRipple);
@@ -436,6 +439,8 @@ void App::setupEffectsGui() {
 	fx_toggle_posterize.addListener(this, &App::onGuiPosterize);
 	fx_toggle_flip.addListener(this, &App::onGuiFlip);
 	fx_crack.addListener(this, &App::onGuiCrack);
+	fx_heart.addListener(this, &App::onGuiHeart);
+
 	
 	gui.loadFromFile("app.xml");
 	bool b = true;
@@ -528,6 +533,10 @@ void App::onGuiMirror(bool& on) {
 
 void App::onGuiReflect(bool& on) {
 	fx.reflect(on);
+}
+
+void App::onGuiHeart(bool& on) {
+	fx.love(on);
 }
 
 void App::onGuiPosterize(bool& on) {

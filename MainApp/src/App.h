@@ -85,6 +85,9 @@ public:
 	ofxFloatSlider		fx_center_x;
 	ofxFloatSlider		fx_center_y;
 	ofxFloatSlider		fx_flip_adjust_y;	
+	ofxFloatSlider		fx_love_scale;
+	ofxFloatSlider		fx_love_x;
+	ofxFloatSlider		fx_love_y;
 	ofxButton			fx_test_ripple;
 	ofxButton			fx_test_shake;
 	ofxToggle			fx_toggle_pixelate;
@@ -97,7 +100,7 @@ public:
 	ofxToggle			fx_toggle_flip;
 	ofxToggle			fx_reset_automatically;
 	ofxToggle			fx_crack;
-	
+	ofxToggle			fx_heart;
 	
 	void setupEffectsGui();
 	void onGuiUpdateSettings(bool& on);
@@ -119,6 +122,8 @@ public:
 	void onGuiPosterize(bool& on);
 	void onGuiFlip(bool& on);
 	void onGuiCrack(bool& on);
+	void onGuiHeart(bool& on);
+
 	
     // Audio
     AudioManager         audioManager;

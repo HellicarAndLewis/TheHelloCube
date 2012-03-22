@@ -24,6 +24,9 @@ uniform float fx_swirl_radius;
 uniform float fx_swirl_angle;
 uniform vec3 fx_ripple_params;
 uniform float fx_ripple_p;
+uniform float fx_love_scale;
+uniform float fx_love_x;
+uniform float fx_love_y;
 
 uniform vec2 center;
 uniform sampler2D img;
@@ -111,10 +114,13 @@ void main() {
 	// <3 thanks http://www.iquilezles.org/apps/shadertoy/ 
 	// some tweaking using: http://www.mathematische-basteleien.de/heart.htm
 	if(fx_love == 1) {
-		float scale = 0.7;
-		vec2 p = -scale + (tc * 2.0) * scale;
-		p.y -= (1.0-scale);
-    
+		//float scale = 0.7;
+			
+		vec2 p = -fx_love_scale + (tc * 2.0) * fx_love_scale;
+		p.y -= (1.0-fx_love_scale);
+    	p.x += fx_love_x;
+		p.y += fx_love_y;
+		
 		// animate
     	float tt = mod(fx_time,2.0)/2.0;
     	float ss = pow(tt,.2)*0.5 + 0.5;

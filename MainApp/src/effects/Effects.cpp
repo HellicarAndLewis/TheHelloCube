@@ -142,7 +142,10 @@ void Effects::update() {
 
 		shader.setUniform2f("center", cx, cy);
 		shader.setUniform1f("fx_flip_adjust_y", fx_flip_adjust_y);
-	
+		shader.setUniform1f("fx_love_scale", fx_love_scale);
+		shader.setUniform1f("fx_love_x", fx_love_x);
+		shader.setUniform1f("fx_love_y", fx_love_y);
+		
 		float now = ofGetElapsedTimef();
 		shader.setUniform1f("fx_time", now);
 		if(shake_enabled) {
