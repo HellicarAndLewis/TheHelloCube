@@ -13,6 +13,8 @@ Effects::Effects()
 	,ripple_duration(0)
 	,ripple_untill(0)
 	,cracks_enabled(false)
+	,width(0)
+	,height(0)
 {
 }
 
@@ -106,19 +108,6 @@ void Effects::setup(int w, int h) {
 	flip(false);
 	mirror(false);	
 	crack(false);
-	
-#ifndef USE_SMALL_APP
-	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
-	float cx = ((float)CUBE_SCREEN_WIDTH * 0.5/total_w);
-	float cy = (1.0 - (float)(CUBE_SCREEN_HEIGHT * 0.5) /(float)CAMERA_PROJECTION_SCREEN_HEIGHT);
-#else
-	float cx = 0.5;
-	float cy = 0.5;
-#endif
-
-	shader.begin();
-	shader.setUniform2f("center", cx, cy);
-
 }
 
 void Effects::beginGrabPixels() {
@@ -131,11 +120,23 @@ void Effects::beginGrabPixels() {
 
 void Effects::endGrabPixels() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0,0,width, height);
+	glViewport(0,0,ofGetWidth(), ofGetHeight());
 }
 
 void Effects::update() {
 	shader.begin();
+
+#ifndef USE_SMALL_APP
+	float total_w = CAMERA_PROJECTION_SCREEN_WIDTH + CUBE_SCREEN_WIDTH;
+	float cx = (((float)CUBE_SCREEN_WIDTH) * 0.5/total_w);
+	float cy = (1.0 - ((float)(CUBE_SCREEN_HEIGHT * 0.5)) /((float)CAMERA_PROJECTION_SCREEN_HEIGHT));
+#else
+	float cx = 0.5;
+	float cy = 0.5;
+#endif
+	//printf("XXXXXXXXXXXXXXXXXXXXXX: %f --- %f ------ %f\n", cx, total_w, (float)CUBE_SCREEN_WIDTH);
+	shader.setUniform2f("center", cx, cy);
+	
 		float now = ofGetElapsedTimef();
 		shader.setUniform1f("fx_time", now);
 		if(shake_enabled) {
@@ -168,6 +169,7 @@ void Effects::draw() {
 	if(cracks_enabled) {
 		cracks.draw();
 	}
+
 }
 
 void Effects::bind() {

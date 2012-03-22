@@ -12,7 +12,8 @@ void main() {
 	texcoord = tex ;
 	
 	if(fx_mirror == 1) {
-		texcoord.x = center.x + (center.x - texcoord.x);
+		float w = center.x * 2.0;
+		texcoord.x = (w - (texcoord.x));
 	}
 	
 	if(fx_flip == 1) {
