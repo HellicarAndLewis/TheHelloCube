@@ -32,6 +32,8 @@ void DrawnScene::setup() {
         tris.back().loadImage("graphics/drawn/triangle_"+ofToString(i)+".png");
     }
     
+    dotRepeatImg.load("graphics/drawn/kusamadot_repeat.png");
+    
     /*
 	// TOP
     int nVines = 20;
@@ -505,7 +507,7 @@ void DrawnScene::draw() {
     // ----------------------
     // sound
     // ----------------------
-    float peak = 0.2;
+    float peak = 0.5;
     for(int i=0; i<4; i++) {
         
         float amp = audioPtr->getVolume(i);

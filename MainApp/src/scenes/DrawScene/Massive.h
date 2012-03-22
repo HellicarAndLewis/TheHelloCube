@@ -11,7 +11,7 @@
 #include "ofxBox2d.h"
 #include "Hair.h"
 
-class Wiggler {
+class Massive {
     
 public:
     
@@ -23,16 +23,14 @@ public:
     float               girth;
     float               seperation;  
     float               unique;
-    ofImgae *           txt;
     
     //--------------------------------------------------------------
-    Wiggler() {
-        txt   = NULL;
+    Massive() {
         bMade = false;
         unique = ofRandomuf();
     }
     //--------------------------------------------------------------
-    ~Wiggler() {
+    ~Massive() {
         
     }
     

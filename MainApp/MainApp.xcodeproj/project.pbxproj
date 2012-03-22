@@ -484,6 +484,7 @@
 		5F1B7F53151A979800CABB41 /* Wiggler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wiggler.h; sourceTree = "<group>"; };
 		5F1B7F59151A9CAC00CABB41 /* TinyVine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TinyVine.h; sourceTree = "<group>"; };
 		5F1B7F5A151A9CBF00CABB41 /* Hair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hair.h; sourceTree = "<group>"; };
+		5F1B7F65151AB67E00CABB41 /* Massive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Massive.h; sourceTree = "<group>"; };
 		5F6153DE150BDDD5009BCA78 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		5F6153E2150BE0D0009BCA78 /* VoronoiDiagramGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoronoiDiagramGenerator.cpp; sourceTree = "<group>"; };
 		5F6153E3150BE0D0009BCA78 /* VoronoiDiagramGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoronoiDiagramGenerator.h; sourceTree = "<group>"; };
@@ -1322,6 +1323,7 @@
 		5FE8945314FDD586002C15D0 /* DrawnScene */ = {
 			isa = PBXGroup;
 			children = (
+				5F1B7F65151AB67E00CABB41 /* Massive.h */,
 				5FE8945414FDD586002C15D0 /* DrawnScene.cpp */,
 				5FE8945514FDD586002C15D0 /* DrawnScene.h */,
 				5F1B7F53151A979800CABB41 /* Wiggler.h */,

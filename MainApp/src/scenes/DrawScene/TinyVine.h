@@ -36,7 +36,7 @@ public:
         headSizePct = ofRandom(0.1, 0.2);
         headImg     = NULL;
         bShrinking  = false;
-        maxLength   = ofRandom(10, 50);
+        maxLength   = ofRandom(6, 20);
         thickness   = (int)ofRandom(1, 3);
     }
     
@@ -57,7 +57,7 @@ public:
     //--------------------------------------------------------------
 
     void grow() {
-        if(pts.size() < maxLength) {
+        if(pts.size() < maxLength && !bShrinking) {
             pts.push_back(pts.back());
         }else {
             bShrinking = true;
@@ -111,6 +111,7 @@ public:
                 bShrinking = false;
                 if(side == BaseScene::TOP) {
                     root.x = ofRandom(50, CUBE_SCREEN_WIDTH-50);
+                     maxLength   = ofRandom(6, 20);
                 }
             }
         }
