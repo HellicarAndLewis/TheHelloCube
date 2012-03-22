@@ -27,7 +27,6 @@ void BaseScene::draw() {
 };
 
 void BaseScene::generateComplimentaryColours(){
-    cout << "Making new complimentary colours " << endl;
     
     //twitterColour is the value that we are going to work with
     float hue, saturation, brightness;
