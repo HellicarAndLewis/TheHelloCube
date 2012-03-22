@@ -1,0 +1,49 @@
+//
+//  Viner.h
+//  MainApp
+//
+//  Created by Todd Vanderlin on 3/11/12.
+//  Copyright (c) 2012 vanderlin.cc. All rights reserved.
+//
+
+#pragma once
+#include "BaseScene.h"
+#include "ofxBox2d.h"
+
+class Hair {
+public:
+	ofPolyline pts;
+    ofVec2f    dir;
+    bool       bMade;
+    Hair() {
+        bMade = false;
+    }
+    void init(int n) {
+        for (int i=0; i<n; i++) {
+            pts.addVertex(ofRandomf(), ofRandomf());
+        }
+        bMade = true;
+    }
+    int size() {
+        return (int)pts.size();
+    }
+    void draw(ofVec2f base, float seperation) {
+        if(!bMade) return;
+        if(pts.size()>3) {
+            pts[0] = base;
+            pts[1] = base;
+            float rnd = 0.92;
+            pts[1].x += ofRandom(-rnd, rnd);
+            pts[1].y += ofRandom(-rnd, rnd);
+            for (int i=2; i<pts.size(); i++) {
+                ofVec3f v = pts[i] - pts[i-2];
+                float   d = v.length();
+                pts[i] = pts[i-1] + (v * seperation) / d;
+                pts[i] += dir;
+                pts[i].y -= 0.2;
+                
+            }
+            pts.draw();
+        }
+    }
+};

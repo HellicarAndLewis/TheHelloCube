@@ -70,7 +70,7 @@ void App::setup() {
 //    cracks.setup(ofGetWidth(), ofGetHeight());
 	
     showMouse = false;
-    ofHideCursor();
+    //ofHideCursor();
 }
 
 //--------------------------------------------------------------

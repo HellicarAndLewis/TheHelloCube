@@ -45,7 +45,7 @@ public:
         
         ofSetColor(0, 250, 250);
         ofDrawBitmapString(AudioManager::getSideName(side), pos);
-        
+ 
     }
 };
 

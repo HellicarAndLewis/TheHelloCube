@@ -24,6 +24,13 @@ public:
     BaseScene();
     ~BaseScene();
     
+    enum {
+        TOP    = 0,
+        BOTTOM = 1,
+        LEFT   = 2,
+        RIGHT  = 3  
+    };
+    
     // ----------------------------------------------------
     string   name;
     ofxPanel gui;
