@@ -31,7 +31,7 @@ void TwitterManager::init() {
 	}
 	
 	// twitter mentions
-#if RUN_MODE == RUN_MODE_PRODUCTION
+#ifndef USE_TEST_TWITTERACCOUNT
 	twitter_user = "thehellocube";
 #else
 	twitter_user = "roxlutest";
@@ -109,15 +109,24 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 			}
 			
 			if(must_handle) {
-				TwitterCommand cmd(
-					 tweet
-					,found_commands
-					,found_colours
-					,found_scenes
-					,isFake
-				);
-				cmd.print();
-				commands.push(cmd);
+				if(tweet.getScreenName() == twitter_user) {
+					if(verbose) {
+						printf("We're not handling this command because it's send from the same account as we're using to fetch mentions. This would result in a infinite loop\n");
+					}
+				}
+				else {
+					TwitterCommand cmd(
+						 tweet
+						,found_commands
+						,found_colours
+						,found_scenes
+						,isFake
+					);
+					if(verbose) {
+						cmd.print();
+					}
+					commands.push(cmd);
+				}
 			}
 			else {
 				size_t num_messages = unhandled_commands_messages.size();
