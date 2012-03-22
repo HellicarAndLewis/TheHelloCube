@@ -266,6 +266,11 @@ void Effects::reflect(bool apply) {
 	shader.end();
 }
 
+void Effects::love(bool apply) {
+	shader.begin();
+		shader.setUniform1i("fx_love", apply ? 1: 2);
+	shader.end();
+}
 
 void Effects::shake(bool apply, float seconds, float number, float amplitude) {
 	shake_untill = ofGetElapsedTimef() + seconds;
@@ -314,6 +319,9 @@ void Effects::applyEffect(const string& fx) {
 	else if(fx == "crack") {
 		crack(true);
 	}
+	else if(fx == "love") {
+		love(true);
+	}
 }
 
 void Effects::reset() {
@@ -329,5 +337,6 @@ void Effects::reset() {
 		shader.setUniform1i("fx_swirl", 2);
 		shader.setUniform1i("fx_reflect", 2);
 		shader.setUniform1i("fx_shake", 2);
+		shader.setUniform1i("fx_love", 2);
 	shader.end();
 }

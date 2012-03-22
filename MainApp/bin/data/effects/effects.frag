@@ -9,6 +9,7 @@ uniform int fx_ripple;
 uniform int fx_posterize;
 uniform int fx_reflect;
 uniform int fx_cracks;
+uniform int fx_love;
 
 uniform float fx_time;
 uniform float fx_shake_p;
@@ -115,10 +116,39 @@ void main() {
 		color.g = max(0.0, 1.0 - color.g);
 		color.b = max(0.0, 1.0 - color.b);
 	}
+	
 	if(fx_cracks == 1) {
 		if(color.r != 0.1 && color.g != 0.1 && color.b != 0.1) {
 			color += 0.7;
 		}
 	}
+	
+	// <3 thanks http://www.iquilezles.org/apps/shadertoy/ 
+	// some tweaking using: http://www.mathematische-basteleien.de/heart.htm
+	if(fx_love == 1) {
+		float scale = 0.7;
+		vec2 p = -scale + (tc * 2.0) * scale;
+		p.y -= (1.0-scale);
+    
+		// animate
+    	float tt = mod(fx_time,2.0)/2.0;
+    	float ss = pow(tt,.2)*0.5 + 0.5;
+    	ss -= ss*0.2*sin(tt*6.2831*8.0)*exp(-tt*2.0);
+    	p *= vec2(0.5,1.5) + ss*vec2(0.5,-0.5);
+
+    
+	    float a = atan(p.x,p.y)/3.141593;
+	    float r = length(p);
+
+	    // shape
+	    float h = abs(a);
+	    float d = (13.0*h - 22.0*h*h + 10.0*h*h*h)/(6.0-5.0*h);
+
+	    // color
+	    float f = step(r,d) * pow(1.0-r/d,0.25);
+		vec4 heart_color = vec4(f,0.0,0.1,(f > 0.5) ? 1.0 : 1.0);
+		color = heart_color * color;
+	}
+	
 	gl_FragColor = color;
 }

@@ -151,13 +151,14 @@ void App::draw(){
 	ofBackground(33);
 	veins.draw();
 #endif
-
-	//cracks.draw();
 		
 	fx.endGrabPixels();
-
     fx.draw();
- 
+	
+	if(currentScene != NULL) {
+	 	currentScene->drawGui();
+	}
+	
     ofSetColor(255);
     
 #ifndef USE_SMALL_APP
@@ -202,7 +203,7 @@ void App::draw(){
 		twitter.getSimulator().take_screenshot = false;
 	}
 		
-    if(draw_gui) {
+    if(currentScene != NULL && currentScene->mustDrawGui) {
 		gui.draw();
         
         // draw some stats about the app...
@@ -238,9 +239,11 @@ void App::keyPressed(int key) {
 			break; 
         case OF_KEY_RIGHT:  //scene changing
 			sceneIndex++;
+			draw_gui = true;
 			break;              
         case OF_KEY_LEFT:
 			sceneIndex--;
+			draw_gui = true;
 			break;              
         case 'e': // for exporting a screen grab
 			ofSaveScreen("exports/"+ofToString(ofGetUnixTime())+".png");

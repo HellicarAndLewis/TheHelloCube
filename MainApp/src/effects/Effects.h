@@ -46,6 +46,7 @@ public:
 	void reflect(bool apply);
 	void posterize(bool apply);
 	void crack(bool apply);
+	void love(bool apply);
 	
 private:
 	ofShader shader;

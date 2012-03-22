@@ -6,6 +6,7 @@ ofColor BaseScene::twitterColour = ofColor(255,0,0);
 BaseScene::BaseScene() {
     audioPtr = NULL;
     generateComplimentaryColours();
+	mustDrawGui = true;
 }
 
 // ----------------------------------------------------
@@ -55,3 +56,9 @@ void BaseScene::generateComplimentaryColours(){
         complimentaryColours[i] = ofColor::fromHsb(newHue, newSaturation, newBrightness);
     }
 };
+
+void BaseScene::drawGui() {
+	if(mustDrawGui) {
+		gui.draw();
+	}
+}
