@@ -32,7 +32,7 @@ void DrawnScene::setup() {
         tris.back().loadImage("graphics/drawn/triangle_"+ofToString(i)+".png");
     }
     
-    dotRepeatImg.load("graphics/drawn/kusamadot_repeat.png");
+    dotRepeatImg.loadImage("graphics/drawn/kusamadot_repeat.png");
     
     /*
 	// TOP

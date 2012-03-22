@@ -23,7 +23,7 @@ public:
     float               girth;
     float               seperation;  
     float               unique;
-    ofImgae *           txt;
+    ofImage  *          txt;
     
     //--------------------------------------------------------------
     Wiggler() {
