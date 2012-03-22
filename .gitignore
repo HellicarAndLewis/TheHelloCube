@@ -94,4 +94,5 @@ paths.make
 !examples/android/*/.project
 !examples/android/*/.settings
 
+MainApp/bin/data/exports
 MainApp/bin/data/thumbs/

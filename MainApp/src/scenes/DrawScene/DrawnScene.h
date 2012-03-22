@@ -12,10 +12,14 @@
 #include "Viner.h"
 #include "Particle.h"
 #include "VectorField.h"
+#include "Wiggler.h"
+#include "TinyVine.h"
+
 
 #include "rxSpring.h"
 #include "rxParticles.h"
 #include "rxParticle.h"
+
 // Particles test
 #ifdef USE_SWIRPS
 rxParticles particles;
@@ -97,12 +101,18 @@ public:
     
     // chasers and the stuff that comes out of them
     void makePoop();
-    void addChasers();
+    void addChasers(float x=ofRandom(CUBE_SCREEN_WIDTH), float y = ofRandom(-300, 300) + CUBE_SCREEN_HEIGHT/2);
     void addBush(float startX);
+    void makeWiggler();
+    void makeTinyVine();
+    
     vector <Chaser>     chasers;
     vector <VinePoop>   poop;
     vector <Viner>      vines;
     vector <Viner*>     poopVines;
+    
+    vector <Wiggler>    wigglers;
+    vector <TinyVine>   tinyVines;
     
     // images
     vector <ofImage> tris;

@@ -32,7 +32,7 @@ void DrawnScene::setup() {
         tris.back().loadImage("graphics/drawn/triangle_"+ofToString(i)+".png");
     }
     
-    
+    /*
 	// TOP
     int nVines = 20;
     int ranTriIndex = ofRandomIndex(tris);
@@ -45,10 +45,11 @@ void DrawnScene::setup() {
         v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
         vines.push_back(v);
     }
+    */
     
     // BOTTOM
-    nVines = 3;
-    ranTriIndex = ofRandomIndex(tris);
+    int nVines = 3;
+    int ranTriIndex = ofRandomIndex(tris);
     for(int i=0; i<nVines; i++) {
         float x = ofMap(i, 0, nVines-1, 100, CUBE_SCREEN_WIDTH-100) + ofRandom(-50, 50);
         Viner v;
@@ -86,6 +87,47 @@ void DrawnScene::setup() {
 #endif
     
     drawGUI = false;
+    
+    // make 3 wigglers...
+    for(int i=0; i<3; i++) {
+        makeWiggler();
+        
+        makeTinyVine();
+    }
+    
+    for(int i=0; i<10; i++) {
+        makeTinyVine();
+    }
+
+}
+
+// ----------------------------------------------------
+void DrawnScene::makeWiggler() {
+    
+    float x = ofRandom(50, CUBE_SCREEN_WIDTH-50);
+    float y = CUBE_SCREEN_HEIGHT+10;
+    
+    Wiggler w;
+    w.make(x, y);
+    
+    
+    wigglers.push_back(w);
+    
+}
+
+// ----------------------------------------------------
+void DrawnScene::makeTinyVine() {
+    float x     = ofRandom(50, CUBE_SCREEN_WIDTH-50);
+    float y     = 0;
+    int   side  = BaseScene::TOP;// ofRandom(0, 4);
+    for(int i=0; i<2; i++) {
+        TinyVine w;
+        w.side = side;
+        w.make(x+ofRandom(-3,3), y, 4);
+        w.headImg = &dots[ofRandomIndex(dots)];
+        w.colorD  = complimentaryColours[ofRandomIndex(complimentaryColours)]; 
+        tinyVines.push_back(w);
+    }
 }
 
 
@@ -107,6 +149,16 @@ void DrawnScene::addBush(float startX) {
     
 }
 
+
+// ----------------------------------------------------
+void DrawnScene::addChasers(float x, float y) {
+    
+    Chaser p;
+    p.radius = ofRandom(20, 50);
+    p.setPosition(x, y);
+    
+    chasers.push_back(p);
+}
 
 // ----------------------------------------------------
 void DrawnScene::makePoop() {
@@ -144,7 +196,10 @@ void DrawnScene::update() {
     bgColor.setHex(0xE1E3D3);
     ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
 
+    
+    // ----------------------
     // Poop 
+    // ----------------------
     for(vector<VinePoop>::iterator it=poop.begin(); it!=poop.end(); ++it) {
         
         ofVec2f frc;
@@ -171,7 +226,9 @@ void DrawnScene::update() {
     }    
     
     
+    // ----------------------
     // Vines
+    // ----------------------
     for(vector<Viner>::iterator it=vines.begin(); it!=vines.end(); ++it) {
         
         for(int i=0; i<it->joints.size(); ++i) {
@@ -215,8 +272,9 @@ void DrawnScene::update() {
 
     }   
     
-    
+    // ----------------------
     // Chasers
+    // ----------------------
     float t = ofGetElapsedTimef()*0.02;
     for(vector<Chaser>::iterator it=chasers.begin(); it!=chasers.end(); ++it) {
         
@@ -282,37 +340,41 @@ void DrawnScene::update() {
     }
     ofRemove(chasers, Particle::shouldRemove);
 
-    box2d.update();	
+    // ----------------------
+    // wigglers
+    // ----------------------
+    for(vector<Wiggler>::iterator it=wigglers.begin(); it!=wigglers.end(); ++it) {
+        it->update();
+    }
     
+    // Tiny Vines
+    // ----------------------
+    for(vector<TinyVine>::iterator it=tinyVines.begin(); it!=tinyVines.end(); ++it) {
+        it->update();
+    }
+    
+    
+    // ----------------------
+    box2d.update();	    
     field.fadeField(0.98);
-}
-
-// ----------------------------------------------------
-void DrawnScene::addChasers() {
-    
-    Chaser p;
-    p.radius = ofRandom(20, 50);
-    p.setPosition(ofRandom(CUBE_SCREEN_WIDTH), ofRandom(-300, 300) + CUBE_SCREEN_HEIGHT/2);
-    
-    chasers.push_back(p);
 }
 
 // ----------------------------------------------------
 void DrawnScene::draw() {
     
     drawBackground();
-    
-    drawBackground();
-    
     ofColor peteWhite = ofColor(255,255,255);
-    
+    ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     ofSetColor(peteWhite);
     ofFill();
-    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    ofRect(screen);
 
+    
+    // ----------------------
+    // Vector field
+    // ----------------------
     float scalex = (float)field.externalWidth / (float)field.fieldWidth;
     float scaley = (float)field.externalHeight / (float)field.fieldHeight;
-    
     ofSetColor(150);
     for (int i = 0; i < field.fieldWidth; i++){
         for (int j = 0; j < field.fieldHeight; j++){
@@ -331,9 +393,24 @@ void DrawnScene::draw() {
         }
     }
     
+    // ----------------------
+    // wigglers
+    // ----------------------
+    for(vector<Wiggler>::iterator it=wigglers.begin(); it!=wigglers.end(); ++it) {
+        it->draw();
+    }
+    
+    // ----------------------
+    // Tiny Vines
+    // ----------------------
+    for(vector<TinyVine>::iterator it=tinyVines.begin(); it!=tinyVines.end(); ++it) {
+        it->draw();
+    }
     
     
-    
+    // ----------------------
+    // Chasers
+    // ----------------------
     for(vector<Chaser>::iterator it=chasers.begin(); it!=chasers.end(); ++it) {
         
         
@@ -359,7 +436,6 @@ void DrawnScene::draw() {
         float angle = ofRadToDeg( atan2(it->vel.y, it->vel.x) );
         it->rotation += (angle-it->rotation) * 0.3;
         ofEnableAlphaBlending();
-        //ofSetColor(255);
         ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
         ofPushMatrix();
         ofTranslate(it->pos);
@@ -378,7 +454,9 @@ void DrawnScene::draw() {
         it->drawAsVine();
     }
     
-    ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    // ----------------------
+    // Poop
+    // ----------------------
     for(vector<VinePoop>::iterator it=poop.begin(); it!=poop.end(); ++it) {
       
         float r = it->getRadius() * 2;
@@ -411,6 +489,10 @@ void DrawnScene::draw() {
     }
     ofRemove(poop, ofxBox2dBaseShape::shouldRemove);
     
+    
+    // ----------------------
+    // gui
+    // ----------------------
     if(drawGUI){
         gui.draw();
 #ifdef USE_SWIRPS
@@ -421,12 +503,72 @@ void DrawnScene::draw() {
 #endif        
     }
     
+    // ----------------------
+    // sound
+    // ----------------------
+    float peak = 0.2;
+    for(int i=0; i<4; i++) {
+        
+        float amp = audioPtr->getVolume(i);
+        ofVec2f pos;
+        // TOP
+        if(i == AudioManager::TOP) {
+            pos.set(CUBE_SCREEN_WIDTH/2, 20);
+        }
+        
+        // BOTTOM
+        if(i == AudioManager::BOTTOM) {
+            pos.set(CUBE_SCREEN_WIDTH/2, CUBE_SCREEN_HEIGHT-20);
+        }
+        
+        // LEFT
+        if(i == AudioManager::LEFT) {
+            pos.set(20, CUBE_SCREEN_HEIGHT/2);
+        }
+        
+        // RIGHT
+        if(i == AudioManager::RIGHT) {
+            pos.set(CUBE_SCREEN_WIDTH-20, CUBE_SCREEN_HEIGHT/2);
+            
+        }
+        
+        
+        if(amp > 0.3) {
+            int ranTinyVine = ofRandomIndex(tinyVines);
+            tinyVines[ranTinyVine].grow();
+        }
+        
+        if(amp>peak) addChasers(pos.x, pos.y);
+
+        
+        // draw
+        ofSetColor(255);
+        ofCircle(pos, 25);
+        ofSetColor(255, 0, 255);
+        ofCircle(pos, 5+(20*amp));
+        ofSetColor(0, 250, 250);
+        ofDrawBitmapString(AudioManager::getSideName(i), pos);
+    }
+
+    
+    // ----------------------
+    // add some randomly
+    // ----------------------
     if((int)ofRandom(0, 40)==10) addChasers();
     if((int)ofRandom(0, 4)==2)   makePoop();
 }
 
 // ----------------------------------------------------
 void DrawnScene::keyPressed(int key) {
+    
+    
+    if(key == 'q') {
+        
+        int ranTinyVine = ofRandomIndex(tinyVines);
+        tinyVines[ranTinyVine].grow();
+        
+    }
+    
     switch (key) { 
         case 'g': {
             drawGUI = !drawGUI;
@@ -475,6 +617,7 @@ void DrawnScene::keyPressed(int key) {
     
 }
 
+// ----------------------------------------------------
 void DrawnScene::mousePressed(int x, int y, int button){
 #ifdef USE_SWIRPS
     rxSwirp* sw = new rxSwirp(ofVec3f(x,y,0),particles, (int)ofRandom(5,15));
@@ -482,6 +625,7 @@ void DrawnScene::mousePressed(int x, int y, int button){
 #endif   
 }
 
+// ----------------------------------------------------
 void DrawnScene::mouseMoved(int x, int y ){
 #ifdef USE_SWIRPS
     ofVec3f m(x, y, 0);
@@ -491,12 +635,16 @@ void DrawnScene::mouseMoved(int x, int y ){
 #endif	
 }
 
+// ----------------------------------------------------
 void DrawnScene::respondToNewComplimentaryColours(){
     for(int i=0; i<vines.size(); i++) {
-        vines[i].colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
+        vines[i].colorDes = complimentaryColours[ofRandomIndex(complimentaryColours)];  
     }
     for(int i=0; i<poop.size(); i++) {
-        poop[i].colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; 
+        poop[i].colorD = complimentaryColours[ofRandomIndex(complimentaryColours)];  
+    }
+    for(int i=0; i<tinyVines.size(); i++) {
+        tinyVines[i].colorD = complimentaryColours[ofRandomIndex(complimentaryColours)]; 
     }
 }
 

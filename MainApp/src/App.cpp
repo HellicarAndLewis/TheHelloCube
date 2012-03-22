@@ -69,7 +69,7 @@ void App::setup() {
 	command_timeout = ofGetElapsedTimef() + fx_duration;
     
     showMouse = false;
-    ofHideCursor();
+    //ofHideCursor();
 }
 
 //--------------------------------------------------------------
