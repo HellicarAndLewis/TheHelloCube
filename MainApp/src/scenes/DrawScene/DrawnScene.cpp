@@ -362,7 +362,7 @@ void DrawnScene::update() {
 
 // ----------------------------------------------------
 void DrawnScene::draw() {
-    
+
     drawBackground();
     ofColor peteWhite = ofColor(255,255,255);
     ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);

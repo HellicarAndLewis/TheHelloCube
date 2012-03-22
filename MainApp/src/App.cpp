@@ -83,6 +83,7 @@ void App::update() {
 	
 	ofSetWindowTitle(ofToString(ofGetFrameRate()));
 	
+	
 	float now = ofGetElapsedTimef();
 	if(now >= command_timeout) {
 		if(twitter.hasNewCommands() && twitter.getNextCommand(command)) {
@@ -100,6 +101,27 @@ void App::update() {
 				else if(switch_scene == "spots") {
                     changeScene(SCENE_SPOTS);
                 }	
+				else if(switch_scene == "next") {
+					++sceneIndex;
+					sceneIndex %= (int)scenes.size();
+					changeScene(sceneIndex);
+				}
+				else if(switch_scene == "previous") {
+					--sceneIndex;
+					if(sceneIndex < 0) {
+						sceneIndex = scenes.size()-1;
+					}
+					changeScene(sceneIndex);
+				}
+				else if(switch_scene == "random") {
+					unsigned int rnd_dx = rand() % scenes.size();
+					int max = 100;
+					do {
+						rnd_dx = rand() % scenes.size();
+						--max;
+					} while(rnd_dx == sceneIndex && max > 0);
+					changeScene(rnd_dx);
+				}
 			}
 			currentScene->handleCommands(command, fx);
 			

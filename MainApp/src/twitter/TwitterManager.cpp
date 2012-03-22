@@ -25,6 +25,7 @@ void TwitterManager::init() {
 	
 	// twitter mentions
 	twitter_user = "thehellocube";
+	twitter_user = "roxlutest";
 	string tokens_file = ofToDataPath("twitter/twitter_" +twitter_user +".txt",true);
 	twitter_thread.setup(tokens_file);
 	twitter_thread.startThread(false, false);

@@ -21,8 +21,8 @@ void TextureScene::setup() {
 	gui.add(peakValue.setup("vol peak", 0.4, 0.0, 1.0, gui_w));
 	gui.add(attractionDamping.setup("att damping", 0.3, 0.0, 1.0, gui_w));
     gui.loadFromFile(gui_file);
-	  
- //   ofDisableArbTex();
+	
+ 	ofEnableArbTex();
     for(int i=1; i<26; i++) {
         textures.push_back(ofTexture());
         if(!ofLoadImage(textures.back(), "graphics/texture/"+ofToString(i)+".png")) printf("error loading: '%d.png'\n", i);
@@ -196,43 +196,39 @@ void TextureScene::keyPressed(int key) {
 
 // ----------------------------------------------------
 void TextureScene::draw() {
-    
-    //drawBackground();
-    
     ofSetColor(twitterColour); //fill the background!
-//    ofFill();
-//    ofRect(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     ofBackgroundGradient(twitterColour, ofColor::black, OF_GRADIENT_CIRCULAR);
-    
     ofEnableAlphaBlending();
+
     if((int)ofRandom(0, 300) == 30) {
         circleFrcFlip = !circleFrcFlip;
     }
+	
     float n = ofGetElapsedTimef() * 0.2;
-    if(circleFrcFlip) n *= -1;
+    if(circleFrcFlip) {
+		n *= -1;
+	}
+	
     float r = 5 + ofNoise(n, circleFrc.x/3000.0) * 300;
     circleFrc.x = cos(n*TWO_PI) * r;
     circleFrc.y = sin(n*TWO_PI) * r;
-//    ofSetColor(255, 0, 0);
-//    ofCircle(circleFrc+getCentreCubeScreen(), 13); //don't draw the red dot...
     
-    for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {
-        
+    for (vector<TexturedShape>::iterator it=shapes.begin(); it!=shapes.end(); ++it) {        
         ofVec2f p = it->getPosition();
         float r = it->getRadius();
         
         ofSetColor(it->colour);
         ofSetColor(255,255,255);
-        
         it->tex->bind();
-        glBegin(GL_QUADS);
-        
-        glVertex2f(p.x-r, p.y-r); glTexCoord2f(0, 0);
-        glVertex2f(p.x+r, p.y-r); glTexCoord2f(1, 0);
-        glVertex2f(p.x+r, p.y+r); glTexCoord2f(1, 1);
-        glVertex2f(p.x-r, p.y+r); glTexCoord2f(0, 1);
-        
-        //ofSphere(p, 10);
+        glBegin(GL_QUADS);        
+			glTexCoord2f(0, 0); glVertex2f(p.x-r, p.y-r); 
+			glTexCoord2f(1, 0); glVertex2f(p.x+r, p.y-r); 
+			glTexCoord2f(1, 1); glVertex2f(p.x+r, p.y+r); 
+			glTexCoord2f(0, 1); glVertex2f(p.x-r, p.y+r); 
+//			glVertex2f(p.x-r, p.y-r); glTexCoord2f(0, 0);
+//			glVertex2f(p.x+r, p.y-r); glTexCoord2f(1, 0);
+//			glVertex2f(p.x+r, p.y+r); glTexCoord2f(1, 1);
+//			glVertex2f(p.x-r, p.y+r); glTexCoord2f(0, 1);
         glEnd();
         it->tex->unbind();  
         

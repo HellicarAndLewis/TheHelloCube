@@ -44,6 +44,35 @@ struct TwitterCommand {
 			scene = *(scenes.begin());
 			return true;
 		}
+		
+		// special commands: next scene
+		{
+			set<string>::iterator it = std::find(tokens.begin(), tokens.end(), "next");
+			if(it != tokens.end()) {
+				scene = *it;
+				return true;
+			}
+		}
+
+		// special commands: previous scene
+		{
+			set<string>::iterator it = std::find(tokens.begin(), tokens.end(), "previous");
+			if(it != tokens.end()) {
+				scene = *it;
+				return true;
+			}
+		}
+
+		// special commands: random scene
+		{
+			set<string>::iterator it = std::find(tokens.begin(), tokens.end(), "random");
+			if(it != tokens.end()) {
+				scene = *it;
+				printf("%s<------------", scene.c_str());
+				return true;
+			}
+		}
+
 		return false;
 	}	
 	
