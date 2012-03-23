@@ -311,6 +311,18 @@ void TextureScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 				shapes[ranId].radiusTarget = ofRandom(2, 10);
 			}
 		}
+		else if(c == "faster") {
+		
+		}
+		else if(c == "slower") {
+		
+		}
+		else if(c == "less") {
+		
+		}
+		else if(c == "more") {
+		
+		}
 		fx.applyEffect(c);
 		++it;
 	}

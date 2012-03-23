@@ -139,6 +139,7 @@ void TwitterPhotoUploaderThread::threadedFunction() {
 			}
 			else if(task->type == TASK_GENERAL_MESSAGE) {	
 				TwitterPhotoUploaderTask_GeneralMessage* gen = static_cast<TwitterPhotoUploaderTask_GeneralMessage*>(task);
+				printf(">>>>>>>>>>>>>>>>> %s\n", gen->tweet.getScreenName().c_str());
 				if(!gen->tweet.getScreenName().size()) {
 					if(verbose) {
 						printf("Trying to send general twitter message, but no screenname found. This probably means you're using the gui.\n");	
@@ -211,7 +212,7 @@ void TwitterPhotoUploaderThread::setReplyEndings(const set<string>& cmd) {
 		if(verbose) {
 			printf("reply ending: %s\n", (*it).c_str());
 		}
-		reply_endings.push_back("Now try this command '" +(*it) +"'");
+		reply_endings.push_back("Why not try this command: '" +(*it) +"'");
 		if(i%5 == 0) {
 			reply_endings.push_back("Also try these colors: http://is.gd/9TkO2");		
 		}

@@ -70,6 +70,7 @@ public:
 	TwitterPhotoUploaderTask_GeneralMessage(const string& msg, rtt::Tweet tweet)
 		:TwitterPhotoUploaderTask(TASK_GENERAL_MESSAGE)
 		,message(msg)
+		,tweet(tweet)
 	{
 	}
 	

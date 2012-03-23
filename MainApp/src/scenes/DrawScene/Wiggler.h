@@ -180,10 +180,8 @@ public:
         }
         
         for(int i=0; i<hair.size(); i++) {
-            
-            int hairIndex = MIN(i, hair.size());
-            
-            hair[hairIndex].rnd = soundAmp;
+			int hairIndex = MIN(i, hair.size());
+			hair[hairIndex].rnd = soundAmp;
             hair[hairIndex].draw(linestrip[i], 3);
         }
         

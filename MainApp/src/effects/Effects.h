@@ -75,7 +75,8 @@ public:
 	float cx; 
 	float cy; 
 	float fx_flip_adjust_y;
-	float fx_love_scale;
+	float fx_love_scale_x;
+	float fx_love_scale_y;
 	float fx_love_x;
 	float fx_love_y;
 	

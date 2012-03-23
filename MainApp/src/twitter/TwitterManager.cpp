@@ -108,7 +108,8 @@ void TwitterManager::parseTweet(rtt::Tweet& tweet, bool isFake) {
 				printf("Handle tweet: %c\n", (must_handle) ? 'y' : 'n');
 			}
 			
-			if(must_handle) {
+			
+			if(must_handle) {	
 				if(tweet.getScreenName() == twitter_user) {
 					if(verbose) {
 						printf("We're not handling this command because it's send from the same account as we're using to fetch mentions. This would result in a infinite loop\n");
