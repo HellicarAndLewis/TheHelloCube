@@ -19,6 +19,7 @@ void SpotsScene::setup() {
     bgColorTarget = ofRandomColor();    
     
     mustDrawGui = false;
+    speed = 0.002;
 }
 
 
@@ -43,7 +44,7 @@ void SpotsScene::update() {
 //        it->addAttractionPoint(circleFrc + ofGetCenterScreen(), 0.03);//(ofGetCenterScreen(), 0.0002);
 //        
         if(it->getPosition().distance(getCentreCubeScreen()) < 300) {
-			it->addRepulsionForce(getCentreCubeScreen(), 0.002);
+			it->addRepulsionForce(getCentreCubeScreen(), speed);
         }
         
         
@@ -238,6 +239,13 @@ void SpotsScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 				shapes[ranId].radiusTarget = ofRandom(2, 10);
 			}
 		}
+        else if(c == "faster") {
+            speed = 0.01;
+        }
+        else if(c == "slower") {
+            speed = 0.002;
+        }
+      
 		fx.applyEffect(c);
 		++it;
 	}

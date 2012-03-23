@@ -28,6 +28,7 @@ float follow_effect;
 #endif
 
 #define MAX_CHASERS 100
+#define MAX_POOP    700
 
 // ----------------------------------------------------
 class Chaser : public Particle {
@@ -54,19 +55,28 @@ public:
         img = NULL;
         birthdate = ofGetElapsedTimef();
         bFade =false;
+        bGetBig = false;
         alpha = 255;
+        newPopSize = 10;
     }
     
     void updateColor() {
         color.r += (colorD.r - color.r) * 0.2;
         color.g += (colorD.g - color.g) * 0.2;
         color.b += (colorD.b - color.b) * 0.2;
+        
+        if(bGetBig) {
+            float r = getRadius();
+            r += (newPopSize-r) * 0.2;
+            setRadius(r);
+        }
     }
   
+    bool bGetBig;
     bool bFade;
     float alpha;
     float birthdate;
-    float dotSize, dotSizeD;
+    float dotSize, dotSizeD, newPopSize;
     ofImage * img;
     ofColor color, colorD;    
 };
@@ -93,11 +103,7 @@ public:
     void mouseMoved(int x, int y );
 	void handleCommands(TwitterCommand& cmd, Effects& fx);   
     void respondToNewComplimentaryColours();
-    void enterScene(){
-        generateComplimentaryColours();
-        respondToNewComplimentaryColours();
-        ofRegisterMouseEvents(&gui);
-    }
+    void enterScene();
     
     VectorField field;
     
@@ -107,6 +113,7 @@ public:
     void addBush(float startX);
     void makeWiggler();
     void makeTinyVine();
+    void makePoopFromTinyVines();
     
     vector <Chaser>     chasers;
     vector <VinePoop>   poop;
@@ -122,6 +129,10 @@ public:
     ofImage          eyeA;
     float            eyeRatio;
     ofImage          dotRepeatImg;
+    
+    int              bBigMode;
+    int              tinyVinesPoopAmt;
+    bool             bTinyPoop;
     
     // Particles test
 #ifdef USE_SWIRPS

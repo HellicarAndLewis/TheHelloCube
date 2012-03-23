@@ -26,6 +26,8 @@ public:
     float               div;
     ofTexture  *        txt;
     float               soundAmp;
+    ofColor             color, colorD;
+
     //--------------------------------------------------------------
     Wiggler() {
         soundAmp = 0.1;
@@ -50,7 +52,7 @@ public:
             pts.push_back(ofVec2f(x, y-i*2));
         }
         
-        nHairs = ofRandom(50, 160);
+        nHairs = ofNextPow2(ofRandom(50, 160));
         for (int i=0; i<nHairs; i++) {
             hair.push_back(Hair());
             hair[i].init(ofRandom(5, 10));
@@ -88,6 +90,10 @@ public:
         }
         
         
+        color.r += (colorD.r - color.r) * 0.2;
+        color.g += (colorD.g - color.g) * 0.2;
+        color.b += (colorD.b - color.b) * 0.2;
+        color.a = 255;
     }
     
     
@@ -100,7 +106,7 @@ public:
             resampled.addVertex(pts[i].x, pts[i].y);
         }
         resampled = resampled.getResampledByCount(30);
-       
+        ofEnableAlphaBlending();
         
        
         glEnable(txt->texData.textureTarget);
@@ -109,7 +115,7 @@ public:
         glTexParameterf(txt->texData.textureTarget, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(txt->texData.textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(txt->texData.textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        ofSetColor(255);
+        ofSetColor(color);
         
         glBegin (GL_QUAD_STRIP);
 

@@ -28,6 +28,7 @@ public:
     bool                bShrinking;
     int                 thickness;
     int                 side;
+    float               headSize;
     
     //--------------------------------------------------------------
     TinyVine() {
@@ -38,6 +39,7 @@ public:
         bShrinking  = false;
         maxLength   = ofRandom(6, 20);
         thickness   = (int)ofRandom(1, 3);
+        headSize    = 10;
     }
     
     //--------------------------------------------------------------
@@ -132,6 +134,7 @@ public:
         ofVec2f b = pts[(int)pts.size()-1];
         float rotation = a.angle(b);
         float sz       = ofMap(pts.size(), 0, maxLength, 0.01, headSizePct, true);
+        headSize       = headImg->getWidth()*sz;
         ofPushStyle();
         ofEnableAlphaBlending();
         ofSetColor(color);
@@ -140,7 +143,7 @@ public:
             ofTranslate(pts.back());
             ofRotate(rotation);
             ofSetRectMode(OF_RECTMODE_CENTER);
-            headImg->draw(0, 0, headImg->getWidth()*sz, headImg->getHeight()*sz);
+            headImg->draw(0, 0, headSize, headSize);
             ofPopMatrix();
         }
         ofPopStyle();
