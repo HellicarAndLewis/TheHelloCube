@@ -32,7 +32,7 @@ public:
     void exitScene();
     
 	void handleCommands(TwitterCommand& cmd, Effects& fx);
-    
+    float speed;
     ofxBox2d box2d;
     vector <ofxBox2dCircle> obsticals;
     vector <SpotShape>   shapes;
