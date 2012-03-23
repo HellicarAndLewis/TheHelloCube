@@ -42,7 +42,7 @@ void App::setup() {
     }
     
     // start with the frist scene
-    sceneIndex = SCENE_SPOTS;
+    sceneIndex = SCENE_DRAWN;
     changeScene(sceneIndex);
     
 	
