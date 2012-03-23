@@ -267,8 +267,22 @@ void CellScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 	while(it != cmd.tokens.end()) {
 		const string& c = (*it);
 		if(c == "bigger") {
+		
 		}
 		else if(c == "smaller") {
+		
+		}
+		else if(c == "faster") {
+		
+		}
+		else if(c == "slower") {
+		
+		}
+		else if(c == "less") {
+		
+		}
+		else if(c == "more") {
+		
 		}
 		fx.applyEffect(c);
 		++it;

@@ -1659,7 +1659,7 @@
 												<string key="NSFrame">{{15, 17}, {58, 18}}</string>
 												<reference key="NSSuperview" ref="587430667"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView"/>
+												<reference key="NSNextKeyView" ref="975435712"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="399258653">
 													<int key="NSCellFlags">67239424</int>
@@ -1691,12 +1691,16 @@
 													<string key="NSContents">Ripple</string>
 													<reference key="NSSupport" ref="788051649"/>
 													<reference key="NSControlView" ref="146552916"/>
-													<int key="NSButtonFlags">-2038152961</int>
+													<int key="NSButtonFlags">-2033434369</int>
 													<int key="NSButtonFlags2">163</int>
 													<string key="NSAlternateContents"/>
 													<string key="NSKeyEquivalent"/>
 													<int key="NSPeriodicDelay">400</int>
 													<int key="NSPeriodicInterval">75</int>
+													<object class="NSCustomResource" key="NSSound">
+														<string key="NSClassName">NSSound</string>
+														<string key="NSResourceName">Submarine</string>
+													</object>
 												</object>
 											</object>
 										</array>
@@ -1919,6 +1923,7 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{46, 72}, {481, 15}}</string>
 												<reference key="NSSuperview" ref="112804702"/>
+												<reference key="NSNextKeyView" ref="58478230"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="857462208">
 													<int key="NSCellFlags">-2079981824</int>
@@ -2125,6 +2130,7 @@
 												<int key="NSvFlags">266</int>
 												<string key="NSFrame">{{118, 7}, {409, 48}}</string>
 												<reference key="NSSuperview" ref="17567102"/>
+												<reference key="NSNextKeyView" ref="975435712"/>
 												<string key="NSClassName">Plot</string>
 											</object>
 										</array>
@@ -2190,6 +2196,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{103, 66}, {413, 15}}</string>
 												<reference key="NSSuperview" ref="548104172"/>
+												<reference key="NSNextKeyView" ref="58478230"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSSliderCell" key="NSCell" id="236900299">
 													<int key="NSCellFlags">-2079981824</int>
@@ -2286,7 +2293,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="29677747"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 			</object>
 			<object class="NSCustomObject" id="976324537">

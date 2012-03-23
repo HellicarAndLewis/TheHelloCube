@@ -24,9 +24,10 @@ uniform float fx_swirl_radius;
 uniform float fx_swirl_angle;
 uniform vec3 fx_ripple_params;
 uniform float fx_ripple_p;
-uniform float fx_love_scale;
 uniform float fx_love_x;
 uniform float fx_love_y;
+uniform vec2 fx_love_scale;
+
 
 uniform vec2 center;
 uniform sampler2D img;
@@ -116,8 +117,12 @@ void main() {
 	if(fx_love == 1) {
 		//float scale = 0.7;
 			
-		vec2 p = -fx_love_scale + (tc * 2.0) * fx_love_scale;
-		p.y -= (1.0-fx_love_scale);
+		//vec2 p = -fx_love_scale + (tc * 2.0) * fx_love_scale;
+		// vec2 p = (2.0*gl_FragCoord.xy-resolution)/resolution.y;
+		vec2 p = -1.0 + (2.0*tc);
+		p = 1.0 * tc;
+		p.y = 1.0 - p.y;
+//		p.y -= (1.0-fx_love_scale);
     	p.x += fx_love_x;
 		p.y += fx_love_y;
 		
@@ -125,7 +130,7 @@ void main() {
     	float tt = mod(fx_time,2.0)/2.0;
     	float ss = pow(tt,.2)*0.5 + 0.5;
     	ss -= ss*0.2*sin(tt*6.2831*8.0)*exp(-tt*2.0);
-    	p *= vec2(0.5,1.5) + ss*vec2(0.5,-0.5);
+    	p *= vec2(0.5*fx_love_scale.x,1.5*fx_love_scale.y) + ss*vec2(0.5,-0.5);
 
     
 	    float a = atan(p.x,p.y)/3.141593;

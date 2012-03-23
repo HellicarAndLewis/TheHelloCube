@@ -85,7 +85,8 @@ public:
 	ofxFloatSlider		fx_center_x;
 	ofxFloatSlider		fx_center_y;
 	ofxFloatSlider		fx_flip_adjust_y;	
-	ofxFloatSlider		fx_love_scale;
+	ofxFloatSlider		fx_love_scale_x;
+	ofxFloatSlider		fx_love_scale_y;
 	ofxFloatSlider		fx_love_x;
 	ofxFloatSlider		fx_love_y;
 	ofxButton			fx_test_ripple;

@@ -66,7 +66,8 @@ void App::update() {
 	fx.cx = fx_center_x;
 	fx.cy = fx_center_y;
 	fx.fx_flip_adjust_y = fx_flip_adjust_y;
-	fx.fx_love_scale = fx_love_scale;
+	fx.fx_love_scale_x = fx_love_scale_x;
+	fx.fx_love_scale_y = fx_love_scale_y;
 	fx.fx_love_x = fx_love_x;
 	fx.fx_love_y = fx_love_y;
 	
@@ -402,9 +403,10 @@ void App::setupEffectsGui() {
 	gui.add(fx_shake_duration.setup("FX: Shake duration (sec)",14,0,25,gui_w));	
 	gui.add(fx_swirl_radius.setup("FX: Swirl radius",0.23,0,1,gui_w));		
 	gui.add(fx_swirl_angle.setup("FX: Swirl angle",5.6,0,TWO_PI	,gui_w));		
-	gui.add(fx_love_scale.setup("FX: Heart scale",0.8,-2,2, gui_w));		
-	gui.add(fx_love_x.setup("FX: Heart x",0.0,-2,2, gui_w));		
-	gui.add(fx_love_y.setup("FX: Heart y",0.0,-2,2, gui_w));		
+	gui.add(fx_love_scale_x.setup("FX: Heart scale X",0.8,-20,20, gui_w));		
+	gui.add(fx_love_scale_y.setup("FX: Heart scale Y",0.8,-20,20, gui_w));		
+	gui.add(fx_love_x.setup("FX: Heart x",0.0,-4,4, gui_w));		
+	gui.add(fx_love_y.setup("FX: Heart y",0.0,-4,4, gui_w));		
 	gui.add(fx_center_x.setup("Center X",0.5,0,0.55,gui_w));		
 	gui.add(fx_center_y.setup("Center Y",0.5,0,0.7,gui_w));		
 	gui.add(fx_flip_adjust_y.setup("Flip adjust Y",0.0,-0.5,0.5,gui_w));		
