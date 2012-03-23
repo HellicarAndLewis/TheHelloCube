@@ -42,9 +42,8 @@ void App::setup() {
     }
     
     // start with the frist scene
-    sceneIndex = SCENE_SPOTS;
+    sceneIndex = SCENE_DRAWN;
     changeScene(sceneIndex);
-    
 	
 	twitter.setVerbose(true);
 	twitter.init();
@@ -52,10 +51,7 @@ void App::setup() {
 	take_screenshot_on = 0;
 	twitter.getSimulator().setEffects(fx);
 	twitter.getSimulator().loadSettings();
-	
 	command_timeout = ofGetElapsedTimef() + fx_duration;
-	
-    
     showMouse = false;
     //ofHideCursor();
 }
