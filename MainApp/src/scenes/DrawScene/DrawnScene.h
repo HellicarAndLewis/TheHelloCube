@@ -29,6 +29,7 @@ float follow_effect;
 
 #define MAX_CHASERS 100
 #define MAX_POOP    700
+//#define MAKE_LAND
 
 // ----------------------------------------------------
 class Chaser : public Particle {
@@ -44,7 +45,15 @@ public:
     
 };
 
-
+// ----------------------------------------------------
+// Land mass
+// ----------------------------------------------------
+class LandMass : public ofPolyline {
+  public:
+    vector <ofVec2f> perps;
+    vector <float>   circleVariance;
+    int              texId;
+};
 
 // ----------------------------------------------------
 class VinePoop : public ofxBox2dCircle {
@@ -101,6 +110,8 @@ public:
     void keyPressed(int key);
     void mousePressed(int x, int y, int button);
     void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+
 	void handleCommands(TwitterCommand& cmd, Effects& fx);   
     void respondToNewComplimentaryColours();
     void enterScene();
@@ -123,13 +134,30 @@ public:
     vector <Wiggler>    wigglers;
     vector <TinyVine>   tinyVines;
     
+    // ---------------------
+    // land wiggles
+    // ---------------------
+    vector <Wiggler>    landWiggles;
+
+    // ---------------------
+    // land masses
+    // ---------------------
+    vector <LandMass>   land;
+    vector <Hair>       landHair;
+    float               landHairSep;
+    
+    // ---------------------
     // images
+    // ---------------------
     vector <ofImage> tris;
     vector <ofImage> dots;
     ofImage          eyeA;
     float            eyeRatio;
     ofImage          dotRepeatImg;
     
+    // ---------------------
+    // modes
+    // ---------------------
     int              bBigMode;
     int              tinyVinesPoopAmt;
     bool             bTinyPoop;

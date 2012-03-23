@@ -18,11 +18,11 @@ public:
     
 	vector <ofVec2f>	pts;
 	vector <Hair>		hair;
-    ofVec2f             root;
+    ofVec2f             root, dir;
     int                 bMade;
     float               unique;
     ofImage *           headImg;
-    float               headSizePct;
+    float               headSizePct, headSizePctD;
     ofColor             color, colorD;
     int                 maxLength;
     bool                bShrinking;
@@ -32,14 +32,15 @@ public:
     
     //--------------------------------------------------------------
     TinyVine() {
-        bMade       = false;
-        unique      = ofRandomuf();
-        headSizePct = ofRandom(0.1, 0.2);
-        headImg     = NULL;
-        bShrinking  = false;
-        maxLength   = ofRandom(6, 20);
-        thickness   = (int)ofRandom(1, 3);
-        headSize    = 10;
+        bMade        = false;
+        unique       = ofRandomuf();
+        headSizePct  = 0;
+        headSizePctD = ofRandom(0.1, 0.2);
+        headImg      = NULL;
+        bShrinking   = false;
+        maxLength    = ofRandom(6, 20);
+        thickness    = (int)ofRandom(1, 3);
+        headSize     = 10;
     }
     
     //--------------------------------------------------------------
@@ -77,6 +78,9 @@ public:
         color.b += (colorD.b - color.b) * 0.2;
         color.a = 255;
         
+        
+        headSizePct += (headSizePctD-headSizePct) * 0.2;
+        
         float seperation    = 10;
         float rnd           = 0.2;
         float div           = 500.0;
@@ -88,7 +92,7 @@ public:
         }
        
         pts[0].set(root);
-        pts[0].set(root.x, root.y+offset);
+        pts[0].set(root.x, root.y);
         ofVec2f noiseFrc;
         noiseFrc.x = ofSignedNoise(unique, t, pts[1].y/div);
         noiseFrc.y = ofSignedNoise(unique, pts[1].x/div, t);
@@ -102,7 +106,7 @@ public:
             float   d = v.length();
             pts[i] = pts[i-1] + (v * seperation) / d;
             
-            pts[i].y += 1;
+            pts[i] += dir;
             
         }
         
