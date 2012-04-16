@@ -58,7 +58,7 @@ public:
         
         this->type = type;
         root.set(x, y+20);
-
+        nHairs = 22;
         
         int nPts = ofRandom(20, 30);
         girth    = ofRandom(MAX(3, nPts-5), nPts);
@@ -145,7 +145,7 @@ public:
     
     
     //--------------------------------------------------------------
-    void drawThick() {
+    void draw() {
         if(!bMade) return;
         
         // resample to get better points
@@ -156,7 +156,7 @@ public:
         resampled = resampled.getResampledByCount(resampleCount);
         ofEnableAlphaBlending();
         
-        
+       
         // -----------------
         // repeating tex
         // -----------------
@@ -167,7 +167,7 @@ public:
         glTexParameteri(txt->texData.textureTarget, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(txt->texData.textureTarget, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         ofSetColor(color);
-       
+        
         ofVec2f v, p, a, b;
         vector <ofVec2f> perps;
         
@@ -184,7 +184,7 @@ public:
             p *= r;
             
             float w = (girth*2) / 64.0;
-            float per = ofMap(i, 0, resampled.size()-2, 0, seperation*(resampled.size()-2)) / 64.0;
+            float per = ofMap(i, 0, resampled.size()-2, 0, seperation*(resampled.size()-2), true) / 64.0;
             glTexCoord2f(0.0, per);  glVertex2f(a.x - p.x, a.y - p.y);
             glTexCoord2f(w, per);    glVertex2f(a.x + p.x, a.y + p.y);
             
@@ -212,18 +212,20 @@ public:
         }
         linestrip.addVertex(perps[0]);
         linestrip = linestrip.getResampledByCount(nHairs);
-        
+      
         // draw fast
         ofSetColor(20);
         glLineWidth(thickness);
+        linestrip.draw();
+        /*
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, &linestrip.getVertices()[0]);
         glDrawArrays(GL_LINE_STRIP, 0, (int)linestrip.size());
         glDisableClientState(GL_VERTEX_ARRAY);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);        
+        */
         glLineWidth(1);
-        
         
         if(type == NORMAL) {
             // find the general perp
@@ -245,9 +247,9 @@ public:
     
     
     //--------------------------------------------------------------
-    void draw() {
+    /*void draw() {
         if(!bMade) return;
-        /*
+        
          for (int i=1; i<pts.size(); i++) {
          ofSetHexColor(0x363328);
          ofLine(pts[i-1], pts[i]);
@@ -258,10 +260,10 @@ public:
          ofSetHexColor(0x363328);
          ofCircle(pts[i], 4);
          ofCircle(pts[i], 1);
-         }*/
+         }
         
-        drawThick();
+       // drawThick();
         
     }
-    
+    */
 };

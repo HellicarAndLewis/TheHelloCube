@@ -16,17 +16,6 @@
 #include "TinyVine.h"
 
 
-#include "rxSpring.h"
-#include "rxParticles.h"
-#include "rxParticle.h"
-
-// Particles test
-#ifdef USE_SWIRPS
-rxParticles particles;
-float repel_effect;
-float follow_effect;
-#endif
-
 #define MAX_CHASERS 100
 #define MAX_POOP    700
 //#define MAKE_LAND
@@ -162,11 +151,5 @@ public:
     int              tinyVinesPoopAmt;
     bool             bTinyPoop;
     
-    // Particles test
-#ifdef USE_SWIRPS
-	rxParticles particles;
-	float repel_effect;
-	float follow_effect;
-#endif
   
 };

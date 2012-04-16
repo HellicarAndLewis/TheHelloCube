@@ -12,11 +12,11 @@ void DrawnScene::setup() {
     gui.add(damping.setup("damping", 1, 0.0003, 1.0));
     
     
-    
 	// box2d
     box2d.init();
 	box2d.setGravity(0, 0);
 	box2d.setFPS(30.0);
+    
     
     // images
     eyeA.loadImage("graphics/drawn/eye_002.png");
@@ -35,45 +35,17 @@ void DrawnScene::setup() {
     dotRepeatImg.loadImage("graphics/drawn/kusamadot_repeat.png");
     
     /*
-     // RIGHT
-     int nVines = 3;
-     int ranTriIndex = ofRandomIndex(tris);
-     for(int i=0; i<nVines; i++) {
-     float y = ofMap(i, 0, nVines-1, 20, CUBE_SCREEN_HEIGHT-20);
-     Viner v;
-     v.triImg = &tris[ranTriIndex];
-     v.pullForce.set(-2, 0);
-     v.make(CUBE_SCREEN_WIDTH+20, y, Viner::RIGHT, box2d);
-     v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
-     vines.push_back(v);
-     }
-     
-     
-     // BOTTOM
-     int nVines = 3;
-     int ranTriIndex = ofRandomIndex(tris);
-     for(int i=0; i<nVines; i++) {
-     float x = ofMap(i, 0, nVines-1, 100, CUBE_SCREEN_WIDTH-100) + ofRandom(-50, 50);
-     Viner v;
-     v.triImg = &tris[ranTriIndex];
-     v.pullForce.set(0, -2);
-     v.make(x, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
-     v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
-     vines.push_back(v);
-     }
-     */
-    
     addBush(30);
     addBush(500);    
     addBush(CUBE_SCREEN_WIDTH-300);
+    */
     
     // ----------------------------------
     // Field
     // ----------------------------------
-    field.setupField(100, 100, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    field.setupField(80, 60, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     field.randomizeField(3);
     field.fadeField(0.8);
-    
     bgColor.setHex(0xE1E3D3);
     
     
@@ -85,11 +57,6 @@ void DrawnScene::setup() {
         }
         
     }
-    
-#ifdef USE_SWIRPS
-	repel_effect = 0.3;
-	follow_effect = 0.001;
-#endif
     
     
     // make 3 wigglers...
@@ -277,28 +244,29 @@ void DrawnScene::addChasers(float x, float y) {
 void DrawnScene::makePoop() {
     if(poop.size() < MAX_POOP) {
         int ranVine  = ofRandomIndex(poopVines);
-        
-        Viner * vine = poopVines[ranVine];
-        if(vine->type == Viner::LINER) {
-            int nPoops = 2;
-            for(int i=0; i<nPoops; i++) {
-                
-                
-                ofVec2f pt = vine->circles.back().getPosition();
-                float   r  = (vine->dotImg->getWidth() * vine->dotSize)/2;
-                
-                VinePoop p;
-                p.setPhysics(0.2, 0.2, 0.9);
-                p.setup(box2d.getWorld(), pt.x, pt.y, r);
-                p.img = vine->dotImg;
-                p.dotSizeD = vine->dotSizeD;
-                p.dotSize  = vine->dotSizeD;
-                p.colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
-                
-                poop.push_back(p);
-                
+        if(ranVine != -1 && poopVines.size()>0) {
+            Viner * vine = poopVines[ranVine];
+            if(vine->type == Viner::LINER) {
+                int nPoops = 2;
+                for(int i=0; i<nPoops; i++) {
+                    
+                    
+                    ofVec2f pt = vine->circles.back().getPosition();
+                    float   r  = (vine->dotImg->getWidth() * vine->dotSize)/2;
+                    
+                    VinePoop p;
+                    p.setPhysics(0.2, 0.2, 0.9);
+                    p.setup(box2d.getWorld(), pt.x, pt.y, r);
+                    p.img = vine->dotImg;
+                    p.dotSizeD = vine->dotSizeD;
+                    p.dotSize  = vine->dotSizeD;
+                    p.colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
+                    
+                    poop.push_back(p);
+                    
+                }
+                vine->bPop = true;
             }
-            vine->bPop = true;
         }
     }
 }
@@ -334,6 +302,7 @@ void DrawnScene::makePoopFromTinyVines() {
 
 // ----------------------------------------------------
 void DrawnScene::update() {
+    
     
     bgColor.setHex(0xE1E3D3);
     ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
@@ -522,7 +491,6 @@ void DrawnScene::draw() {
     ofRect(screen);
     
     
-    
     // ----------------------
     // vector field
     // ----------------------
@@ -565,6 +533,7 @@ void DrawnScene::draw() {
     for(vector<TinyVine>::iterator it=tinyVines.begin(); it!=tinyVines.end(); ++it) {
         it->draw();
     }
+   
     
     // ----------------------
     // land wigglers
