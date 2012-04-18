@@ -52,7 +52,7 @@ void TwitterManager::init() {
 		,replies_file
 	);
 	uploader_thread.setReplyEndings(allowed_commands.getCommands());	
-	uploader_thread.startThread(false, false);		
+	uploader_thread.startThread(false, false);
 }
 
 void TwitterManager::update() {

@@ -1,5 +1,5 @@
 <Duration_of_effect>20.96</Duration_of_effect>
-<Duration_of_effect__sec_>20</Duration_of_effect__sec_>
+<Duration_of_effect__sec_>10</Duration_of_effect__sec_>
 <Delay_between_fx_and_screengrab__millis_>1000</Delay_between_fx_and_screengrab__millis_>
 <FX>
     <_Pixelate_X>10</_Pixelate_X>
@@ -13,8 +13,10 @@
     <_Swirl_radius>0.23</_Swirl_radius>
     <_Swirl_angle>5.62973</_Swirl_angle>
     <_Heart_scale>1.24</_Heart_scale>
-    <_Heart_x>0.472</_Heart_x>
-    <_Heart_y>-0.832</_Heart_y>
+    <_Heart_x>-0.24</_Heart_x>
+    <_Heart_y>-0.288</_Heart_y>
+    <_Heart_scale_X>8.24</_Heart_scale_X>
+    <_Heart_scale_Y>-1.68</_Heart_scale_Y>
 </FX>
 <Reset_effects_automatically>1</Reset_effects_automatically>
 <Ripple>0</Ripple>
