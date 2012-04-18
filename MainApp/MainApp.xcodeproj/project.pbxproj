@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		02E228E3151209470029F677 /* SpotShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02E228E1151209470029F677 /* SpotShape.cpp */; };
-		4898E533151A551B00DFB38D /* rxCracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4898E532151A551B00DFB38D /* rxCracks.cpp */; };
 		544C7AB1150BB960003E8B76 /* TwitterBadWords.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA4150BB960003E8B76 /* TwitterBadWords.cpp */; };
 		544C7AB2150BB960003E8B76 /* TwitterCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA6150BB960003E8B76 /* TwitterCommands.cpp */; };
 		544C7AB3150BB960003E8B76 /* TwitterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 544C7AA8150BB960003E8B76 /* TwitterManager.cpp */; };
@@ -53,11 +52,6 @@
 		544C7BA6150BB9E8003E8B76 /* libpcrecpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 544C7B96150BB9E8003E8B76 /* libpcrecpp.a */; };
 		544C7BA9150BBA40003E8B76 /* effects.frag in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA7150BBA40003E8B76 /* effects.frag */; };
 		544C7BAA150BBA40003E8B76 /* effects.vert in Sources */ = {isa = PBXBuildFile; fileRef = 544C7BA8150BBA40003E8B76 /* effects.vert */; };
-		5463A9DE151680AC004B9066 /* rxParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9D6151680AC004B9066 /* rxParticle.cpp */; };
-		5463A9DF151680AC004B9066 /* rxParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9D8151680AC004B9066 /* rxParticles.cpp */; };
-		5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9DA151680AC004B9066 /* rxSpring.cpp */; };
-		5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5463A9DC151680AC004B9066 /* rxSwirp.cpp */; };
-		54A467F0151915D800B1075E /* rxVeins.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54A467EF151915D800B1075E /* rxVeins.cpp */; };
 		54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54F686AF15108F73006BDEFD /* AudioManager.cpp */; };
 		5D80CB0C150B864800F8C65F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D80CB0B150B864800F8C65F /* CoreVideo.framework */; };
 		5DA1196A150A5D300011C6A8 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA11969150A5D300011C6A8 /* QTKit.framework */; };
@@ -105,8 +99,6 @@
 		5F01479E14FF3241000EB0FF /* ofxBox2dPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01476F14FF3241000EB0FF /* ofxBox2dPolygon.cpp */; };
 		5F01479F14FF3241000EB0FF /* ofxBox2dRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F01477214FF3241000EB0FF /* ofxBox2dRect.cpp */; };
 		5F6153DF150BDDD5009BCA78 /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6153DE150BDDD5009BCA78 /* Particle.cpp */; };
-		5F6153E7150BE0D0009BCA78 /* VoronoiDiagramGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6153E2150BE0D0009BCA78 /* VoronoiDiagramGenerator.cpp */; };
-		5F6153E8150BE0D0009BCA78 /* ofxVoronoi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6153E5150BE0D0009BCA78 /* ofxVoronoi.cpp */; };
 		5F615412150BE550009BCA78 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F615407150BE550009BCA78 /* ofxBaseGui.cpp */; };
 		5F615413150BE550009BCA78 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F615409150BE550009BCA78 /* ofxButton.cpp */; };
 		5F615414150BE550009BCA78 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F61540C150BE550009BCA78 /* ofxPanel.cpp */; };
@@ -126,6 +118,16 @@
 		5FE8945F14FDD586002C15D0 /* SpotsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8945714FDD586002C15D0 /* SpotsScene.cpp */; };
 		5FE8946014FDD586002C15D0 /* TextureScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8945A14FDD586002C15D0 /* TextureScene.cpp */; };
 		5FE8946814FDD645002C15D0 /* AppAssets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8946614FDD645002C15D0 /* AppAssets.cpp */; };
+		BA8F407E153C8F680054C085 /* libvoro++_2d32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA8F4074153C8F680054C085 /* libvoro++_2d32.a */; };
+		BA8F407F153C8F680054C085 /* Voronoi2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F407C153C8F680054C085 /* Voronoi2D.cpp */; };
+		BA8F40C1153C936A0054C085 /* rxCracks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40B5153C936A0054C085 /* rxCracks.cpp */; };
+		BA8F40C2153C936A0054C085 /* rxParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40B7153C936A0054C085 /* rxParticle.cpp */; };
+		BA8F40C3153C936A0054C085 /* rxParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40B9153C936A0054C085 /* rxParticles.cpp */; };
+		BA8F40C4153C936A0054C085 /* rxSpring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40BB153C936A0054C085 /* rxSpring.cpp */; };
+		BA8F40C5153C936A0054C085 /* rxSwirp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40BD153C936A0054C085 /* rxSwirp.cpp */; };
+		BA8F40C6153C936A0054C085 /* rxVeins.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40BF153C936A0054C085 /* rxVeins.cpp */; };
+		BA8F40E1153C93830054C085 /* VoronoiDiagramGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40CC153C93830054C085 /* VoronoiDiagramGenerator.cpp */; };
+		BA8F40E2153C93830054C085 /* ofxVoronoi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA8F40CF153C93830054C085 /* ofxVoronoi.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -178,8 +180,6 @@
 /* Begin PBXFileReference section */
 		02E228E1151209470029F677 /* SpotShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotShape.cpp; sourceTree = "<group>"; };
 		02E228E2151209470029F677 /* SpotShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotShape.h; sourceTree = "<group>"; };
-		4898E531151A54AA00DFB38D /* rxCracks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxCracks.h; sourceTree = "<group>"; };
-		4898E532151A551B00DFB38D /* rxCracks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxCracks.cpp; sourceTree = "<group>"; };
 		544C7AA4150BB960003E8B76 /* TwitterBadWords.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterBadWords.cpp; path = twitter/TwitterBadWords.cpp; sourceTree = "<group>"; };
 		544C7AA5150BB960003E8B76 /* TwitterBadWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterBadWords.h; path = twitter/TwitterBadWords.h; sourceTree = "<group>"; };
 		544C7AA6150BB960003E8B76 /* TwitterCommands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwitterCommands.cpp; path = twitter/TwitterCommands.cpp; sourceTree = "<group>"; };
@@ -370,16 +370,6 @@
 		544C7B9C150BB9E8003E8B76 /* pcreposix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcreposix.h; sourceTree = "<group>"; };
 		544C7BA7150BBA40003E8B76 /* effects.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.frag; path = bin/data/effects/effects.frag; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		544C7BA8150BBA40003E8B76 /* effects.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = effects.vert; path = bin/data/effects/effects.vert; sourceTree = SOURCE_ROOT; };
-		5463A9D6151680AC004B9066 /* rxParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticle.cpp; sourceTree = "<group>"; };
-		5463A9D7151680AC004B9066 /* rxParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticle.h; sourceTree = "<group>"; };
-		5463A9D8151680AC004B9066 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticles.cpp; sourceTree = "<group>"; };
-		5463A9D9151680AC004B9066 /* rxParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticles.h; sourceTree = "<group>"; };
-		5463A9DA151680AC004B9066 /* rxSpring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSpring.cpp; sourceTree = "<group>"; };
-		5463A9DB151680AC004B9066 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
-		5463A9DC151680AC004B9066 /* rxSwirp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSwirp.cpp; sourceTree = "<group>"; };
-		5463A9DD151680AC004B9066 /* rxSwirp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSwirp.h; sourceTree = "<group>"; };
-		54A467EE1519157F00B1075E /* rxVeins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxVeins.h; sourceTree = "<group>"; };
-		54A467EF151915D800B1075E /* rxVeins.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxVeins.cpp; sourceTree = "<group>"; };
 		54F686AF15108F73006BDEFD /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
 		54F686B015108F73006BDEFD /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		5D80CB0B150B864800F8C65F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = ../../../../../../../../../../../System/Library/Frameworks/CoreVideo.framework; sourceTree = "<group>"; };
@@ -486,10 +476,6 @@
 		5F1B7F5A151A9CBF00CABB41 /* Hair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hair.h; sourceTree = "<group>"; };
 		5F1B7F65151AB67E00CABB41 /* Massive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Massive.h; sourceTree = "<group>"; };
 		5F6153DE150BDDD5009BCA78 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
-		5F6153E2150BE0D0009BCA78 /* VoronoiDiagramGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoronoiDiagramGenerator.cpp; sourceTree = "<group>"; };
-		5F6153E3150BE0D0009BCA78 /* VoronoiDiagramGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoronoiDiagramGenerator.h; sourceTree = "<group>"; };
-		5F6153E5150BE0D0009BCA78 /* ofxVoronoi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxVoronoi.cpp; sourceTree = "<group>"; };
-		5F6153E6150BE0D0009BCA78 /* ofxVoronoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVoronoi.h; sourceTree = "<group>"; };
 		5F615405150BE550009BCA78 /* ofOscParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofOscParameter.h; sourceTree = "<group>"; };
 		5F615406150BE550009BCA78 /* ofParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofParameter.h; sourceTree = "<group>"; };
 		5F615407150BE550009BCA78 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
@@ -534,6 +520,40 @@
 		5FE8945B14FDD586002C15D0 /* TextureScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureScene.h; sourceTree = "<group>"; };
 		5FE8946614FDD645002C15D0 /* AppAssets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppAssets.cpp; sourceTree = "<group>"; };
 		5FE8946714FDD645002C15D0 /* AppAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppAssets.h; sourceTree = "<group>"; };
+		BA8F406D153C8F680054C085 /* c_loops_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = c_loops_2d.hh; sourceTree = "<group>"; };
+		BA8F406E153C8F680054C085 /* cell_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cell_2d.hh; sourceTree = "<group>"; };
+		BA8F406F153C8F680054C085 /* cell_nc_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cell_nc_2d.hh; sourceTree = "<group>"; };
+		BA8F4070153C8F680054C085 /* common.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hh; sourceTree = "<group>"; };
+		BA8F4071153C8F680054C085 /* config.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hh; sourceTree = "<group>"; };
+		BA8F4072153C8F680054C085 /* container_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = container_2d.hh; sourceTree = "<group>"; };
+		BA8F4073153C8F680054C085 /* ctr_boundary_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ctr_boundary_2d.hh; sourceTree = "<group>"; };
+		BA8F4074153C8F680054C085 /* libvoro++_2d32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libvoro++_2d32.a"; sourceTree = "<group>"; };
+		BA8F4075153C8F680054C085 /* rad_option.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rad_option.hh; sourceTree = "<group>"; };
+		BA8F4076153C8F680054C085 /* v_base_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = v_base_2d.hh; sourceTree = "<group>"; };
+		BA8F4077153C8F680054C085 /* v_compute_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = v_compute_2d.hh; sourceTree = "<group>"; };
+		BA8F4078153C8F680054C085 /* wall_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wall_2d.hh; sourceTree = "<group>"; };
+		BA8F4079153C8F680054C085 /* worklist_2d.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = worklist_2d.hh; sourceTree = "<group>"; };
+		BA8F407A153C8F680054C085 /* project_setup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = project_setup.png; sourceTree = "<group>"; };
+		BA8F407C153C8F680054C085 /* Voronoi2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Voronoi2D.cpp; sourceTree = "<group>"; };
+		BA8F407D153C8F680054C085 /* Voronoi2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voronoi2D.h; sourceTree = "<group>"; };
+		BA8F40B5153C936A0054C085 /* rxCracks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxCracks.cpp; sourceTree = "<group>"; };
+		BA8F40B6153C936A0054C085 /* rxCracks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxCracks.h; sourceTree = "<group>"; };
+		BA8F40B7153C936A0054C085 /* rxParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticle.cpp; sourceTree = "<group>"; };
+		BA8F40B8153C936A0054C085 /* rxParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticle.h; sourceTree = "<group>"; };
+		BA8F40B9153C936A0054C085 /* rxParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxParticles.cpp; sourceTree = "<group>"; };
+		BA8F40BA153C936A0054C085 /* rxParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxParticles.h; sourceTree = "<group>"; };
+		BA8F40BB153C936A0054C085 /* rxSpring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSpring.cpp; sourceTree = "<group>"; };
+		BA8F40BC153C936A0054C085 /* rxSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSpring.h; sourceTree = "<group>"; };
+		BA8F40BD153C936A0054C085 /* rxSwirp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxSwirp.cpp; sourceTree = "<group>"; };
+		BA8F40BE153C936A0054C085 /* rxSwirp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxSwirp.h; sourceTree = "<group>"; };
+		BA8F40BF153C936A0054C085 /* rxVeins.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rxVeins.cpp; sourceTree = "<group>"; };
+		BA8F40C0153C936A0054C085 /* rxVeins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rxVeins.h; sourceTree = "<group>"; };
+		BA8F40C8153C93830054C085 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		BA8F40CC153C93830054C085 /* VoronoiDiagramGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoronoiDiagramGenerator.cpp; sourceTree = "<group>"; };
+		BA8F40CD153C93830054C085 /* VoronoiDiagramGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoronoiDiagramGenerator.h; sourceTree = "<group>"; };
+		BA8F40CF153C93830054C085 /* ofxVoronoi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxVoronoi.cpp; sourceTree = "<group>"; };
+		BA8F40D0153C93830054C085 /* ofxVoronoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVoronoi.h; sourceTree = "<group>"; };
+		BA8F40DB153C93830054C085 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -584,6 +604,7 @@
 				544C7BA4150BB9E8003E8B76 /* libssl.a in Frameworks */,
 				544C7BA5150BB9E8003E8B76 /* libpcre.a in Frameworks */,
 				544C7BA6150BB9E8003E8B76 /* libpcrecpp.a in Frameworks */,
+				BA8F407E153C8F680054C085 /* libvoro++_2d32.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,25 +963,6 @@
 			path = pcre;
 			sourceTree = "<group>";
 		};
-		5463A9D5151680AC004B9066 /* physics */ = {
-			isa = PBXGroup;
-			children = (
-				5463A9D8151680AC004B9066 /* rxParticles.cpp */,
-				5463A9D6151680AC004B9066 /* rxParticle.cpp */,
-				5463A9D7151680AC004B9066 /* rxParticle.h */,
-				5463A9D9151680AC004B9066 /* rxParticles.h */,
-				5463A9DA151680AC004B9066 /* rxSpring.cpp */,
-				5463A9DB151680AC004B9066 /* rxSpring.h */,
-				5463A9DC151680AC004B9066 /* rxSwirp.cpp */,
-				5463A9DD151680AC004B9066 /* rxSwirp.h */,
-				54A467EE1519157F00B1075E /* rxVeins.h */,
-				54A467EF151915D800B1075E /* rxVeins.cpp */,
-				4898E531151A54AA00DFB38D /* rxCracks.h */,
-				4898E532151A551B00DFB38D /* rxCracks.cpp */,
-			);
-			path = physics;
-			sourceTree = "<group>";
-		};
 		54F686AE15108F73006BDEFD /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1171,34 +1173,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		5F6153E0150BE0D0009BCA78 /* ofxVoronoi */ = {
-			isa = PBXGroup;
-			children = (
-				5F6153E1150BE0D0009BCA78 /* libs */,
-				5F6153E4150BE0D0009BCA78 /* src */,
-			);
-			name = ofxVoronoi;
-			path = ../addons/ofxVoronoi/addon/ofxVoronoi;
-			sourceTree = "<group>";
-		};
-		5F6153E1150BE0D0009BCA78 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				5F6153E2150BE0D0009BCA78 /* VoronoiDiagramGenerator.cpp */,
-				5F6153E3150BE0D0009BCA78 /* VoronoiDiagramGenerator.h */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		5F6153E4150BE0D0009BCA78 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				5F6153E5150BE0D0009BCA78 /* ofxVoronoi.cpp */,
-				5F6153E6150BE0D0009BCA78 /* ofxVoronoi.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		5F615403150BE550009BCA78 /* ofxGui */ = {
 			isa = PBXGroup;
 			children = (
@@ -1359,6 +1333,7 @@
 		5FE8946514FDD645002C15D0 /* app utils */ = {
 			isa = PBXGroup;
 			children = (
+				BA8F406B153C8F680054C085 /* Voronoi */,
 				5FB33B051515605300A87F16 /* VectorField.cpp */,
 				5FB33B061515605300A87F16 /* VectorField.h */,
 				5FE8946614FDD645002C15D0 /* AppAssets.cpp */,
@@ -1369,12 +1344,116 @@
 			path = "app utils";
 			sourceTree = "<group>";
 		};
+		BA8F406B153C8F680054C085 /* Voronoi */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F406C153C8F680054C085 /* lib */,
+				BA8F407A153C8F680054C085 /* project_setup.png */,
+				BA8F407B153C8F680054C085 /* src */,
+			);
+			path = Voronoi;
+			sourceTree = "<group>";
+		};
+		BA8F406C153C8F680054C085 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F406D153C8F680054C085 /* c_loops_2d.hh */,
+				BA8F406E153C8F680054C085 /* cell_2d.hh */,
+				BA8F406F153C8F680054C085 /* cell_nc_2d.hh */,
+				BA8F4070153C8F680054C085 /* common.hh */,
+				BA8F4071153C8F680054C085 /* config.hh */,
+				BA8F4072153C8F680054C085 /* container_2d.hh */,
+				BA8F4073153C8F680054C085 /* ctr_boundary_2d.hh */,
+				BA8F4074153C8F680054C085 /* libvoro++_2d32.a */,
+				BA8F4075153C8F680054C085 /* rad_option.hh */,
+				BA8F4076153C8F680054C085 /* v_base_2d.hh */,
+				BA8F4077153C8F680054C085 /* v_compute_2d.hh */,
+				BA8F4078153C8F680054C085 /* wall_2d.hh */,
+				BA8F4079153C8F680054C085 /* worklist_2d.hh */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		BA8F407B153C8F680054C085 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F407C153C8F680054C085 /* Voronoi2D.cpp */,
+				BA8F407D153C8F680054C085 /* Voronoi2D.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		BA8F40B4153C936A0054C085 /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F40B5153C936A0054C085 /* rxCracks.cpp */,
+				BA8F40B6153C936A0054C085 /* rxCracks.h */,
+				BA8F40B7153C936A0054C085 /* rxParticle.cpp */,
+				BA8F40B8153C936A0054C085 /* rxParticle.h */,
+				BA8F40B9153C936A0054C085 /* rxParticles.cpp */,
+				BA8F40BA153C936A0054C085 /* rxParticles.h */,
+				BA8F40BB153C936A0054C085 /* rxSpring.cpp */,
+				BA8F40BC153C936A0054C085 /* rxSpring.h */,
+				BA8F40BD153C936A0054C085 /* rxSwirp.cpp */,
+				BA8F40BE153C936A0054C085 /* rxSwirp.h */,
+				BA8F40BF153C936A0054C085 /* rxVeins.cpp */,
+				BA8F40C0153C936A0054C085 /* rxVeins.h */,
+			);
+			path = physics;
+			sourceTree = "<group>";
+		};
+		BA8F40C7153C93830054C085 /* ofxVoronoi */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F40C8153C93830054C085 /* .gitignore */,
+				BA8F40C9153C93830054C085 /* addon */,
+				BA8F40DB153C93830054C085 /* README.md */,
+			);
+			name = ofxVoronoi;
+			path = ../addons/ofxVoronoi;
+			sourceTree = "<group>";
+		};
+		BA8F40C9153C93830054C085 /* addon */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F40CA153C93830054C085 /* ofxVoronoi */,
+			);
+			path = addon;
+			sourceTree = "<group>";
+		};
+		BA8F40CA153C93830054C085 /* ofxVoronoi */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F40CB153C93830054C085 /* libs */,
+				BA8F40CE153C93830054C085 /* src */,
+			);
+			path = ofxVoronoi;
+			sourceTree = "<group>";
+		};
+		BA8F40CB153C93830054C085 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F40CC153C93830054C085 /* VoronoiDiagramGenerator.cpp */,
+				BA8F40CD153C93830054C085 /* VoronoiDiagramGenerator.h */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		BA8F40CE153C93830054C085 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F40CF153C93830054C085 /* ofxVoronoi.cpp */,
+				BA8F40D0153C93830054C085 /* ofxVoronoi.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				BA8F40C7153C93830054C085 /* ofxVoronoi */,
 				5F615417150BE56D009BCA78 /* ofxXmlSettings */,
 				5F615403150BE550009BCA78 /* ofxGui */,
-				5F6153E0150BE0D0009BCA78 /* ofxVoronoi */,
 				544C7ABB150BB9BC003E8B76 /* roxlu */,
 				5DA1196C150A5D520011C6A8 /* ofxQTKitVideoGrabber */,
 				5F01470D14FF3241000EB0FF /* ofxBox2d */,
@@ -1445,7 +1524,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				5463A9D5151680AC004B9066 /* physics */,
+				BA8F40B4153C936A0054C085 /* physics */,
 				54F686AE15108F73006BDEFD /* audio */,
 				544C7AA3150BB94E003E8B76 /* twitter */,
 				544C7AA2150BB947003E8B76 /* effects */,
@@ -1647,8 +1726,6 @@
 				544C7BA9150BBA40003E8B76 /* effects.frag in Sources */,
 				544C7BAA150BBA40003E8B76 /* effects.vert in Sources */,
 				5F6153DF150BDDD5009BCA78 /* Particle.cpp in Sources */,
-				5F6153E7150BE0D0009BCA78 /* VoronoiDiagramGenerator.cpp in Sources */,
-				5F6153E8150BE0D0009BCA78 /* ofxVoronoi.cpp in Sources */,
 				5F615412150BE550009BCA78 /* ofxBaseGui.cpp in Sources */,
 				5F615413150BE550009BCA78 /* ofxButton.cpp in Sources */,
 				5F615414150BE550009BCA78 /* ofxPanel.cpp in Sources */,
@@ -1661,12 +1738,15 @@
 				54F686B115108F73006BDEFD /* AudioManager.cpp in Sources */,
 				02E228E3151209470029F677 /* SpotShape.cpp in Sources */,
 				5FB33B071515605300A87F16 /* VectorField.cpp in Sources */,
-				5463A9DE151680AC004B9066 /* rxParticle.cpp in Sources */,
-				5463A9DF151680AC004B9066 /* rxParticles.cpp in Sources */,
-				5463A9E0151680AC004B9066 /* rxSpring.cpp in Sources */,
-				5463A9E1151680AC004B9066 /* rxSwirp.cpp in Sources */,
-				54A467F0151915D800B1075E /* rxVeins.cpp in Sources */,
-				4898E533151A551B00DFB38D /* rxCracks.cpp in Sources */,
+				BA8F407F153C8F680054C085 /* Voronoi2D.cpp in Sources */,
+				BA8F40C1153C936A0054C085 /* rxCracks.cpp in Sources */,
+				BA8F40C2153C936A0054C085 /* rxParticle.cpp in Sources */,
+				BA8F40C3153C936A0054C085 /* rxParticles.cpp in Sources */,
+				BA8F40C4153C936A0054C085 /* rxSpring.cpp in Sources */,
+				BA8F40C5153C936A0054C085 /* rxSwirp.cpp in Sources */,
+				BA8F40C6153C936A0054C085 /* rxVeins.cpp in Sources */,
+				BA8F40E1153C93830054C085 /* VoronoiDiagramGenerator.cpp in Sources */,
+				BA8F40E2153C93830054C085 /* ofxVoronoi.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,6 +1873,7 @@
 					"\"$(SRCROOT)/../addons/roxlu/libs/jansson\"",
 					"\"$(SRCROOT)/../addons/roxlu/libs/openssl\"",
 					"\"$(SRCROOT)/../addons/roxlu/libs/pcre\"",
+					"\"$(SRCROOT)/src/app utils/Voronoi/lib\"",
 				);
 				PRODUCT_NAME = MainAppDebug;
 				SDKROOT = macosx10.6;
@@ -1942,6 +2023,7 @@
 					"\"$(SRCROOT)/../addons/roxlu/libs/jansson\"",
 					"\"$(SRCROOT)/../addons/roxlu/libs/openssl\"",
 					"\"$(SRCROOT)/../addons/roxlu/libs/pcre\"",
+					"\"$(SRCROOT)/src/app utils/Voronoi/lib\"",
 				);
 				PRODUCT_NAME = MainAppDebug;
 				SDKROOT = macosx10.6;
@@ -2031,6 +2113,7 @@
 					"\"$(SRCROOT)/../addons/roxlu/libs/jansson\"",
 					"\"$(SRCROOT)/../addons/roxlu/libs/openssl\"",
 					"\"$(SRCROOT)/../addons/roxlu/libs/pcre\"",
+					"\"$(SRCROOT)/src/app utils/Voronoi/lib\"",
 				);
 				PRODUCT_NAME = MainApp;
 				SDKROOT = macosx10.6;

@@ -20,6 +20,8 @@ void CellScene::setup() {
     bgColorTarget = ofRandomColor();
     
     cellWallWidth = 1.f; //v thin line to start...
+    
+   voronoi.setup(0,1,0,1,10,10,16);
 }
 
 // ----------------------------------------------------
@@ -104,16 +106,22 @@ void CellScene::update() {
     
     // voronoi up this scene
     if(cells.size() > 0) {
-        voronoi.clear();
-        voronoi.addPoint(0, 0);
-        voronoi.addPoint(CUBE_SCREEN_WIDTH, 0);
-        voronoi.addPoint(CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
-        voronoi.addPoint(0, CUBE_SCREEN_HEIGHT);
         
-        for (vector<CellNode>::iterator itA=cells.begin(); itA!=cells.end(); ++itA) {
-            voronoi.addPoint(itA->pos);
+      
+        voronoi.clear();
+
+        voronoi.put(0, 0, 0);
+        voronoi.put(1, 1, 0);
+        voronoi.put(2, 1, 1);
+        voronoi.put(3, 0, 1);
+        
+        int inc = 4;
+        for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
+            voronoi.put(inc, it->pos.x/(float)CUBE_SCREEN_WIDTH, it->pos.y/(float)CUBE_SCREEN_HEIGHT);
+            inc ++;
+            
+            //cout << "i:" << inc << " x:" << it->pos.x << " y:" << it->pos.y << endl;
         }
-        bool bMadeVor = voronoi.generateVoronoi();
     }
     
     
@@ -151,30 +159,36 @@ void CellScene::draw() {
         it->draw();
     }
     
-    //draws lines between cell nodes as in Screen shot 2012-03-15 at 18.21.41.png from pete
-    //not quite...
-//    for (vector<CellNode>::iterator it=cells.begin(); it!=cells.end(); ++it) {
-//        //it->draw();
-//        for (vector<CellNode>::iterator jt=cells.begin(); jt!=cells.end(); ++jt) {
-//            //it->draw();
-//            ofSetColor(it->colour);
-//            ofLine(it->pos, jt->pos);
-//        } 
-//    }    
     
     ofPushStyle();
-//    ofEnableSmoothing();
-    
     ofSetLineWidth(cellWallWidth);
     
     //draws the edges
+    float x = 0;
+	float y = 0;
+	float w = CUBE_SCREEN_WIDTH;
+	float h = CUBE_SCREEN_HEIGHT;
+	
     ofSetColor(BaseScene::twitterColour);
-    for(vector<ofxVoronoiEdge>::iterator it=voronoi.edges.begin(); it!=voronoi.edges.end(); ++it) {
-        //ofSetColor(complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    if(voronoi.start()) {
+        do {
+            if(voronoi.computeCell()) {
+                glBegin(GL_POLYGON);
+                do {
+                    voronoi.getCellPoint(x,y);
+                    glVertex2f(x*w,y*h);	
+                } while(voronoi.cellHasEdges());
+                glEnd();
+            }
+        } while(voronoi.next());
+    }
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    /*for(vector<ofxVoronoiEdge>::iterator it=voronoi.edges.begin(); it!=voronoi.edges.end(); ++it) {
         it->draw();
     }
-    
-//    ofDisableSmoothing();
+    */
     ofPopStyle();
     
 

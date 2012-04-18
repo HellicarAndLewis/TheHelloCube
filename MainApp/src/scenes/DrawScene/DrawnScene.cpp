@@ -12,11 +12,11 @@ void DrawnScene::setup() {
     gui.add(damping.setup("damping", 1, 0.0003, 1.0));
     
     
-    
 	// box2d
     box2d.init();
 	box2d.setGravity(0, 0);
 	box2d.setFPS(30.0);
+    
     
     // images
     eyeA.loadImage("graphics/drawn/eye_002.png");
@@ -35,42 +35,17 @@ void DrawnScene::setup() {
     dotRepeatImg.loadImage("graphics/drawn/kusamadot_repeat.png");
     
     /*
-    // RIGHT
-    int nVines = 3;
-    int ranTriIndex = ofRandomIndex(tris);
-    for(int i=0; i<nVines; i++) {
-        float y = ofMap(i, 0, nVines-1, 20, CUBE_SCREEN_HEIGHT-20);
-        Viner v;
-        v.triImg = &tris[ranTriIndex];
-        v.pullForce.set(-2, 0);
-        v.make(CUBE_SCREEN_WIDTH+20, y, Viner::RIGHT, box2d);
-        v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
-        vines.push_back(v);
-    }
-    
-     
-     // BOTTOM
-     int nVines = 3;
-     int ranTriIndex = ofRandomIndex(tris);
-     for(int i=0; i<nVines; i++) {
-     float x = ofMap(i, 0, nVines-1, 100, CUBE_SCREEN_WIDTH-100) + ofRandom(-50, 50);
-     Viner v;
-     v.triImg = &tris[ranTriIndex];
-     v.pullForce.set(0, -2);
-     v.make(x, CUBE_SCREEN_HEIGHT, Viner::BOTTOM, box2d);
-     v.colorDes = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())]; //choice of random complimentary colour
-     vines.push_back(v);
-     }
-     */
-    
     addBush(30);
     addBush(500);    
     addBush(CUBE_SCREEN_WIDTH-300);
+    */
     
-    field.setupField(60, 60, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
+    // ----------------------------------
+    // Field
+    // ----------------------------------
+    field.setupField(80, 60, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
     field.randomizeField(3);
     field.fadeField(0.8);
-    
     bgColor.setHex(0xE1E3D3);
     
     
@@ -83,17 +58,65 @@ void DrawnScene::setup() {
         
     }
     
-#ifdef USE_SWIRPS
-	repel_effect = 0.3;
-	follow_effect = 0.001;
-#endif
-    
     
     // make 3 wigglers...
     for(int i=0; i<4; i++) {
         makeWiggler();
     }
     
+    
+    
+    // ----------------------------------
+    // the land
+    // ----------------------------------
+    ofDirectory dir;
+    int nLandFiles = dir.listDir("graphics/drawn/land/");
+    for(int i=0; i<nLandFiles; i++) {
+        land.push_back(LandMass());
+        if(ofLoadPolyPoints(land.back(), dir.getPath(i))) {
+            printf("land_%i.dat loaded\n", i);
+        }
+    }  
+    
+    // get the perps
+    for(int i=0; i<land.size(); i++) {
+        ofVec2f vec, perp;
+        for(int j=0; j<land[i].size(); j++) {
+            
+            if(land[i][0].x < land[i].getVertices().back().x && land[i][0].y < CUBE_SCREEN_HEIGHT/2) {
+                if(j == 0) vec = land[i][j] - land[i][land[i].size()-1];
+                else       vec = land[i][j] - land[i][j-1];
+            }
+            else {
+                if(j == 0) vec = land[i][land[i].size()-1] - land[i][j];
+                else       vec = land[i][j-1] - land[i][j];
+            }
+            perp  = vec.perpendicular();
+            land[i].perps.push_back(perp);
+            land[i].circleVariance.push_back(ofRandom(.5, 1));
+        }
+        
+    }
+    
+    for(int i=0; i<land.size(); i++) {
+        for(int j=0; j<land[i].size(); j++) {
+            ofVec2f p = land[i][j]; 
+            
+            Hair hr;
+            hr.landHairIndex[0] = i;
+            hr.landHairIndex[1] = j;
+            hr.init((int)ofRandom(4, 10));
+            hr.dir = land[i].perps[j];   
+            landHair.push_back(hr);
+
+        }        
+    }
+    landHairSep = 4;
+    
+    
+    // ----------------------------------
+    // tiny vines on the land
+    // ----------------------------------
     for(int i=0; i<10; i++) {
         makeTinyVine();
     }
@@ -101,6 +124,27 @@ void DrawnScene::setup() {
     bBigMode  = true;
     bTinyPoop = true;
     tinyVinesPoopAmt = 30;
+    
+    
+    // ----------------------------------
+    // add some land wiggles
+    // ----------------------------------
+    int nwiggles = 10;
+    for(int i=0; i<nwiggles; i++) {
+   
+        int     nPoly  = ofRandomIndex(land);
+        int     ind    = ofRandomIndex(land[nPoly].getVertices());
+        float   x      = land[nPoly][ind].x; 
+        float   y      = land[nPoly][ind].y; 
+        
+        Wiggler w;
+        w.txt = &dotRepeatImg.getTextureReference();
+        w.spikeTex = &tris[ofRandomIndex(tris)].getTextureReference();        
+        w.make(x, y, Wiggler::LAND_WIGGLE);
+        w.dir = land[nPoly].perps[ind];
+        landWiggles.push_back(w);
+    }
+    
 }
 
 // ----------------------------------------------------
@@ -115,6 +159,21 @@ void DrawnScene::enterScene() {
         float y = CUBE_SCREEN_HEIGHT+10;
         wigglers[i].root.set(x, y);
     }
+    
+    // get new postion for land wiggles
+    for (int i=0; i<landWiggles.size(); i++) {
+        int     nPoly  = ofRandomIndex(land);
+        int     ind    = ofRandomIndex(land[nPoly].getVertices());
+        float   x      = land[nPoly][ind].x; 
+        float   y      = land[nPoly][ind].y; 
+        landWiggles[i].spikeTex = &tris[ofRandomIndex(tris)].getTextureReference();        
+        landWiggles[i].root.set(x, y);
+        landWiggles[i].dir = land[nPoly].perps[ind];
+    }
+    
+    for(int i=0; i<land.size(); i++) {
+        land[i].texId = ofRandomIndex(dots);
+    }
 }
 
 // ----------------------------------------------------
@@ -125,7 +184,7 @@ void DrawnScene::makeWiggler() {
     
     Wiggler w;
     w.txt = &dotRepeatImg.getTextureReference();
-    w.make(x, y);
+    w.make(x, y, Wiggler::NORMAL);
     
     
     wigglers.push_back(w);
@@ -134,8 +193,12 @@ void DrawnScene::makeWiggler() {
 
 // ----------------------------------------------------
 void DrawnScene::makeTinyVine() {
-    float x     = ofRandom(50, CUBE_SCREEN_WIDTH-50);
-    float y     = 0;
+    
+    int     nPoly  = ofRandomIndex(land);
+    int     ind    = ofRandomIndex(land[nPoly].getVertices());
+    float   x      = land[nPoly][ind].x; 
+    float   y      = land[nPoly][ind].y; 
+    
     int   side  = BaseScene::TOP;// ofRandom(0, 4);
     for(int i=0; i<5; i++) {
         TinyVine w;
@@ -143,6 +206,7 @@ void DrawnScene::makeTinyVine() {
         w.make(x+ofRandom(-3,3), y, ofRandom(4, 10));
         w.headImg = &dots[ofRandomIndex(dots)];
         w.colorD  = complimentaryColours[ofRandomIndex(complimentaryColours)]; 
+        w.dir     = land[nPoly].perps[ind];
         tinyVines.push_back(w);
     }
 }
@@ -165,7 +229,6 @@ void DrawnScene::addBush(float startX) {
     
 }
 
-
 // ----------------------------------------------------
 void DrawnScene::addChasers(float x, float y) {
     if(chasers.size() < MAX_CHASERS) {
@@ -181,32 +244,32 @@ void DrawnScene::addChasers(float x, float y) {
 void DrawnScene::makePoop() {
     if(poop.size() < MAX_POOP) {
         int ranVine  = ofRandomIndex(poopVines);
-        
-        Viner * vine = poopVines[ranVine];
-        if(vine->type == Viner::LINER) {
-            int nPoops = 2;
-            for(int i=0; i<nPoops; i++) {
-                
-                
-                ofVec2f pt = vine->circles.back().getPosition();
-                float   r  = (vine->dotImg->getWidth() * vine->dotSize)/2;
-                
-                VinePoop p;
-                p.setPhysics(0.2, 0.2, 0.9);
-                p.setup(box2d.getWorld(), pt.x, pt.y, r);
-                p.img = vine->dotImg;
-                p.dotSizeD = vine->dotSizeD;
-                p.dotSize  = vine->dotSizeD;
-                p.colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
-                
-                poop.push_back(p);
-                
+        if(ranVine != -1 && poopVines.size()>0) {
+            Viner * vine = poopVines[ranVine];
+            if(vine->type == Viner::LINER) {
+                int nPoops = 2;
+                for(int i=0; i<nPoops; i++) {
+                    
+                    
+                    ofVec2f pt = vine->circles.back().getPosition();
+                    float   r  = (vine->dotImg->getWidth() * vine->dotSize)/2;
+                    
+                    VinePoop p;
+                    p.setPhysics(0.2, 0.2, 0.9);
+                    p.setup(box2d.getWorld(), pt.x, pt.y, r);
+                    p.img = vine->dotImg;
+                    p.dotSizeD = vine->dotSizeD;
+                    p.dotSize  = vine->dotSizeD;
+                    p.colorD = complimentaryColours[(int)ofRandom(0, complimentaryColours.size())];
+                    
+                    poop.push_back(p);
+                    
+                }
+                vine->bPop = true;
             }
-            vine->bPop = true;
         }
     }
 }
-
 
 // ----------------------------------------------------
 void DrawnScene::makePoopFromTinyVines() {
@@ -239,6 +302,7 @@ void DrawnScene::makePoopFromTinyVines() {
 
 // ----------------------------------------------------
 void DrawnScene::update() {
+    
     
     bgColor.setHex(0xE1E3D3);
     ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
@@ -395,6 +459,14 @@ void DrawnScene::update() {
         it->soundAmp = audioPtr->getVolume(0);
     }
     
+    // ----------------------
+    // land wigglers
+    // ----------------------
+    for(vector<Wiggler>::iterator it=landWiggles.begin(); it!=landWiggles.end(); ++it) {
+        it->update();
+        it->soundAmp = audioPtr->getVolume(0);
+    }
+    
     // Tiny Vines
     // ----------------------
     for(vector<TinyVine>::iterator it=tinyVines.begin(); it!=tinyVines.end(); ++it) {
@@ -410,6 +482,7 @@ void DrawnScene::update() {
 // ----------------------------------------------------
 void DrawnScene::draw() {
     
+    float t = ofGetElapsedTimef() * 0.3;
     drawBackground();
     ofColor peteWhite = ofColor(255,255,255);
     ofRectangle screen(0, 0, CUBE_SCREEN_WIDTH, CUBE_SCREEN_HEIGHT);
@@ -419,7 +492,7 @@ void DrawnScene::draw() {
     
     
     // ----------------------
-    // Vector field
+    // vector field
     // ----------------------
     float scalex = (float)field.externalWidth / (float)field.fieldWidth;
     float scaley = (float)field.externalHeight / (float)field.fieldHeight;
@@ -441,11 +514,17 @@ void DrawnScene::draw() {
         }
     }
     
+    
+    
     // ----------------------
-    // wigglers
+    // land hair
     // ----------------------
-    for(vector<Wiggler>::iterator it=wigglers.begin(); it!=wigglers.end(); ++it) {
-        it->draw();
+    for(int i=0; i<landHair.size(); i++) {
+        int     nPoly  = landHair[i].landHairIndex[0];
+        int     ind    = landHair[i].landHairIndex[1];
+        ofVec2f pt = land[nPoly][ind];
+        ofSetColor(90, 0, 0);
+        landHair[i].draw(pt, landHairSep);
     }
     
     // ----------------------
@@ -454,7 +533,45 @@ void DrawnScene::draw() {
     for(vector<TinyVine>::iterator it=tinyVines.begin(); it!=tinyVines.end(); ++it) {
         it->draw();
     }
+   
     
+    // ----------------------
+    // land wigglers
+    // ----------------------
+    for(vector<Wiggler>::iterator it=landWiggles.begin(); it!=landWiggles.end(); ++it) {
+        it->draw();
+    }
+    
+    
+    // ----------------------
+    // land masses (draw on top of land items)
+    // ----------------------
+    ofPushStyle();
+    ofSetRectMode(OF_RECTMODE_CENTER);
+    int step = 1;
+    if(bBigMode) step = 2;
+    for(int i=0; i<land.size(); i++) {
+        for(int j=0; j<land[i].size(); j+=step) {
+            ofSetColor(0);
+            float cv = land[i].circleVariance[j] + (ofNoise(t, land[i].circleVariance[j]/ 4.0, land[i][j].x/500.0) * 2);
+            float sz = bBigMode?4:2;
+            sz *= 2;
+            sz += 2;
+            dots[land[i].texId].draw(land[i][j], cv + sz, cv + sz);
+            //ofCircle(land[i][j], cv + sz);
+        }        
+    }
+    ofPopStyle();
+    
+    
+    // ----------------------
+    // wigglers
+    // ----------------------
+    for(vector<Wiggler>::iterator it=wigglers.begin(); it!=wigglers.end(); ++it) {
+        it->draw();
+    }
+    
+   
     
     // ----------------------
     // Chasers
@@ -603,7 +720,12 @@ void DrawnScene::draw() {
         int ranPoop = ofRandomIndex(poop);
         poop[ranPoop].newPopSize = ofRandom(10, 40);
         poop[ranPoop].bGetBig = true;
+        
+        int ranTiny = ofRandomIndex(tinyVines);
+        tinyVines[ranTiny].headSizePctD = ofRandom(0.2, 1.2);
     }
+    
+    
     
 }
 
@@ -681,6 +803,30 @@ void DrawnScene::keyPressed(int key) {
         } 
     }
     
+    
+    // for making the land
+#ifdef MAKE_LAND
+    if(key == 'C') {
+        land.clear();
+    }
+    if(key == 'c') {
+        if(land.size()>0) {
+            land.back().clear();
+        }
+    }
+    if(key == 's') {
+        for(int i=0; i<land.size(); i++) {
+            ofPolyline resampled = land[i].getResampledBySpacing(5);
+            land[i].clear();
+            land[i].addVertexes(resampled.getVertices());
+            if(ofSavePolyPoints(land[i], "graphics/drawn/land/land_"+ofToString(i)+".dat")) {
+                printf("land_%i.dat saved\n", i);
+            }
+        }        
+    }
+    
+#endif
+    
 }
 
 // ----------------------------------------------------
@@ -689,6 +835,11 @@ void DrawnScene::mousePressed(int x, int y, int button){
     rxSwirp* sw = new rxSwirp(ofVec3f(x,y,0),particles, (int)ofRandom(5,15));
     particles.addSwirp(sw);
 #endif   
+    
+#ifdef MAKE_LAND
+    land.push_back(LandMass());
+#endif
+    
 }
 
 // ----------------------------------------------------
@@ -699,6 +850,15 @@ void DrawnScene::mouseMoved(int x, int y ){
     particles.repel(repel_effect);
     particles.update();
 #endif	
+}
+
+// ----------------------------------------------------
+void DrawnScene::mouseDragged(int x, int y, int button) {
+    
+#ifdef MAKE_LAND
+    land.back().addVertex(x, y);
+#endif
+    
 }
 
 // ----------------------------------------------------
@@ -728,10 +888,18 @@ void DrawnScene::handleCommands(TwitterCommand& cmd, Effects& fx) {
 		if(c == "bigger") {
             tinyVinesPoopAmt = 20;
             bBigMode = true;
+            landHairSep = ofRandom(10, 20);
 		}
 		else if(c == "smaller") {
             tinyVinesPoopAmt = 50;
             bBigMode = false;
+            landHairSep = ofRandom(4, 8);
+            
+            for(int i=0; i<tinyVines.size(); i++) {
+               tinyVines[i].headSizePctD = ofRandom(0.1, 0.2);
+            }
+
+            
 		}
         else if(c=="more") {
             bTinyPoop = true;

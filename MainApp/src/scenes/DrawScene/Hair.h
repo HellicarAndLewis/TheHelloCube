@@ -16,7 +16,10 @@ public:
     ofVec2f    dir;
     bool       bMade;
     float      rnd;
+    int        landHairIndex[2];
     Hair() {
+        landHairIndex[0] = 0;
+        landHairIndex[1] = 0;
         bMade = false;
         rnd   = 0.92;
     }
@@ -41,8 +44,6 @@ public:
                 float   d = v.length();
                 pts[i] = pts[i-1] + (v * seperation) / d;
                 pts[i] += dir;
-                pts[i].y -= 0.2;
-                
             }
             pts.draw();
         }

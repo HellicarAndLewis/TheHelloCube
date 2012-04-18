@@ -9,7 +9,7 @@
 #pragma once
 #include "BaseScene.h"
 #include "CellNode.h"
-#include "ofxVoronoi.h"
+#include "Voronoi2D.h"
 #include "Utils.h"
 
 class CellScene : public BaseScene {
@@ -32,8 +32,8 @@ public:
         respondToNewComplimentaryColours();
         ofRegisterMouseEvents(&gui);
     }
-	
-    ofxVoronoi        voronoi;
+    
+	roxlu::Voronoi2D  voronoi;
     vector <CellNode> cells;
     
     ofxFloatSlider separationDistance;

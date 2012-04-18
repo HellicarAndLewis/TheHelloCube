@@ -15,7 +15,7 @@
 // Use this to switch code between prouction and development production running at the Turbine Hall
 #define RUN_MODE_DEVELOPMENT 1
 #define RUN_MODE_PRODUCTION	2
-#define RUN_MODE RUN_MODE_PRODUCTION
+#define RUN_MODE RUN_MODE_DEVELOPMENT
 
 #if RUN_MODE == RUN_MODE_DEVELOPMENT
 
